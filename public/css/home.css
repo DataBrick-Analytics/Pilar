@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
 
 :root {
-    --primaria: rgb(0,0,0);
-    --secundaria: rgb(255,255,255);
+    --text: #fffff0;
+    --background: #152e54;
+    --primary: #5fa4dc;
+    --secondary: #C45824;
+    --accent: #768087;
     --Thin: 100;
     --ExtraLight: 200;
     --Light: 300;
@@ -22,7 +25,7 @@
 
 header a {
     text-decoration: none;
-    color: black;
+    color: var(--text);
 }
 
 .nav {
@@ -31,7 +34,11 @@ header a {
     justify-content: space-evenly;
     align-items: center;
     font-weight: var(--Bold);
-    margin-top: 1em;
+    margin-top: 0;
+    padding-top:10px ;
+    background-color: var(--background);
+
+    color: var(--text);
 }
 
 .enterprise {
@@ -50,6 +57,10 @@ header a {
     gap: 1vw;
 }
 
+.navbar ul a{
+    color: var(--text);
+}
+
 .login {
     display: flex;
     justify-content: center;
@@ -62,11 +73,17 @@ header a {
     padding: 16px 20px 16px 20px;
     color: white;
     background-color: black;
-    border-radius: 4px;
+    border-radius: 5px;
     white-space: nowrap;
 }
 
+.login a:hover{
+    background-color: var(--secondary);
+    transition: 0.7s;
+}
+
 .hero {
+    background: var(--background);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,13 +103,19 @@ header a {
     font-size: 48px;
     font-weight: var(--Regular);
     white-space: nowrap;
+    color: var(--text);
+}
+
+.hero .container h2 span{
+        color: var(--secondary);
 }
 
 .hero .container p {
-    color: #71717A;
+    color: var(--accent);
 }
 
 header .frame {
+    padding: 5px;
     display: flex;
     margin-left: 5vw;
     gap: 1vw;
@@ -120,10 +143,19 @@ header .frame a {
     font-weight: var(--ExtraBold);
     font-size: 48px;
     line-height: 56px;
+    color: var(--primary);
+    text-align: center;
 }
 
 .services .text p {
     font-size: 16px;
+    width: 80%;
+    text-align: center;
+    justify-self: center;
+}
+
+.services .text p span{
+    font-weight: var(--ExtraBold);
 }
 
 .grid-container {
@@ -159,7 +191,7 @@ header .frame a {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: black;
+    background-color: var(--background);
     color: white;
     padding: 3em 5vw;
 }
@@ -167,11 +199,15 @@ header .frame a {
 .testimonial .text h1 {
     font-size: 48px;
     font-weight: var(--ExtraBold);
+    color: var(--secondary);
+    justify-self: center;
 }
 
 .testimonial .text p {
     font-size: 16px;
     font-weight: var(--Regular);
+    color: var(--text);
+    text-align: center;
 }
 
 .divisions {
@@ -184,22 +220,26 @@ header .frame a {
 }
 
 .divisions .container {
-    border: 2px solid #71717A;
+    border: 2px solid black;
     border-radius: 10px;
     padding: 30px 24px;
     gap: 28px;
     display: flex;
     flex-direction: column;
+
+    background-color: var(--primary);
 }
 
 .divisions .container .title {
     gap: 30px;
     display: flex;
     align-items: center;
+
+    color: black;
 }
 
 .divisions .container p {
-    color: #D4D4D8;
+    color: black;
 }
 
 .about {
@@ -229,6 +269,10 @@ header .frame a {
     line-height: 56px;
 }
 
+.about .text h1 b{
+    color: var(--secondary);
+}
+
 .about .text div {
     display: flex;
     flex-direction: column;
@@ -240,6 +284,11 @@ header .frame a {
     font-weight: var(--Regular);
     line-height: 24px;
     color: #71717A;
+}
+
+.about .text div p span{
+    color: var(--secondary);
+    font-weight: bold;
 }
 
 .projects {
@@ -316,7 +365,8 @@ header .frame a {
     gap: 20px;
 }
 
-.contact .inputs .forms input, .contact .inputs .forms textarea {
+.contact .inputs .forms input,
+.contact .inputs .forms textarea {
     padding: 16px 24px;
     outline: none;
     border: 1.4px solid black;
