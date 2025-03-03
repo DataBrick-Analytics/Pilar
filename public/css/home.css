@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
 
 :root {
-    --text: #bec3c7;
-    --background: #fcfce0;
+    --text: #D4D4D8;
+    --background: #fffff0;
     --primary: #2C3E50;
     --secondary: #C45824;
     --accent: #768087;
@@ -160,6 +160,7 @@ header .frame a {
     width: 70%;
     text-align: center;
     justify-self: center;
+    color: var(--accent);
 }
 
 .services .text p span{
@@ -244,6 +245,9 @@ header .frame a {
     align-items: center;
 
     color: black;
+}
+.divisions .container h3{
+    color: white;
 }
 
 .divisions .container p {
