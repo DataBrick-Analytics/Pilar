@@ -10,88 +10,89 @@
 
   <script src="./js/sessao.js"></script>
 
-  <link rel="stylesheet" href="./css/estilo.css" />
+  <link rel="stylesheet" href="css/cadastro.css" />
   <link rel="icon" href="./assets/icon/favicon2.ico" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
 <body onload="listar()">
-  <!--header inicio-->
-  <div class="header">
-    <div class="container">
-      <h1 class="titulo">AquaTech</h1>
-      <ul class="navbar">
-        <li>
-          <a href="index.html">Inicial</a>
-        </li>
-        <li>
-          <a href="simulador.html">Simulador</a>
-        </li>
-        <li>|</li>
-        <li>
-          <a href="login.html">Login</a>
-        </li>
-        <li class="agora">
-          <a href="#">Cadastro</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <!--header fim-->
 
-  <div class="login">
-    <div class="alerta_erro">
-      <div class="card_erro" id="cardErro">
-        <span id="mensagem_erro"></span>
-      </div>
+  <div class="leftContainer">
+    <div class="signUpDescription">
+      <h1>FAÇA SEU CADASTRO</h1>
+      <p>Cadastre-se agora e aproveite todas as vantagens que oferecemos!</p>
     </div>
-    <div class="container">
-      <div class="card card-cadastro">
-        <h2>Bem-vindo!</h2>
-        <div class="formulario">
-          <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
-          <div class="campo">
-            <span>Código de ativação:</span>
-            <input id="codigo_input" type="text" placeholder="Insira aqui seu código" />
-          </div>
-          <div class="campo">
-            <span>Nome:</span>
-            <input id="nome_input" type="text" placeholder="Seu nome" />
-          </div>
-          <div class="campo">
-            <span>E-mail:</span>
-            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
-          </div>
-          <div class="campo">
-            <span>Senha:</span>
-            <input id="senha_input" type="password" placeholder="******" />
-          </div>
-          <div class="campo">
-            <span>Confirmação da Senha:</span>
-            <input id="confirmacao_senha_input" type="password" placeholder="******" />
-          </div>
-          <button class="botao" onclick="cadastrar()">Cadastrar</button>
-        </div>
-        <div id="div_aguardar" class="loading-div">
-          <img src="./assets/circle-loading.gif" id="loading-gif" />
+    <img src="assets/work-from-home.svg" alt="" id="imageSignUp">
+  </div>
+  
+  <div class="container">
+    <img src="assets/Big-logo-icon.svg" alt="">
+    <h4>Cadastre uma conta!</h4>
+
+    <form action="" class="formulario">
+
+      <div class="leftSection">
+        <div class="field">
+          <label for="nome">Nome da Empresa:</label>
+          <input type="text" placeholder="Digite o nome da empresa">
         </div>
 
-        <div id="div_erros_login"></div>
-      </div>
-    </div>
-  </div>
+        <div class="field">
+          <label for="email">E-mail:</label>
+          <input type="text" placeholder="empresa@gmail.com">
+        </div>
 
-  <!--footer inicio-->
-  <div class="footer">
-    <div class="container">
-      <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-      <span class="version">v1.0.0</span>
+        <div class="field">
+          <label for="telefone">Telefone:</label>
+          <input type="number" placeholder="Digite o nome da empresa">
+        </div>
+
+        <div class="field">
+          <label for="estado">Estado:</label>
+          <input type="text" placeholder="empresa@gmail.com">
+        </div>
+
+        <div class="field">
+          <label for="bairro">Bairro</label>
+          <input type="text" placeholder="empresa@gmail.com">
+        </div>
+      </div>
+
+
+      <div class="rightSection">
+        <div class="field">
+          <label for="cnpj">CNPJ::</label>
+          <input type="number" placeholder="Digite o CNPJ da empresa">
+        </div>
+
+        <div class="field">
+          <label for="senha">Senha:</label>
+          <input type="password" placeholder="Digite sua senha">
+        </div>
+
+        <div class="field">
+          <label for="cep">CEP:</label>
+          <input type="number" placeholder="98765-432">
+        </div>
+
+        <div class="field">
+          <label for="cidade">Cidade:</label>
+          <input type="text" placeholder="São Paulo">
+        </div>
+
+        <div class="field">
+          <label for="numero">Numero</label>
+          <input type="number" placeholder="(xx) xxxxx-xxxx">
+        </div>
+      </div>
+
+    </form>
+
+    <div class="buttons">
+      <button class="">Sign Up now</button>
+      <button>Login</button>
     </div>
   </div>
-  <!--footer fim-->
 </body>
 
 </html>
