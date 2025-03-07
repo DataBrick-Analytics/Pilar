@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>DataBrick | Cadastro</title>
+
+  <script src="./js/sessao.js"></script>
+
+  <link rel="stylesheet" href="css/cadastro.css" />
+  <link rel="icon" href="./assets/icon/favicon2.ico" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+</head>
+
+<body onload="listar()">
+
+  <div class="leftContainer">
+    <div class="signUpDescription">
+      <h1>FAÇA SEU CADASTRO</h1>
+      <p>Cadastre-se agora e aproveite todas as vantagens que oferecemos!</p>
+    </div>
+    <img src="assets/work-from-home.svg" alt="" id="imageSignUp">
+  </div>
+  
+  <div class="container">
+    <img src="assets/Big-logo-icon.svg" alt="">
+    <h4>Cadastre uma conta!</h4>
+
+    <form action="" class="formulario">
+
+      <div class="leftSection">
+        <div class="field">
+          <label for="nome">Nome da Empresa:</label>
+          <input type="text" placeholder="Digite o nome da empresa">
+        </div>
+
+        <div class="field">
+          <label for="email">E-mail:</label>
+          <input type="text" placeholder="empresa@gmail.com">
+        </div>
+
+        <div class="field">
+          <label for="telefone">Telefone:</label>
+          <input type="number" placeholder="(xx) xxxxx-xxxx">
+        </div>
+
+        <div class="field">
+          <label for="estado">Estado:</label>
+          <input type="text" placeholder="Santo André">
+        </div>
+
+        <div class="field">
+          <label for="bairro">Bairro:</label>
+          <input type="text" placeholder="Campestre">
+        </div>
+      </div>
+
+
+      <div class="rightSection">
+        <div class="field">
+          <label for="cnpj">CNPJ:</label>
+          <input type="number" placeholder="Digite o CNPJ da empresa">
+        </div>
+
+        <div class="field">
+          <label for="senha">Senha:</label> 
+          <input type="password" placeholder="Digite sua senha">
+        </div>
+
+        <div class="field">
+          <label for="cep">CEP:</label>
+          <input type="number" placeholder="98765-432">
+        </div>
+
+        <div class="field">
+          <label for="cidade">Cidade:</label>
+          <input type="text" placeholder="São Paulo">
+        </div>
+
+        <div class="field">
+          <label for="numero">Número:</label>
+          <input type="number" placeholder="1234">
+        </div>
+      </div>
+
+    </form>
+
+    <div class="buttons">
+      <button id="signUpButton">Sign Up now</button>
+
+     
+        <img src="assets/or-crossbar.svg" alt="" id="orLoginImage">
+        <button id="logInButton">Login</button>
+      
+    </div>
+  </div>
+</body>
+
+</html>
+
+<script>
+
+  // Array para armazenar empresas cadastradas para validação de código de ativação 
+  let listaEmpresasCadastradas = [];
+
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = nome_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+    var codigoVar = codigo_input.value;
+    var idEmpresaVincular
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == "" ||
+      codigoVar == ""
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+        idEmpresaVincular = listaEmpresasCadastradas[i].id
+        console.log("Código de ativação válido.");
+        break;
+      } else {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+        finalizarAguardar();
+      }
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        idEmpresaVincularServer: idEmpresaVincular
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  // Listando empresas cadastradas 
+  function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+
+            console.log("listaEmpresasCadastradas")
+            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+</script>
