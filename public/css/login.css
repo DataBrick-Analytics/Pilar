@@ -1,0 +1,165 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+
+:root {
+    --text: #D4D4D8;
+    --background: #fffff0;
+    --primary: #2C3E50;
+    --secondary: #C45824;
+    --accent: #768087;
+    --Thin: 100;
+    --ExtraLight: 200;
+    --Light: 300;
+    --Regular: 400;
+    --Medium: 500;
+    --SemiBold: 600;
+    --Bold: 700;
+    --ExtraBold: 800;
+}
+body{
+    margin: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+*{
+    font-family: "Sora";
+}
+
+.Direita{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 65%;
+    height: 100vh;
+    gap: 10px;
+    background-color: #FFFFF0;
+}
+
+.descricao{
+    font-weight: var(--ExtraBold);
+    color: var(--secondary);
+    font-size: x-large;
+}
+.descricao h1{
+    margin: 3px;
+}
+
+.descricao p{
+    font-weight: normal;
+    font-size: medium;
+    margin: 0;
+}
+
+#imageSignUp{
+    height: 70vh;
+}
+
+
+.container{
+    height: 100vh;
+    width: 35%;
+    background-color: white;
+    justify-self: right;
+    border-left: 2px solid var(--secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.container img{
+    width: 10vh;
+    justify-self: center;
+    padding-top: 5px;
+}
+
+.container h4{
+    font-weight: var(--ExtraBold);
+}
+
+.formulario{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.formulario .email-senha{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}
+
+.formulario .field{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.formulario .field input{
+    width: 100%;;
+    height: 4vh;
+    border: none;
+    background-color: #F1F3F6;
+    border-radius:5px;
+    padding: 5px;
+
+}
+
+.formulario .rightSection{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20vh;
+    gap: 10px;
+}
+
+#BotaoLogin{
+    width: 90%;
+    height: 5vh;
+    border-radius: 10px;
+    border:  none;
+    background-color: #AD6C41;
+    color: white;
+    box-shadow: 0 4px 10px var(--secondary);
+}
+
+#orLoginImage{
+    width: 60%;
+}
+
+#Cadastro{
+    width: 75%;
+    height: 5vh;
+    border: solid 2px var(--secondary);
+    border-radius: 10px;
+    background-color: white;
+}
+
+#BotaoLogin:hover{
+    cursor: pointer;
+    transition: .2s;
+    filter: brightness(.9);
+}
+
+#Cadastro:hover{
+    cursor: pointer;
+    background-color: var(--accent);
+    color: white;
+    transition: .2s;
+    border: solid 2px white;
+}
