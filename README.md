@@ -38,13 +38,13 @@ Pilar é um sistema inteligente desenvolvido pela **BrickData** para auxiliar co
 
 Sinta-se à vontade para contribuir! Para isso:  
 
-1. Faça um fork do repositório  
-2. Crie uma nova branch:  
+1. Crie uma nova branch:  
    ```sh
-   git checkout -b minha-feature
+   git checkout -b feature/novosCampos
    ```  
-3. Faça as alterações e commit:  
+2. Adicione as alterações e faça o commit:  
    ```sh
+   git add .
    git commit -m "Minha contribuição"
    ```  
-4. Envie um pull request  
+3. Envie um pull request  
