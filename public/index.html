@@ -15,6 +15,8 @@
 
     <header>
         <nav class="nav">
+            
+
             <section class="enterprise"><img src="assets/logo/BussinesIcon.svg" alt="">Name</section>
             <ul class="navbar">
                 <li class="nav-item"><a href="/">Inicio</a></li>
@@ -26,11 +28,31 @@
                 <a href="/">Login</a>
                 <a href="/">Registre-se</a>
             </section>
+            
+            
+            <div class="menu-icon" onclick="toggleMenu()">
+                <div></div>
+            </div>
         </nav>
+
+        <div class="mobile-menu">
+            <ul class="navbar">
+                <li class="nav-item"><a href="/">Inicio</a></li>
+                <li class="nav-item"><a href="/">Oque Fazemos?</a></li>
+                <li class="nav-item"><a href="/">Projetos</a></li>
+                <li class="nav-item"><a href="/">Contate-Nos</a></li>
+            </ul>
+            <section class="login">
+                <a href="/">Login</a>
+                <a href="/">Registre-se</a>
+            </section>
+        </div>
+        
     </header>
 
     <main>
         <section class="hero-main">
+
             <div class="hero-conteiner">
 
                 <article class="container">
@@ -50,6 +72,7 @@
                 <a href=""><img src="assets/icons-contact/orange-icons/redit.svg" alt=""></a>
                 <a href=""><img src="assets/icons-contact/orange-icons/twitter.svg" alt=""></a>
             </div>
+
         </section>
 
 
@@ -85,21 +108,24 @@
         </section>
 
         <section class="testimonial">
+
             <article class="text">
                 <h1>Transformando Dados em Decisões Inteligentes...</h1>
-                <p>Ao optar pela X, você está investindo em um parceiro dedicado a impulsionar o seu sucesso, oferecendo
+                <p>Ao optar pela BricksData, você está investindo em um parceiro dedicado a impulsionar o seu sucesso, oferecendo
                     serviços que são mais do que soluções, são estratégias para o seu crescimento.</p>
             </article>
 
             <article class="divisions">
+
                 <div class="container">
                     <div class="title"><img src="assets/chose-us/star.svg" alt="">
                         <h3>Por que escolher a X?</h3>
                     </div>
-                    <p>A empresa X é a melhor escolha para análise de dados devido à sua reputação de excelência, equipe
+                    <p>A  BricksData é a melhor escolha para análise de dados devido à sua reputação de excelência, equipe
                         experiente e uso de tecnologia avançada. Eles garantem segurança e privacidade dos dados,
                         oferecem atendimento ao cliente excepcional e têm um ótimo custo-benefício.</p>
                 </div>
+
                 <div class="container" style="background-color: #71717A; border: 2px solid var(--accent);">
                     <div class="title"><img src="assets/chose-us/icon-data-base.svg" alt="">
                         <h3>Oque é o processo ELT?</h3>
@@ -108,16 +134,20 @@
                         para análises avançadas, garantindo que as empresas possam tomar decisões informadas com base em
                         dados precisos e consistentes.</p>
                 </div>
+
                 <div class="container">
+
                     <div class="title"><img src="assets/chose-us/icon-business-transfer.svg" alt="">
                         <h3>Como podemos impulsionar sua empresa?</h3>
                     </div>
+
                     <p>Investir em tecnologia avançada e treinamento contínuo, automatizar processos, estabelecer
                         políticas rigorosas de qualidade de dados e integrar dados de várias fontes são
                         estratégias-chave para melhorar a análise de dados ETL. A colaboração entre departamentos e o
                         uso de técnicas de análise avançada ajudam a transformar dados brutos em informações valiosas
                         para decisões estratégicas e crescimento da empresa.</p>
                 </div>
+
             </article>
         </section>
 
@@ -225,3 +255,11 @@
 </body>
 
 </html>
+
+<script>
+    function toggleMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        mobileMenu.classList.toggle('active');
+    }
+    
+</script>    

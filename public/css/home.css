@@ -16,7 +16,7 @@
     --ExtraBold: 800;
 }
 
-body{
+body {
     background-color: var(--background);
 }
 
@@ -39,10 +39,18 @@ header a {
     align-items: center;
     font-weight: var(--Bold);
     margin-top: 0;
-    padding-top:10px ;
+    padding-top: 10px;
     background-color: var(--background);
 
     color: var(--text);
+}
+
+.menu-icon {
+    display: none;
+}
+
+.mobile-menu {
+    display: none;
 }
 
 .enterprise {
@@ -62,7 +70,7 @@ header a {
     gap: 1vw;
 }
 
-.navbar ul a{
+.navbar ul a {
     color: var(--text);
 }
 
@@ -82,7 +90,7 @@ header a {
     white-space: nowrap;
 }
 
-.login a:hover{
+.login a:hover {
     background-color: var(--secondary);
     transition: 0.7s;
 }
@@ -96,13 +104,14 @@ header a {
     padding: 8% 10vw 0% 10vw;
 }
 
-.hero-conteiner{
+.hero-conteiner {
     gap: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
- 
+
 }
+
 .hero-conteiner img {
     scale: 1.20;
 }
@@ -120,8 +129,8 @@ header a {
     color: var(--secondary);
 }
 
-.hero-conteiner .container h2 span{
-        color: var(--secondary);
+.hero-conteiner .container h2 span {
+    color: var(--secondary);
 }
 
 .hero-conteiner .container p {
@@ -171,7 +180,7 @@ header a {
     color: var(--secondary);
 }
 
-.services .text p span{
+.services .text p span {
     font-weight: var(--ExtraBold);
 }
 
@@ -255,14 +264,16 @@ header a {
 
     color: black;
 }
-.divisions .container h3{
+
+.divisions .container h3 {
     color: white;
 }
 
 .divisions .container p {
     color: var(--text);
 }
-.divisions h3{
+
+.divisions h3 {
     color: var(--text);
 }
 
@@ -294,7 +305,7 @@ header a {
     line-height: 56px;
 }
 
-.about .text h1 b{
+.about .text h1 b {
     color: var(--secondary);
 }
 
@@ -311,7 +322,7 @@ header a {
     color: #71717A;
 }
 
-.about .text div p span{
+.about .text div p span {
     color: var(--secondary);
     font-weight: bold;
 }
@@ -334,7 +345,8 @@ header a {
     padding: 20px 0;
     color: var(--secondary);
 }
-.projects-content{
+
+.projects-content {
     display: flex;
     flex-direction: column;
     gap: 70px;
@@ -489,4 +501,238 @@ footer .watermark {
     font-size: 20px;
     font-weight: var(--SemiBold);
     line-height: 20px;
+}
+
+@media screen and (max-width: 768px) {
+
+    /* Navigation */
+    .nav {
+        padding: 20px;
+        justify-content: space-around;
+    }
+
+    .navbar,
+    .login {
+        display: none;
+    }
+
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+    }
+
+    .menu-icon div {
+        width: 25px;
+        height: 3px;
+        background-color: var(--secondary);
+        margin: 5px 0;
+        position: relative;
+    }
+
+    .menu-icon div::before,
+    .menu-icon div::after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 3px;
+        background-color: var(--secondary);
+        transition: 0.3s;
+    }
+
+    .menu-icon div::before {
+        transform: translateY(-8px);
+    }
+
+    .menu-icon div::after {
+        transform: translateY(8px);
+    }
+
+    .mobile-menu.active {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        background-color: var(--background);
+    }
+
+    /* Hero Section */
+
+    .hero-main .frame {
+        margin-top: 10px;
+    }
+
+    .hero-conteiner {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .hero-conteiner img {
+        width: 100%;
+        scale: 1;
+    }
+
+    .hero-conteiner .container h2 {
+        font-size: 36px;
+        white-space: normal;
+    }
+
+    .hero-conteiner .container p {
+        width: 100%;
+    }
+
+    /* Services Section */
+    .services {
+        flex-direction: column;
+        height: auto;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .services .text {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .services .text h1 {
+        font-size: 36px;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .services .text p {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        font-size: 16px;
+        line-height: 24px;
+        color: var(--secondary);
+    }
+
+
+    .grid-container {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .grid-item {
+        width: 100%;
+        height: auto;
+        padding: 16px;
+    }
+
+    .grid-item img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .grid-item p {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .services .text {
+        text-align: justify;
+        align-items: flex-start;
+    }
+
+    .services .text p {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* testimonial Section */
+    .testimonial {
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+
+    .testimonial .text {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .testimonial .text h1 {
+        font-size: 36px;
+        line-height: 44px;
+        text-align: left;
+        width: 100%;
+    }
+
+    .testimonial .text p {
+        text-align: justify;
+    }
+
+    /* About Section */
+    .about {
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .about .logo img {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .about p {
+        text-align: justify;
+    }
+
+    /* Projects Section */
+    .projects .works {
+        flex-direction: column;
+    }
+
+    .projects .works div img {
+        width: 100%;
+    }
+
+    .projects h1 {
+        font-size: 36px;
+    }
+
+    .projects .works .details h2 {
+        font-size: 36px;
+    }
+
+    /* Contact Section */
+    .contact {
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+
+    .contact .inputs {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .contact .text {
+        text-align: center;
+    }
+
+    .contact .text h1 {
+        font-size: 36px;
+    }
+
+    /* Footer */
+    footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    footer .watermark {
+        align-items: center;
+    }
 }
