@@ -357,6 +357,10 @@ header a {
     gap: 40px;
 }
 
+.projects .works.reverse {
+    flex-direction: row-reverse;
+}
+
 .projects .works .details {
     display: flex;
     justify-content: center;
@@ -392,6 +396,7 @@ header a {
 
 .contact {
     display: flex;
+    flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
     padding: 3em 5vw;
@@ -598,7 +603,7 @@ footer .watermark {
 
     .services .text h1 {
         font-size: 36px;
-        text-align: center;
+        text-align: justify;
         width: 100%;
         margin-bottom: 10px;
     }
@@ -607,7 +612,7 @@ footer .watermark {
         width: 100%;
         margin: 0;
         padding: 0;
-        text-align: center;
+        text-align: justify;
         font-size: 16px;
         line-height: 24px;
         color: var(--secondary);
@@ -676,7 +681,7 @@ footer .watermark {
     .about {
         flex-direction: column;
         height: auto;
-        text-align: center;
+        text-align: justify;
         padding: 40px 20px;
     }
 
@@ -692,6 +697,9 @@ footer .watermark {
     /* Projects Section */
     .projects .works {
         flex-direction: column;
+    }
+    .projects .works.reverse {
+        flex-direction: column; 
     }
 
     .projects .works div img {
@@ -718,7 +726,7 @@ footer .watermark {
     }
 
     .contact .text {
-        text-align: center;
+        text-align: justify;
     }
 
     .contact .text h1 {
