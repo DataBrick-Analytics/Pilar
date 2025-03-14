@@ -384,7 +384,7 @@ header a {
 .projects .works .details p {
     font-size: 16px;
     text-align: justify;
-    width: 90%;
+    width: 100%;
     font-weight: var(--Regular);
     color: var(--text);
     line-height: 24px;
@@ -429,6 +429,7 @@ header a {
 .contact .inputs .frame {
     display: flex;
     gap: 1vw;
+    flex-direction: column;
 }
 
 .contact .inputs .frame a {
@@ -511,8 +512,15 @@ footer .watermark {
 @media screen and (max-width: 768px) {
 
     /* Navigation */
+
+    * {
+        border: 0;
+        padding: 0;
+        margin: 0;
+        font-family: "Sora";
+    }
     .nav {
-        justify-content: space-around;
+        justify-content: space-evenly;
     }
 
     .navbar,
@@ -561,8 +569,20 @@ footer .watermark {
 
     /* Hero Section */
 
+    .hero-main{
+        background: var(--background);
+        display: flex;
+        flex-direction: column;
+        justify-content: justify;
+        align-items: justify;
+        padding: 20px 20px 0px 20px;
+    }
+
     .hero-main .frame {
         margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .hero-conteiner {
@@ -588,7 +608,7 @@ footer .watermark {
     .services {
         flex-direction: column;
         height: auto;
-        padding: 40px 20px;
+        padding: 0px 20px 40px 20px;
         text-align: center;
     }
 
@@ -645,11 +665,6 @@ footer .watermark {
         align-items: flex-start;
     }
 
-    .services .text p {
-        width: 100%;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
 
     /* testimonial Section */
     .testimonial {
