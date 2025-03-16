@@ -519,8 +519,15 @@ footer .watermark {
         margin: 0;
         font-family: "Sora";
     }
+
+    .enterprise{
+        padding-left: 10px;
+    }
     .nav {
-        justify-content: space-evenly;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
     }
 
     .navbar,
@@ -531,6 +538,7 @@ footer .watermark {
     .menu-icon {
         display: block;
         cursor: pointer;
+        padding-right: 10px;
     }
 
     .menu-icon div {
@@ -564,7 +572,8 @@ footer .watermark {
         flex-direction: column;
         gap: 20px;
         padding: 20px;
-        background-color: var(--background);
+        background-color: var(--primary);
+        z-index: 3;
     }
 
     /* Hero Section */
