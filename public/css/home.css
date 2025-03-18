@@ -16,6 +16,76 @@
     --ExtraBold: 800;
 }
 
+.mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: var(--primary);
+    z-index: 1000;
+}
+
+.mobile-menu.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-menu .menu-close {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1002;
+}
+
+.mobile-menu .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+}
+
+.mobile-menu .navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.mobile-menu .nav-item a {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    font-weight: var(--Regular);
+}
+
+.mobile-menu .nav-item a:hover {
+    color: var(--secondary);
+}
+
+.mobile-menu .login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 80%;
+    max-width: 300px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 30px;
+}
+
+.mobile-menu .login a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 12px 24px;
+    border-radius: 4px;
+    background-color: var(--secondary);
+    width: 100%;
+    text-align: center;
+}
+
 body {
     background-color: var(--background);
 }
@@ -57,10 +127,16 @@ header a {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1vw;
-    width: 20%;
+    gap: 0.0vw;
+    width: 10%;
     color: var(--secondary);
 }
+
+.enterprise img {
+    width: 120px;
+    height: 60px;
+}
+
 
 .navbar {
     list-style: none;
@@ -228,6 +304,7 @@ header a {
     font-weight: var(--ExtraBold);
     color: var(--secondary);
     justify-self: center;
+    text-align: justify;
 }
 
 .testimonial .text p {
@@ -271,6 +348,7 @@ header a {
 
 .divisions .container p {
     color: var(--text);
+    text-align: justify;
 }
 
 .divisions h3 {
@@ -290,6 +368,11 @@ header a {
     padding: 32px;
     border: 4px solid black;
     border-radius: 12px;
+    
+}
+.logo img{
+    width: 560px;
+    height: 420px;
 }
 
 .about .text {
@@ -320,6 +403,7 @@ header a {
     font-weight: var(--Regular);
     line-height: 24px;
     color: #71717A;
+    align-items: justify;
 }
 
 .about .text div p span {
@@ -421,6 +505,7 @@ header a {
     padding: 16px 24px;
     outline: none;
     border: 1.4px solid var(--secondary);
+    width: 80%;
     border-radius: 4px;
     text-align: start;
     resize: none;
@@ -429,7 +514,6 @@ header a {
 .contact .inputs .frame {
     display: flex;
     gap: 1vw;
-    flex-direction: column;
 }
 
 .contact .inputs .frame a {
@@ -520,9 +604,11 @@ footer .watermark {
         font-family: "Sora";
     }
 
-    .enterprise{
-        padding-left: 10px;
+    .enterprise {
+        width: 30%;
+        
     }
+
     .nav {
         display: flex;
         justify-content: space-between;
@@ -530,55 +616,42 @@ footer .watermark {
         width: 100%;
     }
 
-    .navbar,
-    .login {
+    .nav section img {
         display: none;
     }
 
     .menu-icon {
         display: block;
         cursor: pointer;
-        padding-right: 10px;
+        padding-right: 20px;
+        z-index: 1001;
     }
 
-    .menu-icon div {
-        width: 25px;
-        height: 3px;
-        background-color: var(--secondary);
-        margin: 5px 0;
-        position: relative;
+    .menu-icon svg {
+        width: 24px;
+        height: 24px;
     }
 
-    .menu-icon div::before,
-    .menu-icon div::after {
-        content: '';
-        position: absolute;
-        width: 25px;
-        height: 3px;
-        background-color: var(--secondary);
-        transition: 0.3s;
+    .menu-icon .menu-close {
+        display: none;
     }
 
-    .menu-icon div::before {
-        transform: translateY(-8px);
+    .menu-icon.active .menu-open {
+        display: none;
     }
 
-    .menu-icon div::after {
-        transform: translateY(8px);
+    .menu-icon.active .menu-close {
+        display: block;
     }
 
-    .mobile-menu.active {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        padding: 20px;
-        background-color: var(--primary);
-        z-index: 3;
+    .navbar,
+    .login {
+        display: none;
     }
 
     /* Hero Section */
 
-    .hero-main{
+    .hero-main {
         background: var(--background);
         display: flex;
         flex-direction: column;
@@ -590,8 +663,8 @@ footer .watermark {
     .hero-main .frame {
         margin-top: 10px;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: justify;
+        justify-content: justify;
     }
 
     .hero-conteiner {
@@ -721,8 +794,9 @@ footer .watermark {
     .projects .works {
         flex-direction: column;
     }
+
     .projects .works.reverse {
-        flex-direction: column; 
+        flex-direction: column;
     }
 
     .projects .works div img {
@@ -744,7 +818,6 @@ footer .watermark {
     }
 
     .contact .inputs {
-        width: 100%;
         margin-right: 0;
     }
 
