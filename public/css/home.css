@@ -103,14 +103,15 @@ header a {
 }
 
 .nav {
-    width: 100%;
+    width: 90%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     font-weight: var(--Bold);
     margin-top: 0;
     padding-top: 10px;
     background-color: var(--background);
+    justify-self: center;
 
     color: var(--text);
 }
@@ -177,11 +178,11 @@ header a {
     flex-direction: column;
     justify-content: justify;
     align-items: justify;
-    padding: 8% 10vw 0% 10vw;
+    padding: 3em 5vw;
 }
 
 .hero-conteiner {
-    gap: 20px;
+    gap: 5vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -189,7 +190,7 @@ header a {
 }
 
 .hero-conteiner img {
-    scale: 1.20;
+    scale: 0.95;
 }
 
 .hero-conteiner .container {
@@ -308,7 +309,7 @@ header a {
 }
 
 .testimonial .text p {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: var(--Regular);
     color: var(--text);
     text-align: center;
@@ -344,11 +345,13 @@ header a {
 
 .divisions .container h3 {
     color: white;
+    font-size: 24px;
 }
 
 .divisions .container p {
     color: var(--text);
     text-align: justify;
+    font-size: 20px
 }
 
 .divisions h3 {
@@ -361,7 +364,7 @@ header a {
     align-items: center;
     padding: 3em 5vw;
     gap: 5vw;
-    height: 100vh;
+    height: 100%;
 }
 
 .about .logo {
@@ -399,7 +402,7 @@ header a {
 }
 
 .about .text div p {
-    font-size: 16px;
+    font-size: 24px;
     font-weight: var(--Regular);
     line-height: 24px;
     color: #71717A;
@@ -466,7 +469,7 @@ header a {
 }
 
 .projects .works .details p {
-    font-size: 16px;
+    font-size: 24px;
     text-align: justify;
     width: 100%;
     font-weight: var(--Regular);
@@ -552,13 +555,13 @@ header a {
 .contact .text p {
     margin-top: 20px;
     margin-bottom: 40px;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: var(--Regular);
     line-height: 24px;
 }
 
 .contact .text h2 {
-    font-size: 28px;
+    font-size: 36px;
     font-weight: var(--SemiBold);
     line-height: 32px;
     color: var(--secondary);
@@ -827,6 +830,14 @@ footer .watermark {
 
     .contact .text h1 {
         font-size: 36px;
+    }
+
+    .contact .text p {
+        font-size: 16px;
+    }
+
+    .contact .text h2 {
+        font-size: 20px;
     }
 
     /* Footer */
