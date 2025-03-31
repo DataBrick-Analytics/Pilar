@@ -90,12 +90,16 @@ body {
 .containerMain {
     width: 70vw;
     height: 100vh;
-    /* background-color: rgb(194, 194, 194); */
 
     position: absolute;
     left: 25vw;
 
     margin-left: 2%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
 }
 
 .containerKPI {
@@ -122,10 +126,24 @@ body {
     font-weight: lighter;
 }
 
+.charts {
+    display: flex;
+    justify-content: space-around;
+}
+
 #chartLine {
-    width: 40%;
-    height: 300px;
+    max-width: 500px;
+    max-height: 350px;
     padding: 5px;
 
-    background-color: gray;
+    border-bottom: solid 2px black;
+}
+
+
+#chartPie {
+    max-width: 500px;
+    max-height: 350px;
+    padding: 5px;
+
+    border-bottom: solid 2px black;
 }
