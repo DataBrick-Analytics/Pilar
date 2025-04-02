@@ -2,7 +2,7 @@ const chartLine = document.getElementById('chartLine');
 new Chart(chartLine, {
     type: 'line',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['label', 'label', 'label', 'label', 'label', 'label'],
         datasets: [{
             label: '# of Votes',
             data: [12, 19, 3, 5, 2, 3],
