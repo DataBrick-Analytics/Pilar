@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --text: #D4D4D8;
+    --background: #fffff0;
+    --primary: #2C3E50;
+    --secondary: #e66c2f;
+    --accent: #768087;
+    --Thin: 100;
+    --ExtraLight: 200;
+    --Light: 300;
+    --Regular: 400;
+    --Medium: 500;
+    --SemiBold: 600;
+    --Bold: 700;
+    --ExtraBold: 800;
+}
+
+* {
+    font-family: "Inter";
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    background-color: var(--background);
+}
+
+.banner {
+    width: 100%;
+    height: 20vh;
+    background-color: #646464;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.banner .adressInfo {
+    color: white;
+    position: absolute;
+    left: 30vw;
+}
+
+.pagesBar {
+    width: 20vw;
+    height: 85vh;
+    background-color: var(--primary);
+    position: absolute;
+    left: 5vw;
+    top: 10vh;
+
+    border-radius: 15px;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.pagesBar h1 {
+    font-weight: normal;
+    text-align: center;
+    font-size: 40px;
+
+    margin-top: 10%;
+}
+
+.pagesBar h1 span {
+    font-size: 50px;
+}
+
+.pagesBar .pages {
+    width: 90%;
+    height: 20vh;
+    padding: 5%;
+    gap: 20px;
+}
+
+.pagesBar .pages h2 {
+    font-weight: normal;
+}
+
+.pagesBar .pages ul {
+    list-style: none;
+    gap: 20px;
+}
+
+.containerMain {
+    width: 70vw;
+    position: absolute;
+    left: 25vw;
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 5px;
+}
+
+.containerKPI {
+    display: flex;
+    flex-direction: row;
+    gap: 5vw;
+
+    justify-content: center;
+    margin-top: -5vh;
+}
+
+.containerKPI .kpi {
+    background-color: var(--primary);
+    width: 15vw;
+    height: 15vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 10px;
+    font-size: 5vh;
+
+    color: var(--secondary);
+    font-weight: lighter;
+}
+
+.charts {
+    display: flex;
+    justify-content: space-around;
+}
+
+#chartLine {
+    max-width: 500px;
+    max-height: 350px;
+    padding: 5px;
+
+    border-bottom: solid 2px black;
+}
+
+
+#chartPie {
+    max-width: 500px;
+    max-height: 350px;
+    padding: 5px;
+
+    border-bottom: solid 2px black;
+}
+
+
+.landImage {
+    width: 100%;
+    height: 45vh;
+    background-color: darkgray;
+
+    border-radius: 10px;
+    border: solid 2px black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filters{
+    width: 20vw;
+    height: 40vh;
+    position: absolute;
+    top: 140vh;
+    left: 5vw;
+
+    background-color: var(--primary);
+    color: white;
+
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filters .filtersBar{
+    position: absolute;
+    top: 5vh;
+}
+
+.writeComment{
+    width: 90%;
+    height: 30vh;
+    background-color: var(--primary);
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    position: static;
+    border-radius: 15px;
+}
+
+.userComment{
+    width: 90%;
+    height: 40%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.writeComment h3{
+    align-self: flex-start;
+    margin-left: 5%;
+    color: var(--secondary);
+    font-weight: bold;
+}
+
+.writeComment #submit{
+    background-color: var(--secondary);
+    color: white;
+    width: 5vw;
+    height: 5vh;
+    border-radius: 10px;
+    font-weight: bold;
+
+    align-self: flex-end;
+    margin-right: 5%;
+}
+
+.commentsSection{
+    height: 50vh;
+    white-space: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.commentsSection .comments{
+    width: 90%;
+    height: 25%;
+
+    background-color: white;
+    border: solid 1px black;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+}
+
+.commentsSection .comments p{
+    width: 80%;    
+}
+
+.commentsSection .comments img{
+    width: 5vw;
+    border-radius: 60px;
+}
