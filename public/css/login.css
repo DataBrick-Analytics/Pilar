@@ -163,3 +163,58 @@ body{
     transition: .2s;
     border: solid 2px white;
 }
+
+
+@media screen and (max-width: 768px) {
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      background-color: var(--background);
+    }
+  
+    .Direita {
+      width: 100%;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--background);
+    }
+  
+    .Direita img {
+      display: none;
+      justify-content: flex-start;
+    }
+  
+    .descricao {
+      text-align: center;
+    }
+  
+    .descricao h1 {
+      font-size: xx-large;
+    }
+  
+    .container {
+      width: 90%;
+      height: auto;
+      padding: 20px;
+      border-left: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--background);
+    }
+  
+    .formulario {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .buttons {
+      height: auto;
+    }
+  }
