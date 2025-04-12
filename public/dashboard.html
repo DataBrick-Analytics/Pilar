@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databrick - Dashboard</title>
+
+    <link rel="shortcut icon" href="assets/logo/BrickData.svg" type="image/x-icon">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <div class="banner">
+        <div class="adressInfo">
+            <h3>XXXXXXXXXXX</h3>
+            <h4>Adress: </h4>
+        </div>
+    </div>
+
+    <div class="pagesBar">
+        <h1><span>DB</span> <br>Analytics</h1>
+
+        <div class="pages">
+            <h2>Pages</h2>
+
+            <ul>
+                <li>Home</li>
+                <li>Home</li>
+                <li>Home</li>
+                <li>Home</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="containerMain">
+        <div class="containerKPI">
+            <div class="kpi" id="kpi1">$$$$</div>
+            <div class="kpi" id="kpi2">XXXX</div>
+            <div class="kpi" id="kpi2">%%%%</div>
+        </div>
+
+        <div class="charts">
+            <canvas id="chartLine"></canvas>
+            <canvas id="chartPie"></canvas>
+        </div>
+
+        <div class="landImage">
+            <img src="assets/services/icon-map.svg" alt="">
+        </div>
+
+        <div class="writeComment">
+            <h3>Leave a Comment!</h3>
+            <textarea cols="40" rows="5" class="userComment"></textarea>
+            <button id="submit">Submit</button>
+
+        </div>
+
+        <div class="commentsSection">
+            <div class="comments">
+                <img src="https://www.moneytimes.com.br/uploads/2022/07/natalia-beauty-empreendedorismo-1.png" alt="">
+                <p>
+                    O terreno tem uma localização estratégica, próximo a vias principais, mas apresenta
+                    desníveis que exigiriam um bom trabalho de terraplanagem antes da construção.
+                </p>
+            </div>
+            <div class="comments">
+                <img src="https://elements-resized.envatousercontent.com/elements-video-cover-images/files/ab6f51c2-9751-4aa6-8858-37da15703de5/inline_image_preview.jpg?w=500&cf_fit=cover&q=85&format=auto&s=515d7d8d4534e1d155382f6b723fa14a0b0305f12780eb85014cb1a43f27f5a0" alt="">
+                <p>
+                    O solo aparenta ser firme e bem drenado, o que é positivo, mas um estudo geotécnico
+                    seria essencial para evitar surpresas estruturais no futuro.
+                </p>
+            </div>
+            <div class="comments">
+                <img src="https://img.freepik.com/fotos-premium/empresario-com-rosto-nao-barbeado-retrato-do-empresario-empresario-usando-gravata-borboleta-com-smoking_474717-78987.jpg" alt="">
+                <p>
+                    A área tem um grande potencial para valorização, porém a falta de infraestrutura
+                    básica, como asfalto e saneamento, pode encarecer a obra e impactar a atratividade no curto prazo.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="filters">
+        <div class="filtersBar">
+            <h2>Filters</h2>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/graficosDash.js"></script>
