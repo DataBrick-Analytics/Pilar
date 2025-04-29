@@ -58,7 +58,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
 
+.locais .charts {
+    width: 90%;
+    height: 90%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .grafico1{
@@ -122,7 +130,6 @@
 }
 
 .pagesBar {
-    width: 20vw;
     height: 85vh;
     border-radius: 15px;
     color: white;
@@ -131,6 +138,10 @@
 }
 
 .pagesBar h1 {
+    width: 50%;
+    justify-self: center;
+    align-self: center;
+    
     font-weight: normal;
     text-align: center;
     font-size: 40px;
@@ -140,6 +151,10 @@
 
 .pagesBar h1 span {
     font-size: 50px;
+}
+.pagesBar h2{
+    justify-self: center;
+    align-self: center;
 }
 
 .pagesBar .pages {
@@ -151,6 +166,7 @@
 
 .pagesBar .pages h2 {
     font-weight: normal;
+    justify-self: left;
 }
 
 .pagesBar .pages ul {
