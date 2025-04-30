@@ -4,7 +4,7 @@ var database = require("../database/config");
 async function createEnterprise(enterprise) {
   const query = `
   INSERT INTO tb_empresa (nome, endereco, telefone, email, data_cadastro, senha)
-  VALUES (?, ?, ?, ?, ?, ?)
+  VALUES (?, ?, ?, ?, ?, sha2(?, 256))
   `;
 
   const values = [
@@ -20,6 +20,7 @@ async function createEnterprise(enterprise) {
     const resultado = await database.execute(query, values);
     console.log('Empresa inserida com sucesso:', resultado);
     return resultado;
+
   } catch (error) {
     console.error('Erro ao inserir empresa:', error.message);
     throw error;

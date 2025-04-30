@@ -260,3 +260,15 @@ body{
         width: 50%;
     }
 }
+
+
+#senhaIcon{
+    scale: 0.4;
+    position: absolute;
+    right: 4%;
+    margin-top: 1.5px;
+}
+
+#senhaIcon:hover{
+    cursor: pointer;
+}

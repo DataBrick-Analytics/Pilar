@@ -1,7 +1,8 @@
 var enterpriseModel = require("../models/enterpriseModel");
 
 function createEnterprise(req, res) {
-    var enterprise = req.body;
+    var enterprise = req.body
+
     console.log("Dados recebidos:", enterprise);
 
     if (enterprise == undefined || enterprise == null) {
@@ -25,11 +26,14 @@ function createEnterprise(req, res) {
 
     enterpriseModel.createEnterprise(enterprise)
         .then(function (resultado) {
-            if (resultado.affectedRows > 0) {
-                res.status(201).json({
-                    message: "Empresa criada com sucesso",
-                    id: resultado.insertId
-                });
+            console.log('voltou pro then do controller')
+
+            if (resultado) {
+                // res.status(201).json({
+                //     message: "Empresa criada com sucesso",
+                //     id: resultado.insertId
+                // });
+                res.json(resultado)
             } else {
                 res.status(400).json({
                     error: "Erro ao criar empresa"

@@ -7,16 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>DataBrick | Cadastro</title>
-
-  <script src="./js/sessao.js"></script>
+  <!--LIBS-->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
 
   <link rel="stylesheet" href="css/cadastro.css" />
   <link rel="icon" href="./assets/icon/favicon2.ico" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
-
-  <script src="js/cadastro.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
+  
+  <script src="./js/cadastro.js"></script>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
   </div>
 
   <div class="container">
-    <img src="assets/Big-logo-icon.svg" alt="">
+    <img src="assets/logo/BrickData.svg" alt="">
     <h4>Cadastre uma conta!</h4>
 
     <form action="" class="formulario">
@@ -43,12 +43,12 @@
 
         <div class="field">
           <label for="email">E-mail:</label>
-          <input type="text" placeholder="empresa@gmail.com" id="email_input">
+          <input type="email" placeholder="empresa@gmail.com" id="email_input">
         </div>
 
         <div class="field">
           <label for="telefone">Telefone:</label>
-          <input type="number" placeholder="(xx) xxxxx-xxxx" id="telefone_input">
+          <input type="tel" placeholder="(xx) xxxxx-xxxx" id="telefone_input">
         </div>
 
         <div class="field">
@@ -70,7 +70,7 @@
         </div>
 
         <div class="field">
-          <label for="senha">Senha:</label>
+          <label for="senha">Senha: <img src="assets/services/icon - showPasswd.svg" id="senhaIcon"></label>
           <input type="password" placeholder="Digite sua senha" id="senha_input">
         </div>
 
@@ -93,7 +93,7 @@
     </form>
 
     <div class="buttons">
-      <button id="signUpButton">Sign Up now</button>
+      <button onclick="cadastrar()" id="signUpButton">Sign Up now</button>
 
 
       <img src="assets/login/or-crossbar.svg" alt="" id="orLoginImage">
@@ -101,6 +101,7 @@
 
     </div>
   </div>
+
 </body>
 
 </html>
