@@ -207,6 +207,9 @@ body {
 }
 
 .divGraficoReal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     margin-top: -5%;
     width: 95%;
@@ -214,6 +217,10 @@ body {
     background-color: var(--primary);
     border-radius: 10px;
     box-shadow: 0 0px 5px gray;
+}
+.divGraficoReal canvas {
+    width: 95% !important ;
+    height: 95% !important;
 }
 
 .divNomeGrafico{
