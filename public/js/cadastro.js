@@ -135,14 +135,14 @@ function cadastrar() {
     }),
   })
     .then(function (resposta) {
-      console.log("resposta: ", resposta);
-
-      console.log('Voltou ao cadastro AAAAAAAAAAAAAAAAA')
       if (resposta.ok) {
+        
         Swal.fire({
           icon: "success",
           title: "Perfeito!",
           text: "Cadastro realizado com sucesso!"
+        }).then(() => {
+          window.location = '/login.html'
         })
       } else {
         throw "Houve um erro ao tentar realizar o cadastro!";
@@ -180,6 +180,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
   iconeSenha.addEventListener('click', function () {
     senha_input.type = senha_input.type === 'password' ? 'text' : 'password'
-    iconeSenha.innerHTML = ""
   })
 })

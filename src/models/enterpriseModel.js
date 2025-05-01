@@ -27,6 +27,28 @@ async function createEnterprise(enterprise) {
   }
 }
 
+async function autenticateEnterprise(enterprise) {
+  const query = `
+  SELECT * FROM tb_empresa WHERE email = ? AND senha = sha2(? , 256)
+  `
+  const values = [
+    enterprise.email,
+    enterprise.senha
+  ]
+
+  try {
+    const resultado = await database.execute(query, values)
+    
+    if(resultado.affectedRows == 1){
+      console.log("Empresa localizada com sucesso: ", resultado)
+      
+      return resultado
+    }
+  } catch(error){
+    console.error("Erro ao localizar a empresa", error.message)
+    throw error
+  }
+}
 
 async function editEnterprise(enterprise, idEnterprise) {
 
@@ -70,7 +92,7 @@ async function deleteEnterprise(idEnterprise) {
     if (idEnterprise == null || idEnterprise == undefined) {
       throw new Error('Id Está indifinido.');
     }
-    if(resultado.affectedRows === 0) {
+    if (resultado.affectedRows === 0) {
       throw new Error('Nenhuma empresa encontrada com o ID fornecido.');
     }
     console.log('Empresa deletada com sucesso:', resultado);
@@ -85,6 +107,7 @@ async function deleteEnterprise(idEnterprise) {
 
 module.exports = {
   createEnterprise,
+  autenticateEnterprise,
   editEnterprise,
   deleteEnterprise
 }

@@ -171,6 +171,11 @@ body{
     border: solid 2px white;
 }
 
+#logoBrickData{
+    scale: 2;
+    margin-bottom: 2vh;
+}
+
 
 @media screen and (max-width: 768px) {
     body {
