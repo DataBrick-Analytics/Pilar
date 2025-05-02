@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+:root {
+    --text: #D4D4D8;
+    --background: #fffff0;
+    --primary: #2C3E50;
+    --secondary: #e66c2f;
+    --accent: #768087;  
+    --gray: lightslategray;
+}
+
+* {
+    font-family: "Inter";
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    background-color: var(--background);
+}
+
+.divGeral{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+}
+
+.divPainel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background);
+    width: 15%;
+    height: 100%;
+}
+
+.divPainelAzul{
+    width: 85%;
+    height: 85%;
+    background-color: var(--primary) ;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px var(--primary);
+}
+
+.divDash{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background-color: var(--background);
+    width: 85%;
+    height: 100vh ;
+}
+
+.divKPIs{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    width: 95%;
+    height: 15%;
+    background-color: var(--background);
+}
+
+.divKPI{
+    position: relative;
+    width: 23%;
+    height: 80%;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: flex-start;
+    box-shadow: 0 5px 10px gray;
+}
+
+.Primary{
+    background-color: var(--primary);
+}
+
+.Secondary{
+    background-color: var(--secondary);
+}
+
+.icon1{
+    background-image: url(../assets/icons-dash/account-circle.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.icon2{
+    background-image: url(../assets/icons-dash/account-plus.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.icon3{
+    background-image: url(../assets/icons-dash/chart-bar.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.icon4{
+    background-image: url(../assets/icons-dash/store.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.divKpiIcone{
+    position: absolute;
+    margin-top: -5%;
+    margin-left: 7%;
+    width: 20%;
+    height: 45%;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px gray;
+}
+
+.divKpiNomes{
+    color: var(--gray);
+    position: absolute;
+    margin-left: 80%;
+    margin-top: 2%;
+}
+
+.divKpiValor{
+    color: var(--primary);
+    position: absolute;
+    margin-left: 80%;
+    margin-top: 11%;
+    font-weight: bold;
+    font-size: small;
+    font-weight: bold;
+}
+
+.divKpiDescricao1{
+    color: var(--gray);
+    position: absolute;
+    margin-top: 20%;
+    margin-left: 5%;
+    font-size: small;
+    font-weight: bold;
+}
+.divKpiDescricao1 span{
+    color: greenyellow;
+}
+
+.divKpiDescricao2{
+    color: var(--gray);
+    position: absolute;
+    margin-top: 20%;
+    margin-left: 5%;
+    font-size: small;
+    font-weight: bold;
+}
+.divKpiDescricao2 span{
+    color: var(--secondary);
+}
+
+.divKpiDescricao3{
+    color: var(--gray);
+    position: absolute;
+    margin-top: 20%;
+    margin-left: 5%;
+    font-size: small;
+    font-weight: bold;
+}
+.divKpiDescricao3 span{
+    color: red;
+}
+
+.divKpiDescricao4{
+    color: var(--gray);
+    position: absolute;
+    margin-top: 20%;
+    margin-left: 5%;
+    font-size: small;
+    font-weight: bold;
+}
+.divKpiDescricao4 span{
+    color: greenyellow;
+}
+
+.divGraficos{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 95%;
+    height: 45%;
+    background-color: var(--background);
+}
+
+.divGrafico{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 49%;
+    height: 95%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px gray;
+}
+
+.divGraficoReal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: -5%;
+    width: 95%;
+    height: 65%;
+    background-color: var(--primary);
+    border-radius: 10px;
+    box-shadow: 0 0px 5px gray;
+}
+.divGraficoReal canvas {
+    width: 95% !important ;
+    height: 95% !important;
+}
+
+.divNomeGrafico{
+    color: var(--gray);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 95%;
+    height: 15%;
+}
+
+.spanNome{
+    color: var(--primary);
+    font-weight: bold;
+    font-size: larger;
+}
+.divAtualizacaoGrafico{
+    color: var(--gray);
+    width: 95%;
+    height: 10%;
+}
+
+.divInformacoes{
+    width: 85%;
+    height: 25%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.divTituloInformacoes{
+    color: var(--primary);
+    font-weight: bold;
+    font-size: large;
+    width: 95%;
+    height: 15%;
+}
+
+.divInformacoesFiltros{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+    /* background-color: aqua; */
+}
+
+.linhas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    height: 20%;
+}
+
+.rankingCor{
+    width: 10%;
+    height: 100%;
+    /* background-color: #e66c2f; */
+}
+
+.tituloDescricaoValor{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    height: 100%;
+}
+.tituloDescricao{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    width: 70%;
+    height: 100%;
+    color: var(--primary);
+}
+.titulo{
+    color: var(--primary);
+    font-weight: bold;
+}
+.valor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    height: 100%;
+    color: red;
+    font-weight: bold;
+}
