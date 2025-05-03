@@ -4,7 +4,7 @@ var database = require("../database/config");
 async function createUser(user) {
 
     const query = `
-    INSERT INTO tb_usuario (nome, email, senha, data_cadastro, fk_empresa, fk_funcao)
+    INSERT INTO usuarios (nome, email, senha, data_cadastro, fk_empresa, fk_funcao)
     VALUES (?, ?, ?, NOW(), ?, ?)
      `;
 
@@ -28,7 +28,7 @@ async function createUser(user) {
 async function editUser(user,idUser) {
 
     const query = `
-    UPDATE tb_usuario
+    UPDATE usuarios
      SET nome = ?,
         email = ?,
         senha = ?,
@@ -57,7 +57,7 @@ async function editUser(user,idUser) {
 async function deleteUser(idUser) {
 
     const query = `
-    DELETE tb_usuario FROM WHERE id_usuario= ?
+    DELETE usuarios FROM WHERE id_usuario= ?
     `;
 
     try {

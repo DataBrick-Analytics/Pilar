@@ -3,7 +3,7 @@ var database = require("../database/config");
 
 async function createEnterprise(enterprise) {
   const query = `
-  INSERT INTO tb_empresa (nome, endereco, telefone, email, data_cadastro, senha)
+  INSERT INTO empresas (nome, endereco, telefone, email, data_cadastro, senha)
   VALUES (?, ?, ?, ?, ?, sha2(?, 256))
   `;
 
@@ -29,8 +29,10 @@ async function createEnterprise(enterprise) {
 
 async function autenticateEnterprise(enterprise) {
   const query = `
-  SELECT id_empresa, nome, endereco, telefone, email FROM tb_empresa WHERE email = ? AND senha = sha2(? , 256)
-  `
+      SELECT id_empresa, nome, endereco, telefone, email 
+        FROM empresas 
+      WHERE email = ? 
+  AND senha = SHA2(?, 256);  `
   const values = [enterprise.email, enterprise.senha ]
 
   try {
@@ -45,7 +47,7 @@ async function autenticateEnterprise(enterprise) {
 async function editEnterprise(enterprise, idEnterprise) {
 
   const query = `
-  UPDATE tb_empresa
+  UPDATE empresas
   SET nome = ?,
       endereco = ?,
       telefone = ?,
@@ -77,7 +79,7 @@ async function editEnterprise(enterprise, idEnterprise) {
 
 async function deleteEnterprise(idEnterprise) {
   console.log("ID para exclusão:", idEnterprise);
-  const query = `DELETE FROM tb_empresa WHERE id_empresa  = ?`;
+  const query = `DELETE FROM empresas WHERE id_empresa  = ?`;
 
   try {
     const resultado = await database.execute(query, [idEnterprise]);
