@@ -8,7 +8,9 @@ function entrar() {
         Swal.fire({
             icon: "error",
             title: "Opa...",
-            text: "Informações Faltando!"
+            text: "Informações Faltando!",
+            color: "#FFFFFF",
+            background: "#2C3E50"
         })
         return
     }
@@ -26,38 +28,52 @@ function entrar() {
             email: emailVar,
             senha: senhaVar
         })
-    }).then(function (resposta) {
-        console.log("ESTOU NO THEN DO entrar()!")
-
-        if (resposta.ok) {
-            console.log(resposta);
-
-            resposta.json().then(json => {
-                console.log(json);
-                console.log(JSON.stringify(json));
-                sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.ID_USUARIO = json.id;
-
-                setTimeout(function () {
-                    window.location = "./dashboard/cards.html";
-                }, 1000); // apenas para exibir o loading
-
-            });
-
-        } else {
-
-            console.log("Houve um erro ao tentar realizar o login!");
-
-            resposta.text().then(texto => {
-                console.error(texto);
-                finalizarAguardar(texto);
-            });
-        }
-
-    }).catch(function (erro) {
-        console.log(erro);
     })
+        .then(resposta => {
+            console.log("ESTOU NO THEN DO entrar()!")
+            if (!resposta.ok) {
+                // Aqui a gente tenta extrair a mensagem de erro que veio do backend
+                return resposta.text().then(mensagemErro => {
+                    throw new Error(mensagemErro);
+                });
+            }
+            return resposta.json();
+        })
+        .then(dadosEmpresa => {
+            Swal.fire({
+                icon: "success",
+                title: "Bem-vindo!",
+                text: "Login realizado com sucesso",
+                color: "#FFFFFF",
+                background: "#2C3E50"
+            })
+                .then(() => {
+                    sessionStorage.setItem("ID_EMPRESA", dadosEmpresa.idEmpresa)
+                    sessionStorage.setItem("NOME_EMPRESA", dadosEmpresa.nomeEmpresa)
+                    sessionStorage.setItem("EMAIL", dadosEmpresa.email);
+                    sessionStorage.setItem("ENDERECO", dadosEmpresa.endereco); // 'totalGuardado' está correto
+                    sessionStorage.setItem("TELEFONE", dadosEmpresa.telefone);
 
+                    window.location = "/dash2.html"
+                })
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            Swal.fire({
+                icon: "error",
+                title: "Erro ao fazer login",
+                text: erro.message,
+                color: "#FFFFFF",
+                background: "#2C3E50"
+            });
+        })
     return false;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    var iconSenha = document.getElementById("senhaIcon")
+
+    iconSenha.addEventListener('click', () => {
+        senha_input.type = senha_input.type === "password" ? "text" : "password"
+    })
+})

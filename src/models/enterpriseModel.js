@@ -29,21 +29,13 @@ async function createEnterprise(enterprise) {
 
 async function autenticateEnterprise(enterprise) {
   const query = `
-  SELECT * FROM tb_empresa WHERE email = ? AND senha = sha2(? , 256)
+  SELECT id_empresa, nome, endereco, telefone, email FROM tb_empresa WHERE email = ? AND senha = sha2(? , 256)
   `
-  const values = [
-    enterprise.email,
-    enterprise.senha
-  ]
+  const values = [enterprise.email, enterprise.senha ]
 
   try {
-    const resultado = await database.execute(query, values)
-    
-    if(resultado.affectedRows == 1){
-      console.log("Empresa localizada com sucesso: ", resultado)
-      
-      return resultado
-    }
+    return resultado = await database.execute(query, values)
+
   } catch(error){
     console.error("Erro ao localizar a empresa", error.message)
     throw error

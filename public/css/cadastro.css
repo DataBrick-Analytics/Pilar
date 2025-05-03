@@ -15,7 +15,8 @@
     --Bold: 700;
     --ExtraBold: 800;
 }
-body{
+
+body {
     background: linear-gradient(to bottom, var(--background)70%, var(--secondary));
     margin: 0;
     display: flex;
@@ -23,11 +24,11 @@ body{
     justify-content: space-between;
 }
 
-*{
+* {
     font-family: "Sora";
 }
 
-.leftContainer{
+.leftContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,28 +38,29 @@ body{
     gap: 10px;
 }
 
-.signUpDescription{
+.signUpDescription {
     font-weight: var(--ExtraBold);
     color: var(--secondary);
     font-size: x-large;
 }
-.signUpDescription h1{
+
+.signUpDescription h1 {
     margin: 3px;
-    
+
 }
 
-.signUpDescription p{
+.signUpDescription p {
     font-weight: normal;
     font-size: medium;
     margin: 0;
 }
 
-#imageSignUp{
+#imageSignUp {
     height: 70vh;
 }
 
 
-.container{
+.container {
     height: 100vh;
     width: 50%;
     background-color: rgb(255, 255, 255);
@@ -70,17 +72,17 @@ body{
 
 }
 
-.container img{
+.container img {
     width: 10vh;
     justify-self: center;
     padding-top: 5px;
 }
 
-.container h4{
+.container h4 {
     font-weight: var(--ExtraBold);
 }
 
-.formulario{
+.formulario {
     width: 80%;
     display: flex;
     flex-direction: row;
@@ -88,37 +90,38 @@ body{
     gap: 3vw;
 }
 
-.formulario .leftSection{
+.formulario .leftSection {
     width: 55%;
     display: flex;
     flex-direction: column;
     gap: 3vh;
 }
 
-.formulario .field{
+.formulario .field {
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
 
-.formulario .field input{
-    width: 100%;;
+.formulario .field input {
+    width: 100%;
+    ;
     height: 4vh;
     border: none;
     background-color: #F1F3F6;
-    border-radius:5px;
+    border-radius: 5px;
     padding: 5px;
 
 }
 
-.formulario .rightSection{
+.formulario .rightSection {
     width: 55%;
     display: flex;
     flex-direction: column;
     gap: 3vh;
 }
 
-.buttons{
+.buttons {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -128,21 +131,21 @@ body{
     gap: 10px;
 }
 
-.buttons #signUpButton{
+.buttons #signUpButton {
     width: 70%;
     height: 5vh;
     border-radius: 10px;
-    border:  none;
+    border: none;
     background-color: #AD6C41;
     color: white;
     box-shadow: 0 4px 10px var(--secondary);
 }
 
-.buttons #orLoginImage{
+.buttons #orLoginImage {
     width: 60%;
 }
 
-.buttons #logInButton{
+.buttons #logInButton {
     width: 55%;
     height: 5vh;
     border: solid 2px var(--secondary);
@@ -159,18 +162,24 @@ body{
 }
 
 
-.buttons #signUpButton:hover{
+.buttons #signUpButton:hover {
     cursor: pointer;
     transition: .2s;
     filter: brightness(.9);
 }
 
-.buttons #logInButton:hover{
+.buttons #logInButton:hover {
     cursor: pointer;
     background-color: var(--accent);
     color: white;
     transition: .2s;
     border: solid 2px white;
+}
+
+#senhaIcon {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
@@ -179,7 +188,8 @@ body{
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        min-height: 100vh; /* Evita corte */
+        min-height: 100vh;
+        /* Evita corte */
         background-color: var(--background);
     }
 
@@ -262,13 +272,3 @@ body{
 }
 
 
-#senhaIcon{
-    scale: 0.4;
-    position: absolute;
-    right: 4%;
-    margin-top: 1.5px;
-}
-
-#senhaIcon:hover{
-    cursor: pointer;
-}

@@ -1,5 +1,6 @@
-const e = require("express");
+
 var enterpriseModel = require("../models/enterpriseModel");
+
 
 function createEnterprise(req, res) {
     var enterprise = req.body
@@ -48,6 +49,8 @@ function createEnterprise(req, res) {
         });
 }
 
+
+
 function autenticateEnterprise(req, res) {
     var enterprise = req.body
 
@@ -60,21 +63,22 @@ function autenticateEnterprise(req, res) {
 
     enterpriseModel.autenticateEnterprise(enterprise)
         .then(function (resultado) {
-            if (resultado) {
-                return res.status(200).json({
-                    message: "Empresa localizada com sucesso!",
-                    message: resultado,
-                    id: resultado.id_empresa,
-                    nome: resultado.nome,
-                    email: resultado.email,
-                    endereco: resultado.endereco,
-                    telefone: resultado.telefone
+            console.log(`\nResultados encontrados: ${resultado.length}`)
+            console.log(resultado)
 
+            if (resultado.length == 1) {
+                return res.json({
+                    idEmpresa: resultado[0].id_empresa,
+                    nomeEmpresa: resultado[0].nome,
+                    email: resultado[0].email,
+                    endereco: resultado[0].endereco,
+                    telefone: resultado[0].telefone,
                 })
+
+            } else if (resultado.length == 0) {
+                res.status(403).send("Email e/ou senha inválido(s)")
             } else {
-                res.status(404).json({
-                    message: "Não foi possível localizar a empresa"
-                })
+                res.status(403).send("Mais de um usuário com o mesmo login e senha.")
             }
         })
         .catch(function (erro) {

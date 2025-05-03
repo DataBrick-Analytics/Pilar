@@ -30,7 +30,9 @@ function cadastrar() {
     Swal.fire({
       icon: "error",
       title: "Opa...",
-      text: "Informações Faltando!"
+      text: "Informações Faltando!",
+      color: "#FFFFFF",
+      background: "#2C3E50"
     });
     return
   }
@@ -40,26 +42,32 @@ function cadastrar() {
     Swal.fire({
       icon: "error",
       title: 'Nome de Empresa Incorreto',
-      text: 'Insira um nome válido'
+      text: 'Insira um nome válido',
+      color: "#FFFFFF",
+      background: "#2C3E50"
     })
   }
   // Validação do Email
-  if (!emailVar.includes('@') || !emailVar.includes('.com')) {
+  if (!emailVar.includes('@gmail' || '@hotmail' || '@outlook') || !emailVar.includes('.com')) {
     Swal.fire({
       icon: 'error',
       title: 'Email Incorreto',
-      text: 'Insira um email válido!'
+      text: 'Insira um email válido!',
+      color: "#FFFFFF",
+      background: "#2C3E50"
     })
     return
   }
 
   // Validação do telefone
   const telefoneValidado = /^[-()0-9\s]+$/.test(telefoneVar)
-  if (!telefoneValidado) {
+  if (!telefoneValidado || telefoneVar.length < 11) {
     Swal.fire({
       icon: "error",
       title: 'Telefone Incorreto',
-      text: 'Insira um telefone válido'
+      text: 'Insira um telefone válido',
+      color: "#FFFFFF",
+      background: "#2C3E50"
     })
     return
   }
@@ -69,7 +77,9 @@ function cadastrar() {
     Swal.fire({
       icon: "error",
       title: 'Estado Incorreto',
-      text: 'Insira um estado válido'
+      text: 'Insira um estado válido',
+      color: "#FFFFFF",
+      background: "#2C3E50"
     })
     return
   }
@@ -79,7 +89,9 @@ function cadastrar() {
     Swal.fire({
       icon: "error",
       title: 'Bairro Incorreto',
-      text: 'Insira um Bairro válido'
+      text: 'Insira um Bairro válido',
+      color: "#FFFFFF",
+      background: "#2C3E50"
     })
     return
   }
@@ -89,7 +101,9 @@ function cadastrar() {
     Swal.fire({
       icon: "error",
       title: 'CNPJ Incorreto',
-      text: 'Insira um CPNJ válido'
+      text: 'Insira um CPNJ válido',
+      color: "#FFFFFF",
+      background: "#2C3E50"
     })
     return
   }
@@ -99,7 +113,9 @@ function cadastrar() {
     Swal.fire({
       icon: "error",
       title: 'CEP Incorreto',
-      text: 'Insira um Cep válido'
+      text: 'Insira um Cep válido',
+      color: "#FFFFFF",
+      background: "#2C3E50"
     })
     return
   }
@@ -108,12 +124,14 @@ function cadastrar() {
     Swal.fire({
       icon: "error",
       title: 'Cidade Incorreta',
-      text: 'Insira uma cidade válida'
+      text: 'Insira uma cidade válida',
+      color: "#FFFFFF",
+      background: "#2C3E50"
     })
     return
   }
 
-  var enderecoCompletoVar = cidadeVar + ' - ' + bairroVar  + ' - ' + numeroVar + ' - ' + estadoVar + ' - ' + cepVar
+  var enderecoCompletoVar = cidadeVar + ' - ' + bairroVar + ' - ' + numeroVar + ' - ' + estadoVar + ' - ' + cepVar
 
   console.log("Informações corretas")
 
@@ -129,18 +147,21 @@ function cadastrar() {
       nome: nomeEmpresaVar,
       email: emailVar,
       telefone: telefoneVar,
-      endereco : enderecoCompletoVar,
+      endereco: enderecoCompletoVar,
       cnpj: cnpjVar,
       senha: senhaVar,
     }),
   })
     .then(function (resposta) {
       if (resposta.ok) {
-        
+
         Swal.fire({
           icon: "success",
           title: "Perfeito!",
-          text: "Cadastro realizado com sucesso!"
+          text: "Cadastro realizado com sucesso!",
+          color: "#FFFFFF",
+          background: "#2C3E50"
+
         }).then(() => {
           window.location = '/login.html'
         })
