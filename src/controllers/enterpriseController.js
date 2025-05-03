@@ -1,7 +1,10 @@
+
 var enterpriseModel = require("../models/enterpriseModel");
 
+
 function createEnterprise(req, res) {
-    var enterprise = req.body;
+    var enterprise = req.body
+
     console.log("Dados recebidos:", enterprise);
 
     if (enterprise == undefined || enterprise == null) {
@@ -25,8 +28,10 @@ function createEnterprise(req, res) {
 
     enterpriseModel.createEnterprise(enterprise)
         .then(function (resultado) {
-            if (resultado.affectedRows > 0) {
-                res.status(201).json({
+            console.log('voltou pro then do controller')
+
+            if (resultado) {
+                return res.status(201).json({
                     message: "Empresa criada com sucesso",
                     id: resultado.insertId
                 });
@@ -42,6 +47,46 @@ function createEnterprise(req, res) {
                 error: erro.sqlMessage || erro.message
             });
         });
+}
+
+
+
+function autenticateEnterprise(req, res) {
+    var enterprise = req.body
+
+    if (enterprise.email == undefined || enterprise.email == null) {
+        return res.status(400).json({ error: "Email está undefined ou nulo!" });
+    }
+    if (enterprise.senha == undefined || enterprise.senha == null) {
+        return res.status(400).json({ error: "Senha está undefined ou nula!" });
+    }
+
+    enterpriseModel.autenticateEnterprise(enterprise)
+        .then(function (resultado) {
+            console.log(`\nResultados encontrados: ${resultado.length}`)
+            console.log(resultado)
+
+            if (resultado.length == 1) {
+                return res.json({
+                    idEmpresa: resultado[0].id_empresa,
+                    nomeEmpresa: resultado[0].nome,
+                    email: resultado[0].email,
+                    endereco: resultado[0].endereco,
+                    telefone: resultado[0].telefone,
+                })
+
+            } else if (resultado.length == 0) {
+                res.status(403).send("Email e/ou senha inválido(s)")
+            } else {
+                res.status(403).send("Mais de um usuário com o mesmo login e senha.")
+            }
+        })
+        .catch(function (erro) {
+            console.error("Erro ao localizar empresa:", erro);
+            res.status(500).json({
+                error: erro.sqlMessage || erro.message
+            });
+        })
 }
 
 function editEnterprise(req, res) {
@@ -114,6 +159,7 @@ function deleteEnterprise(req, res) {
 
 module.exports = {
     createEnterprise,
+    autenticateEnterprise,
     editEnterprise,
     deleteEnterprise
 };

@@ -4,7 +4,7 @@ var database = require("../database/config");
 async function createEnterprise(enterprise) {
   const query = `
   INSERT INTO tb_empresa (nome, endereco, telefone, email, data_cadastro, senha)
-  VALUES (?, ?, ?, ?, ?, ?)
+  VALUES (?, ?, ?, ?, ?, sha2(?, 256))
   `;
 
   const values = [
@@ -20,12 +20,27 @@ async function createEnterprise(enterprise) {
     const resultado = await database.execute(query, values);
     console.log('Empresa inserida com sucesso:', resultado);
     return resultado;
+
   } catch (error) {
     console.error('Erro ao inserir empresa:', error.message);
     throw error;
   }
 }
 
+async function autenticateEnterprise(enterprise) {
+  const query = `
+  SELECT id_empresa, nome, endereco, telefone, email FROM tb_empresa WHERE email = ? AND senha = sha2(? , 256)
+  `
+  const values = [enterprise.email, enterprise.senha ]
+
+  try {
+    return resultado = await database.execute(query, values)
+
+  } catch(error){
+    console.error("Erro ao localizar a empresa", error.message)
+    throw error
+  }
+}
 
 async function editEnterprise(enterprise, idEnterprise) {
 
@@ -69,7 +84,7 @@ async function deleteEnterprise(idEnterprise) {
     if (idEnterprise == null || idEnterprise == undefined) {
       throw new Error('Id Está indifinido.');
     }
-    if(resultado.affectedRows === 0) {
+    if (resultado.affectedRows === 0) {
       throw new Error('Nenhuma empresa encontrada com o ID fornecido.');
     }
     console.log('Empresa deletada com sucesso:', resultado);
@@ -84,6 +99,7 @@ async function deleteEnterprise(idEnterprise) {
 
 module.exports = {
   createEnterprise,
+  autenticateEnterprise,
   editEnterprise,
   deleteEnterprise
 }
