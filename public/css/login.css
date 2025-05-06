@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
 
 :root {
@@ -16,18 +15,19 @@
     --Bold: 700;
     --ExtraBold: 800;
 }
-body{
+
+body {
     margin: 0;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
 }
 
-*{
+* {
     font-family: "Sora";
 }
 
-.Direita{
+.Direita {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,27 +38,28 @@ body{
     background-color: #FFFFF0;
 }
 
-.descricao{
+.descricao {
     font-weight: var(--ExtraBold);
     color: var(--secondary);
     font-size: x-large;
 }
-.descricao h1{
+
+.descricao h1 {
     margin: 3px;
 }
 
-.descricao p{
+.descricao p {
     font-weight: normal;
     font-size: medium;
     margin: 0;
 }
 
-#imageSignUp{
+#imageSignUp {
     height: 70vh;
 }
 
 
-.container{
+.container {
     height: 100vh;
     width: 35%;
     background-color: white;
@@ -71,54 +72,65 @@ body{
 
 }
 
-.container img{
+.container img {
     width: 10vh;
     justify-self: center;
     padding-top: 5px;
 }
 
-.container h4{
+.container h4 {
     font-weight: var(--ExtraBold);
 }
 
-.formulario{
+.formulario {
     width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-.formulario .email-senha{
+.formulario .email-senha {
     width: 90%;
     display: flex;
     flex-direction: column;
     gap: 3vh;
 }
 
-.formulario .field{
+.formulario .field {
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
 
-.formulario .field input{
-    width: 100%;;
+.formulario .field #field_senha label{
+   height: 2vh;
+}
+
+#senhaIcon{
+    width: 25px;
+    height: 25px;
+    
+    cursor: pointer;
+    margin-bottom: 0px;
+}
+
+.formulario .field input {
+    width: 100%;
     height: 4vh;
     border: none;
     background-color: #F1F3F6;
-    border-radius:5px;
+    border-radius: 5px;
     padding: 5px;
-
 }
 
-.formulario .rightSection{
+.formulario .rightSection {
     width: 45%;
     display: flex;
     flex-direction: column;
     gap: 3vh;
 }
 
-.buttons{
+.buttons {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -128,21 +140,21 @@ body{
     gap: 10px;
 }
 
-#BotaoLogin{
+#BotaoLogin {
     width: 90%;
     height: 5vh;
     border-radius: 10px;
-    border:  none;
+    border: none;
     background-color: #AD6C41;
     color: white;
     box-shadow: 0 4px 10px var(--secondary);
 }
 
-#orLoginImage{
+#orLoginImage {
     width: 60%;
 }
 
-#Cadastro{
+#Cadastro {
     width: 75%;
     height: 5vh;
     border: solid 2px var(--secondary);
@@ -157,13 +169,13 @@ body{
     box-shadow: 0 4px 10px darkgray;
 }
 
-#BotaoLogin:hover{
+#BotaoLogin:hover {
     cursor: pointer;
     transition: .2s;
     filter: brightness(.9);
 }
 
-#Cadastro:hover{
+#Cadastro:hover {
     cursor: pointer;
     background-color: var(--accent);
     color: white;
@@ -171,57 +183,62 @@ body{
     border: solid 2px white;
 }
 
+#logoBrickData {
+    scale: 2;
+    margin-bottom: 2vh;
+}
+
 
 @media screen and (max-width: 768px) {
     body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      height: 100vh;
-      background-color: var(--background);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100vh;
+        background-color: var(--background);
     }
-  
+
     .Direita {
-      width: 100%;
-      height: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--background);
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--background);
     }
-  
+
     .Direita img {
-      display: none;
-      justify-content: flex-start;
+        display: none;
+        justify-content: flex-start;
     }
-  
+
     .descricao {
-      text-align: center;
+        text-align: center;
     }
-  
+
     .descricao h1 {
-      font-size: xx-large;
+        font-size: xx-large;
     }
-  
+
     .container {
-      width: 85%;
-      height: auto;
-      padding: 20px;
-      border-left: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--background);
+        width: 85%;
+        height: auto;
+        padding: 20px;
+        border-left: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--background);
     }
-  
+
     .formulario {
-      flex-direction: column;
-      align-items: center;
+        flex-direction: column;
+        align-items: center;
     }
-  
+
     .buttons {
-      height: auto;
+        height: auto;
     }
-  }
+}

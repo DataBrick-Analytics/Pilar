@@ -3,8 +3,8 @@ var database = require("../database/config");
 
 async function createEnterprise(enterprise) {
   const query = `
-  INSERT INTO tb_empresa (nome, endereco, telefone, email, data_cadastro, senha)
-  VALUES (?, ?, ?, ?, ?, ?)
+  INSERT INTO empresas (nome, endereco, telefone, email, data_cadastro, senha)
+  VALUES (?, ?, ?, ?, ?, sha2(?, 256))
   `;
 
   const values = [
@@ -20,17 +20,34 @@ async function createEnterprise(enterprise) {
     const resultado = await database.execute(query, values);
     console.log('Empresa inserida com sucesso:', resultado);
     return resultado;
+
   } catch (error) {
     console.error('Erro ao inserir empresa:', error.message);
     throw error;
   }
 }
 
+async function autenticateEnterprise(enterprise) {
+  const query = `
+      SELECT id_empresa, nome, endereco, telefone, email 
+        FROM empresas 
+      WHERE email = ? 
+  AND senha = SHA2(?, 256);  `
+  const values = [enterprise.email, enterprise.senha ]
+
+  try {
+    return resultado = await database.execute(query, values)
+
+  } catch(error){
+    console.error("Erro ao localizar a empresa", error.message)
+    throw error
+  }
+}
 
 async function editEnterprise(enterprise, idEnterprise) {
 
   const query = `
-  UPDATE tb_empresa
+  UPDATE empresas
   SET nome = ?,
       endereco = ?,
       telefone = ?,
@@ -62,14 +79,14 @@ async function editEnterprise(enterprise, idEnterprise) {
 
 async function deleteEnterprise(idEnterprise) {
   console.log("ID para exclusão:", idEnterprise);
-  const query = `DELETE FROM tb_empresa WHERE id_empresa  = ?`;
+  const query = `DELETE FROM empresas WHERE id_empresa  = ?`;
 
   try {
     const resultado = await database.execute(query, [idEnterprise]);
     if (idEnterprise == null || idEnterprise == undefined) {
       throw new Error('Id Está indifinido.');
     }
-    if(resultado.affectedRows === 0) {
+    if (resultado.affectedRows === 0) {
       throw new Error('Nenhuma empresa encontrada com o ID fornecido.');
     }
     console.log('Empresa deletada com sucesso:', resultado);
@@ -84,6 +101,7 @@ async function deleteEnterprise(idEnterprise) {
 
 module.exports = {
   createEnterprise,
+  autenticateEnterprise,
   editEnterprise,
   deleteEnterprise
 }

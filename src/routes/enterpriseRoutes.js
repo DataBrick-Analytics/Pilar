@@ -4,9 +4,14 @@ var router = express.Router();
 var enterpriseController = require("../controllers/enterpriseController");
 
 // INSERT
-router.post("/enterprise", function (req, res) {
+router.post("/enterprise/cadastrar", function (req, res) {
     enterpriseController.createEnterprise(req, res);
 });
+
+// SELECT
+router.post("/enterprise/autenticar", function (req, res) {
+    enterpriseController.autenticateEnterprise(req, res);
+})
 
 // UPDATE
 router.put("/enterprise/:id", function (req, res) {
