@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar</title>
+    <link rel="stylesheet" href="./css/Style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dashboard" />
+</head>
+
+<body>
+    <div class="dashboard">
+        <div class="main-content">
+            <nav class="sidebar">
+                <div class="logo">
+                    <span class="logo-icon">
+                        <img src="./assets/icons-dash/logo.png" alt="">
+                    </span>
+                    <span class="logo-text">DataBricks</span>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="user-profile">
+                    <div class="avatar">
+                        <img src="./assets/icons-dash/do-utilizador (1).png" alt="">
+                    </div>
+                    <span class="username">Nome usuario</span>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="nav-menu">
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon">
+                            <img src="./assets/icons-dash/dashboard.svg" alt="">
+                        </span>
+                        <span>Home</span>
+                    </a>
+
+                    <div class="nav-section">
+                        <span class="nav-section-title">PAGES</span>
+                        <div class="dropdown">
+                            <button class="dropdown-btn active">
+                                <span class="nav-icon"> <img src="./assets/icons-dash/dashboard.svg" alt=""></span>
+                                <span>Propriedades</span>
+                                <span class="dropdown-arrow">▼</span>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="#" class="dropdown-item">
+                                    <span class="prefix">B</span>
+                                    <span>Filtrar propriedade</span>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <span class="prefix">C</span>
+                                    <span>Propriedades favoritas</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="nav-menu">
+                            <a href="#" class="nav-item">
+                                <span class="nav-icon">
+                                    <img src="./assets/icons-dash/dashboard.svg" alt="">
+                                </span>
+                                <span>Alertas</span>
+                            </a>
+                        </div>
+                    </div>
+            </nav>
+
+            <div class="content">
+                <div class="container-notification">
+                    <h1>Notificações</h1>
+                </div>
+                <section class="alerts-section">
+                    <div class="card">
+                        <h2 class="alert-font">Alertas</h2>
+                        <div class="alerts-container">
+                            <div class="alert error">
+                                <p>A simple primary alert with <strong>an example link</strong>. Give it a click if you
+                                    like</p>
+                                <button class="close-button">×</button>
+                            </div>
+                            <div class="alert success">
+                                <p>A simple primary alert with <strong>an example link</strong>. Give it a click if you
+                                    like</p>
+                                <button class="close-button">×</button>
+                            </div>
+                            <div class="alert warning">
+                                <p>A simple primary alert with <strong>an example link</strong>. Give it a click if you
+                                    like</p>
+                                <button class="close-button">×</button>
+                            </div>
+                            <div class="alert info">
+                                <p>A simple primary alert with <strong>an example link</strong>. Give it a click if you
+                                    like</p>
+                                <button class="close-button">×</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="notifications-section">
+                    <div class="card">
+                        <h2 class="notification">Notificações</h2>
+                        <p class="subtitle">Notifications on this page use Toasts from Bootstrap. Read more details
+                            here.</p>
+                        <div class="notification-buttons">
+                            <button class="btn success">SUCCESS</button>
+                            <button class="btn info">INFO</button>
+                            <button class="btn warning">WARNING</button>
+                            <button class="btn danger">DANGER</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
