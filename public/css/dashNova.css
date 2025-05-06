@@ -58,13 +58,36 @@ body {
     height: 100vh ;
 }
 
+.divPagina{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 5%;
+}
+
+.divPaginaHome a {
+    color: var(--gray);
+    width: 10%;
+    height: 50%;
+    text-decoration: none;
+}
+.divPaginaAtual{
+    color: var(--primary);
+    font-weight: bold;
+    font-size: x-large;
+    width: 10%;
+    height: 50%;
+}
+
 .divKPIs{
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     flex-direction: row;
-    width: 95%;
+    width: 100%;
     height: 15%;
     background-color: var(--background);
 }
@@ -188,7 +211,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 95%;
+    width: 100%;
     height: 45%;
     background-color: var(--background);
 }
@@ -245,7 +268,7 @@ body {
 }
 
 .divInformacoes{
-    width: 85%;
+    width: 99%;
     height: 25%;
     background-color: white;
     border-radius: 10px;
@@ -271,7 +294,6 @@ body {
     align-items: center;
     width: 100%;
     height: 80%;
-    /* background-color: aqua; */
 }
 
 .linhas{
@@ -286,7 +308,6 @@ body {
 .rankingCor{
     width: 10%;
     height: 100%;
-    /* background-color: #e66c2f; */
 }
 
 .tituloDescricaoValor{
