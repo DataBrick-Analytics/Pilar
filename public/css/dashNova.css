@@ -149,17 +149,21 @@ body {
 .divKpiNomes{
     color: var(--gray);
     position: absolute;
-    margin-left: 80%;
+    display: flex;
+    justify-content: flex-end;
+    width: 95%;
     margin-top: 2%;
 }
 
 .divKpiValor{
     color: var(--primary);
     position: absolute;
-    margin-left: 80%;
-    margin-top: 11%;
+    display: flex;
+    justify-content: flex-end;
+    width: 95%;
+    margin-top: 13%;
     font-weight: bold;
-    font-size: small;
+    font-size: 200%;
     font-weight: bold;
 }
 
@@ -266,6 +270,9 @@ body {
     font-size: larger;
 }
 .divAtualizacaoGrafico{
+    gap: 0.5px;
+    display: flex;
+    align-items: center;
     color: var(--gray);
     width: 95%;
     height: 10%;

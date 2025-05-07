@@ -1,26 +1,87 @@
-const chartLine = document.getElementById('chartLine');
-new Chart(chartLine, {
-    type: 'line',
+
+const ctx2 = document.getElementById('meuGraficoBarras').getContext('2d');
+const meuGraficoBarras = new Chart(ctx2, {
+    type: 'bar',
     data: {
-        labels: ['label', 'label', 'label', 'label', 'label', 'label'],
+        labels: ['1/5', '2/5', '3/5', '4/5', '5/5'],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
+            label: '', // sem legenda
+            data: [329.29, 649.43,1085.64, 1721.35, 4024.75],
+            backgroundColor: 'white', // cor das barras
+            borderRadius: 5 // borda arredondada das barras (opcional)
         }]
     },
     options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false // oculta legenda
+            },
+            title: {
+                display: false // oculta título
+            }
+        },
         scales: {
-            y: {
-                ticks: {
-                    display: false
+            x: {
+                grid: {
+                    display: false // remove linhas verticais
                 },
-                grid: {
-                    display: false
+                ticks: {
+                    color: 'white'
                 }
-            },x: {
+            },
+            y: {
                 grid: {
-                    display: false
+                    color: 'white' // linhas horizontais brancas
+                },
+                ticks: {
+                    color: 'white'
+                }
+            }
+        }
+    }
+});
+
+const ctx = document.getElementById('meuGrafico').getContext('2d');
+const meuGrafico = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
+        datasets: [{
+            label: '', // sem legenda
+            data: [12, 19, 3, 5, 2],
+            borderColor: 'white', // linha branca
+            backgroundColor: 'rgba(255, 255, 255, 0.1)', // preenchimento suave (opcional)
+            tension: 0.3
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false // oculta legenda
+            },
+            title: {
+                display: false // oculta título
+            }
+        },
+        scales: {
+            x: {
+                grid: {
+                    display: false // remove linhas verticais
+                },
+                ticks: {
+                    color: 'white' // texto do eixo X branco
+                }
+            },
+            y: {
+                grid: {
+                    color: 'white' // apenas linhas horizontais brancas
+                },
+                ticks: {
+                    color: 'white' // texto do eixo Y branco
                 }
             }
         }
@@ -28,142 +89,4 @@ new Chart(chartLine, {
 });
 
 
-const chartPie = document.getElementById('chartPie')
-new Chart(chartPie, {
-    type: 'pie',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-})
 
-const chartPolar = document.getElementById('chartPolar')
-new Chart(chartPolar, {
-    type: 'polarArea',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                ticks: {
-                    display: false
-                },
-                grid: {
-                    display: false
-                }
-            },x: {
-                grid: {
-                    display: false
-                }
-            }
-        }
-    }
-})
-
-const chartBar = document.getElementById('chartBar')
-new Chart(chartBar, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: '#e66c2f',
-            borderColor: '#e66c2f',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                ticks: {
-                    display: false
-                },
-                grid: {
-                    display: false
-                }
-            },x: {
-                grid: {
-                    display: false
-                }
-            }
-        }
-    }
-})
-
-const chartBar2 = document.getElementById('chartBar2')
-new Chart(chartBar2, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [20, 19, 7, 5, 2, 12],
-            backgroundColor: '#EE82EE',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                ticks: {
-                    display: false
-                },
-                grid: {
-                    display: false
-                }
-            },x: {
-                grid: {
-                    display: false
-                }
-            }
-        }
-    }
-})
-
-const chartBar3 = document.getElementById('chartBar3')
-new Chart(chartBar3, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: '#008B8B',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                ticks: {
-                    display: false
-                },
-                grid: {
-                    display: false
-                }
-            },x: {
-                grid: {
-                    display: false
-                }
-            }
-        }
-    }
-})
