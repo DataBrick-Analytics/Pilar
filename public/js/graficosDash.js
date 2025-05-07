@@ -47,10 +47,10 @@ const ctx = document.getElementById('meuGrafico').getContext('2d');
 const meuGrafico = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
+        labels: ['Outubro', 'Novembro', 'Dezembro', 'Janeiro', 'Fevereiro'],
         datasets: [{
             label: '', // sem legenda
-            data: [12, 19, 3, 5, 2],
+            data: [9520, 9920, 10062, 11036, 11460],
             borderColor: 'white', // linha branca
             backgroundColor: 'rgba(255, 255, 255, 0.1)', // preenchimento suave (opcional)
             tension: 0.3
