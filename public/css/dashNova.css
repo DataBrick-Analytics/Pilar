@@ -164,7 +164,7 @@ body {
     margin-top: -5%;
     margin-left: 7%;
     width: 20%;
-    height: 45%;
+    height: 70%;
     border-radius: 10px;
     box-shadow: 0 5px 10px gray;
 }
@@ -314,7 +314,7 @@ body {
 .divKPI2{
     position: relative;
     width: 20%;
-    height: 90%;
+    height: 60%;
     background-color: white;
     border-radius: 10px;
     display: flex;
