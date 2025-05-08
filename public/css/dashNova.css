@@ -281,72 +281,63 @@ body {
 .divInformacoes{
     width: 99%;
     height: 25%;
+    /* background-color: white; */
+    border-radius: 10px;
+    /* box-shadow: 0 5px 10px gray; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.divIformacoesAdjacentes{
+    position: relative;
+    height: 80%;
+    width: 32%;
     background-color: white;
+    box-shadow: 0 5px 10px gray;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.divLogoInformacao{
+    margin-top: -20%;
+    margin-right: 65%;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
     border-radius: 10px;
     box-shadow: 0 5px 10px gray;
+}
+
+.divLogoInformacao img{
+    transform: scale(0.2); 
+}
+
+.divNumerosPorArea{
+    width: 60%;
+    height: 90%;
+    color: var(--gray);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.divTituloInformacoes{
-    color: var(--primary);
-    font-weight: bold;
-    font-size: large;
-    width: 95%;
-    height: 15%;
-}
-
-.divInformacoesFiltros{
+.numeroRegiao{
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
     align-items: center;
+    justify-content: center;
+    height: 70%;
     width: 100%;
-    height: 80%;
-}
-
-.linhas{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    width: 100%;
-    height: 20%;
-}
-
-.rankingCor{
-    width: 10%;
-    height: 100%;
-}
-
-.tituloDescricaoValor{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 90%;
-    height: 100%;
-}
-.tituloDescricao{
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: column;
-    width: 70%;
-    height: 100%;
-    color: var(--primary);
-}
-.titulo{
-    color: var(--primary);
-    font-weight: bold;
-}
-.valor{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20%;
-    height: 100%;
-    color: red;
-    font-weight: bold;
+    font-size: 400%;
 }
