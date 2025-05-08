@@ -317,13 +317,12 @@ body {
     align-items: center;
     justify-content: center;
     width: 50%;
-    height: 100%;
-    margin-top: -5%;
+    height: 100%;   
 }
 
 .divInformacoes2 img {
-    position: relative;
-    transform: scale(2);
+    margin-left: 60%;
+    transform: scale(1.5);
 }
 
 .divKPI2{
