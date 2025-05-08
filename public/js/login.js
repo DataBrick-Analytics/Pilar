@@ -54,7 +54,7 @@ function entrar() {
                     sessionStorage.setItem("ENDERECO", dadosEmpresa.endereco); // 'totalGuardado' está correto
                     sessionStorage.setItem("TELEFONE", dadosEmpresa.telefone);
 
-                    window.location = "/dash2.html"
+                    window.location = "/dashboard.html"
                 })
         })
         .catch(function (erro) {

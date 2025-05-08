@@ -79,7 +79,7 @@ function autenticateEnterprise(req, res) {
 
                 try {
                     await saveUserActivity(userActivityData); 
-                    console.log("Atividade registrada com sucesso!");
+                    console.log("Enviando para SpringBoot!");
                 } catch (error) {
                     console.error("Erro ao salvar atividade:", error.message);
                 }
