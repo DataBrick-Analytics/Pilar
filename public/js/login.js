@@ -84,9 +84,9 @@ document.addEventListener("DOMContentLoaded", () => {
     botao.addEventListener('click', () => {
 
         Swal.fire({
-            icon: "error",
-            title: "Opa...",
-            text: "Informações Faltando!",
+            icon: "success",
+            title: "Bem-vindo!",
+            text: "Login realizado com sucesso",
             color: "#FFFFFF",
             background: "#2C3E50"
         })
