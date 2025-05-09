@@ -77,3 +77,11 @@ document.addEventListener("DOMContentLoaded", () => {
         senha_input.type = senha_input.type === "password" ? "text" : "password"
     })
 })
+
+document.addEventListener("DOMContentLoaded", () => {
+    var botao = document.getElementById("BotaoLogin")
+
+    botao.addEventListener('click', () => {
+        window.location = "/dashboard.html"
+    })
+})
