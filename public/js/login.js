@@ -82,6 +82,15 @@ document.addEventListener("DOMContentLoaded", () => {
     var botao = document.getElementById("BotaoLogin")
 
     botao.addEventListener('click', () => {
+
+        Swal.fire({
+            icon: "error",
+            title: "Opa...",
+            text: "Informações Faltando!",
+            color: "#FFFFFF",
+            background: "#2C3E50"
+        })
+        
         window.location = "/dashboard.html"
     })
 })
