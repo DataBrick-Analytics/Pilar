@@ -310,19 +310,39 @@ body {
     align-items: center;
     justify-content: space-around;
     flex-direction: row-reverse;
+    gap: 5px;
+
+}
+
+.kpis{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 .divInformacoes2{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     width: 50%;
+<<<<<<< HEAD
+    height: 100%;
+    margin-right: 4%;
+}
+
+.divInformacoes2 img {
+    transform: scale(1.2);
+    margin-left: 60%;
+=======
     height: 100%;   
 }
 
 .divInformacoes2 img {
     margin-left: 60%;
     transform: scale(1.2);
+>>>>>>> 40035494cd5e45c8763eb932efb7554a463bb8ea
 }
 
 .divKPI2{
