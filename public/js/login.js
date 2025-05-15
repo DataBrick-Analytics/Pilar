@@ -78,10 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 })
 
-document.addEventListener("DOMContentLoaded", () => {
-    var botao = document.getElementById("BotaoLogin")
+// document.addEventListener("DOMContentLoaded", () => {
+//     var botao = document.getElementById("BotaoLogin")
 
-    botao.addEventListener('click', () => {
-        window.location = "/dashboard.html"
-    })
-})
+//     botao.addEventListener('click', () => {
+//         window.location = "/dashboard.html"
+//     })
+// })
