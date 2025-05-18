@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/Style.css">
     <script src="js/graficosDash.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
 </head>
 <body>
     <div class="divGeral">
@@ -123,9 +124,9 @@
                         <span class="spanNome">Renda Média</span>
                         <span>Renda média por quinto da população</span>
                     </div>
-                    <div class="divAtualizacaoGrafico">
+                    <div id="ultimaAtualizacao" class="divAtualizacaoGrafico">
                         <img src="assets/icons-dash/clock-outline.png" alt="">
-                        Atualizado a 20s atrâs
+
                     </div>
                 </div>
                 <div class="divGrafico">
@@ -136,9 +137,9 @@
                         <span class="spanNome">Flutuação do preço do m²</span>
                         <span>Evolução do preço m² de Janeiro a Dezembro</span>
                     </div>
-                    <div class="divAtualizacaoGrafico">
+                    <div id="ultimaAtualizacao2" class="divAtualizacaoGrafico">
                         <img src="assets/icons-dash/clock-outline.png" alt="">
-                        Atualizado a 20s atrâs
+                        
                     </div>
                 </div>
             </div>
@@ -178,3 +179,5 @@
     </div>
 </body>
 </html>
+
+<script src="js/dashboard.js"></script>
