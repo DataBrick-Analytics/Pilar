@@ -48,6 +48,7 @@ body {
     box-shadow: 0 5px 10px var(--primary);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 1rem;
     padding: 1rem;
 }
@@ -355,4 +356,32 @@ body {
     height: 60%;
     border-radius: 10px;
     box-shadow: 0 5px 10px gray;
+}
+
+.button_logout{
+    display: flex;
+    align-items: center;
+    color: var(--background);
+    border-radius: 5px;
+    background-color: #c45824;
+    justify-content: center;
+    width: 70%;
+    height: 50%;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.button_logout:hover {
+    background-color: #a8421b;
+    transform: scale(1.05);
+}
+
+.div-button-log-out{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
 }
