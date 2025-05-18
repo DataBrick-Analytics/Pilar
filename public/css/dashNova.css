@@ -81,7 +81,7 @@ body {
     color: var(--primary);
     font-weight: bold;
     font-size: x-large;
-    width: 10%;
+    width: 100%;
     height: 50%;
 }
 
@@ -327,7 +327,6 @@ body {
     align-items: center;
     justify-content: flex-end;
     width: 50%;
-<<<<<<< HEAD
     height: 100%;
     margin-right: 4%;
 }
@@ -335,14 +334,6 @@ body {
 .divInformacoes2 img {
     transform: scale(1.2);
     margin-left: 60%;
-=======
-    height: 100%;   
-}
-
-.divInformacoes2 img {
-    margin-left: 60%;
-    transform: scale(1.2);
->>>>>>> 40035494cd5e45c8763eb932efb7554a463bb8ea
 }
 
 .divKPI2{
