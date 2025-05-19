@@ -1,22 +1,98 @@
 let securityData = []
 var securityDataSum = 0
 var populationRegion = 0
+var comercialBuildings = 0;
+var residencialBuildings = 0;
+var totalBuildings =
 
-fetch("/data/getPopulationRegion", {
+// // fetch("/data/getPopulationRegion", {
+// //     method: "POST",
+// //     headers: {
+// //         "Content-Type": "application/json"
+// //     }
+// // }).then(function (resposta) {
+// //     console.log("Peguei as informações da população no banco");
+
+// //     if (resposta.ok) {
+// //         console.log(resposta);
+
+// //         resposta.json().then(json => {
+// //             console.log(json);
+// //             populationRegion += json[0];
+
+// //         });
+
+// //     } else {
+// //         console.log(resposta);
+// //         resposta.text().then(texto => {
+// //             console.error(texto);
+// //             finalizarAguardar(texto);
+// //         });
+// //     }
+
+// // }).catch(function (erro) {
+// //     console.log(erro);
+// // });
+
+// fetch("/data/getRegionType", {
+//     method: "POST",
+//     headers: {
+//         "Content-Type": "application/json"
+//     }
+// }).then(function (resposta) {
+//     console.log("Peguei as informações da região no banco");
+
+//     if (resposta.ok) {
+//         console.log(resposta);
+
+//         resposta.json().then(json => {
+//             console.log(json);
+//             for (let i = 0; i < json.length; i++) {
+//                 securityData.push(json[i]);
+//             }
+
+//             for (let i = 0; i < securityData.length; i++) {
+//                 securityDataSum += securityData[i];
+//             }
+
+//             kpiseguranca.innerHTML = securityDataSum / populationRegion
+//         });
+
+//     } else {
+//         console.log(resposta);
+//         resposta.text().then(texto => {
+//             console.error(texto);
+//             finalizarAguardar(texto);
+//         });
+//     }
+
+// }).catch(function (erro) {
+//     console.log(erro);
+// });
+
+fetch("/data/getRegionType", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
     }
 }).then(function (resposta) {
-    console.log("Peguei as informações da população no banco");
+    console.log("Peguei as informações de tipo de região no banco");
 
     if (resposta.ok) {
         console.log(resposta);
 
         resposta.json().then(json => {
             console.log(json);
-            populationRegion += json[0];
+            comercialBuildings = json[1] + json[2] + json[3] + (json[4]/2)
+            residencialBuildings = json[0] + (json[4]/2)
+            totalBuildings = json[0] + json[1] + json[2] + json[3] + json[4]
 
+            if (residencialBuildings > (0.7 * totalBuildings)){
+                kpitipo.innerhtml = "Residencial"
+            } 
+            else{
+                kpitipo.innerhtml = "Comercial"
+            }
         });
 
     } else {
@@ -28,41 +104,5 @@ fetch("/data/getPopulationRegion", {
     }
 
 }).catch(function (erro) {
-    console.log(erro);
-});
-
-fetch("/data/getSecurityRegion", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    }
-}).then(function (resposta) {
-    console.log("Peguei as informações de segurança no banco");
-
-    if (resposta.ok) {
-        console.log(resposta);
-
-        resposta.json().then(json => {
-            console.log(json);
-            for (let i = 0; i < json.length; i++) {
-                securityData.push(json[i]);
-            }
-
-            for (let i = 0; i < securityData.length; i++) {
-                securityDataSum += securityData[i];
-            }
-
-            kpiseguranca.innerHTML = securityDataSum / populationRegion
-        });
-
-    } else {
-        console.log(resposta);
-        resposta.text().then(texto => {
-            console.error(texto);
-            finalizarAguardar(texto);
-        });
-    }
-
-}).catch(function (erro) {
-    console.log(erro);
+    console.log(erro);4
 });
