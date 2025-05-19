@@ -89,9 +89,13 @@ fetch("/data/getRegionType", {
 
             if (residencialBuildings > (0.7 * totalBuildings)){
                 kpitipo.innerhtml = "Residencial"
+                kpitipovalor.innerhtml = `${residencialBuildings}%`
+
             } 
             else{
                 kpitipo.innerhtml = "Comercial"
+                kpitipovalor.innerhtml = `${comercialBuildings}%`
+
             }
         });
 
