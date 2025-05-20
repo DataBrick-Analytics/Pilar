@@ -28,7 +28,7 @@
                         <div class="avatar">
                             <img src="./assets/icons-dash/do-utilizador (1).png" alt="">
                         </div>
-                        <span class="username">Nome usuario</span>
+                        <span class="username" id="user">Nome usuario</span>
                     </div>
     
                     <div class="separator"></div>
@@ -178,3 +178,7 @@
     </div>
 </body>
 </html>
+
+<script>
+    user.innerHTML = sessionStorage.NOME_EMPRESA
+</script>
