@@ -3,7 +3,7 @@ var securityDataSum = 0
 var populationRegion = 0
 var comercialBuildings = 0;
 var residencialBuildings = 0;
-var totalBuildings =
+var totalBuildings = 0;
 
 // // fetch("/data/getPopulationRegion", {
 // //     method: "POST",
@@ -70,39 +70,41 @@ var totalBuildings =
 //     console.log(erro);
 // });
 
-fetch("/data/getRegionType", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    }
-}).then(function (resposta) {
-    console.log("Peguei as informações de tipo de região no banco");
+function catchKPI() {
+    fetch("/data/getRegionType", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (resposta) {
+        console.log("Peguei as informações de tipo de região no banco");
 
-    if (resposta.ok) {
-        console.log(resposta);
+        if (resposta.ok) {
+            console.log(resposta);
 
-        resposta.json().then(json => {
-            console.log(json);
-            comercialBuildings = json[1] + json[2] + json[3] + (json[4]/2)
-            residencialBuildings = json[0] + (json[4]/2)
-            totalBuildings = json[0] + json[1] + json[2] + json[3] + json[4]
+            resposta.json().then(json => {
+                console.log(json);
+                comercialBuildings = parseInt(json[0].total_comercial) + parseInt(json[0].total_garagens_depositos) + parseInt(json[0].total_industrial) + (parseInt(json[0].total_misto)/2)
+                residencialBuildings = parseInt(json[0].total_residencial) + (parseInt(json[0].total_misto)/2)
+                totalBuildings = parseInt(json[0].total_comercial) + parseInt(json[0].total_garagens_depositos) + parseInt(json[0].total_industrial) + parseInt(json[0].total_misto) + parseInt(json[0].total_residencial)
 
-            if (residencialBuildings > (0.7 * totalBuildings)){
-                kpitipo.innerhtml = "Residencial"
-            } 
-            else{
-                kpitipo.innerhtml = "Comercial"
-            }
-        });
+                if (residencialBuildings > (0.7 * totalBuildings)){
+                    kpitipo.innerHTML = "Residencial"
+                } 
+                else{
+                    kpitipo.innerHTML = "Comercial"
+                }
+            });
 
-    } else {
-        console.log(resposta);
-        resposta.text().then(texto => {
-            console.error(texto);
-            finalizarAguardar(texto);
-        });
-    }
+        } else {
+            console.log(resposta);
+            resposta.text().then(texto => {
+                console.error(texto);
+                finalizarAguardar(texto);
+            });
+        }
 
-}).catch(function (erro) {
-    console.log(erro);4
-});
+    }).catch(function (erro) {
+        console.log(erro);4
+    });
+}

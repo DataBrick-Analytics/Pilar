@@ -11,7 +11,7 @@ var dataController = require("../controllers/dataController");
 //     dataController.getPopulationRegionController(req, res);
 // });
 
-router.post("/data", function (req, res) {
+router.get("/data/getRegionType", function (req, res) {
     dataController.getRegionType(req, res);
 });
 

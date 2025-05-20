@@ -37,7 +37,7 @@ var dataModel = require("../models/dataModel");
 //     );
 // }
 
-function getRegionTypeController(req, res){
+function getRegionType(req, res){
     dataModel.getRegionType()
     .then(
         function(resultado) {
@@ -58,5 +58,5 @@ function getRegionTypeController(req, res){
 module.exports = {
     // getSecurityRegionController,
     // getPopulationRegionController
-    getRegionTypeController
+    getRegionType
 }

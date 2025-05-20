@@ -47,8 +47,7 @@ async function getRegionType(req, res) {
           FROM propriedades; `
   
     try {
-      return resultado = await database.execute(query, values)
-  
+      return resultado = await database.execute(query)
     } catch(error){
       console.error("Erro ao localizar a informação", error.message)
       throw error
