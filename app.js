@@ -1,4 +1,4 @@
-var ambiente_processo = process.env.NODE_ENV || 'desenvolvimento';
+var ambiente_processo = '';
 
 var caminho_env = '';
 switch(ambiente_processo) {
