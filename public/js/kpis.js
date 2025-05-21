@@ -89,13 +89,13 @@ function catchKPI() {
                 totalBuildings = parseInt(json[0].total_comercial) + parseInt(json[0].total_garagens_depositos) + parseInt(json[0].total_industrial) + parseInt(json[0].total_misto) + parseInt(json[0].total_residencial)
 
             if (residencialBuildings > (0.7 * totalBuildings)){
-                kpitipo.innerhtml = "Residencial"
-                kpitipovalor.innerhtml = `${residencialBuildings}%`
+                kpitipo.innerHTML = "Residencial"
+                kpitipovalor.innerHTML = `${residencialBuildings}%`
 
             } 
             else{
-                kpitipo.innerhtml = "Comercial"
-                kpitipovalor.innerhtml = `${comercialBuildings}%`
+                kpitipo.innerHTML = "Comercial"
+                kpitipovalor.innerHTML = `${comercialBuildings}%`
 
             }
         });

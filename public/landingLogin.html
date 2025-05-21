@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/landing.css">
+    <title>Home - DataBrick</title>
+</head>
+
+<body>
+    <!-- <aside class="sidebar">
+        <article class="title">
+            <img src="assets/icons-home/logo_databrick_branco_v2.svg" alt="Logo"><h1>Databricks</h1>
+        </article>
+        <article class="user">
+            <img src="assets/icons-home/account_circle.png" alt="Account"><h2>Nome usuário</h2>
+        </article>
+        <article class="pages">
+            <h2>PAGES</h2>
+            <section class="propreties">
+                <a href=""><img src="assets/icons-home/chart_properties.svg" alt=""> Propriedades</a>
+                <div style="visibility: hidden;" class="sub-properties">
+                    <a href=""><img src="" alt=""> Filtrar Propriedades</a>
+                    <a href=""><img src="" alt=""> Propriedades favoritas</a>
+                </div>
+                <a href="TelaAlertas.html"><img src="assets/icons-home/alerts_bell.svg" alt=""> Alertas</a>
+            </section>
+        </article>
+    </aside> -->
+
+    <div class="divPainel">
+            <div class="divPainelAzul">
+
+                <nav class="sidebarAzul">
+                    <div class="logo">
+                        <span class="logo-icon">
+                            <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" alt="">
+                        </span>
+                        <span class="logo-text">DataBrick</span>
+                    </div>
+    
+                    <div class="separator"></div>
+    
+                    <div class="user-profile">
+                        <div class="avatar">
+                            <img src="./assets/icons-dash/USER-ICON-SM.svg" alt="">
+                        </div>
+                        <span class="username" id="user">Nome usuario</span>
+                    </div>
+    
+                    <div class="separator"></div>
+    
+                    <div class="nav-menu">
+                        <a href="#" class="nav-item">
+                            <span class="nav-icon">
+                                <img src="./assets/icons-dash/HOME-ICON-SM.svg" alt="">
+                            </span>
+                            <span>Home</span>
+                        </a>
+    
+                        <div class="nav-section">
+                            <span class="nav-section-title">PAGES</span>
+                            <div class="dropdown">
+                                <button class="dropdown-btn active">
+                                    <span class="nav-icon"> <img src="./assets/icons-dash/CHART-ICON-SM.svg" alt=""></span>
+                                    <span>Propriedades</span>
+                                    <span class="dropdown-arrow">▼</span>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#" class="dropdown-item">
+                                        <span class="prefix">B</span>
+                                        <span>Filtrar propriedade</span>
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        <span class="prefix">C</span>
+                                        <span>Propriedades favoritas</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="nav-menu">
+                                <a href="#" class="nav-item">
+                                    <span class="nav-icon">
+                                        <img src="./assets/icons-dash/ALERT-ICON-SM.svg" alt="">
+                                    </span>
+                                    <span>Alertas</span>
+                                </a>
+                            </div>
+                        </div>
+                </nav>
+
+                <div class="div-button-log-out">
+                    <button onclick="logout()" class="button_logout">
+                        Log Out
+                    </button>
+                </div>
+                
+
+            </div>
+        </div>
+
+    <main>
+        <article class="card">
+            <section class="title-card">
+                <h1>Apartamento moderno</h1>
+                <img src="assets/icons-home/black_star.png" alt="Star">
+                <p>Um belo apartamento moderno no centro da cidade</p>
+            </section>
+            <section class="specs-card">
+                <div class="spec"><img src="assets/icons-home/square_meter.svg" alt="square meter"> 85m2</div>
+                <div class="spec"><img src="assets/icons-home/bedrooms.svg" alt="rooms"> 2 quartos</div>
+                <div class="spec"><img src="assets/icons-home/bath.svg" alt="baths"> 1 banheiro</div>
+                <div class="spec"><img src="assets/icons-home/pointer.svg" alt="location"> Centro</div>
+            </section>
+            <section class="tags">
+                <div>Varanda</div>
+                <div>Mobiliado</div>
+                <div>Pet-friendly</div>
+            </section>
+            <button class="visit-button" onclick="openDash()">Agendar visita</button>
+        </article>
+    </main>
+
+</body>
+
+</html>
