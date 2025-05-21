@@ -169,10 +169,41 @@ function userFavoriteLand(req,res){
 
 }
 
+
+
+function serchUserByEnterpriseId(req, res) {
+    var id = req.params.id;
+    console.log("ID empresa:", id);
+
+    if (id == undefined || id == null) {
+        return res.status(400).json({
+            error: "O id está undefined ou nulo!"
+        });
+    }
+
+    userModel.serchUserByEnterpriseId(id)
+        .then(function (resultado) {
+            res.status(200).json({
+                message: "Usuários encontrados com sucesso",
+                resultado: resultado
+            });
+        })
+        .catch(function (erro) {
+            console.error("Erro ao deletar usuário:", erro);
+            res.status(500).json({
+                error: erro.sqlMessage || erro.message
+            });
+        });
+}
+
+
+
+
 module.exports = {
     createUser,
     editUser,
     deleteUser,
     authenticateUser,
-    userFavoriteLand
+    userFavoriteLand,
+    serchUserByEnterpriseId
 };

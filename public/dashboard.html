@@ -6,10 +6,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/dashNova.css">
     <link rel="stylesheet" href="./css/Style.css">
-    <script src="js/graficosDash.js" defer></script>
-    <script src="js/kpis.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script onload="catchKPI()" src="js/kpis.js"></script>
 </head>
 <body>
     <div class="divGeral">
@@ -63,7 +59,7 @@
                                 </div>
                             </div>
                             <div class="nav-menu">
-                                <a href="#" class="nav-item">
+                                <a href="./listaUsuario.html" class="nav-item">
                                     <span class="nav-icon">
                                         <img src="./assets/icons-dash/ALERT-ICON-SM.svg" alt="">
                                     </span>
@@ -187,3 +183,7 @@
 <script src="js/dashboard.js">
     user.innerHTML = sessionStorage.NOME_EMPRESA
 </script>
+    <script src="js/graficosDash.js" defer></script>
+    <script src="js/kpis.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script onload="catchKPI()" src="js/kpis.js"></script>
