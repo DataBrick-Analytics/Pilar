@@ -8,9 +8,14 @@ router.post("/user", function (req, res) {
   usuarioController.createUser(req, res);
 })
 
+// INSERT
+router.post("/user/autenticar", function (req, res) {
+    usuarioController.authenticateUser(req, res);
+})
+
 // SELECT
-router.get("/user/:id", function (req, res) {
-  usuarioController.selectBancoModelo(req, res);
+router.get("/AllUsers/:id", function (req, res) {
+  usuarioController.serchUserByEnterpriseId(req, res);
 });
 
 // UPDATE
@@ -22,5 +27,10 @@ router.put("/user/:id", function (req, res) {
 router.delete("/user/:id", function (req, res) {
   usuarioController.deleteUser(req, res);
 });
+
+// POST 
+router.post("/user/favoritar", function(req,res) {
+  usuarioController.userFavoriteLand(req,res);
+})
 
 module.exports = router;

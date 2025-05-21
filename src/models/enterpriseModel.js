@@ -1,4 +1,5 @@
 var database = require("../database/config");
+const { get } = require("../routes/enterpriseRoutes");
 
 
 async function createEnterprise(enterprise) {
@@ -33,12 +34,12 @@ async function autenticateEnterprise(enterprise) {
         FROM empresas 
       WHERE email = ? 
   AND senha = SHA2(?, 256);  `
-  const values = [enterprise.email, enterprise.senha ]
+  const values = [enterprise.email, enterprise.senha]
 
   try {
     return resultado = await database.execute(query, values)
 
-  } catch(error){
+  } catch (error) {
     console.error("Erro ao localizar a empresa", error.message)
     throw error
   }
@@ -98,10 +99,28 @@ async function deleteEnterprise(idEnterprise) {
   }
 }
 
+async function getEnterpriseEmployees(fkEmpresa) {
+  console.log("Entrei no getEnterpriseEmployees()")
+
+  try{
+    const query = `SELECT * FROM usuarios WHERE fk_empresa = ${fkEmpresa};`
+    const resultado = await database.execute(query);
+    
+    if (resultado.length > 0) {
+      console.log("SELECT no banco feito")
+      return resultado;
+    }
+  } catch (error){
+    console.error("Erro ao selecionar funcionarios", error.message)
+    throw error
+  }
+}
+
 
 module.exports = {
   createEnterprise,
   autenticateEnterprise,
   editEnterprise,
-  deleteEnterprise
+  deleteEnterprise,
+  getEnterpriseEmployees
 }

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuário</title>
+    <link rel="stylesheet" href="css/listaUsuario.css">
+    <script src="js/popupRegister.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dashboard" />
+</head>
+
+<body>
+    <div class="dashboard">
+        <div class="main-content">
+            <nav class="sidebar">
+                <div class="logo">
+                    <span class="logo-icon">
+                        <img src="./assets/icons-dash/logo.png" alt="">
+                    </span>
+                    <span class="logo-text">DataBricks</span>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="user-profile">
+                    <div class="avatar">
+                        <img src="./assets/icons-dash/do-utilizador (1).png" alt="">
+                    </div>
+                    <span class="username">Nome usuario</span>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="nav-menu">
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon">
+                            <img src="./assets/icons-dash/dashboard.svg" alt="">
+                        </span>
+                        <span>Home</span>
+                    </a>
+
+                    <div class="nav-section">
+                        <span class="nav-section-title">PAGES</span>
+                        <div class="dropdown">
+                            <button class="dropdown-btn active">
+                                <span class="nav-icon"> <img src="./assets/icons-dash/dashboard.svg" alt=""></span>
+                                <span>Propriedades</span>
+                                <span class="dropdown-arrow">▼</span>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="#" class="dropdown-item">
+                                    <span class="prefix">B</span>
+                                    <span>Filtrar propriedade</span>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <span class="prefix">C</span>
+                                    <span>Propriedades favoritas</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="nav-menu">
+                            <a href="#" class="nav-item">
+                                <span class="nav-icon">
+                                    <img src="./assets/icons-dash/dashboard.svg" alt="">
+                                </span>
+                                <span>Alertas</span>
+                            </a>
+                        </div>
+                        <div class="nav-menu">
+                            <a href="#" class="nav-item">
+                                <span class="nav-icon">
+                                    <img src="./assets/icons-dash/dashboard.svg" alt="">
+                                </span>
+                                <span>Usuários</span>
+                            </a>
+                        </div>
+                        <div class="nav-menu">
+                            <a href="#" class="nav-item">
+                                <span class="nav-icon">
+                                    <img src="./assets/icons-dash/dashboard.svg" alt="">
+                                </span>
+                                <span>Base de dados</span>
+                            </a>
+                        </div>
+                    </div>
+            </nav>
+
+            <main class="content">
+                <div class="content-header">
+                    <h1>Lista de úsuarios</h1>
+                    <div class="header-actions">
+                        <button class="btn-cadastrar" onclick="openModal()">Cadastrar usúario</button>
+                        <div class="search-container">
+                            <input type="text" placeholder="Procurar por nome" class="search-input">
+                            <img src="assets/icons-dash/search.svg" alt="Search" class="search-icon">
+                        </div>
+                    </div>
+                </div>
+
+                <section class="users-section">
+                    <div class="users-container">
+                        <div class="user-card">
+                            <span>Usuario x - email</span>
+                            <div class="crud">
+                                <img src="assets/icons-dash/edit.svg" alt="">
+                                <img class="size" src="assets/icons-dash/x.png" alt="">
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <span>Usuario x - email</span>
+                            <div class="crud">
+                                <img src="assets/icons-dash/edit.svg" alt="">
+                                <img class="size" src="assets/icons-dash/x.png" alt="">
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <span>Usuario x - email</span>
+                            <div class="crud">
+                                <img src="assets/icons-dash/edit.svg" alt="">
+                                <img class="size" src="assets/icons-dash/x.png" alt="">
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <span>Usuario x - email</span>
+                            <div class="crud">
+                                <img src="assets/icons-dash/edit.svg" alt="">
+                                <img class="size" src="assets/icons-dash/x.png" alt="">
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <span>Usuario x - email</span>
+                            <div class="crud">
+                                <img src="assets/icons-dash/edit.svg" alt="">
+                                <img class="size" src="assets/icons-dash/x.png" alt="">
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <span>Usuario x - email</span>
+                            <div class="crud">
+                                <img src="assets/icons-dash/edit.svg" alt="">
+                                <img class="size" src="assets/icons-dash/x.png" alt="">
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <span>Usuario x - email</span>
+                            <div class="crud">
+                                <img src="assets/icons-dash/edit.svg" alt="">
+                                <img class="size" src="assets/icons-dash/x.png" alt="">
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-content-cancel">
+                <img onclick="closeModal()" class="cancel" src="assets/icons-dash/cancel.svg" alt="">
+            </div>
+            <div class="modal-content-img">
+                <img class="logo" src="assets/logo/BrickData.svg" alt="">
+            </div>
+            <h2>Cadastrar Novo Usúario</h2>
+            <form id="userForm">
+                <div class="form-content-group">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password">
+                    </div>
+                </div>
+                <div class="form-content-group2">
+                    <div class="form-group">
+                        <label for="confirmPassword">CPF</label>
+                        <input type="text" id="cpf">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Função</label>
+                        <input type="text" id="funcao">
+                    </div>
+                </div>
+            </form>
+            <div class="modal-actions">
+                <button type="submit" class="btn-confirm" onclick="cadastrarUsuario()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    
+function cadastrarUsuario() {
+    // Pegar valores dos campos
+    const nome = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('password').value;
+    const cpf = document.getElementById('cpf').value;
+    const funcao = document.getElementById('funcao').value;
+
+    // Validações básicas
+    if (!nome || !email || !senha || !cpf || !funcao) {
+        alert('Por favor, preencha todos os campos!');
+        return;
+    }
+
+    // Criar objeto com dados do usuário
+    const novoUsuario = {
+        nome: nome,
+        email: email,
+        senha: senha,
+        cpf: cpf,
+        funcao_empresa: funcao,
+        fk_empresa: localStorage.getItem('EMPRESA_ID') 
+    };
+
+    // Enviar para o backend
+    fetch('/user', {
+        method: 'GEt',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(novoUsuario)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.id) {
+            alert('Usuário cadastrado com sucesso!');
+            closeModal();
+            window.location.reload(); // Recarrega a página para mostrar o novo usuário
+        } else {
+            alert('Erro ao cadastrar usuário: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao cadastrar usuário!');
+    });
+}
+
+</script>
