@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="css/dashNova.css">
     <link rel="stylesheet" href="./css/Style.css">
     <script src="js/graficosDash.js" defer></script>
+    <script src="js/kpis.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script onload="catchKPI()" src="js/kpis.js"></script>
 </head>
 <body>
     <div class="divGeral">
@@ -90,27 +92,27 @@
                 <div class="divKPI">
                     <div class="divKpiIcone Primary icon1"></div>
                     <div class="divKpiNomes">Índice de violência na área</div>
-                    <div class="divKpiValor">2,7%</div>
+                    <div id="kpiseguranca" class="divKpiValor">2,7%</div>
                     <div class="divKpiDescricao1"> <span>15° </span>  no ranking</div>
                 </div>
 
                 <div class="divKPI">
                     <div class="divKpiIcone Secondary icon2"></div>
                     <div class="divKpiNomes">Densidade da malha urbana</div>
-                    <div class="divKpiValor">3/100m²</div>
+                    <div id="kpimalhaurbana" class="divKpiValor">3/100m²</div>
                     <div class="divKpiDescricao2"> <span>10°</span> no ranking </div>
                 </div>
                 <div class="divKPI">
                     <div class="divKpiIcone Primary icon3"></div>
                     <div class="divKpiNomes">Valor m²</div>
-                    <div class="divKpiValor">R$12.000,00</div>
+                    <div id="kpivalor" class="divKpiValor">R$12.000,00</div>
                     <div class="divKpiDescricao3"> <span>5°</span> no ranking</div>
                 </div>
                 <div class="divKPI">
                     <div class="divKpiIcone Secondary icon4"></div>
                     <div class="divKpiNomes">Predominância tipo de imóvel</div>
-                    <div class="divKpiValor">Residencial</div>
-                    <div class="divKpiDescricao4"> <span>87%</span>dos imóveis</div>
+                    <div id="kpitipo" class="divKpiValor">Residencial</div>
+                    <div class="divKpiDescricao4"> <span id="kpitipovalor"></span>dos imóveis</div>
                 </div>
             </div>
 
@@ -125,7 +127,7 @@
                     </div>
                     <div class="divAtualizacaoGrafico">
                         <img src="assets/icons-dash/clock-outline.png" alt="">
-                        Atualizado a 20s atrâs
+                        Atualizado há 20s.
                     </div>
                 </div>
                 <div class="divGrafico">
@@ -138,7 +140,7 @@
                     </div>
                     <div class="divAtualizacaoGrafico">
                         <img src="assets/icons-dash/clock-outline.png" alt="">
-                        Atualizado a 20s atrâs
+                        Atualizado há 20s.
                     </div>
                 </div>
             </div>
