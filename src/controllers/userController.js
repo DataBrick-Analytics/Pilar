@@ -165,10 +165,14 @@ function deleteUser(req, res) {
             });
         });
 }
+function userFavoriteLand(req,res){
+
+}
 
 module.exports = {
     createUser,
     editUser,
     deleteUser,
-    authenticateUser
+    authenticateUser,
+    userFavoriteLand
 };
