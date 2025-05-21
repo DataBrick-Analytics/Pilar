@@ -9,6 +9,11 @@ router.post("/user", function (req, res) {
 })
 
 // SELECT
+router.post("/user/autenticar", function (req, res) {
+    usuarioController.authenticateUser(req, res);
+})
+
+// SELECT
 router.get("/user/:id", function (req, res) {
   usuarioController.selectBancoModelo(req, res);
 });

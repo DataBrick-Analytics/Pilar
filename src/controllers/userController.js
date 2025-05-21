@@ -1,45 +1,83 @@
 var userModel = require("../models/userModel");
 
-function createUser(req, res) {
+function authenticateUser(req, res) {
     var user = req.body;
-    console.log("Dados recebidos:", user);
 
-    if (user == undefined || user == null) {
-        return res.status(400).json({ error: "O usuário está undefined ou nulo!" });
-    }
-    if (user.nome == undefined || user.nome == null) {
-        return res.status(400).json({ error: "Seu nome está undefined ou nulo!" });
-    }
-    if (user.email == undefined || user.email == null) {
-        return res.status(400).json({ error: "Seu email está undefined ou nulo!" });
-    }
-    if (user.senha == undefined || user.senha == null) {
-        return res.status(400).json({ error: "Sua senha está undefined ou nula!" });
-    }
-    if (user.fk_empresa == undefined || user.fk_empresa == null) {
-        return res.status(400).json({ error: "Sua empresa está undefined ou nula!" });
-    }
-    if (user.fk_funcao == undefined || user.fk_funcao == null) {
-        return res.status(400).json({ error: "Sua função está undefined ou nula!" });
+    if (!user.email || !user.senha) {
+        return res.status(400).json({ 
+            error: "Dados inválidos",
+            message: "Email e senha são obrigatórios"
+        });
     }
 
-    userModel.createUser(user)
+    userModel.authenticateUser(user.email, user.senha)
         .then(function (resultado) {
-            if (resultado.affectedRows > 0) {
-                res.status(201).json({
-                    message: "Usuário criado com sucesso",
-                    id: resultado.insertId
+            if (resultado && resultado.auth) {
+                return res.status(200).json({
+                    message: "Usuário autenticado com sucesso",
+                    usuario: {
+                        id: resultado.usuario.id_usuario,
+                        nome: resultado.usuario.nome,
+                        email: resultado.usuario.email,
+                        funcao_empresa: resultado.usuario.funcao_empresa,
+                        fk_empresa: resultado.usuario.fk_empresa,
+                        data_cadastro: resultado.usuario.data_cadastro
+                    }
                 });
             } else {
-                res.status(400).json({
-                    error: "Erro ao criar usuário"
+                return res.status(401).json({
+                    error: "Autenticação falhou",
+                    message: "Email ou senha inválidos"
                 });
             }
         })
         .catch(function (erro) {
-            console.error("Erro ao criar usuário:", erro);
-            res.status(500).json({
-                error: erro.sqlMessage || erro.message
+            console.error("Erro na autenticação:", erro);
+            return res.status(500).json({
+                error: "Erro interno",
+                message: "Erro ao realizar autenticação"
+            });
+        });
+}
+
+
+function createUser(req, res) {
+    var user = req.body;
+    console.log("Dados recebidos:", user);
+
+    userModel.createUser(user)
+        .then(function (resultado) {
+            console.log("Resultado do banco:", resultado);
+            
+            if (resultado && resultado.success) {
+                return res.status(201).json({
+                    message: "Usuário criado com sucesso",
+                    usuario: {
+                        nome: user.nome,
+                        email: user.email,
+                        fk_empresa: user.fk_empresa,
+                        funcao_empresa: user.funcao_empresa
+                    }
+                });
+            } else {
+                console.error("Resposta inesperada do banco.");
+                return res.status(201).json({ 
+                    message: "Usuário criado com sucesso",
+                    warning: "Resposta do banco incompleta",
+                    usuario: {
+                        nome: user.nome,
+                        email: user.email,
+                        fk_empresa: user.fk_empresa,
+                        funcao_empresa: user.funcao_empresa
+                    }
+                });
+            }
+        })
+        .catch(function (erro) {
+            console.error("Erro no banco:", erro);
+            return res.status(400).json({ 
+                error: "Erro ao criar usuário",
+                message: erro.sqlMessage || erro.message 
             });
         });
 }
@@ -50,45 +88,58 @@ function editUser(req, res) {
     console.log("ID:", id);
     console.log("Dados recebidos:", user);
 
-    if (id == undefined || id == null) {
-        return res.status(400).json({ error: "O id está undefined ou nulo!" });
+    // Validations
+    if (!id) {
+        return res.status(400).json({ error: "ID não fornecido" });
     }
-    if (id.length < 1) {
-        return res.status(400).json({ error: "O id está vazio!" });
-    }
-    if (user == undefined || user == null) {
-        return res.status(400).json({ error: "O usuário está undefined ou nulo!" });
-    }
-    if (user.nome == undefined || user.nome == null) {
-        return res.status(400).json({ error: "Seu nome está undefined ou nulo!" });
-    }
-    if (user.email == undefined || user.email == null) {
-        return res.status(400).json({ error: "Seu email está undefined ou nulo!" });
-    }
-    if (user.senha == undefined || user.senha == null) {
-        return res.status(400).json({ error: "Sua senha está undefined ou nula!" });
-    }
-    if (user.fk_empresa == undefined || user.fk_empresa == null) {
-        return res.status(400).json({ error: "Sua empresa está undefined ou nula!" });
-    }
-    if (user.fk_funcao == undefined || user.fk_funcao == null) {
-        return res.status(400).json({ error: "Sua função está undefined ou nula!" });
+
+    if (!user || !user.nome || !user.email || !user.senha || !user.funcao_empresa || !user.fk_empresa) {
+        return res.status(400).json({ 
+            error: "Dados incompletos",
+            message: "Todos os campos são obrigatórios" 
+        });
     }
 
     userModel.editUser(user, id)
         .then(function (resultado) {
-            res.status(200).json({
-                message: "Usuário atualizado com sucesso",
-                resultado: resultado
-            });
+            console.log("Resultado do banco:", resultado);
+            
+            // Simplified check without destructuring
+            if (resultado) {
+                return res.status(200).json({
+                    message: "Usuário atualizado com sucesso",
+                    usuario: {
+                        id: id,
+                        nome: user.nome,
+                        email: user.email,
+                        funcao_empresa: user.funcao_empresa,
+                        fk_empresa: user.fk_empresa
+                    }
+                });
+            } else {
+                console.error("Resposta inesperada do banco.");
+                return res.status(201).json({ 
+                    message: "Usuário atualizado com sucesso",
+                    warning: "Resposta do banco incompleta",
+                    usuario: {
+                        id: id,
+                        nome: user.nome,
+                        email: user.email,
+                        funcao_empresa: user.funcao_empresa,
+                        fk_empresa: user.fk_empresa
+                    }
+                });
+            }
         })
         .catch(function (erro) {
             console.error("Erro ao atualizar usuário:", erro);
-            res.status(500).json({
-                error: erro.sqlMessage || erro.message
+            return res.status(400).json({ 
+                error: "Erro ao atualizar usuário",
+                message: erro.sqlMessage || erro.message 
             });
         });
 }
+
 
 function deleteUser(req, res) {
     var id = req.params.id;
@@ -118,5 +169,6 @@ function deleteUser(req, res) {
 module.exports = {
     createUser,
     editUser,
-    deleteUser
+    deleteUser,
+    authenticateUser
 };

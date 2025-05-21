@@ -1,4 +1,4 @@
-var ambiente_processo = '';
+var ambiente_processo = 'desenvolvimento'; // 'desenvolvimento' ou 'producao'
 
 var caminho_env = '';
 switch(ambiente_processo) {

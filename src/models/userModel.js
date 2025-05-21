@@ -1,72 +1,127 @@
 var database = require("../database/config");
 
-
-async function createUser(user) {
+async function authenticateUser(email, senha) {
+    if (!email || !senha) {
+        console.error('Email ou senha não fornecidos');
+        return {
+            auth: false,
+            message: "Credenciais inválidas"
+        };
+    }
 
     const query = `
-    INSERT INTO usuarios (nome, email, senha, data_cadastro, fk_empresa, fk_funcao)
-    VALUES (?, ?, ?, NOW(), ?, ?)
-     `;
-
-    const values = [
-        user.nome,
-        user.email,
-        user.senha,
-        user.fk_empresa,
-        user.fk_funcao
-    ];
+    SELECT 
+        id_usuario,
+        nome,
+        email,
+        funcao_empresa,
+        fk_empresa,
+        data_cadastro
+    FROM usuarios 
+    WHERE email = ? AND senha = ?
+    `;
 
     try {
-        const [resultado] = await database.execute(query, values);
-        console.log('Usuário inserido com sucesso:', resultado);
-      } catch (error) {
-        console.error('Erro ao inserir usuário:', error.message);
-      }
+        const result = await database.execute(query, [email, senha]);
+        console.log('Resultado bruto:', result);
+
+        const rows = result[0];
+        console.log('Linhas encontradas:', rows);
+        
+        // Check if rows exists and has properties
+        if (rows && rows.id_usuario) {
+            console.log('Usuário encontrado:', rows);
+            
+            return {
+                auth: true,
+                usuario: rows
+            };
+        }
+
+        console.log('Nenhum usuário encontrado para:', email);
+        return {
+            auth: false,
+            message: "Email ou senha inválidos"
+        };
+
+    } catch (error) {
+        console.error('Erro na autenticação:', error);
+        return {
+            auth: false,
+            message: "Erro ao autenticar usuário"
+        };
+    }
 }
 
 
-async function editUser(user,idUser) {
-
+async function createUser(user) {
     const query = `
-    UPDATE usuarios
-     SET nome = ?,
-        email = ?,
-        senha = ?,
-        fk_funcao = ?
-    WHERE id_usuario = ?
-     
+    INSERT INTO usuarios (nome, email, senha, fk_empresa, funcao_empresa, data_cadastro)
+    VALUES (?, ?, ?, ?, ?, NOW())
     `;
 
     const values = [
         user.nome,
         user.email,
         user.senha,
-        user.fk_funcao,
+        user.fk_empresa, 
+        user.funcao_empresa
+    ];
+
+    try {
+        const resultado = await database.execute(query, values);
+        console.log('Database result:', resultado);
+        return resultado[0];
+    } catch (error) {
+        console.error('Database error:', error);
+        throw error;
+    }
+}
+
+async function editUser(user, idUser) {
+    const query = `
+    UPDATE usuarios 
+    SET nome = ?, 
+        email = ?, 
+        senha = ?, 
+        funcao_empresa = ?,
+        fk_empresa = ?
+    WHERE id_usuario = ?
+    `;
+
+    const values = [
+        user.nome,
+        user.email,
+        user.senha,
+        user.funcao_empresa,
+        user.fk_empresa,
         idUser
     ];
 
     try {
-        const [resultado] = await database.execute(query, values);
-        console.log('Usuário inserido com sucesso:', resultado);
-      } catch (error) {
-        console.error('Erro ao inserir usuário:', error.message);
-      } 
-    
+        const result = await database.execute(query, values);
+        return result[0];
+    } catch (error) {
+        console.error('Database error:', error);
+        throw error;
+    }
 }
 
-async function deleteUser(idUser) {
 
+async function deleteUser(idUser) {
     const query = `
-    DELETE usuarios FROM WHERE id_usuario= ?
+    DELETE FROM usuarios WHERE id_usuario = ?
     `;
 
     try {
         const [resultado] = await database.execute(query, [idUser]);
-        console.log('Usuário inserido com sucesso:', resultado);
-      } catch (error) {
-        console.error('Erro ao inserir usuário:', error.message);
-      }
-    
+        console.log('Usuário deletado com sucesso:', resultado);
+        return resultado[0];
+    } catch (error) {
+        console.error('Erro ao deletar usuário:', error.message);
+        throw error;
+    }
+
 }
 
 
@@ -74,5 +129,6 @@ async function deleteUser(idUser) {
 module.exports = {
     createUser,
     editUser,
-    deleteUser
+    deleteUser,
+    authenticateUser
 }
