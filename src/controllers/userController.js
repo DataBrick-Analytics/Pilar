@@ -165,6 +165,9 @@ function deleteUser(req, res) {
             });
         });
 }
+function userFavoriteLand(req,res){
+
+}
 
 
 
@@ -201,5 +204,6 @@ module.exports = {
     editUser,
     deleteUser,
     authenticateUser,
+    userFavoriteLand,
     serchUserByEnterpriseId
 };

@@ -28,4 +28,9 @@ router.delete("/user/:id", function (req, res) {
   usuarioController.deleteUser(req, res);
 });
 
+// POST 
+router.post("/user/favoritar", function(req,res) {
+  usuarioController.userFavoriteLand(req,res);
+})
+
 module.exports = router;

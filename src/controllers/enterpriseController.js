@@ -119,8 +119,23 @@ function deleteEnterprise(req, res) {
         });
 }
 
+async function getEnterpriseEmployees(req, res) {
+    console.log("Acessando controller")
+    const fkEmpresa = 3
+    try {
+        const allEmployees = await enterpriseModel.getEnterpriseEmployees(fkEmpresa)
+        console.log('voltei pro controller')
+        return res.status(200).json(allEmployees)
+    } catch (erro) {
+            console.log(erro)
+            console.log("Houve um erro ao pegar os funcionários.", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+    }
+}
+
 module.exports = {
     createEnterprise,
     editEnterprise,
-    deleteEnterprise
+    deleteEnterprise,
+    getEnterpriseEmployees
 };
