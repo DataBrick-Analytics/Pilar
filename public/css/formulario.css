@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+
+
+body{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.telaGeral{
+    width:50%;
+    height: 100%;
+    background-color: blue;
+}
