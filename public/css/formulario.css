@@ -1,15 +1,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
 
-
-body{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+* {
+    font-family: "Sora";
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
-.telaGeral{
-    width:50%;
+:root {
+    --text: #D4D4D8;
+    --background: #fffff0;
+    --primary: #2C3E50;
+    --secondary: #e66c2f;
+    --accent: #768087;  
+    --gray: lightslategray;
+}
+
+.formulario{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+.telaEsquerda{
+    width:40%;
     height: 100%;
-    background-color: blue;
+    background-color: var(--accent)
+}
+
+.telaDireita{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+    /* background-color:var(--background) ; */
+}
+.center-around-row{
+    display: flex;
+    align-items:center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.divCima{
+    background-color: var(--primary);
+    width: 100%;
+    height: 75%;
+}
+.card-filtro{
+    width: 28%;
+    height: 75%;
+    border: 2px solid var(--accent);
+    background-color: var(--accent);
+}
+.card-filtro:hover{
+    border: 2px solid var(--secondary);
+    cursor: pointer;
+}
+
+.divBaixo{
+    width: 100%;
+    height: 25%;
+}
+.card-selecao-filtro{
+    width: 28%;
+    height: 65%;
+    border: 2px solid var(--accent);
+    background-color: var(--accent);
+}
+.card-selecao-filtro:hover{
+    border: 2px solid var(--secondary);
+    cursor: pointer;
 }
