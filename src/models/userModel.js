@@ -71,7 +71,7 @@ async function createUser(user) {
     try {
         const resultado = await database.execute(query, values);
         console.log('Database result:', resultado);
-        return resultado[0];
+        return resultado;
     } catch (error) {
         console.error('Database error:', error);
         throw error;

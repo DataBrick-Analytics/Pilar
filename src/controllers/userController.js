@@ -42,14 +42,14 @@ function authenticateUser(req, res) {
 
 
 function createUser(req, res) {
-    var user = req.body;
+    const user = req.body;
     console.log("Dados recebidos:", user);
 
     userModel.createUser(user)
         .then(function (resultado) {
             console.log("Resultado do banco:", resultado);
-            
-            if (resultado && resultado.success) {
+        
+            if (resultado.affectedRows > 0) {
                 return res.status(201).json({
                     message: "Usuário criado com sucesso",
                     usuario: {
@@ -61,15 +61,9 @@ function createUser(req, res) {
                 });
             } else {
                 console.error("Resposta inesperada do banco.");
-                return res.status(201).json({ 
-                    message: "Usuário criado com sucesso",
+                return res.status(500).json({ 
+                    message: "Erro ao criar usuário",
                     warning: "Resposta do banco incompleta",
-                    usuario: {
-                        nome: user.nome,
-                        email: user.email,
-                        fk_empresa: user.fk_empresa,
-                        funcao_empresa: user.funcao_empresa
-                    }
                 });
             }
         })
