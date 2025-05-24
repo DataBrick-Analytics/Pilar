@@ -31,13 +31,65 @@
     height: 100%;
     background-color: var(--background);
 }
+.card-titulo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 55%;
+    height: 30%;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 28px;
+}
+.card-titulo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    height: 40%;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 28px;
+}
+.esquerda{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+}
+.direita{
+    width: 50%;
+    height: 100%;
+    background-color: var(--secondary);
+}
+.div-titulo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    font-size: 50px;
+    color: var(--primary);
+}
+.div-frase-titulo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+    font-size: 22px;
+}
 .card-filtros-pai{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: row;
     width: 100%;
-    height: 70%;
+    height: 60%;
 }
 .card-filtro{
     width: 25%;
@@ -67,16 +119,7 @@
     margin-bottom: 15%;
     margin-left: 5%;
 }
-.card-titulo{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 55%;
-    height: 100%;
-    color: var(--accent);
-    font-weight: bold;
-    font-size: 30px;
-}
+
 .icon1{
     background-image: url(../assets/icons-dash/police.svg);
     background-repeat: no-repeat;
@@ -97,7 +140,30 @@
 }
 
 .card-parte-baixo{
-    width: 100%;
-    height: 70%;
-    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:80%;
+    height: 60%;
+    /* border: 2px solid var(--primary); */
+    border-radius: 10px;
+    font-size: 25px;
+}
+.p-margin{
+    margin-bottom: 20%;
+}
+.button-arrow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30%;
+    width: 30%;
+    height: 20%;
+    background-color: lightgrey;
+    border-radius: 15px;
+    cursor: pointer;
+    transition:  0.5s;
+}
+.button-arrow:hover{
+    background-color: var(--secondary);
 }
