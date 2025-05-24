@@ -165,7 +165,7 @@ function userFavoriteLand(req,res){
 
 
 
-function serchUserByEnterpriseId(req, res) {
+function searchUserByEnterpriseId(req, res) {
     var id = req.params.id;
     console.log("ID empresa:", id);
 
@@ -175,7 +175,7 @@ function serchUserByEnterpriseId(req, res) {
         });
     }
 
-    userModel.serchUserByEnterpriseId(id)
+    userModel.searchUserByEnterpriseId(id)
         .then(function (resultado) {
             res.status(200).json({
                 message: "Usuários encontrados com sucesso",
@@ -199,5 +199,5 @@ module.exports = {
     deleteUser,
     authenticateUser,
     userFavoriteLand,
-    serchUserByEnterpriseId
+    searchUserByEnterpriseId
 };

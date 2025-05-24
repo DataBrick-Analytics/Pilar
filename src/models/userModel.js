@@ -114,9 +114,10 @@ async function deleteUser(idUser) {
     `;
 
     try {
-        const [resultado] = await database.execute(query, [idUser]);
+        console.log(query)
+        const resultado = await database.execute(query, [idUser]);
         console.log('Usuário deletado com sucesso:', resultado);
-        return resultado[0];
+        return resultado;
     } catch (error) {
         console.error('Erro ao deletar usuário:', error.message);
         throw error;
@@ -125,7 +126,7 @@ async function deleteUser(idUser) {
 }
 
 
-async function serchUserByEnterpriseId(idEnterprise) {
+async function searchUserByEnterpriseId(idEnterprise) {
     const query = `
     SELECT * FROM usuarios WHERE fk_empresa = ?
     `;
@@ -147,5 +148,5 @@ module.exports = {
     editUser,
     deleteUser,
     authenticateUser,
-    serchUserByEnterpriseId
+    searchUserByEnterpriseId
 }

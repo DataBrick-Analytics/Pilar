@@ -15,7 +15,7 @@ router.post("/user/autenticar", function (req, res) {
 
 // SELECT
 router.get("/AllUsers/:id", function (req, res) {
-  usuarioController.serchUserByEnterpriseId(req, res);
+  usuarioController.searchUserByEnterpriseId(req, res);
 });
 
 // UPDATE

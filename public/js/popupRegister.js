@@ -4,9 +4,6 @@ async function generateUserCards() {
         const resposta = await fetch("/enterprise/employees")
         const employees = await resposta.json()
 
-        console.log("Tamo no retorno")
-        console.log("Qtd de funcionarios: ", employees.length)
-
         const container = document.querySelector('.users-container');
         container.innerHTML = ''
 
@@ -14,7 +11,7 @@ async function generateUserCards() {
             const card = document.createElement('div');
             card.className = 'user-card';
             card.innerHTML = `
-                <span id=${user.id}>${user.nome} - ${user.email}</span>
+                <span id="${user.id_usuario}">${user.nome} - ${user.email}</span>
                 <div class="crud">
                     <img src="assets/icons-dash/edit.svg" alt="">
                     <img class="size" src="assets/icons-dash/x.png" alt="" onclick="removeUser(this)" aria-label="Remove user">
@@ -41,11 +38,6 @@ addEventListener("DOMContentLoaded", () => {
     });
 })
 
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     generateUserCards();
-// });
-
 window.addEventListener('click', function (e) {
     const modal = document.getElementById('userModal');
     if (e.target === modal) {
@@ -58,8 +50,23 @@ function openModal() {
 }
 
 
-function removeUser(button) {
-    button.closest('.user-card').remove();
+async function removeUser(button) {
+    const card = button.closest('.user-card');
+    const id = Number(card.querySelector('span').id)
+    console.log("ID selecionado: " + id)
+
+    const deletion = await fetch(`/user/${id}`, {
+        method: "DELETE"
+    })
+    
+    if(deletion.ok){
+        alert("Usuário deletado com sucesso")
+        await generateUserCards()
+    } else {
+        alert("Erro ao remover o usuário")
+    }
+
+    card.remove()
 }
 
 function closeModal() {
