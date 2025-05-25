@@ -126,7 +126,7 @@ async function deleteUser(idUser) {
 }
 
 
-async function searchUserByEnterpriseId(idEnterprise) {
+async function searchUsersByEnterpriseId(idEnterprise) {
     const query = `
     SELECT * FROM usuarios WHERE fk_empresa = ?
     `;
@@ -143,10 +143,29 @@ async function searchUserByEnterpriseId(idEnterprise) {
 }
 
 
+async function searchUserById(idUser) {
+    const query = `
+    SELECT * FROM usuarios WHERE id_usuario = ?
+    `;
+
+    try {
+        const [resultado] = await database.execute(query, [idUser]);
+        console.log('Usuários encontrados com sucesso:', resultado);
+        return resultado[0];
+    } catch (error) {
+        console.error('Erro ao procurar usuario:', error.message);
+        throw error;
+    }
+
+}
+
+
+
 module.exports = {
     createUser,
     editUser,
     deleteUser,
     authenticateUser,
-    searchUserByEnterpriseId
+    searchUsersByEnterpriseId,
+    searchUserById
 }

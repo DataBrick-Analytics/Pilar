@@ -3,19 +3,19 @@ var router = express.Router();
 
 var usuarioController = require("../controllers/userController");
 
-// INSERT
+// POST
 router.post("/user", function (req, res) {
   usuarioController.createUser(req, res);
 })
 
-// INSERT
+// POST
 router.post("/user/autenticar", function (req, res) {
     usuarioController.authenticateUser(req, res);
 })
 
-// SELECT
+// GET
 router.get("/AllUsers/:id", function (req, res) {
-  usuarioController.searchUserByEnterpriseId(req, res);
+  usuarioController.searchUsersByEnterpriseId(req, res);
 });
 
 // UPDATE
@@ -28,9 +28,11 @@ router.delete("/user/:id", function (req, res) {
   usuarioController.deleteUser(req, res);
 });
 
-// POST 
-router.post("/user/favoritar", function(req,res) {
-  usuarioController.userFavoriteLand(req,res);
-})
+// GET
+router.get("/user/:id", function (req, res) {
+  usuarioController.searchUserById(req, res);
+});
+
+
 
 module.exports = router;

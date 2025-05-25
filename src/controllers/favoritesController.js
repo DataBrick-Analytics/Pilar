@@ -1,44 +1,4 @@
-var userModel = require("../models/userModel");
-
-function authenticateUser(req, res) {
-    var user = req.body;
-
-    if (!user.email || !user.senha) {
-        return res.status(400).json({ 
-            error: "Dados inválidos",
-            message: "Email e senha são obrigatórios"
-        });
-    }
-
-    userModel.authenticateUser(user.email, user.senha)
-        .then(function (resultado) {
-            if (resultado && resultado.auth) {
-                return res.status(200).json({
-                    message: "Usuário autenticado com sucesso",
-                    usuario: {
-                        id: resultado.usuario.id_usuario,
-                        nome: resultado.usuario.nome,
-                        email: resultado.usuario.email,
-                        funcao_empresa: resultado.usuario.funcao_empresa,
-                        fk_empresa: resultado.usuario.fk_empresa,
-                        data_cadastro: resultado.usuario.data_cadastro
-                    }
-                });
-            } else {
-                return res.status(401).json({
-                    error: "Autenticação falhou",
-                    message: "Email ou senha inválidos"
-                });
-            }
-        })
-        .catch(function (erro) {
-            console.error("Erro na autenticação:", erro);
-            return res.status(500).json({
-                error: "Erro interno",
-                message: "Erro ao realizar autenticação"
-            });
-        });
-}
+var favoritesModel = require("../models/favoritesModel");
 
 
 function createUser(req, res) {
@@ -163,7 +123,7 @@ function deleteUser(req, res) {
 
 
 
-function searchUserById(req, res) {
+function searchFavoriteByUserId (req, res) {
     var id = req.params.id;
     console.log("ID usúario:", id);
 
@@ -173,7 +133,7 @@ function searchUserById(req, res) {
         });
     }
 
-    userModel.searchUserById(id)
+    favoritesModel.searchFavoriteByUserId(id)
         .then(function (resultado) {
             res.status(200).json({
                 message: "Usuário encontrados com sucesso",
@@ -190,39 +150,9 @@ function searchUserById(req, res) {
 
 
 
-function searchUsersByEnterpriseId(req, res) {
-    var id = req.params.id;
-    console.log("ID empresa:", id);
-
-    if (id == undefined || id == null) {
-        return res.status(400).json({
-            error: "O id está undefined ou nulo!"
-        });
-    }
-
-    userModel.searchUsersByEnterpriseId(id)
-        .then(function (resultado) {
-            res.status(200).json({
-                message: "Usuários encontrados com sucesso",
-                resultado: resultado
-            });
-        })
-        .catch(function (erro) {
-            console.error("Erro ao deletar usuário:", erro);
-            res.status(500).json({
-                error: erro.sqlMessage || erro.message
-            });
-        });
-}
-
-
-
-
 module.exports = {
     createUser,
     editUser,
     deleteUser,
-    authenticateUser,
-    searchUserById,
-    searchUsersByEnterpriseId
+    searchFavoriteByUserId,
 };
