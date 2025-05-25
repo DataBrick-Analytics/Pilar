@@ -1,0 +1,220 @@
+:root {
+    --text: #D4D4D8;
+    --background: #fffff0;
+    --primary: #2C3E50;
+    --secondary: #e66c2f;
+    --accent: #768087;  
+    --gray: lightslategray;
+}
+.div-tela-home{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    background-color: var(--background);
+    width: 85%;
+    height: 90vh ;
+}
+.tela-home-principal{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 70%;
+    height: 100%;
+}
+.home-banner-cliente{
+    display: flex;
+    align-items: center;
+    color: #e66c2f;
+    width: 98%;
+    height: 18%;
+    background-image: url(../assets/icons-forms/Path\(3\).png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+}
+.textos-banner{
+    padding-left: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 50%;
+    height: 60%;
+}
+.regioes-favoritas{
+    display: flex;
+    flex-direction: column;
+    width: 98%;
+    height: 20%;
+}
+.titulo-regioes{
+    color: var(--primary);
+    font-size: 30px;
+    font-weight: bold;
+    width: 100%;
+    height: 20%;
+}
+.banners-favoritos{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 80%;
+}
+.banner-favorito-white{
+    width: 22%;
+    height: 90%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+.banner-favorito-orange{
+    width: 22%;
+    height: 90%;
+    background-color: var(--secondary);
+    border: 1px solid black;
+    border-radius: 20px;
+}
+.banner-propriedades{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-left: 3%;
+    width: 98%;
+    height: 20%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+.banner-texts{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 90%;
+    height: 60%;
+    color: var(--accent);
+}
+.banner-texts p{
+    font-size: 25px;
+    color: var(--primary);
+    font-weight: bold;
+}
+.propiedades-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 15%;
+    height: 25%;
+    background-color: var(--secondary);
+    color: white;
+    border-radius: 5px;
+}
+.banner-questionario-alertas{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 98%;
+    height: 25%;
+}
+.questionario{
+    padding-left: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 48%;
+    height: 100%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+.questionario-icon{
+    width: 20%;
+    height: 20%;
+    background-image:url(../assets/icons-forms/image\ 10.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.questionario-texts{
+    color: var(--accent);
+    width: 95%;
+    height: 35%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.questionario-texts p{
+    font-weight: bold;
+    color: var(--primary);
+    font-size: 20px;
+}
+.alertas{
+    padding-left: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 48%;
+    height: 100%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+.alertas-icon{
+    width: 20%;
+    height: 20%;
+    background-image:url(../assets/icons-forms/bell-solid\ \(1\).svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.alertas-texts{
+    color: var(--accent);
+    width: 95%;
+    height: 35%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.alertas-texts p{
+    color: var(--primary);
+    font-size: 20px;
+    font-weight: bold;
+}
+.alertas-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 20%;
+    height: 15%;
+    background-color: var(--secondary);
+    color: white;
+    border-radius: 5px;
+    font-size: 80%;
+}
+.manual-databrick{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 18%;
+    height: 96%;
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+.manual-logo{
+    width: 95%;
+    height: 12%;
+}
+.manual{
+    width: 95%;
+    height: 20%;
+}
+.pergunta{
+    color: var(--primary);
+}
+.resposta{
+    color: var(--accent);
+    font-size: 13px;
+}
