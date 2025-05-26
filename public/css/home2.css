@@ -94,9 +94,10 @@
     width: 90%;
     height: 60%;
     color: var(--accent);
+    font-size: small;
 }
 .banner-texts p{
-    font-size: 25px;
+    font-size: 100%;
     color: var(--primary);
     font-weight: bold;
 }
@@ -139,9 +140,9 @@
 .questionario-texts{
     color: var(--accent);
     width: 95%;
-    height: 35%;
+    height: 50%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: column;
 }
 .questionario-texts p{
@@ -170,9 +171,9 @@
 .alertas-texts{
     color: var(--accent);
     width: 95%;
-    height: 35%;
+    height: 50%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-direction: column;
 }
 .alertas-texts p{
@@ -204,6 +205,7 @@
     border: 1px solid black;
 }
 .manual-logo{
+    font-size: 70%;
     width: 95%;
     height: 12%;
 }
@@ -212,9 +214,10 @@
     height: 20%;
 }
 .pergunta{
+    font-size: 70%;
     color: var(--primary);
 }
 .resposta{
     color: var(--accent);
-    font-size: 13px;
+    font-size: 50%;
 }
