@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuário</title>
     <link rel="stylesheet" href="css/listaUsuario.css">
-    <script src="js/popupRegister.js"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dashboard" />
 </head>
@@ -101,55 +100,8 @@
 
                 <section class="users-section">
                     <div class="users-container">
-                        <div class="user-card">
-                            <span>Usuario x - email</span>
-                            <div class="crud">
-                                <img src="assets/icons-dash/edit.svg" alt="">
-                                <img class="size" src="assets/icons-dash/x.png" alt="">
-                            </div>
-                        </div>
-                        <div class="user-card">
-                            <span>Usuario x - email</span>
-                            <div class="crud">
-                                <img src="assets/icons-dash/edit.svg" alt="">
-                                <img class="size" src="assets/icons-dash/x.png" alt="">
-                            </div>
-                        </div>
-                        <div class="user-card">
-                            <span>Usuario x - email</span>
-                            <div class="crud">
-                                <img src="assets/icons-dash/edit.svg" alt="">
-                                <img class="size" src="assets/icons-dash/x.png" alt="">
-                            </div>
-                        </div>
-                        <div class="user-card">
-                            <span>Usuario x - email</span>
-                            <div class="crud">
-                                <img src="assets/icons-dash/edit.svg" alt="">
-                                <img class="size" src="assets/icons-dash/x.png" alt="">
-                            </div>
-                        </div>
-                        <div class="user-card">
-                            <span>Usuario x - email</span>
-                            <div class="crud">
-                                <img src="assets/icons-dash/edit.svg" alt="">
-                                <img class="size" src="assets/icons-dash/x.png" alt="">
-                            </div>
-                        </div>
-                        <div class="user-card">
-                            <span>Usuario x - email</span>
-                            <div class="crud">
-                                <img src="assets/icons-dash/edit.svg" alt="">
-                                <img class="size" src="assets/icons-dash/x.png" alt="">
-                            </div>
-                        </div>
-                        <div class="user-card">
-                            <span>Usuario x - email</span>
-                            <div class="crud">
-                                <img src="assets/icons-dash/edit.svg" alt="">
-                                <img class="size" src="assets/icons-dash/x.png" alt="">
-                            </div>
-                        </div>
+                        <!-- Usuarios vindo do popupRegister.js -->
+                    </div>
 
                     </div>
                 </section>
@@ -206,54 +158,57 @@
 
 </html>
 
+<script src="js/popupRegister.js"></script>
 <script>
     
-function cadastrarUsuario() {
-    // Pegar valores dos campos
-    const nome = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const senha = document.getElementById('password').value;
-    const cpf = document.getElementById('cpf').value;
-    const funcao = document.getElementById('funcao').value;
 
-    // Validações básicas
-    if (!nome || !email || !senha || !cpf || !funcao) {
-        alert('Por favor, preencha todos os campos!');
-        return;
-    }
+    
+// function cadastrarUsuario() {
+//     // Pegar valores dos campos
+//     const nome = document.getElementById('name').value;
+//     const email = document.getElementById('email').value;
+//     const senha = document.getElementById('password').value;
+//     const cpf = document.getElementById('cpf').value;
+//     const funcao = document.getElementById('funcao').value;
 
-    // Criar objeto com dados do usuário
-    const novoUsuario = {
-        nome: nome,
-        email: email,
-        senha: senha,
-        cpf: cpf,
-        funcao_empresa: funcao,
-        fk_empresa: localStorage.getItem('EMPRESA_ID') 
-    };
+//     // Validações básicas
+//     if (!nome || !email || !senha || !cpf || !funcao) {
+//         alert('Por favor, preencha todos os campos!');
+//         return;
+//     }
 
-    // Enviar para o backend
-    fetch('/user', {
-        method: 'GEt',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(novoUsuario)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.id) {
-            alert('Usuário cadastrado com sucesso!');
-            closeModal();
-            window.location.reload(); // Recarrega a página para mostrar o novo usuário
-        } else {
-            alert('Erro ao cadastrar usuário: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        alert('Erro ao cadastrar usuário!');
-    });
-}
+//     // Criar objeto com dados do usuário
+//     const novoUsuario = {
+//         nome: nome,
+//         email: email,
+//         senha: senha,
+//         cpf: cpf,
+//         funcao_empresa: funcao,
+//         fk_empresa: localStorage.getItem('EMPRESA_ID') 
+//     };
+
+//     // Enviar para o backend
+//     fetch('/user', {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(novoUsuario)
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         if (data.id) {
+//             alert('Usuário cadastrado com sucesso!');
+//             closeModal();
+//             window.location.reload(); // Recarrega a página para mostrar o novo usuário
+//         } else {
+//             alert('Erro ao cadastrar usuário: ' + data.message);
+//         }
+//     })
+//     .catch(error => {
+//         console.error('Erro:', error);
+//         alert('Erro ao cadastrar usuário!');
+//     });
+// }
 
 </script>

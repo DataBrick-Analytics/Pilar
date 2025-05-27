@@ -11,7 +11,7 @@ function entrar() {
         return false;
     }
 
-	fetch("/user/autenticar", {
+    fetch("/user/autenticar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -29,11 +29,13 @@ function entrar() {
                 if (json.usuario && json.usuario.id) {
                     localStorage.setItem('USER_ID', json.usuario.id);
                     localStorage.setItem('EMPRESA_ID', json.usuario.fk_empresa);
-                    
+
                     Swal.fire({
                         icon: 'success',
                         title: 'Bem vindo!',
-                        text: json.message
+                        text: json.message,
+                        color: "#FFFFFF",
+                        background: "#2C3E50"
                     }).then(() => {
                         window.location.href = "./dashboard.html";
                     });
@@ -49,5 +51,13 @@ function entrar() {
         // ...existing code...
     });
 
-	return false;
+    return false;
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    var iconeSenha = document.getElementById("senhaIcon")
+
+    iconeSenha.addEventListener('click', function () {
+        senha_input.type = senha_input.type === 'password' ? 'text' : 'password'
+    })
+})

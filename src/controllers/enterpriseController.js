@@ -121,10 +121,10 @@ function deleteEnterprise(req, res) {
 
 async function getEnterpriseEmployees(req, res) {
     console.log("Acessando controller")
-    const fkEmpresa = 3
+    const fkEmpresa = localStorage.getItem('EMPRESA_ID')
+    
     try {
         const allEmployees = await enterpriseModel.getEnterpriseEmployees(fkEmpresa)
-        console.log('voltei pro controller')
         return res.status(200).json(allEmployees)
     } catch (erro) {
             console.log(erro)

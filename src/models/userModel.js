@@ -71,7 +71,7 @@ async function createUser(user) {
     try {
         const resultado = await database.execute(query, values);
         console.log('Database result:', resultado);
-        return resultado[0];
+        return resultado;
     } catch (error) {
         console.error('Database error:', error);
         throw error;
@@ -114,9 +114,10 @@ async function deleteUser(idUser) {
     `;
 
     try {
-        const [resultado] = await database.execute(query, [idUser]);
+        console.log(query)
+        const resultado = await database.execute(query, [idUser]);
         console.log('Usuário deletado com sucesso:', resultado);
-        return resultado[0];
+        return resultado;
     } catch (error) {
         console.error('Erro ao deletar usuário:', error.message);
         throw error;
@@ -125,7 +126,7 @@ async function deleteUser(idUser) {
 }
 
 
-async function serchUserByEnterpriseId(idEnterprise) {
+async function searchUsersByEnterpriseId(idEnterprise) {
     const query = `
     SELECT * FROM usuarios WHERE fk_empresa = ?
     `;
@@ -142,10 +143,29 @@ async function serchUserByEnterpriseId(idEnterprise) {
 }
 
 
+async function searchUserById(idUser) {
+    const query = `
+    SELECT * FROM usuarios WHERE id_usuario = ?
+    `;
+
+    try {
+        const [resultado] = await database.execute(query, [idUser]);
+        console.log('Usuários encontrados com sucesso:', resultado);
+        return resultado[0];
+    } catch (error) {
+        console.error('Erro ao procurar usuario:', error.message);
+        throw error;
+    }
+
+}
+
+
+
 module.exports = {
     createUser,
     editUser,
     deleteUser,
     authenticateUser,
-    serchUserByEnterpriseId
+    searchUsersByEnterpriseId,
+    searchUserById
 }
