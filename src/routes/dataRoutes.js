@@ -19,4 +19,16 @@ router.get("/data/getMediaByFifth/:id", function (req, res) {
     dataController.getMediaByFifth(req, res);
 });
 
+router.get("/data/getDensidadeUrbana", function (req, res) {
+    dataController.getDensidadeUrbana(req, res)
+})
+
+router.get("/data/getEscolasRegiao", function (req, res) {
+    dataController.getEscolasRegiao(req, res)
+})
+
+router.get("/data/getHospitaisRegiao", function (req, res) {
+    dataController.getHospitalRegiao(req, res)
+})
+
 module.exports = router;

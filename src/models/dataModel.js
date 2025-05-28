@@ -73,6 +73,22 @@ async function getMediaByFifth(idBairro) {
       throw error
     }
 }
+  async function getDensidadeMalhaUrbana(fkBairro) {
+    const areaHectares = `SELECT area_terreno_m2 FROM propriedades WHERE fk_bairro = ${fkBairro}` / 10_000
+    const populacaoUrbana = `SELECT populacao_total FROM info_regiao where fk_bairro = ${fkBairro}`
+
+    // calculo para Densidade = populacaoUrbada / area (em hectares)
+    try{
+      await database.execute(areaHectares, populacaoUrbana)
+      const densidade = populacaoUrbana / areaHectares
+      return densidade;
+
+    } catch(error){
+      console.error("Houve um erro ao localizar os dados", error.message)
+      throw error
+    }
+  }
+
 
 
 
@@ -80,6 +96,7 @@ module.exports = {
   //  getSecurityRegion,
   //  getPopulationRegion,
    getRegionType,
-   getMediaByFifth
+   getMediaByFifth,
+   getDensidadeMalhaUrbana
 };
 
