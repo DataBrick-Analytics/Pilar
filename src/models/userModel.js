@@ -53,7 +53,6 @@ async function authenticateUser(email, senha) {
     }
 }
 
-
 async function createUser(user) {
     const query = `
     INSERT INTO usuarios (nome, email, senha, fk_empresa, funcao_empresa, data_cadastro)
@@ -107,7 +106,6 @@ async function editUser(user, idUser) {
     }
 }
 
-
 async function deleteUser(idUser) {
     const query = `
     DELETE FROM usuarios WHERE id_usuario = ?
@@ -122,9 +120,7 @@ async function deleteUser(idUser) {
         console.error('Erro ao deletar usuário:', error.message);
         throw error;
     }
-
 }
-
 
 async function searchUsersByEnterpriseId(idEnterprise) {
     const query = `
@@ -139,9 +135,7 @@ async function searchUsersByEnterpriseId(idEnterprise) {
         console.error('Erro ao procurar usuario:', error.message);
         throw error;
     }
-
 }
-
 
 async function searchUserById(idUser) {
     const query = `
@@ -156,10 +150,7 @@ async function searchUserById(idUser) {
         console.error('Erro ao procurar usuario:', error.message);
         throw error;
     }
-
 }
-
-
 
 module.exports = {
     createUser,

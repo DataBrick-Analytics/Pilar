@@ -84,7 +84,7 @@ main {
     flex-direction: column;
     background-color: var(--background);
     width: 85%;
-    height: 100vh ;
+    height: 100vh;
 }
 
 .center-box {
@@ -94,6 +94,7 @@ main {
     width: 90%;
     height: 80%;
     border-radius: 16px;
+    box-shadow: 0 5px 10px var(--primary);
 }
 
 .blue-box {
@@ -148,7 +149,14 @@ main {
     border-radius: 8px;
     border: none;
     padding: 0 0 0 8px ;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+.division div input::-webkit-outer-spin-button,
+.division div input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
 
 .update-button {
     height: fit-content;
@@ -156,7 +164,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 0 32px 0 0;
+    padding: 0 32px 16px 0;
 }
 
 .update-button button {
