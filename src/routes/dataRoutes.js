@@ -31,4 +31,8 @@ router.get("/data/getHospitaisRegiao", function (req, res) {
     dataController.getHospitalRegiao(req, res)
 })
 
+router.get("/data/getPriceFluctuation:/id", function (req, res) {
+    dataController.getPriceFluctuation(req, res)
+})
+
 module.exports = router;

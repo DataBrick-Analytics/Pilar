@@ -39,7 +39,7 @@ var dataModel = require("../models/dataModel");
 
 
 function getRegionType(req, res){
-    var idBairro = req.param.id;
+    var idBairro = req.params.id;
     console.log("ID recebido:", id);
     // Verifica se o ID está definido e não é nulo
     if (id == undefined || id == null) {
@@ -67,7 +67,7 @@ function getRegionType(req, res){
 
 
 function getMediaByFifth(req, res){
-    var idBairro = req.param.id;
+    var idBairro = req.params.id;
     console.log("ID recebido:", id);
 
     // Verifica se o ID está definido e não é nulo
@@ -133,11 +133,40 @@ function getDensidadeUrbana(req, res) {
         )
 }
 
+function  getPriceFluctuation(req, res) {
+    var idBairro = req.params.id;
+    console.log("ID recebido:", id);
+
+    if (id == undefined || id == null) {
+        return res.status(400).json({
+            error: "O id está undefined ou nulo!"
+        });
+    }
+
+    dataModel.getPriceFluctuation(idBairro)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro na coleta de novos Dados:",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 
 
 module.exports = {
     // getSecurityRegionController,
     // getPopulationRegionController
     getRegionType,
-    getMediaByFifth
+    getMediaByFifth,
+    getDensidadeUrbana,
+    getPriceFluctuation
 }
