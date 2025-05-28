@@ -73,6 +73,8 @@ async function getMediaByFifth(idBairro) {
       throw error
     }
 }
+
+
   async function getDensidadeMalhaUrbana(fkBairro) {
     const areaHectares = `SELECT area_terreno_m2 FROM propriedades WHERE fk_bairro = ${fkBairro}` / 10_000
     const populacaoUrbana = `SELECT populacao_total FROM info_regiao where fk_bairro = ${fkBairro}`
@@ -89,7 +91,17 @@ async function getMediaByFifth(idBairro) {
     }
   }
 
+  async function getPriceFluctuation(req, res) {
+    const query = `SELECT preco,data_precificao FROM precificao WHERE fk_bairro = ?;`
+    const values = [req.params.id]
 
+    try {
+      return resultado = await database.execute(query, values)
+    } catch (error) {
+      console.error("Erro ao localizar a informação", error.message)
+      throw error
+    }
+  }
 
 
 module.exports = {
@@ -97,6 +109,7 @@ module.exports = {
   //  getPopulationRegion,
    getRegionType,
    getMediaByFifth,
-   getDensidadeMalhaUrbana
+   getDensidadeMalhaUrbana,
+   getPriceFluctuation
 };
 

@@ -38,8 +38,8 @@ var dataModel = require("../models/dataModel");
 // }
 
 
-function getRegionType(req, res){
-    var idBairro = req.param.id;
+function getRegionType(req, res) {
+    var idBairro = req.params.id;
     console.log("ID recebido:", id);
     // Verifica se o ID está definido e não é nulo
     if (idBairro == undefined || idBairro == null) {
@@ -49,24 +49,24 @@ function getRegionType(req, res){
     }
 
     dataModel.getRegionType(idBairro)
-    .then(
-        function(resultado) {
-            res.json(resultado);
-        }
-    ).catch(
-        function (erro) {
-            console.log(erro);
-            console.log(
-                "\nHouve um erro na coleta de novos Dados:",
-                erro.sqlMessage
-            );
-            res.status(500).json(erro.sqlMessage);
-        }
-    );
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro na coleta de novos Dados:",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
 }
 
 
-function getMediaByFifth(req, res){
+function getMediaByFifth(req, res) {
     var idBairro = req.params.id;
     console.log("ID recebido:", idBairro);
 
@@ -77,22 +77,22 @@ function getMediaByFifth(req, res){
         });
     }
     dataModel.getMediaByFifth(idBairro)
-    .then(
-        function(resultado) {
-            res.json(resultado);
-            
-        }
-    ).catch(
-        function (erro) {
-            console.log(erro);
-            console.log(
-                "\nHouve um erro na coleta de novos Dados:",
-                erro.sqlMessage
-            );
-            res.status(500).json(erro.sqlMessage);
-        }
-    );
-    
+        .then(
+            function (resultado) {
+                res.json(resultado);
+
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro na coleta de novos Dados:",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
 }
 
 function getRegionType(req, res) {
@@ -134,30 +134,58 @@ function getDensidadeUrbana(req, res) {
         )
 }
 
-async function getEscolasRegiao(req,res) {
+async function getEscolasRegiao(req, res) {
     const fkBairro = localStorage.getItem("FK_BAIRRO")
-    
+
     dataModel.getEscolasRegiao(fkBairro)
-    .then(
-        function(resultado){
-            res.status(200).send(resultado.length)
-            console.log("Qtd de escolas encontradas: " + resultado.length)
+        .then(
+            function (resultado) {
+                res.status(200).send(resultado.length)
+                console.log("Qtd de escolas encontradas: " + resultado.length)
+            }
+        ).catch(
+            function (erro) {
+                console.log("Houve um erro ao pegar as escolas")
+                res.status(500).json(erro.sqlMessage)
+            }
+        )
+
+    function getPriceFluctuation(req, res) {
+        var idBairro = req.params.id;
+        console.log("ID recebido:", id);
+
+        if (id == undefined || id == null) {
+            return res.status(400).json({
+                error: "O id está undefined ou nulo!"
+            });
         }
-    ).catch(
-        function(erro){
-            console.log("Houve um erro ao pegar as escolas")
-            res.status(500).json(erro.sqlMessage)
-        }
-    )
-}
+
+        dataModel.getPriceFluctuation(idBairro)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro na coleta de novos Dados:",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
 
 
 
-module.exports = {
-    // getSecurityRegionController,
-    // getPopulationRegionController
-    getRegionType,
-    getMediaByFifth,
-    getDensidadeUrbana,
-    getEscolasRegiao,
+    module.exports = {
+        // getSecurityRegionController,
+        // getPopulationRegionController
+        getRegionType,
+        getMediaByFifth,
+        getDensidadeUrbana,
+        getEscolasRegiao,
+        getPriceFluctuation,
+    }
 }
