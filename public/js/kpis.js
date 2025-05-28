@@ -136,7 +136,8 @@ async function getDensidadeMalhaUrbana() {
 }
 
 async function getEscolasRegiao() {
-    const qtdEscolas = fetch("/data/getEscolas")
+    const qtdEscolas = fetch("/data/getEscolas", {method: "GET"}
+    )
 }
 
 

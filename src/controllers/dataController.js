@@ -42,7 +42,7 @@ function getRegionType(req, res){
     var idBairro = req.param.id;
     console.log("ID recebido:", id);
     // Verifica se o ID está definido e não é nulo
-    if (id == undefined || id == null) {
+    if (idBairro == undefined || idBairro == null) {
         return res.status(400).json({
             error: "O id está undefined ou nulo!"
         });
@@ -67,19 +67,20 @@ function getRegionType(req, res){
 
 
 function getMediaByFifth(req, res){
-    var idBairro = req.param.id;
-    console.log("ID recebido:", id);
+    var idBairro = req.params.id;
+    console.log("ID recebido:", idBairro);
 
-    // Verifica se o ID está definido e não é nulo
-    if (id == undefined || id == null) {
+    // Verifica se o idBairro está definidBairroo e não é nulo
+    if (idBairro == undefined || idBairro == null) {
         return res.status(400).json({
-            error: "O id está undefined ou nulo!"
+            error: "O idBairro está undefined ou nulo!"
         });
     }
     dataModel.getMediaByFifth(idBairro)
     .then(
         function(resultado) {
             res.json(resultado);
+            
         }
     ).catch(
         function (erro) {
@@ -133,11 +134,30 @@ function getDensidadeUrbana(req, res) {
         )
 }
 
+async function getEscolasRegiao(req,res) {
+    const fkBairro = localStorage.getItem("FK_BAIRRO")
+    
+    dataModel.getEscolasRegiao(fkBairro)
+    .then(
+        function(resultado){
+            res.status(200).send(resultado.length)
+            console.log("Qtd de escolas encontradas: " + resultado.length)
+        }
+    ).catch(
+        function(erro){
+            console.log("Houve um erro ao pegar as escolas")
+            res.status(500).json(erro.sqlMessage)
+        }
+    )
+}
+
 
 
 module.exports = {
     // getSecurityRegionController,
     // getPopulationRegionController
     getRegionType,
-    getMediaByFifth
+    getMediaByFifth,
+    getDensidadeUrbana,
+    getEscolasRegiao,
 }

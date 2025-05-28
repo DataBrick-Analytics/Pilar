@@ -62,7 +62,7 @@ async function getMediaByFifth(idBairro) {
                   renda_domiciliar_segundo_quinto_mais_pobre,
                   renda_domiciliar_terceiro_quinto_mais_pobre,
                   renda_domiciliar_quarto_quinto_mais_pobre,
-                  renda_domiciliar_quinto_quinto_mais_pobre
+                  renda_domiciliar_quinto_mais_rico
                 FROM info_regiao  WHERE fk_bairro = ?;`
     const values = [idBairro]
 
