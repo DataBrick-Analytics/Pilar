@@ -171,4 +171,6 @@ main {
     justify-content: center;
     align-items: center;
     gap: 4px;
+    font-size: 1rem;
+    cursor: pointer;
 }
