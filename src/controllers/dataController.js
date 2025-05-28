@@ -137,7 +137,7 @@ function getDensidadeUrbana(req, res) {
 async function getEscolasRegiao(req, res) {
     const fkBairro = localStorage.getItem("FK_BAIRRO")
 
-    dataModel.getEscolasRegiao(fkBairro)
+    await dataModel.getEscolasRegiao(fkBairro)
         .then(
             function (resultado) {
                 res.status(200).send(resultado.length)
@@ -149,6 +149,7 @@ async function getEscolasRegiao(req, res) {
                 res.status(500).json(erro.sqlMessage)
             }
         )
+    }
 
     function getPriceFluctuation(req, res) {
         var idBairro = req.params.id;
@@ -188,4 +189,3 @@ async function getEscolasRegiao(req, res) {
         getEscolasRegiao,
         getPriceFluctuation,
     }
-}

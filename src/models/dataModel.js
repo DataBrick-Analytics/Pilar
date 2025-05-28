@@ -91,6 +91,10 @@ async function getMediaByFifth(idBairro) {
     }
   }
 
+  async function getEscolasRegiao(fkBairro) {
+    const query = `SELECT * FROM educacao WHERE fk_bairro = ${fkBairro} `
+  }
+
   async function getPriceFluctuation(req, res) {
     const query = `SELECT preco,data_precificao FROM precificao WHERE fk_bairro = ?;`
     const values = [req.params.id]
@@ -110,6 +114,7 @@ module.exports = {
    getRegionType,
    getMediaByFifth,
    getDensidadeMalhaUrbana,
-   getPriceFluctuation
+   getPriceFluctuation,
+   getEscolasRegiao
 };
 
