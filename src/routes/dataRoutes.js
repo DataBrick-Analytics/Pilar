@@ -11,8 +11,12 @@ var dataController = require("../controllers/dataController");
 //     dataController.getPopulationRegionController(req, res);
 // });
 
-router.get("/data/getRegionType", function (req, res) {
+router.get("/data/getRegionType/:id", function (req, res) {
     dataController.getRegionType(req, res);
+});
+
+router.get("/data/getMediaByFifth/:id", function (req, res) {
+    dataController.getMediaByFifth(req, res);
 });
 
 module.exports = router;

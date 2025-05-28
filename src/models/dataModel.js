@@ -36,7 +36,7 @@ var database = require("../database/config");
 //     }
 //   }
 
-async function getRegionType(req, res) {
+async function getRegionType(idBairro) {
     const query = `
           SELECT
             SUM(CASE WHEN uso_iptu IN (10, 12, 13, 14, 20, 21, 22, 24, 25) THEN 1 ELSE 0 END) AS total_residencial,
@@ -44,10 +44,12 @@ async function getRegionType(req, res) {
             SUM(CASE WHEN uso_iptu IN (50, 51, 60, 61) THEN 1 ELSE 0 END) AS total_industrial,
             SUM(CASE WHEN uso_iptu IN (23, 24, 26, 62, 63) THEN 1 ELSE 0 END) AS total_garagens_depositos,
             SUM(CASE WHEN uso_iptu IN (22, 32, 42) THEN 1 ELSE 0 END) AS total_misto
-          FROM propriedades; `
-  
+          FROM propriedades WHERE ?; `
+
+          const values = [idBairro]
+
     try {
-      return resultado = await database.execute(query)
+      return resultado = await database.execute(query,values)
     } catch(error){
       console.error("Erro ao localizar a informação", error.message)
       throw error
@@ -55,11 +57,29 @@ async function getRegionType(req, res) {
   }
 
 
+async function getMediaByFifth(idBairro) {
+  const query = `SElECT renda_domiciliar_quinto_mais_pobre,
+                  renda_domiciliar_segundo_quinto_mais_pobre,
+                  renda_domiciliar_terceiro_quinto_mais_pobre,
+                  renda_domiciliar_quarto_quinto_mais_pobre,
+                  renda_domiciliar_quinto_quinto_mais_pobre
+                FROM info_regiao  WHERE fk_bairro = ?;`
+    const values = [idBairro]
+
+     try {
+      return resultado = await database.execute(query,values)
+    } catch(error){
+      console.error("Erro ao localizar a informação", error.message)
+      throw error
+    }
+}
+
 
 
 module.exports = {
   //  getSecurityRegion,
   //  getPopulationRegion,
-   getRegionType
+   getRegionType,
+   getMediaByFifth
 };
 
