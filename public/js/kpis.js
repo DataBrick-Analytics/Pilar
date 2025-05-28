@@ -1,3 +1,5 @@
+
+
 let securityData = []
 var securityDataSum = 0
 var populationRegion = 0
@@ -84,21 +86,21 @@ function catchKPI() {
 
             resposta.json().then(json => {
                 console.log(json);
-                comercialBuildings = parseInt(json[0].total_comercial) + parseInt(json[0].total_garagens_depositos) + parseInt(json[0].total_industrial) + (parseInt(json[0].total_misto)/2)
-                residencialBuildings = parseInt(json[0].total_residencial) + (parseInt(json[0].total_misto)/2)
+                comercialBuildings = parseInt(json[0].total_comercial) + parseInt(json[0].total_garagens_depositos) + parseInt(json[0].total_industrial) + (parseInt(json[0].total_misto) / 2)
+                residencialBuildings = parseInt(json[0].total_residencial) + (parseInt(json[0].total_misto) / 2)
                 totalBuildings = parseInt(json[0].total_comercial) + parseInt(json[0].total_garagens_depositos) + parseInt(json[0].total_industrial) + parseInt(json[0].total_misto) + parseInt(json[0].total_residencial)
 
-            if (residencialBuildings > (0.7 * totalBuildings)){
-                kpitipo.innerhtml = "Residencial"
-                kpitipovalor.innerhtml = `${residencialBuildings}%`
+                if (residencialBuildings > (0.7 * totalBuildings)) {
+                    kpitipo.innerhtml = "Residencial"
+                    kpitipovalor.innerhtml = `${residencialBuildings}%`
 
-            } 
-            else{
-                kpitipo.innerhtml = "Comercial"
-                kpitipovalor.innerhtml = `${comercialBuildings}%`
+                }
+                else {
+                    kpitipo.innerhtml = "Comercial"
+                    kpitipovalor.innerhtml = `${comercialBuildings}%`
 
-            }
-        });
+                }
+            });
 
         } else {
             console.log(resposta);
@@ -109,6 +111,37 @@ function catchKPI() {
         }
 
     }).catch(function (erro) {
-        console.log(erro);4
+        console.log(erro); 
     });
 }
+
+
+async function getDensidadeMalhaUrbana() {
+    fetch("/data/getDensidadeUrbana", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(
+        function(resposta){
+            if(resposta.ok){
+                kpimalhaurbana.innerhtml = `${resposta}/ha`
+            } else {
+                console.log("Houve um erro durante a requisição")
+            }
+        }
+    ).catch(function(erro){
+      console.error(erro)  
+    })
+}
+
+async function getEscolasRegiao() {
+    const qtdEscolas = fetch("/data/getEscolas")
+}
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  getDensidadeMalhaUrbana()
+  catchKPI()
+})
