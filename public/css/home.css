@@ -198,8 +198,10 @@ header a {
 }
 
 .hero-conteiner img {
-    width: 40%;
+    width: 45%;
     height: 20%;
+    /* border: 3px solid var(--primary); */
+    /* border-radius: 10px; */
 }
 
 .hero-conteiner .container h2 {
@@ -356,7 +358,7 @@ header a {
     gap: 32px;
     display: flex;
     justify-content: start;
-    align-items: start;
+    align-items: stretch;
 }
 
 .container .image {
@@ -364,15 +366,18 @@ header a {
 }
 
 .divisions .container {
-    max-width: 60%;
-    max-height: 60%;
+    width: 100%;
+    max-width: 600px;
+    min-height: 250px;
     border-radius: 10px;
     padding: 30px;
     gap: 20px;
     display: flex;
-    align-items: start;
+    justify-content: start;
+    /* align-items: start; */
     flex-direction: column;
     background-color: var(--secondary);
+    flex-grow: 1;
 }
 
 .divisions .container .title {
