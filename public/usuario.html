@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/usuario.css">
+    <link rel="stylesheet" href="css/Style.css">
+    <title>Databrick - Usuário</title>
+</head>
+<body>
+
+    <div class="divPainel">
+            <div class="divPainelAzul">
+
+                <nav class="sidebarAzul">
+                    <div class="logo">
+                        <span class="logo-icon">
+                            <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" alt="">
+                        </span>
+                        <span class="logo-text">DataBrick</span>
+                    </div>
+    
+                    <div class="separator"></div>
+    
+                    <div class="user-profile">
+                        <div class="avatar">
+                            <img src="./assets/icons-dash/USER-ICON-SM.svg" alt="">
+                        </div>
+                        <span class="username" id="user">Nome usuario</span>
+                    </div>
+    
+                    <div class="separator"></div>
+    
+                    <div class="nav-menu">
+                        <a href="#" class="nav-item">
+                            <span class="nav-icon">
+                                <img src="./assets/icons-dash/HOME-ICON-SM.svg" alt="">
+                            </span>
+                            <span>Home</span>
+                        </a>
+    
+                        <div class="nav-section">
+                            <span class="nav-section-title">PAGES</span>
+                            <div class="dropdown">
+                                <button class="dropdown-btn active">
+                                    <span class="nav-icon"> <img src="./assets/icons-dash/CHART-ICON-SM.svg" alt=""></span>
+                                    <span>Propriedades</span>
+                                    <span class="dropdown-arrow">▼</span>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#" class="dropdown-item">
+                                        <span class="prefix">B</span>
+                                        <span>Filtrar propriedade</span>
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        <span class="prefix">C</span>
+                                        <span>Propriedades favoritas</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="nav-menu">
+                                <a href="./listaUsuario.html" class="nav-item">
+                                    <span class="nav-icon">
+                                        <img src="./assets/icons-dash/ALERT-ICON-SM.svg" alt="">
+                                    </span>
+                                    <span>Alertas</span>
+                                </a>
+                            </div>
+                        </div>
+                </nav>
+
+                <div class="div-button-log-out">
+                    <button onclick="logout()" class="button_logout">
+                        Log Out
+                    </button>
+                </div>
+                
+
+            </div>
+        </div>
+    
+    <main>
+        <div class="center-box">
+            <header class="blue-box"></header>
+            <section class="configs">
+                <h1>Editar perfil:</h1>
+                <article class="box">
+                    <section class="division">
+                        <div>
+                            <h3>Primeiro nome</h3>
+                            <input type="text" placeholder="Seu primeiro nome">
+                        </div>
+                        <div>
+                            <h3>Apelido</h3>
+                            <input type="text" placeholder="Seu primeiro nome">
+                        </div>
+                    </section>
+                    <section class="division">
+                        <div>
+                            <h3>Primeiro nome</h3>
+                            <input type="text" placeholder="Seu primeiro nome">
+                        </div>
+                        <div>
+                            <h3>Apelido</h3>
+                            <input type="text" placeholder="Seu primeiro nome">
+                        </div>
+                    </section>
+                </article>
+            </section>
+            <section class="update-button"><button onclick="updateProfile()"><img src="assets/icons-dash/CHART-ICON-SM.svg"> Atualizar</button></section>
+        </div>
+    </main>
+
+</body>
+</html>
