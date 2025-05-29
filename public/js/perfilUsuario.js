@@ -1,36 +1,37 @@
 async function setUserInfos() {
-    const userInfos = await searchProfile;
+    const userInfos = await searchProfile();
+    console.log(userInfos)
 
-    user_name.value = userInfos.userName;
-    user_email.value = userInfos.userEmail;
-    user_cpf.value = userInfos.userCPF;
-    user_birthday.value = userInfos.userBirthday;
+    user_name.value = userInfos.nome;
+    user_email.value = userInfos.email;
+    user_cpf.value = userInfos.cpf;
+    user_birthday.value = userInfos.data_nasc;
 }
 
 async function searchProfile() {
-    var userID = localStorage.USER_ID;
+    const userID = localStorage.USER_ID;
 
-    fetch(`/user/${userID}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).then(function (resposta) {
+    try {
+        const resposta = await fetch(`/user/${userID}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
         if (resposta.ok) {
-            resposta.json().then(json => {
-                return json[0];
-            });
+            const json = await resposta.json();
+            return json;
         } else {
             console.log(resposta);
-            resposta.text().then(texto => {
-                console.error(texto);
-                finalizarAguardar(texto);
-            });
+            const texto = await resposta.text();
+            console.error(texto);
         }
+    } catch (erro) {
+        console.error(erro);
+    }
 
-    }).catch(function (erro) {
-        console.log(erro);
-    });
+    return null; // garante retorno mesmo se der erro
 }
 
 async function updateUserProfile() {
@@ -41,15 +42,7 @@ async function updateUserProfile() {
     var userNewPassword = user_new_password.value;
     var confirmNewPassword = confirm_new_password.value;
 
-    if (userName == ''
-        || userEmail == ''
-        || userCPF == ''
-        || userBirthday == ''
-        || userNewPassword == ''
-        || confirmNewPassword == ''
-    ) {
-        return alert("Dados incompletos!");
-    } else if (userNewPassword != confirmNewPassword) {
+    if (userNewPassword != confirmNewPassword) {
         return alert("As senha que você digitou não são iguais!")
     }
 
@@ -60,6 +53,34 @@ async function updateUserProfile() {
     if (passwordModal != userInfos.userPassword) {
         return alert("Senha incorreta!");
     } else {
-        
+        var userID = localStorage.USER_ID;
+
+        fetch(`/user/${userID}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nome: userName,
+                email: userEmail,
+                senha: userNewPassword,
+                cpf: userCPF,
+                data_nasc: userBirthday
+            }),
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    return alert("Alterações feitas com sucesso");
+                });
+            } else {
+                console.log(resposta);
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        });
     }
 }

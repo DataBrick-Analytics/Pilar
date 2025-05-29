@@ -80,11 +80,12 @@ async function createUser(user) {
 async function editUser(user, idUser) {
     const query = `
     UPDATE usuarios 
-    SET nome = ?, 
-        email = ?, 
-        senha = ?, 
-        funcao_empresa = ?,
-        fk_empresa = ?
+    SET nome = ?,
+        email = ?,
+        senha = ?,
+        cpf = ?,
+        data_nasc = ?,
+        data_edicao = now()
     WHERE id_usuario = ?
     `;
 
@@ -92,8 +93,8 @@ async function editUser(user, idUser) {
         user.nome,
         user.email,
         user.senha,
-        user.funcao_empresa,
-        user.fk_empresa,
+        user.cpf,
+        user.data_nasc,
         idUser
     ];
 
@@ -143,9 +144,9 @@ async function searchUserById(idUser) {
     `;
 
     try {
-        const [resultado] = await database.execute(query, [idUser]);
+        const resultado = await database.execute(query, [idUser]);
         console.log('Usuários encontrados com sucesso:', resultado);
-        return resultado[0];
+        return resultado;
     } catch (error) {
         console.error('Erro ao procurar usuario:', error.message);
         throw error;
