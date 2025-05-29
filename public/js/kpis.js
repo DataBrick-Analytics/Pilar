@@ -125,7 +125,11 @@ async function getDensidadeMalhaUrbana() {
     }).then(
         function(resposta){
             if(resposta.ok){
-                kpimalhaurbana.innerhtml = `${resposta}/ha`
+                resposta.json().then(json => {
+                    resposta = json;
+                    console.log("Voltei pra função original" + resposta.valorDensidade);
+                    kpimalhaurbana.innerText = `${resposta.valorDensidade}/ha`
+                });
             } else {
                 console.log("Houve um erro durante a requisição")
             }
@@ -139,7 +143,7 @@ async function getEscolasRegiao() {
     const qtdEscolas = fetch("/data/getEscolas", {method: "GET"})
 
     if(qtdEscolas > 0){
-        
+        kpiEscolas.innerhtml = qtdEscolas
     }
 }
 

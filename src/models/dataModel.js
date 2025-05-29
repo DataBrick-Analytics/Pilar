@@ -26,10 +26,10 @@ var database = require("../database/config");
 //     const query = `
 //           SELECT 
 //           populacao FROM info_regiao WHERE blablabla`
-  
+
 //     try {
 //       return resultado = await database.execute(query, values)
-  
+
 //     } catch(error){
 //       console.error("Erro ao localizar a informação", error.message)
 //       throw error
@@ -46,75 +46,81 @@ async function getRegionType(idBairro) {
             SUM(CASE WHEN uso_iptu IN (22, 32, 42) THEN 1 ELSE 0 END) AS total_misto
           FROM propriedades WHERE ?; `
 
-          const values = [idBairro]
-
-    try {
-      return resultado = await database.execute(query,values)
-    } catch(error){
-      console.error("Erro ao localizar a informação", error.message)
-      throw error
-    }
-  }
-
-
-async function getMediaByFifth(idBairro) {
-  const query = `SElECT renda_domiciliar_quinto_mais_pobre,
-                  renda_domiciliar_segundo_quinto_mais_pobre,
-                  renda_domiciliar_terceiro_quinto_mais_pobre,
-                  renda_domiciliar_quarto_quinto_mais_pobre,
-                  renda_domiciliar_quinto_mais_rico
-                FROM info_regiao  WHERE fk_bairro = ?;`
     const values = [idBairro]
 
-     try {
-      return resultado = await database.execute(query,values)
-    } catch(error){
-      console.error("Erro ao localizar a informação", error.message)
-      throw error
+    try {
+        return resultado = await database.execute(query, values)
+    } catch (error) {
+        console.error("Erro ao localizar a informação", error.message)
+        throw error
     }
 }
 
 
-  async function getDensidadeMalhaUrbana(fkBairro) {
-    const areaHectares = `SELECT area_terreno_m2 FROM propriedades WHERE fk_bairro = ${fkBairro}` / 10_000
-    const populacaoUrbana = `SELECT populacao_total FROM info_regiao where fk_bairro = ${fkBairro}`
+async function getMediaByFifth(idBairro) {
+    const query = `SElECT renda_domiciliar_quinto_mais_pobre,
+                    renda_domiciliar_segundo_quinto,
+                    renda_domiciliar_terceiro_quinto,
+                    renda_domiciliar_quarto_quinto,
+                    renda_domiciliar_quinto_mais_rico
+                FROM info_regiao  WHERE fk_bairro = ?;`
+    const values = [idBairro]
 
-    // calculo para Densidade = populacaoUrbada / area (em hectares)
-    try{
-      await database.execute(areaHectares, populacaoUrbana)
-      const densidade = populacaoUrbana / areaHectares
-      return densidade;
-
-    } catch(error){
-      console.error("Houve um erro ao localizar os dados", error.message)
-      throw error
+    try {
+        return resultado = await database.execute(query, values)
+    } catch (error) {
+        console.error("Erro ao localizar a informação", error.message)
+        throw error
     }
-  }
+}
 
-  async function getEscolasRegiao(fkBairro) {
+
+async function getDensidadeMalhaUrbana(fkBairro) {
+    // calculo para Densidade = populacaoUrbada / area (em hectares)
+    try {
+        const areaRow = await database.execute(`SELECT SUM(area_terreno_m2) AS total_area FROM propriedades WHERE fk_bairro = ?`, [fkBairro])
+        const populacaoRow = await database.execute(`SELECT populacao_total FROM info_regiao where fk_bairro = ?`, [fkBairro])
+
+        const areaM2 = parseFloat((areaRow[0]?.total_area || 0))
+        const populacaototal = populacaoRow[0].populacao_total || 0
+
+        if (areaM2 == 0 || isNaN(areaM2)) return 0
+        const densidade = populacaototal / (areaM2 / 10_000) // area em hectares
+
+        const objDensidade = {valorDensidade: parseInt(densidade)}
+
+        return objDensidade
+
+    } catch (error) {
+        console.error("Houve um erro ao localizar os dados", error.message)
+        throw error
+    }
+}
+
+async function getEscolasRegiao(fkBairro) {
     const query = `SELECT * FROM educacao WHERE fk_bairro = ${fkBairro} `
-  }
+}
 
-  async function getPriceFluctuation(req, res) {
+async function getPriceFluctuation(req, res) {
     const query = `SELECT preco,data_precificao FROM precificao WHERE fk_bairro = ?;`
     const values = [req.params.id]
 
     try {
-      return resultado = await database.execute(query, values)
+        return resultado = await database.execute(query, values)
     } catch (error) {
-      console.error("Erro ao localizar a informação", error.message)
-      throw error
+        console.error("Erro ao localizar a informação", error.message)
+        throw error
     }
-  }
+}
 
 
 module.exports = {
-  //  getSecurityRegion,
-  //  getPopulationRegion,
-   getRegionType,
-   getMediaByFifth,
-   getDensidadeMalhaUrbana,
-   getPriceFluctuation,
-   getEscolasRegiao
+    //  getSecurityRegion,
+    //  getPopulationRegion,
+    getRegionType,
+    getMediaByFifth,
+    getDensidadeMalhaUrbana,
+    getPriceFluctuation,
+    getEscolasRegiao
 };
 

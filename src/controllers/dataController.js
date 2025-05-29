@@ -114,17 +114,16 @@ function getRegionType(req, res) {
 }
 
 function getDensidadeUrbana(req, res) {
-    const fkBairro = localStorage.getItem("FK_BAIRRO")
+    const fkBairro = 5 // dado mocado para testes
 
     if (fkBairro == undefined) {
         return res.status(400).send("fkBairro está undefined")
     }
-
-    dataModel.getDensidadeUrbana(fkBairro)
+    dataModel.getDensidadeMalhaUrbana(fkBairro)
         .then(
-            function (resultado) {
-                res.status(200).json(resultado)
-                console.log("Valor Densidade: " + resultado)
+            function (densidade) {
+                console.log("Valor Densidade: " + densidade.valorDensidade)
+                return res.status(201).json(densidade)
             }
         ).catch(
             function (erro) {
@@ -135,13 +134,13 @@ function getDensidadeUrbana(req, res) {
 }
 
 async function getEscolasRegiao(req, res) {
-    const fkBairro = localStorage.getItem("FK_BAIRRO")
+    const fkBairro = 1
 
     await dataModel.getEscolasRegiao(fkBairro)
         .then(
             function (resultado) {
-                res.status(200).send(resultado.length)
                 console.log("Qtd de escolas encontradas: " + resultado.length)
+                return res.status(200).send(resultado.length)
             }
         ).catch(
             function (erro) {
