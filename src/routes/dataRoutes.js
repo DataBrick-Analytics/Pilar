@@ -3,36 +3,32 @@ var router = express.Router();
 
 var dataController = require("../controllers/dataController");
 
-// router.post("/data", function (req, res) {
-//     dataController.getPopulationRegionController(req, res);
-// });
-
-// router.post("/data", function (req, res) {
-//     dataController.getPopulationRegionController(req, res);
-// });
-
+//KPIS
 router.get("/data/getRegionType/:id", function (req, res) {
     dataController.getRegionType(req, res);
 });
+
+router.get("/data/getUrbanMeshDensity/:id", function (req, res) {
+    dataController.getUrbanMeshDensity(req, res)
+})
+
+//AUXILIARES
+router.get("/data/getSchoolsRegion/:id", function (req, res) {
+    dataController.getSchoolsRegion(req, res)
+})
+
+router.get("/data/getHospitalsByRegion/:id", function (req, res) {
+    dataController.getHospitalsByRegion(req, res)
+})
+
+//GRAFICOS
+router.get("/data/getPriceFluctuation:/:id", function (req, res) {
+    dataController.getPriceFluctuation(req, res)
+})
 
 router.get("/data/getMediaByFifth/:id", function (req, res) {
     dataController.getMediaByFifth(req, res);
 });
 
-router.get("/data/getDensidadeUrbana", function (req, res) {
-    dataController.getDensidadeUrbana(req, res)
-})
-
-router.get("/data/getEscolasRegiao", function (req, res) {
-    dataController.getEscolasRegiao(req, res)
-})
-
-router.get("/data/getHospitaisRegiao", function (req, res) {
-    dataController.getHospitalRegiao(req, res)
-})
-
-router.get("/data/getPriceFluctuation:/id", function (req, res) {
-    dataController.getPriceFluctuation(req, res)
-})
 
 module.exports = router;

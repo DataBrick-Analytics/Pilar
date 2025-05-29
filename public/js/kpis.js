@@ -116,8 +116,8 @@ function catchKPI() {
 }
 
 
-async function getDensidadeMalhaUrbana() {
-    fetch("/data/getDensidadeUrbana", {
+async function getUrbanMeshDensity() {
+    fetch("/data/getUrbanDensity", {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
