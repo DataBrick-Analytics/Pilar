@@ -1,20 +1,16 @@
 var database = require("../database/config");
-const { get } = require("../routes/enterpriseRoutes");
 
 
 async function createEnterprise(enterprise) {
   const query = `
-  INSERT INTO empresas (nome, endereco, telefone, email, data_cadastro, senha)
-  VALUES (?, ?, ?, ?, ?, sha2(?, 256))
+  INSERT INTO empresas (nome,cnpj,data_criacao)
+  VALUES (?, ?, ?)
   `;
 
   const values = [
     enterprise.nome,
-    enterprise.endereco,
-    enterprise.telefone,
-    enterprise.email,
-    new Date(),
-    enterprise.senha
+    enterprise.cnpj,
+    new Date()
   ];
 
   try {
