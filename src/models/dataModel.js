@@ -26,8 +26,8 @@ var database = require("../database/config");
     async function getUrbanMeshDensity(fkBairro) {
         // calculo para Densidade = populacaoUrbada / area (em hectares)
         try {
-            const areaRow = await database.execute(`SELECT SUM(area_terreno_m2) AS total_area FROM propriedades WHERE fk_bairro = ?`, [fkBairro])
-            const populacaoRow = await database.execute(`SELECT populacao_total FROM info_regiao where fk_bairro = ?`, [fkBairro])
+            const areaRow = await database.execute(`SELECT SUM(area_terreno_m2) AS total_area FROM propriedades WHERE fk_bairros = ?`, [fkBairro])
+            const populacaoRow = await database.execute(`SELECT populacao_total FROM info_regiao where fk_bairros = ?`, [fkBairro])
 
             const areaM2 = parseFloat((areaRow[0]?.total_area || 0))
             const populacaototal = populacaoRow[0].populacao_total || 0
@@ -121,9 +121,9 @@ var database = require("../database/config");
     //GRAFICOS
     async function getMediaByFifth(idBairro) {
         const query = `SElECT renda_domiciliar_quinto_mais_pobre,
-			renda_domiciliar_segundo_quinto,
-			renda_domiciliar_terceiro_quinto,
-			renda_domiciliar_quarto_quinto,
+			renda_domiciliar_segundo_quinto_mais_pobre,
+			renda_domiciliar_terceiro_quinto_mais_pobre,
+			renda_domiciliar_quarto_quinto_mais_pobre,
 			renda_domiciliar_quinto_mais_rico
 			FROM info_regiao WHERE fk_bairro = ?;`
         const values = [idBairro]
@@ -148,6 +148,7 @@ var database = require("../database/config");
             throw error
         }
     }
+
 
 
     module.exports = {

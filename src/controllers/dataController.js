@@ -76,7 +76,7 @@ function getUrbanMeshDensity(req, res) {
                 }
             ).catch(
                 function (erro) {
-                    console.log("Houve um erro ao pegar o Preço m²")
+                    console.log("Houve um erro ao pegar a densidade urbana")
                     res.status(500).json(erro.sqlMessage)
                 }
             )

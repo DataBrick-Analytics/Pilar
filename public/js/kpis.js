@@ -1,5 +1,3 @@
-
-
 let securityData = []
 var securityDataSum = 0
 var populationRegion = 0
@@ -111,45 +109,36 @@ function catchKPI() {
         }
 
     }).catch(function (erro) {
-        console.log(erro); 
+        console.log(erro);
     });
 }
 
 
 async function getUrbanMeshDensity() {
-    fetch("/data/getUrbanDensity", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).then(
-        function(resposta){
-            if(resposta.ok){
-                resposta.json().then(json => {
-                    resposta = json;
-                    console.log("Voltei pra função original" + resposta.valorDensidade);
-                    kpimalhaurbana.innerText = `${resposta.valorDensidade}/ha`
-                });
-            } else {
-                console.log("Houve um erro durante a requisição")
+    // const fkBairro = 1;
+    // console.log("ID recebido:", fkBairro);
+    // if (!fkBairro == undefined || !fkBairro == null) {
+
+        fetch(`/data/getUrbanDensity/${fkBairro}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
             }
-        }
-    ).catch(function(erro){
-      console.error(erro)  
-    })
+        }).then(
+            function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        resposta = json;
+                        console.log("Voltei pra função original" + resposta.valorDensidade);
+                        kpimalhaurbana.innerText = `${resposta.valorDensidade}/ha`
+                    });
+                } else {
+                    console.log("Houve um erro durante a requisição")
+                }
+            }
+        ).catch(function (erro) {
+            console.error(erro)
+        })
+    
+
 }
-
-async function getEscolasRegiao() {
-    const qtdEscolas = fetch("/data/getEscolas", {method: "GET"})
-
-    if(qtdEscolas > 0){
-        kpiEscolas.innerhtml = qtdEscolas
-    }
-}
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  getDensidadeMalhaUrbana()
-  catchKPI()
-})
