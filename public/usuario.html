@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
     <div class="divPainel">
         <div class="divPainelAzul">
 
@@ -119,10 +118,22 @@
                     </section>
                 </article>
             </section>
-            <section class="update-button"><button onclick="updateProfile()"><img
+            <section class="update-button"><button onclick="changeModal()"><img
                         src="assets/icons-dash/CHART-ICON-SM.svg"> Atualizar</button></section>
         </div>
     </main>
+
+    <div class="lock hide">
+        <section class="modal-senha">
+            <div class="blue-box">
+                <a onclick="changeModal()"><img src="assets/icons-edit/close.png"></a>
+            </div>
+            <article class="confirmationInput">
+                <input id="password_modal" type="password" placeholder="Digite sua senha para confirmar">
+            </article>
+            <section class="confirmationButton"><button onclick="updateUserProfile()">Confirmar</button></section>
+        </section>
+    </div>
 
 </body>
 </html>

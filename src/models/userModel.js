@@ -140,7 +140,19 @@ async function searchUsersByEnterpriseId(idEnterprise) {
 
 async function searchUserById(idUser) {
     const query = `
-    SELECT * FROM usuarios WHERE id_usuario = ?
+    SELECT 
+        id_usuario,
+        nome,
+        email,
+        senha,
+        fk_empresa,
+        cpf,
+        DATE_FORMAT(data_nasc, '%Y-%m-%d') AS data_nasc,
+        funcao_empresa,
+        data_criacao,
+        data_edicao
+    FROM usuarios
+    WHERE id_usuario = ?
     `;
 
     try {
