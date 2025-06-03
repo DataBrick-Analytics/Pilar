@@ -71,6 +71,20 @@
         </div>
        
     </div>
+
+    <div class="resumo-final"> 
+        <div class="esquerda-resumo"></div>
+        <div class="direita-resumo">
+            <h2>Sua Escolha:</h2>
+            <ul>
+                <li><strong>Etapa 1:</strong> ${escolhas[0]}</li>
+                <li><strong>Etapa 2:</strong> ${escolhas[1]}</li>
+                <li><strong>Etapa 3:</strong> ${escolhas[2]}</li>
+            </ul>
+            <button id="btn-ver-resultados">Ver Resultados</button>
+        </div>
+        
+    </div>
     
     
 </body>
@@ -101,15 +115,15 @@
 
             if (etapa === 2) {
                 adicionarCards(pai, [
-                    { titulo: "Proximidade da Natureza", descricao: "Gosto de áreas com parques e muito verde.", icone: "tree.svg" },
+                    { titulo: "Proximidade ", descricao: "Gosto de áreas com parques e muito verde.", icone: "tree.svg" },
                     { titulo: "Boas escolas", descricao: "A educação das crianças é minha prioridade.", icone: "school.svg" },
-                    { titulo: "Transporte público", descricao: "Prefiro locais com acesso fácil a transporte.", icone: "bus.svg" }
+                    { titulo: "Transporte", descricao: "Prefiro locais com acesso fácil a transporte.", icone: "bus.svg" }
                 ]);
             } else if (etapa === 3) {
                 adicionarCards(pai, [
                     { titulo: "Vida noturna", descricao: "Gosto de sair à noite e ter opções por perto.", icone: "nightlife.svg" },
                     { titulo: "Comércio local", descricao: "Prefiro lugares com mercado, padaria, farmácia por perto.", icone: "store.svg" },
-                    { titulo: "Ambientes tranquilos", descricao: "Gosto de silêncio e pouca movimentação.", icone: "quiet.svg" }
+                    { titulo: "Ambientes", descricao: "Gosto de silêncio e pouca movimentação.", icone: "quiet.svg" }
                 ]);
             } else if (etapa === 4) {
                 mostrarResumo(pai);
@@ -162,7 +176,7 @@
 
 
         document.getElementById('btn-ver-resultados').addEventListener('click', () => {
-            window.location.href = "resultados.html";
+            window.location.href = "home.html";
         });
     }
 </script>

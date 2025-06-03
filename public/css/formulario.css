@@ -170,11 +170,27 @@
 
 .resumo-final{
     width: 100%;
-    height: 100%;
-    background-color: #e66c2f;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: row;
+}
+.esquerda-resumo{
+    width: 50%;
+    height: 100%;
+    background-image: url(../assets/icons-forms/teste.avif);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.direita-resumo{
+    width: 50%;
+    height: 100%;
+    background-color: var(--background);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
 }
 
 @keyframes slideOut {
