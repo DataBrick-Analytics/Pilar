@@ -100,7 +100,7 @@ async function editUser(user, idUser) {
 
     try {
         const result = await database.execute(query, values);
-        return result[0];
+        return result;
     } catch (error) {
         console.error('Database error:', error);
         throw error;
