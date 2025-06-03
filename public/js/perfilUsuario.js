@@ -9,7 +9,7 @@ async function setUserInfos() {
 }
 
 async function searchProfile() {
-    const userID = sessionStorage.USER_ID;
+    const userID = localStorage.USER_ID;
 
     try {
         const resposta = await fetch(`/user/${userID}`, {
@@ -55,7 +55,7 @@ async function updateUserProfile() {
     } else if (passwordModal == userNewPassword) {
         return alert("A nova senha é identica a antiga!")
     } else {
-        var userID = sessionStorage.USER_ID;
+        var userID = localStorage.USER_ID;
 
         if (userNewPassword == null || userNewPassword == "") {
             userNewPassword = userInfos.senha;
