@@ -164,10 +164,24 @@
     cursor: pointer;
     transition:  0.5s;
 }
+.button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30%;
+    width: 30%;
+    height: 5%;
+    background-color: lightgrey;
+    border-radius: 15px;
+    cursor: pointer;
+    transition:  0.5s;
+}
 .button-arrow:hover{
     background-color: var(--secondary);
 }
-
+.button:hover{
+   background-color: var(--secondary); 
+}
 .resumo-final{
     width: 100%;
     height: 100vh;
@@ -192,6 +206,13 @@
     align-items: center;
     flex-direction: column;
 }
+
+.descricao {
+    font-weight: var(--ExtraBold);
+    color: var(--secondary);
+    font-size: x-large;
+}
+
 
 @keyframes slideOut {
     from { transform: translateX(0); opacity: 1; }
