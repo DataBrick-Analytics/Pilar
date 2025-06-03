@@ -49,7 +49,7 @@
 }
 .titulo-regioes{
     color: var(--primary);
-    font-size: 30px;
+    font-size: 130%;
     font-weight: bold;
     width: 100%;
     height: 20%;
@@ -205,19 +205,23 @@
     border: 1px solid black;
 }
 .manual-logo{
-    font-size: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 100%;
     width: 95%;
-    height: 12%;
+    height: 15%;
 }
 .manual{
     width: 95%;
-    height: 20%;
+    height: 25%;
 }
 .pergunta{
-    font-size: 70%;
+    font-size: 100%;
     color: var(--primary);
 }
 .resposta{
     color: var(--accent);
-    font-size: 50%;
+    font-size: 80%;
 }

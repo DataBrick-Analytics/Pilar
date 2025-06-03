@@ -33,7 +33,7 @@
 
 
 
-            <div class="card-filtros-pai">
+            <div class="card-filtros-pai" id="cards-container">
                 <div class="card-filtro">
                     <div class="card-parte-cima">
                         <div class="card-icon icon1"></div>
@@ -41,7 +41,8 @@
                     </div>
                     <div class="card-parte-baixo">
                         <p class="p-margin">Prefiro viver em uma área mais segura, com baixos índices de violência</p>
-                        <div class="button-arrow"> <img src="assets/icons-forms/arrow-lg-white.svg" alt=""></div>
+                        <div class="button-arrow"> <data value="BaixaViolencia"></data> 
+                            <img src="assets/icons-forms/arrow-lg-white.svg" alt=""></div>
                     </div>
                 </div>
                 <div class="card-filtro">
@@ -51,7 +52,8 @@
                     </div>
                     <div class="card-parte-baixo">
                         <p class="p-margin">Gosto de regiões com boa estrutura urbana e tudo por perto.</p>
-                        <div class="button-arrow"> <img src="assets/icons-forms/arrow-lg-white.svg" alt=""></div>
+                        <div class="button-arrow"> <data value="MalhaUrbana"></data>
+                             <img src="assets/icons-forms/arrow-lg-white.svg" alt=""></div>
                     </div>
                 </div>
                 <div class="card-filtro">
@@ -61,7 +63,8 @@
                     </div>
                     <div class="card-parte-baixo">
                         <p class="p-margin">Meu foco é encontrar um bom custo-benefício no valor do m²</p>
-                        <div class="button-arrow"> <img src="assets/icons-forms/arrow-lg-white.svg" alt=""></div>
+                        <div class="button-arrow"> <data value="ValorM2"></data>
+                            <img src="assets/icons-forms/arrow-lg-white.svg" alt=""></div>
                     </div>
                 </div>
             </div>
@@ -72,3 +75,94 @@
     
 </body>
 </html>
+<script>
+    const botoes = document.querySelectorAll('.button-arrow');
+    var escolhas = [];
+    var etapa = 1;
+
+    document.querySelectorAll('.button-arrow').forEach(botao => {
+        botao.addEventListener('click', handleClick);
+    });
+
+    function handleClick(event) {
+        const botao = event.currentTarget;
+        const valorSelecionado = botao.getAttribute('data-value');
+        console.log(`Etapa ${etapa} - Escolheu:`, valorSelecionado);
+        escolhas.push(valorSelecionado);
+
+        const cards = document.querySelectorAll('.card-filtro');
+        cards.forEach(card => card.classList.add('saindo'));
+
+        setTimeout(() => {
+            const pai = document.querySelector('.card-filtros-pai');
+            pai.innerHTML = '';
+
+            etapa++;
+
+            if (etapa === 2) {
+                adicionarCards(pai, [
+                    { titulo: "Proximidade da Natureza", descricao: "Gosto de áreas com parques e muito verde.", icone: "tree.svg" },
+                    { titulo: "Boas escolas", descricao: "A educação das crianças é minha prioridade.", icone: "school.svg" },
+                    { titulo: "Transporte público", descricao: "Prefiro locais com acesso fácil a transporte.", icone: "bus.svg" }
+                ]);
+            } else if (etapa === 3) {
+                adicionarCards(pai, [
+                    { titulo: "Vida noturna", descricao: "Gosto de sair à noite e ter opções por perto.", icone: "nightlife.svg" },
+                    { titulo: "Comércio local", descricao: "Prefiro lugares com mercado, padaria, farmácia por perto.", icone: "store.svg" },
+                    { titulo: "Ambientes tranquilos", descricao: "Gosto de silêncio e pouca movimentação.", icone: "quiet.svg" }
+                ]);
+            } else if (etapa === 4) {
+                mostrarResumo(pai);
+            }
+        }, 600);
+    }
+
+    function adicionarCards(container, cards) {
+        cards.forEach(card => {
+            const novo = document.createElement('div');
+            novo.className = 'card-filtro entrando';
+            novo.innerHTML = `
+                <div class="card-parte-cima">
+                    <div class="card-icon" style="background-image: url(../assets/icons-dash/${card.icone}); background-repeat: no-repeat; background-position: center; background-size: 30px 30px;"></div>
+                    <div class="card-titulo"><p>${card.titulo}</p></div>
+                </div>
+                <div class="card-parte-baixo">
+                    <p class="p-margin">${card.descricao}</p>
+                    <div class="button-arrow" data-value="${card.titulo}">
+                        <img src="assets/icons-forms/arrow-lg-white.svg" alt="">
+                    </div>
+                </div>
+            `;
+            container.appendChild(novo);
+        });
+
+        // Reatribuir eventos aos novos botões
+        document.querySelectorAll('.button-arrow').forEach(botao => {
+            botao.addEventListener('click', handleClick);
+        });
+    }
+
+    function mostrarResumo(container) {
+        localStorage.setItem('escolhasUsuario', JSON.stringify(escolhas));
+
+        const resumo = document.createElement('div');
+        resumo.className = 'resumo-final';
+        resumo.innerHTML = `
+            <h2>Sua Escolha:</h2>
+            <ul>
+                <li><strong>Etapa 1:</strong> ${escolhas[0]}</li>
+                <li><strong>Etapa 2:</strong> ${escolhas[1]}</li>
+                <li><strong>Etapa 3:</strong> ${escolhas[2]}</li>
+            </ul>
+            <button id="btn-ver-resultados">Ver Resultados</button>
+        `;
+        container.appendChild(resumo);
+
+        
+
+
+        document.getElementById('btn-ver-resultados').addEventListener('click', () => {
+            window.location.href = "resultados.html";
+        });
+    }
+</script>
