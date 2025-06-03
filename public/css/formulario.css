@@ -167,14 +167,16 @@
 .button{
     display: flex;
     align-items: center;
+    color: var(--background);
+    border-radius: 5px;
+    background-color: var(--primary);
     justify-content: center;
-    margin-top: 30%;
-    width: 30%;
+    width: 20%;
     height: 5%;
-    background-color: lightgrey;
-    border-radius: 15px;
     cursor: pointer;
-    transition:  0.5s;
+    font-size: 0.875rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 .button-arrow:hover{
     background-color: var(--secondary);
@@ -193,9 +195,10 @@
 .esquerda-resumo{
     width: 50%;
     height: 100%;
-    background-image: url(../assets/icons-forms/teste.avif);
+    /* background-image: url(../assets/icons-forms/teste.avif); */
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: var(--primary);
 }
 .direita-resumo{
     width: 50%;
@@ -212,6 +215,15 @@
     color: var(--secondary);
     font-size: x-large;
 }
+.div-escolhas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 50%;
+    height: 30%;
+}
+
 
 
 @keyframes slideOut {
