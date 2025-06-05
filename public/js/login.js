@@ -38,7 +38,8 @@ function entrar() {
                         title: 'Bem vindo!',
                         text: json.message,
                         color: "#FFFFFF",
-                        background: "#2C3E50"
+                        background: "#2C3E50",
+                        confirmButtonColor: "#C45824"
                     }).then(() => {
                         window.location.href = "./dashboard.html";
                     });

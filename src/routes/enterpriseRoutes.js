@@ -8,11 +8,6 @@ router.post("/enterprise/cadastrar", function (req, res) {
     enterpriseController.createEnterpriseAndUser(req, res);
 });
 
-// SELECT
-router.post("/enterprise/autenticar", function (req, res) {
-    enterpriseController.autenticateEnterprise(req, res);
-})
-
 // UPDATE
 router.put("/enterprise/:id", function (req, res) {
     enterpriseController.editEnterprise(req, res);
@@ -24,7 +19,7 @@ router.delete("/enterprise/:id", function (req, res) {
 });
 
 // SELECT 
-router.get("/enterprise/employees", function(req,res){
+router.get("/enterprise/employees/:id", function(req,res){
     enterpriseController.getEnterpriseEmployees(req,res);
 })
 

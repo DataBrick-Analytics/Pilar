@@ -3,7 +3,7 @@ var database = require("../database/config");
 
 async function createEnterpriseAndUser(cadastro) {
   try {
-    const checkEnterprise = await database.execute(`SELECT id_empresa FROM empresas WHERE cnpj = ${cadastro.cnpj}`)
+    const checkEnterprise = await database.execute(`SELECT id_empresa FROM empresa WHERE cnpj = ${cadastro.cnpj}`)
 
     let cadastroEmpresa
     let cadastroUsuario
@@ -11,8 +11,8 @@ async function createEnterpriseAndUser(cadastro) {
     if (checkEnterprise.length == 0) {
       console.log("Empresa não cadastrada, será necessário cadastrar.")
       cadastroEmpresa = await database.execute(
-        `INSERT INTO empresas (nome,cnpj,data_criacao,date_edicao) VALUES (?, ?, ?, ?)`
-        , values = [cadastro.nomeEmpresa, cadastro.cnpj, new Date(), new Date()]
+        `INSERT INTO empresa (razao_social, nome_fantasia, cnpj, data_criacao, date_edicao) VALUES (?, ?, ?, ?,?)`
+        , values = [cadastro.razaoSocial, cadastro.nomeFantasia, cadastro.cnpj, new Date(), new Date()]
       );
     } else {
       console.log("Empresa já cadastrada, não será necessário cadastrar novamente.")
@@ -21,7 +21,7 @@ async function createEnterpriseAndUser(cadastro) {
     const idEmpresa = cadastroEmpresa.insertId
 
     cadastroUsuario = await database.execute(
-      `INSERT INTO usuarios (nome, email, senha, fk_empresa, cpf, data_nasc, funcao_empresa, data_criacao, data_edicao)
+      `INSERT INTO usuario (nome, email, senha, fk_empresa, cpf, data_nasc, funcao_empresa, data_criacao, data_edicao)
       VALUES (?, ?, SHA2(?, 256), ?, ?, ?, ?, ?, ?)`,
       values = [
         cadastro.nomeUsuario,
@@ -30,7 +30,7 @@ async function createEnterpriseAndUser(cadastro) {
         idEmpresa,
         cadastro.cpf,
         cadastro.dtNasc,
-        cadastro.funcao,
+        "Admin",
         new Date(),
         new Date()
       ])
@@ -43,27 +43,11 @@ async function createEnterpriseAndUser(cadastro) {
   }
 }
 
-async function autenticateEnterprise(enterprise) {
-  const query = `
-      SELECT id_empresa, nome, cnpj 
-        FROM empresas 
-      WHERE email = ? 
-  AND senha = SHA2(?, 256);  `
-  const values = [enterprise.email, enterprise.senha]
-
-  try {
-    return resultado = await database.execute(query, values)
-
-  } catch (error) {
-    console.error("Erro ao localizar a empresa", error.message)
-    throw error
-  }
-}
 
 async function editEnterprise(enterprise, idEnterprise) {
 
   const query = `
-  UPDATE empresas
+  UPDATE empresa
   SET nome = ?,
       endereco = ?,
       telefone = ?,
@@ -95,7 +79,7 @@ async function editEnterprise(enterprise, idEnterprise) {
 
 async function deleteEnterprise(idEnterprise) {
   console.log("ID para exclusão:", idEnterprise);
-  const query = `DELETE FROM empresas WHERE id_empresa  = ?`;
+  const query = `DELETE FROM empresa WHERE id_empresa  = ?`;
 
   try {
     const resultado = await database.execute(query, [idEnterprise]);
@@ -118,7 +102,7 @@ async function getEnterpriseEmployees(fkEmpresa) {
   console.log("Entrei no getEnterpriseEmployees()")
 
   try {
-    const query = `SELECT * FROM usuarios WHERE fk_empresa = ${fkEmpresa};`
+    const query = `SELECT * FROM usuario WHERE fk_empresa = ${fkEmpresa};`
     const resultado = await database.execute(query);
 
     if (resultado.length > 0) {
@@ -134,7 +118,6 @@ async function getEnterpriseEmployees(fkEmpresa) {
 
 module.exports = {
   createEnterpriseAndUser,
-  autenticateEnterprise,
   editEnterprise,
   deleteEnterprise,
   getEnterpriseEmployees

@@ -10,7 +10,7 @@ var database = require("../database/config");
             SUM(CASE WHEN uso_iptu IN (50, 51, 60, 61) THEN 1 ELSE 0 END) AS total_industrial,
             SUM(CASE WHEN uso_iptu IN (23, 24, 26, 62, 63) THEN 1 ELSE 0 END) AS total_garagens_depositos,
             SUM(CASE WHEN uso_iptu IN (22, 32, 42) THEN 1 ELSE 0 END) AS total_misto
-          FROM propriedades WHERE ?; `
+          FROM propriedade WHERE ?; `
 
         const values = [idBairro]
 
@@ -26,8 +26,8 @@ var database = require("../database/config");
     async function getUrbanMeshDensity(fkBairro) {
         // calculo para Densidade = populacaoUrbada / area (em hectares)
         try {
-            const areaRow = await database.execute(`SELECT SUM(area_terreno_m2) AS total_area FROM propriedades WHERE fk_bairros = ?`, [fkBairro])
-            const populacaoRow = await database.execute(`SELECT populacao_total FROM info_regiao where fk_bairros = ?`, [fkBairro])
+            const areaRow = await database.execute(`SELECT SUM(area_terreno_m2) AS total_area FROM propriedade WHERE fk_distrito = ?`, [fkBairro])
+            const populacaoRow = await database.execute(`SELECT populacao_total FROM info_regiao where fk_distrito = ?`, [fkBairro])
 
             const areaM2 = parseFloat((areaRow[0]?.total_area || 0))
             const populacaototal = populacaoRow[0].populacao_total || 0
@@ -46,7 +46,7 @@ var database = require("../database/config");
     }
 
     async function getPriceFluctuation(req, res) {
-        const query = `SELECT preco,data_precificao FROM precificao WHERE fk_bairro = ?;`
+        const query = `SELECT preco, data_precificao FROM precificao WHERE fk_bairro = ?;`
         const values = [req.params.id]
 
         try {

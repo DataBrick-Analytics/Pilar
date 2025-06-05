@@ -115,30 +115,28 @@ function catchKPI() {
 
 
 async function getUrbanMeshDensity() {
-    // const fkBairro = 1;
+    const fkBairro = 1;
     // console.log("ID recebido:", fkBairro);
     // if (!fkBairro == undefined || !fkBairro == null) {
 
-        fetch(`/data/getUrbanDensity/${fkBairro}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
+    fetch(`/data/getUrbanMeshDensity/${fkBairro}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(
+        function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    resposta = json;
+                    console.log("Voltei pra função original" + resposta.valorDensidade);
+                    kpimalhaurbana.innerText = `${resposta.valorDensidade}/ha`
+                });
+            } else {
+                console.log("Houve um erro durante a requisição")
             }
-        }).then(
-            function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(json => {
-                        resposta = json;
-                        console.log("Voltei pra função original" + resposta.valorDensidade);
-                        kpimalhaurbana.innerText = `${resposta.valorDensidade}/ha`
-                    });
-                } else {
-                    console.log("Houve um erro durante a requisição")
-                }
-            }
-        ).catch(function (erro) {
-            console.error(erro)
-        })
-    
-
+        }
+    ).catch(function (erro) {
+        console.error(erro)
+    })
 }

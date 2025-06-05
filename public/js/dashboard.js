@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set user name from session storage
     const userElement = document.getElementById('user');
     if (userElement) {
-        userElement.innerHTML = sessionStorage.NOME_EMPRESA;
+        userElement.innerHTML = localStorage.NOME_USUARIO || 'Usuário';
     }
 
     // Logout function

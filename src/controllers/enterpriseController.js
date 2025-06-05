@@ -8,7 +8,7 @@ function createEnterpriseAndUser(req, res) {
 
     console.log("Dados recebidos:", cadastro);
 
-    if (cadastro.nomeEmpresa == undefined || cadastro.nomeEmpresa == null) {
+    if (cadastro.nomeFantasia == undefined || cadastro.nomeFantasia == null) {
         return res.status(400).json({ error: "O nome da Empresa está undefined ou nula!" });
     }
     if (cadastro.cnpj == undefined || cadastro.cnpj == null) {
@@ -29,10 +29,9 @@ function createEnterpriseAndUser(req, res) {
     if (cadastro.dtNasc == undefined || cadastro.dtNasc == null) {
         return res.status(400).json({ error: "dtNasc está undefined ou nula!" });
     }
-    if (cadastro.funcao == undefined || cadastro.funcao == null) {
+    if (cadastro.razaoSocial == undefined || cadastro.razaoSocial == null) {
         return res.status(400).json({ error: "Função está undefined ou nula!" });
     }
-    console.log(cadastro.dtNasc)
     
     enterpriseModel.createEnterpriseAndUser(cadastro)
         .then(function (resultado) {
@@ -129,7 +128,7 @@ function deleteEnterprise(req, res) {
 
 async function getEnterpriseEmployees(req, res) {
     console.log("Acessando controller")
-    // const fkEmpresa = req,params.id
+    const fkEmpresa = req.params.id
     
     try {
         const allEmployees = await enterpriseModel.getEnterpriseEmployees(fkEmpresa)

@@ -37,13 +37,40 @@
 
       <div class="leftSection">
         <div class="field">
-          <label for="nome">Nome da Empresa:</label>
-          <input type="text" placeholder="Digite o nome da empresa" id="nomeEmpresa_input">
+          <label for="nome">Nome Fantasia:</label>
+          <input type="text" placeholder="Digite o nome fantasia da empresa" id="nomeFantasia_input">
+        </div>
+        <div class="field">
+          <label for="cnpj">CNPJ:</label>
+          <input type="number" placeholder="Digite o CNPJ da empresa" id="cnpj_input">
+        </div>
+
+        <div class="field">
+          <label for="cidade">Razão Social  :</label>
+          <input type="text" placeholder="Razão social da empresa" id="razao_social_input">
+        </div>
+
+        <div class="field">
+          <div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between;">
+            <label for="senha">Senha: </label>
+            <img src="assets/services/icon - showPasswd.svg" id="senhaIcon">
+          </div>
+          <input type="password" placeholder="Digite sua senha" id="senha_input">
         </div>
         
+
+      </div>
+
+
+      <div class="rightSection">
         <div class="field">
           <label for="telefone">Nome Usuário:</label>
           <input type="text" placeholder="Digite seu nome" id="nome_usuario_input">
+        </div>
+
+        <div class="field">
+          <label for="cep">CPF:</label>
+          <input type="number" placeholder="Digite seu CPF" id="cpf_input">
         </div>
 
         <div class="field">
@@ -56,41 +83,6 @@
           <input type="date" id="dtNasc_input" style="color: rgb(109, 109, 109);">
         </div>
 
-        <!-- <div class="field">
-          <label for="bairro">Bairro:</label>
-          <input type="text" placeholder="Campestre" id="bairro_input">
-        </div> -->
-      </div>
-
-
-      <div class="rightSection">
-        <div class="field">
-          <label for="cnpj">CNPJ:</label>
-          <input type="number" placeholder="Digite o CNPJ da empresa" id="cnpj_input">
-        </div>
-
-        <div class="field">
-          <label for="cep">CPF:</label>
-          <input type="number" placeholder="Digite seu CPF" id="cpf_input">
-        </div>
-        
-        <div class="field">
-          <div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between;">
-            <label for="senha">Senha: </label>
-            <img src="assets/services/icon - showPasswd.svg" id="senhaIcon">
-          </div>
-          <input type="password" placeholder="Digite sua senha" id="senha_input">
-        </div>
-        
-        <div class="field">
-          <label for="cidade">Função na empresa:</label>
-          <input type="text" placeholder="Coloque sua função dentro da empresa" id="funcao_input">
-        </div>
-
-        <!-- <div class="field">
-          <label for="numero">Número:</label>
-          <input type="number" placeholder="1234" id="numero_input">
-        </div> -->
       </div>
 
     </form>
