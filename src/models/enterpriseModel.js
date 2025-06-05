@@ -1,26 +1,41 @@
 var database = require("../database/config");
-const { get } = require("../routes/enterpriseRoutes");
 
 
-async function createEnterprise(enterprise) {
-  const query = `
-  INSERT INTO empresas (nome, endereco, telefone, email, data_cadastro, senha)
-  VALUES (?, ?, ?, ?, ?, sha2(?, 256))
-  `;
-
-  const values = [
-    enterprise.nome,
-    enterprise.endereco,
-    enterprise.telefone,
-    enterprise.email,
-    new Date(),
-    enterprise.senha
-  ];
-
+async function createEnterpriseAndUser(cadastro) {
   try {
-    const resultado = await database.execute(query, values);
-    console.log('Empresa inserida com sucesso:', resultado);
-    return resultado;
+    const checkEnterprise = await database.execute(`SELECT id_empresa FROM empresas WHERE cnpj = ${cadastro.cnpj}`)
+
+    let cadastroEmpresa
+    let cadastroUsuario
+
+    if (checkEnterprise.length == 0) {
+      console.log("Empresa não cadastrada, será necessário cadastrar.")
+      cadastroEmpresa = await database.execute(
+        `INSERT INTO empresas (nome,cnpj,data_criacao,date_edicao) VALUES (?, ?, ?, ?)`
+        , values = [cadastro.nomeEmpresa, cadastro.cnpj, new Date(), new Date()]
+      );
+    } else {
+      console.log("Empresa já cadastrada, não será necessário cadastrar novamente.")
+      return
+    }
+    const idEmpresa = cadastroEmpresa.insertId
+
+    cadastroUsuario = await database.execute(
+      `INSERT INTO usuarios (nome, email, senha, fk_empresa, cpf, data_nasc, funcao_empresa, data_criacao, data_edicao)
+      VALUES (?, ?, SHA2(?, 256), ?, ?, ?, ?, ?, ?)`,
+      values = [
+        cadastro.nomeUsuario,
+        cadastro.email,
+        cadastro.senha,
+        idEmpresa,
+        cadastro.cpf,
+        cadastro.dtNasc,
+        cadastro.funcao,
+        new Date(),
+        new Date()
+      ])
+
+    return "Usuario Criado com sucesso";
 
   } catch (error) {
     console.error('Erro ao inserir empresa:', error.message);
@@ -30,7 +45,7 @@ async function createEnterprise(enterprise) {
 
 async function autenticateEnterprise(enterprise) {
   const query = `
-      SELECT id_empresa, nome, endereco, telefone, email 
+      SELECT id_empresa, nome, cnpj 
         FROM empresas 
       WHERE email = ? 
   AND senha = SHA2(?, 256);  `
@@ -102,15 +117,15 @@ async function deleteEnterprise(idEnterprise) {
 async function getEnterpriseEmployees(fkEmpresa) {
   console.log("Entrei no getEnterpriseEmployees()")
 
-  try{
+  try {
     const query = `SELECT * FROM usuarios WHERE fk_empresa = ${fkEmpresa};`
     const resultado = await database.execute(query);
-    
+
     if (resultado.length > 0) {
       console.log("SELECT no banco feito")
       return resultado;
     }
-  } catch (error){
+  } catch (error) {
     console.error("Erro ao selecionar funcionarios", error.message)
     throw error
   }
@@ -118,7 +133,7 @@ async function getEnterpriseEmployees(fkEmpresa) {
 
 
 module.exports = {
-  createEnterprise,
+  createEnterpriseAndUser,
   autenticateEnterprise,
   editEnterprise,
   deleteEnterprise,

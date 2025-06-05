@@ -2,28 +2,24 @@ function cadastrar() {
   //Recupere o valor da nova input pelo nome do id
   // Agora vá para o método fetch logo abaixo
   var nomeEmpresaVar = nomeEmpresa_input.value;
-  var emailVar = email_input.value;
-  var telefoneVar = telefone_input.value;
-  var estadoVar = estado_input.value;
-  var bairroVar = bairro_input.value;
   var cnpjVar = Number(cnpj_input.value);
+  var nomeUsuarioVar = nome_usuario_input.value;
+  var cpfVar = cpf_input.value;
+  var emailVar = email_input.value;
   var senhaVar = senha_input.value;
-  var cepVar = Number(cep_input.value);
-  var cidadeVar = cidade_input.value;
-  var numeroVar = Number(numero_input.value);
+  var dtNascVar = dtNasc_input.value;
+  var funcaoVar = funcao_input.value;
 
   // Verificando se há algum campo em branco
   if (
     nomeEmpresaVar == "" ||
-    emailVar == "" ||
-    telefoneVar == "" ||
-    estadoVar == "" ||
-    bairroVar == "" ||
     cnpjVar == "" ||
+    nomeUsuarioVar == "" ||
+    cpfVar == "" ||
+    emailVar == "" ||
     senhaVar == "" ||
-    cepVar == "" ||
-    cidadeVar == "" ||
-    numeroVar == ""
+    dtNascVar == "" ||
+    funcaoVar == "" 
   ) {
     console.log("Erro na hora do Cadastro")
 
@@ -46,6 +42,7 @@ function cadastrar() {
       color: "#FFFFFF",
       background: "#2C3E50"
     })
+    return 
   }
   // Validação do Email
   if (!emailVar.includes('@gmail' || '@hotmail' || '@outlook') || !emailVar.includes('.com')) {
@@ -59,21 +56,8 @@ function cadastrar() {
     return
   }
 
-  // Validação do telefone
-  const telefoneValidado = /^[-()0-9\s]+$/.test(telefoneVar)
-  if (!telefoneValidado || telefoneVar.length < 11) {
-    Swal.fire({
-      icon: "error",
-      title: 'Telefone Incorreto',
-      text: 'Insira um telefone válido',
-      color: "#FFFFFF",
-      background: "#2C3E50"
-    })
-    return
-  }
-
   // Validação do Estado
-  if (estadoVar.length < 2) {
+  if (dtNascVar.length < 2) {
     Swal.fire({
       icon: "error",
       title: 'Estado Incorreto',
@@ -85,7 +69,7 @@ function cadastrar() {
   }
 
   // Validação do bairro
-  if (bairroVar.length < 2) {
+  if (funcaoVar.length < 2) {
     Swal.fire({
       icon: "error",
       title: 'Bairro Incorreto',
@@ -109,7 +93,7 @@ function cadastrar() {
   }
 
   // Validação do CEP
-  if (cepVar.length < 8 || cepVar.length > 8) {
+  if (nomeUsuarioVar.length < 1) {
     Swal.fire({
       icon: "error",
       title: 'CEP Incorreto',
@@ -119,19 +103,6 @@ function cadastrar() {
     })
     return
   }
-
-  if (cidadeVar.length < 2) {
-    Swal.fire({
-      icon: "error",
-      title: 'Cidade Incorreta',
-      text: 'Insira uma cidade válida',
-      color: "#FFFFFF",
-      background: "#2C3E50"
-    })
-    return
-  }
-
-  var enderecoCompletoVar = cidadeVar + ' - ' + bairroVar + ' - ' + numeroVar + ' - ' + estadoVar + ' - ' + cepVar
 
   console.log("Informações corretas")
 
@@ -144,12 +115,14 @@ function cadastrar() {
     body: JSON.stringify({
       // crie um atributo que recebe o valor recuperado aqui
       // Agora vá para o arquivo routes/usuario.js
-      nome: nomeEmpresaVar,
-      email: emailVar,
-      telefone: telefoneVar,
-      endereco: enderecoCompletoVar,
+      nomeEmpresa: nomeEmpresaVar,
       cnpj: cnpjVar,
+      nomeUsuario: nomeUsuarioVar,
+      cpf: cpfVar,
+      email: emailVar,
       senha: senhaVar,
+      dtNasc: dtNascVar,
+      funcao: funcaoVar
     }),
   })
     .then(function (resposta) {

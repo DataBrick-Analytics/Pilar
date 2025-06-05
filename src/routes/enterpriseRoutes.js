@@ -5,7 +5,7 @@ var enterpriseController = require("../controllers/enterpriseController");
 
 // INSERT
 router.post("/enterprise/cadastrar", function (req, res) {
-    enterpriseController.createEnterprise(req, res);
+    enterpriseController.createEnterpriseAndUser(req, res);
 });
 
 // SELECT
