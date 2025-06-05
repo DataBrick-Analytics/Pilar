@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/usuario.css">
+    <link rel="stylesheet" href="css/perfil.css">
     <link rel="stylesheet" href="css/Style.css">
     <title>Databrick - Empresa</title>
 </head>
@@ -88,32 +88,42 @@
                 <article class="box">
                     <section class="division">
                         <div>
-                            <h3>Nome</h3>
-                            <input id="user_name" type="text" placeholder="Insira seu nome">
+                            <h3>Nome Fantasia</h3>
+                            <input id="fantasy_name" type="text" placeholder="Insira seu nome fantasia">
                         </div>
                         <div>
-                            <h3>Email</h3>
-                            <input id="user_email" type="text" placeholder="Insira seu email">
-                        </div>
-                    </section>
-                    <section class="division">
-                        <div>
-                            <h3>CPF</h3>
-                            <input id="user_cpf" type="number" placeholder="Insira seu CPF" maxlength="11">
-                        </div>
-                        <div>
-                            <h3>Data de nascimento</h3>
-                            <input id="user_birthday" type="text" placeholder="Insira sua data de nascimento">
+                            <h3>Razao Social</h3>
+                            <input id="social_reason" type="text" placeholder="Insira sua razao social">
                         </div>
                     </section>
                     <section class="division">
                         <div>
-                            <h3>Senha</h3>
-                            <input id="user_new_password" type="password" placeholder="Insira sua senha">
+                            <h3>Rua</h3>
+                            <input id="street" type="text" placeholder="Insira seu CPF">
                         </div>
                         <div>
-                            <h3>Confirmar senha</h3>
-                            <input id="confirm_new_password" type="password" placeholder="Insira sua novamente">
+                            <h3>Bairro</h3>
+                            <input id="neighborhood" type="text" placeholder="Insira sua data de nascimento">
+                        </div>
+                    </section>
+                    <section class="division">
+                        <div>
+                            <h3>CEP</h3>
+                            <input id="cep_code" type="text" placeholder="Insira sua senha">
+                        </div>
+                        <div>
+                            <h3>Cidade</h3>
+                            <input id="city" type="text" placeholder="Insira sua novamente">
+                        </div>
+                    </section>
+                    <section class="division">
+                        <div>
+                            <h3>Estado</h3>
+                            <input id="state" type="text" placeholder="Insira sua senha">
+                        </div>
+                        <div>
+                            <h3>UF</h3>
+                            <input id="state_code" type="text" placeholder="Insira sua novamente">
                         </div>
                     </section>
                 </article>
@@ -131,7 +141,7 @@
             <article class="confirmationInput">
                 <input id="password_modal" type="password" placeholder="Digite sua senha para confirmar">
             </article>
-            <section class="confirmationButton"><button onclick="updateUserProfile()">Confirmar</button></section>
+            <section class="confirmationButton"><button onclick="updateEnterprise()">Confirmar</button></section>
         </section>
     </div>
 
@@ -139,3 +149,4 @@
 </html>
 
 <script src="js/perfilEmpresa.js" onload="isManagerUser()"></script>
+<script src="js/perfilEmpresa.js" onload="setEnterpriseInfos()"></script>

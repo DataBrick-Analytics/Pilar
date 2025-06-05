@@ -94,4 +94,5 @@ async function updateUserProfile() {
 function changeModal() {
     const modal = document.querySelector(".lock");
     modal.classList.toggle('hide');
+    password_modal.value = "";
 }

@@ -32,4 +32,8 @@ router.get("/enterprise/:id", function(req,res){
     enterpriseController.getEnterpriseById(req,res);
 })
 
+router.get("/enterprise/address/:id", function(req,res) {
+    enterpriseController.getEnterpriseAddress(req,res);
+})
+
 module.exports = router;
