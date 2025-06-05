@@ -17,7 +17,7 @@ async function authenticateUser(email, senha) {
         funcao_empresa,
         fk_empresa
     FROM usuarios 
-    WHERE email = ? AND senha = ?
+    WHERE email = ? AND senha = sha2(?, 256)
     `;
 
     try {
@@ -57,13 +57,15 @@ async function createUser(user) {
     const query = `
     INSERT INTO usuarios (nome, email, senha, fk_empresa, funcao_empresa, data_cadastro)
     VALUES (?, ?, ?, ?, ?, NOW())
-    `;
+    `;  
 
     const values = [
-        user.nome,
+        user.nomeUsuario,
         user.email,
         user.senha,
-        user.fk_empresa, 
+        user.fk_empresa,
+        user.cpf,
+        user.dtNasc,
         user.funcao_empresa
     ];
 

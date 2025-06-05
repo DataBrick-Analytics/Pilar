@@ -30,8 +30,8 @@
   </div>
 
   <div class="container">
-    <img src="assets/logo/BrickData.svg" alt="">
-    <h4>Cadastre uma conta!</h4>
+    <img src="assets/logo/BrickData.svg" alt="" style="scale: 1.8;">
+    <h4 style="margin: 0;">Cadastre uma conta!</h4>
 
     <form action="" class="formulario">
 
@@ -40,6 +40,11 @@
           <label for="nome">Nome da Empresa:</label>
           <input type="text" placeholder="Digite o nome da empresa" id="nomeEmpresa_input">
         </div>
+        
+        <div class="field">
+          <label for="telefone">Nome Usuário:</label>
+          <input type="text" placeholder="Digite seu nome" id="nome_usuario_input">
+        </div>
 
         <div class="field">
           <label for="email">E-mail:</label>
@@ -47,19 +52,14 @@
         </div>
 
         <div class="field">
-          <label for="telefone">Telefone:</label>
-          <input type="tel" placeholder="(xx) xxxxx-xxxx" id="telefone_input">
+          <label for="estado">Data de Nascimento:</label>
+          <input type="date" id="dtNasc_input" style="color: rgb(109, 109, 109);">
         </div>
 
-        <div class="field">
-          <label for="estado">Estado:</label>
-          <input type="text" placeholder="São Paulo" id="estado_input">
-        </div>
-
-        <div class="field">
+        <!-- <div class="field">
           <label for="bairro">Bairro:</label>
           <input type="text" placeholder="Campestre" id="bairro_input">
-        </div>
+        </div> -->
       </div>
 
 
@@ -70,27 +70,27 @@
         </div>
 
         <div class="field">
+          <label for="cep">CPF:</label>
+          <input type="number" placeholder="Digite seu CPF" id="cpf_input">
+        </div>
+        
+        <div class="field">
           <div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between;">
             <label for="senha">Senha: </label>
             <img src="assets/services/icon - showPasswd.svg" id="senhaIcon">
           </div>
           <input type="password" placeholder="Digite sua senha" id="senha_input">
         </div>
-
+        
         <div class="field">
-          <label for="cep">CEP:</label>
-          <input type="number" placeholder="98765-432" id="cep_input">
+          <label for="cidade">Função na empresa:</label>
+          <input type="text" placeholder="Coloque sua função dentro da empresa" id="funcao_input">
         </div>
 
-        <div class="field">
-          <label for="cidade">Cidade:</label>
-          <input type="text" placeholder="Santo André" id="cidade_input">
-        </div>
-
-        <div class="field">
+        <!-- <div class="field">
           <label for="numero">Número:</label>
           <input type="number" placeholder="1234" id="numero_input">
-        </div>
+        </div> -->
       </div>
 
     </form>
