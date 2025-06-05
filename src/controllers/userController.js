@@ -177,7 +177,8 @@ function searchUserById(req, res) {
                     email: infosUsuario[0].email,
                     cpf: infosUsuario[0].cpf,
                     data_nasc: infosUsuario[0].data_nasc,
-                    senha: infosUsuario[0].senha
+                    senha: infosUsuario[0].senha,
+                    funcao_empresa: infosUsuario[0].funcao_empresa
                 })
             }
         })

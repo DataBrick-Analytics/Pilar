@@ -28,4 +28,8 @@ router.get("/enterprise/employees", function(req,res){
     enterpriseController.getEnterpriseEmployees(req,res);
 })
 
+router.get("/enterprise/:id", function(req,res){
+    enterpriseController.getEnterpriseById(req,res);
+})
+
 module.exports = router;

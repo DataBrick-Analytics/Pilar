@@ -116,11 +116,26 @@ async function getEnterpriseEmployees(fkEmpresa) {
   }
 }
 
+async function getEnterpriseById(idEnterprise) {
+  try{
+    const query = `SELECT * FROM empresas WHERE id_empresa = ${fkEmpresa};`
+    const resultado = await database.execute(query);
+    
+    if (resultado.length > 0) {
+      return resultado;
+    }
+  } catch (error) {
+    console.error("Erro ao buscar pela empresa ", error.message)
+    throw error
+  }
+}
+
 
 module.exports = {
   createEnterprise,
   autenticateEnterprise,
   editEnterprise,
   deleteEnterprise,
-  getEnterpriseEmployees
+  getEnterpriseEmployees,
+  getEnterpriseById
 }

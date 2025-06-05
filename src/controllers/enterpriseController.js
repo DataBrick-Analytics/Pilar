@@ -133,9 +133,23 @@ async function getEnterpriseEmployees(req, res) {
     }
 }
 
+async function getEnterpriseById(req, res) {
+    const idEnterprise = req.params.id;
+
+    try {
+        const enterpriseData = await enterpriseModel.getEnterpriseById(idEnterprise);
+        return res.status(200).json(enterpriseData);
+    } catch (error) {
+        console.error(error);
+        console.error(`Houve um erro ao buscar pela empresa do ID ${idEnterprise}`);
+        return res.status(500).json(erro.sqlMessage);
+    }
+}
+
 module.exports = {
     createEnterprise,
     editEnterprise,
     deleteEnterprise,
-    getEnterpriseEmployees
+    getEnterpriseEmployees,
+    getEnterpriseById
 };
