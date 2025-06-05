@@ -129,7 +129,7 @@ function deleteEnterprise(req, res) {
 
 async function getEnterpriseEmployees(req, res) {
     console.log("Acessando controller")
-    const fkEmpresa = localStorage.getItem('EMPRESA_ID')
+    // const fkEmpresa = req,params.id
     
     try {
         const allEmployees = await enterpriseModel.getEnterpriseEmployees(fkEmpresa)

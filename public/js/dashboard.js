@@ -1,5 +1,3 @@
-
-
 const dataAgora = new Date();
 const formatado = dataAgora.toLocaleString("pt-BR");
 

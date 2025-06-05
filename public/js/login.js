@@ -29,6 +29,9 @@ function entrar() {
                 if (json.usuario && json.usuario.id) {
                     localStorage.setItem('USER_ID', json.usuario.id);
                     localStorage.setItem('EMPRESA_ID', json.usuario.fk_empresa);
+                    localStorage.setItem('EMAIL_USUARIO', json.usuario.email);
+                    localStorage.setItem('NOME_USUARIO', json.usuario.nome);
+                    
 
                     Swal.fire({
                         icon: 'success',
