@@ -92,8 +92,7 @@ function catchKPI() {
                     kpitipo.innerhtml = "Residencial"
                     kpitipovalor.innerhtml = `${residencialBuildings}%`
 
-                }
-                else {
+                } else {
                     kpitipo.innerhtml = "Comercial"
                     kpitipovalor.innerhtml = `${comercialBuildings}%`
 
@@ -115,7 +114,7 @@ function catchKPI() {
 
 
 async function getUrbanMeshDensity() {
-    const fkBairro = 1;
+    const fkBairro = 10;
     // console.log("ID recebido:", fkBairro);
     // if (!fkBairro == undefined || !fkBairro == null) {
 
@@ -140,3 +139,30 @@ async function getUrbanMeshDensity() {
         console.error(erro)
     })
 }
+
+async function getHospitalsByRegion(fkBairro = 10) {
+    const kpiHospitais = document.getElementById("kpiHospitais")
+    try {
+        const resposta = await fetch(`/data/getHospitalsByRegion/${fkBairro}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        if (resposta.ok) {
+            const dados = await resposta.json();
+            console.log("Dados recebidos:", dados);
+            if (dados && dados.total_pontos_saude !== undefined) {
+                kpiHospitais.innerText = dados.total_pontos_saude;
+            } else {
+                kpiHospitais.innerText = "0";
+            }
+        } else {
+            throw new Error("Erro ao buscar dados dos hospitais");
+        }
+    } catch (erro) {
+        console.error("Erro:", erro);
+        kpiHospitais.innerText = "Erro ao carregar dados";
+    }
+}
+

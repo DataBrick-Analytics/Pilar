@@ -154,14 +154,14 @@ function getHospitalsByRegion(req, res) {
     // const fkBairro = localStorage.getItem("FK_BAIRRO")
     console.log("ID recebido:", fkBairro);
 
-    if (fkBairro == undefined) {
+    if (fkBairro === undefined) {
         return res.sendStatus(400).send("fkBairro está undefined");
     }
 
     dataModel.getHospitalsByRegion(fkBairro)
         .then(function (resultado) {
             console.log("Qtd de hospitais encontradas: " + resultado.length);
-            return res.sendStatus(200).send(resultado.length);
+            return res.status(200).json(resultado[0]);
         })
         .catch(function (erro) {
             console.log("Houve um erro ao pegar os hospitais");
