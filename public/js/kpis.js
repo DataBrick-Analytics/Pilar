@@ -5,6 +5,14 @@ var comercialBuildings = 0;
 var residencialBuildings = 0;
 var totalBuildings = 0;
 
+document.addEventListener('DOMContentLoaded', function () {
+    getHospitalsByRegion();
+    getSchoolsByRegion();
+    getUrbanMeshDensity();
+    getPriceSquareMeter()
+    catchKPI()
+})
+
 // // fetch("/data/getPopulationRegion", {
 // //     method: "POST",
 // //     headers: {
@@ -140,8 +148,9 @@ async function getUrbanMeshDensity() {
     })
 }
 
-async function getHospitalsByRegion(fkBairro = 10) {
+async function getHospitalsByRegion() {
     const kpiHospitais = document.getElementById("kpiHospitais")
+    const fkBairro = 10
     try {
         const resposta = await fetch(`/data/getHospitalsByRegion/${fkBairro}`, {
             method: "GET",
@@ -163,6 +172,64 @@ async function getHospitalsByRegion(fkBairro = 10) {
     } catch (erro) {
         console.error("Erro:", erro);
         kpiHospitais.innerText = "Erro ao carregar dados";
+    }
+}
+
+async function getSchoolsByRegion() {
+    const kpiEscolas = document.getElementById("kpiEscolas")
+    const fkBairro = 10
+    try {
+        const resposta = await fetch(`/data/getSchoolsRegion/${fkBairro}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        if (resposta.ok) {
+            const dados = await resposta.json()
+            console.log("Dados recebidos: " + dados)
+
+            if (dados && dados.total_escolas !== undefined) {
+                kpiEscolas.innerText = dados.total_escolas;
+            } else {
+                kpiEscolas.innerText = "0";
+            }
+        } else {
+            throw new Error("Erro ao buscar dados das escolas");
+        }
+    }catch (erro) {
+        console.error("Erro:", erro);
+        kpiEscolas.innerText = "Erro ao carregar dados";
+    }
+}
+
+async function getPriceSquareMeter(){
+    const kpiValorMetro = document.getElementById("kpivalor")
+    const fkBairro = 10
+    kpiValorMetro.innerText=''
+
+    try {
+        const resposta = await fetch(`/data/getPriceSquareMeter/${fkBairro}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        if(resposta.ok){
+            const dados = await resposta.json()
+            console.log("Dados recebidos: " + dados)
+
+            if(dados[0] && dados[0].preco !== undefined){
+                kpiValorMetro.innerText = "R$" + dados[0].preco
+            } else {
+                kpiValorMetro.innerText = "0";
+            }
+        } else {
+            throw new Error("Erro ao buscar dados das escolas");
+        }
+    } catch (erro) {
+        console.error("Erro:", erro);
+        kpiValorMetro.innerText = "Erro ao carregar dados";
     }
 }
 

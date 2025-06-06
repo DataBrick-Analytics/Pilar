@@ -115,7 +115,7 @@ function getPriceFluctuation(req, res) {
     // const fkBairro = localStorage.getItem("FK_BAIRRO")
     console.log("ID recebido:", fkBairro);
 
-    if (fkBairro == undefined || fkBairro == null) {
+    if (fkBairro === undefined || fkBairro == null) {
         return res.status(400).json({
             error: "O id está undefined ou nulo!"
         });
@@ -123,7 +123,9 @@ function getPriceFluctuation(req, res) {
 
     dataModel.getPriceFluctuation(fkBairro)
         .then(function (resultado) {
-            res.json(resultado);
+            return res.status(200).json({
+                preco: resultado[0].preco
+            });
         })
         .catch(function (erro) {
             console.log(erro);
@@ -138,27 +140,33 @@ async function getSchoolsRegion(req, res) {
     // const fkBairro = localStorage.getItem("FK_BAIRRO")
     console.log("ID recebido:", fkBairro);
 
+    if(fkBairro === undefined){
+        return res.status(400).send("fkbairro está undefined")
+    }
+
     await dataModel.getSchoolsRegion(fkBairro)
         .then(function (resultado) {
-            res.sendStatus(200).send(resultado.length);
             console.log("Qtd de escolas encontradas: " + resultado.length);
+            return res.status(200).json({
+                total_escolas: resultado.length
+            });
         })
         .catch(function (erro) {
             console.log("Houve um erro ao pegar as escolas");
-            res.sendStatus(500).json(erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
         });
 }
 
-function getHospitalsByRegion(req, res) {
+async function getHospitalsByRegion(req, res) {
     const fkBairro = req.params.id;
     // const fkBairro = localStorage.getItem("FK_BAIRRO")
     console.log("ID recebido:", fkBairro);
 
     if (fkBairro === undefined) {
-        return res.sendStatus(400).send("fkBairro está undefined");
+        return res.status(400).send("fkBairro está undefined");
     }
 
-    dataModel.getHospitalsByRegion(fkBairro)
+    await dataModel.getHospitalsByRegion(fkBairro)
         .then(function (resultado) {
             console.log("Qtd de hospitais encontradas: " + resultado.length);
             return res.status(200).json(resultado[0]);

@@ -158,13 +158,17 @@ async function getPriceFluctuation(fkBairro) {
 // AUXILIARES
 async function getSchoolsRegion(fkBairro) {
     const query = `
-        SELECT * 
-        FROM educacao 
-        WHERE fk_distrito = ?`;
+        SELECT
+            fk_distrito,
+            COUNT(*) as total_escolas
+        FROM educacao
+        WHERE fk_distrito = ?
+        GROUP BY fk_distrito;
+    `;
     const values = [fkBairro];
 
     try {
-        return resultado = await database.execute(query, values);
+        return await database.execute(query, values)
     } catch (error) {
         console.error("Erro ao localizar a informação", error.message);
         throw error;
