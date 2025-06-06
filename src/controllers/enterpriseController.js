@@ -1,10 +1,9 @@
 
 var enterpriseModel = require("../models/enterpriseModel");
-const { saveUserActivity } = require('../externServices/userActivityService');
 
 
 function createEnterpriseAndUser(req, res) {
-    var cadastro = req.body
+    const cadastro = req.body
 
     console.log("Dados recebidos:", cadastro);
 
@@ -59,8 +58,8 @@ function createEnterpriseAndUser(req, res) {
 
 
 function editEnterprise(req, res) {
-    var enterprise = req.body;
-    var id = req.params.id;
+    const enterprise = req.body;
+    const id = req.params.id;
     console.log("ID:", id);
     console.log("Dados recebidos:", enterprise);
 
@@ -102,7 +101,7 @@ function editEnterprise(req, res) {
 }
 
 function deleteEnterprise(req, res) {
-    var id = req.params.id;
+    const id = req.params.id;
     console.log("ID para exclusão:", id);
 
     if (id == undefined || id == null) {

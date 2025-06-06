@@ -1,7 +1,7 @@
 var userModel = require("../models/userModel");
 
 function authenticateUser(req, res) {
-    var user = req.body;
+    const user = req.body;
 
     if (!user.email || !user.senha) {
         return res.status(400).json({ 
@@ -77,8 +77,8 @@ function createUser(req, res) {
 }
 
 function editUser(req, res) {
-    var user = req.body;
-    var id = req.params.id;
+    const user = req.body;
+    const id = req.params.id;
     console.log("ID:", id);
     console.log("Dados recebidos:", user);
 
@@ -136,7 +136,7 @@ function editUser(req, res) {
 
 
 function deleteUser(req, res) {
-    var id = req.params.id;
+    const id = req.params.id;
     console.log("ID para exclusão:", id);
 
     if (id == undefined || id == null) {
@@ -164,7 +164,7 @@ function deleteUser(req, res) {
 
 
 function searchUserById(req, res) {
-    var id = req.params.id;
+    const id = req.params.id;
     console.log("ID usúario:", id);
 
     if (id == undefined || id == null) {
@@ -190,39 +190,12 @@ function searchUserById(req, res) {
 
 
 
-function searchUsersByEnterpriseId(req, res) {
-    var id = req.params.id;
-    console.log("ID empresa:", id);
-
-    if (id == undefined || id == null) {
-        return res.status(400).json({
-            error: "O id está undefined ou nulo!"
-        });
-    }
-
-    userModel.searchUsersByEnterpriseId(id)
-        .then(function (resultado) {
-            res.status(200).json({
-                message: "Usuários encontrados com sucesso",
-                resultado: resultado
-            });
-        })
-        .catch(function (erro) {
-            console.error("Erro ao deletar usuário:", erro);
-            res.status(500).json({
-                error: erro.sqlMessage || erro.message
-            });
-        });
-}
-
-
 
 
 module.exports = {
+    authenticateUser,
     createUser,
     editUser,
     deleteUser,
-    authenticateUser,
-    searchUserById,
-    searchUsersByEnterpriseId
+    searchUserById
 };

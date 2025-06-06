@@ -127,23 +127,6 @@ async function deleteUser(idUser) {
 }
 
 
-async function searchUsersByEnterpriseId(idEnterprise) {
-    const query = `
-    SELECT * FROM usuario WHERE fk_empresa = ?
-    `;
-
-    try {
-        const [resultado] = await database.execute(query, [idEnterprise]);
-        console.log('Usuários encontrados com sucesso:', resultado);
-        return resultado[0];
-    } catch (error) {
-        console.error('Erro ao procurar usuario:', error.message);
-        throw error;
-    }
-
-}
-
-
 async function searchUserById(idUser) {
     const query = `
     SELECT * FROM usuario WHERE id_usuario = ?
@@ -167,6 +150,5 @@ module.exports = {
     editUser,
     deleteUser,
     authenticateUser,
-    searchUsersByEnterpriseId,
     searchUserById
 }

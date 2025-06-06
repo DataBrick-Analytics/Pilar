@@ -13,11 +13,6 @@ router.post("/user/autenticar", function (req, res) {
     usuarioController.authenticateUser(req, res);
 })
 
-// GET
-router.get("/AllUsers/:id", function (req, res) {
-  usuarioController.searchUsersByEnterpriseId(req, res);
-});
-
 // UPDATE
 router.put("/user/:id", function (req, res) {
   usuarioController.editUser(req, res);

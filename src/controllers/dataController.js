@@ -1,11 +1,10 @@
 var dataModel = require("../models/dataModel");
 
-
 //KPIS
 function getRegionType(req, res) {
-    var fkBairro = req.params.id;
+    const fkBairro = req.params.id;
     // const fkBairro = localStorage.getItem("FK_BAIRRO")
-    console.log("ID recebido:", id);
+    console.log("ID recebido:", fkBairro);
 
     // Verifica se o ID está definido e não é nulo
     if (fkBairro == undefined || fkBairro == null) {
@@ -15,153 +14,104 @@ function getRegionType(req, res) {
     }
 
     dataModel.getRegionType(fkBairro)
-        .then(
-            function (resultado) {
-                res.json(resultado);
-            }
-        ).catch(
-            function (erro) {
-                console.log(erro);
-                console.log(
-                    "\nHouve um erro na coleta de novos Dados:",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro na coleta de novos Dados:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
+function getPriceSquareMeter(req, res) {
+    const fkBairro = req.params.id;
+    // const fkBairro = localStorage.getItem("FK_BAIRRO")
+    if (fkBairro == undefined || fkBairro == null) {
+        return res.status(400).json({
+            error: "O id está undefined ou nulo!"
+        });
+    }
+
+    dataModel.getPriceSquareMeter(fkBairro)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro na coleta de novos Dados:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+
+    console.log("ID recebido:", fkBairro);
+}
 
 function getUrbanMeshDensity(req, res) {
-    var fkBairro = req.params.id;
-    // const fkBairro = localStorage.getItem("FK_BAIRRO")
-    console.log("ID recebido:", fkBairro);
+    const fkBairro = req.params.id; // dado mocado para testes
 
     if (fkBairro == undefined) {
-        return res.status(400).send("fkBairro está undefined")
+        return res.status(400).send("fkBairro está undefined");
     }
 
     dataModel.getUrbanMeshDensity(fkBairro)
-        .then(
-            function (resultado) {
-                res.status(200).json(resultado)
-                console.log("Valor Densidade: " + resultado)
-            }
-        ).catch(
-            function (erro) {
-                console.log("Houve um erro ao pegar a Densidade")
-                res.status(500).json(erro.sqlMessage)
-            }
-        )
+        .then(function (densidade) {
+            console.log("Valor Densidade: " + densidade.valorDensidade);
+            return res.status(201).json(densidade);
+        })
+        .catch(function (erro) {
+            console.log("Houve um erro ao pegar a densidade urbana");
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
-    function getPriceSquareMeter(req, res) {
-        var fkBairro = req.params.id;
-        // const fkBairro = localStorage.getItem("FK_BAIRRO")
-        console.log("ID recebido:", fkBairro);
-    }
-
-
-    function getUrbanMeshDensity(req, res) {
-        const fkBairro = req.params.id // dado mocado para testes
-
-        if (fkBairro == undefined) {
-            return res.status(400).send("fkBairro está undefined")
-        }
-        dataModel.getUrbanMeshDensity(fkBairro)
-            .then(
-                function (densidade) {
-                    console.log("Valor Densidade: " + densidade.valorDensidade)
-                    return res.status(201).json(densidade)
-                }
-            ).catch(
-                function (erro) {
-                    console.log("Houve um erro ao pegar a densidade urbana")
-                    res.status(500).json(erro.sqlMessage)
-                }
-            )
-    }
-
-
-
-//AUXILIARES
-async function getSchoolsRegion(req, res) {
-    var fkBairro = req.params.id;
+function getViolenceIndex(req, res) {
+    const fkBairro = req.params.id;
     // const fkBairro = localStorage.getItem("FK_BAIRRO")
     console.log("ID recebido:", fkBairro);
 
-
-    await dataModel.getSchoolsRegion(fkBairro)
-        .then(
-            function (resultado) {
-                res.status(200).send(resultado.length)
-                console.log("Qtd de escolas encontradas: " + resultado.length)
-            }
-        ).catch(
-            function (erro) {
-                console.log("Houve um erro ao pegar as escolas")
-                res.status(500).json(erro.sqlMessage)
-            }
-        )
-}
-
-function getHospitalsByRegion(req, res) {
-    var fkBairro = req.params.id;
-    // const fkBairro = localStorage.getItem("FK_BAIRRO")
-    console.log("ID recebido:", fkBairro);
-
-    if (fkBairro == undefined) {
-        return res.status(400).send("fkBairro está undefined")
+    // Verifica se o ID está definido e não é nulo
+    if (fkBairro == undefined || fkBairro == null) {
+        return res.status(400).json({
+            error: "O id está undefined ou nulo!"
+        });
     }
 
-    dataModel.getHospitalsByRegion(fkBairro)
-        .then(
-            function (resultado) {
-                console.log("Qtd de escolas encontradas: " + resultado.length)
-                return res.status(200).send(resultado.length)
-            }
-        ).catch(
-            function (erro) {
-                console.log("Houve um erro ao pegar os hospitais")
-                res.status(500).json(erro.sqlMessage)
-            }
-        )
+    dataModel.getViolenceIndex(fkBairro)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro na coleta de novos Dados:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
 //GRAFICOS
 function getMediaByFifth(req, res) {
-    var fkBairro = req.params.id;
+    const fkBairro = req.params.id;
     // const fkBairro = localStorage.getItem("FK_BAIRRO")
     console.log("ID recebido:", fkBairro);
 
-    // Verifica se o idBairro está definidBairroo e não é nulo
     if (fkBairro == undefined || fkBairro == null) {
         return res.status(400).json({
             error: "O idBairro está undefined ou nulo!"
         });
     }
-    dataModel.getMediaByFifth(fkBairro)
-        .then(
-            function (resultado) {
-                res.json(resultado);
 
-            }
-        ).catch(
-            function (erro) {
-                console.log(erro);
-                console.log(
-                    "\nHouve um erro na coleta de novos Dados:",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
+    dataModel.getMediaByFifth(fkBairro)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro na coleta de novos Dados:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
-
-
 function getPriceFluctuation(req, res) {
-    var fkBairro = req.params.id;
+    const fkBairro = req.params.id;
     // const fkBairro = localStorage.getItem("FK_BAIRRO")
     console.log("ID recebido:", fkBairro);
 
@@ -172,29 +122,79 @@ function getPriceFluctuation(req, res) {
     }
 
     dataModel.getPriceFluctuation(fkBairro)
-        .then(
-            function (resultado) {
-                res.json(resultado);
-            }
-        ).catch(
-            function (erro) {
-                console.log(erro);
-                console.log(
-                    "\nHouve um erro na coleta de novos Dados:",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro na coleta de novos Dados:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
+//AUXILIARES
+async function getSchoolsRegion(req, res) {
+    const fkBairro = req.params.id;
+    // const fkBairro = localStorage.getItem("FK_BAIRRO")
+    console.log("ID recebido:", fkBairro);
 
+    await dataModel.getSchoolsRegion(fkBairro)
+        .then(function (resultado) {
+            res.sendStatus(200).send(resultado.length);
+            console.log("Qtd de escolas encontradas: " + resultado.length);
+        })
+        .catch(function (erro) {
+            console.log("Houve um erro ao pegar as escolas");
+            res.sendStatus(500).json(erro.sqlMessage);
+        });
+}
+
+function getHospitalsByRegion(req, res) {
+    const fkBairro = req.params.id;
+    // const fkBairro = localStorage.getItem("FK_BAIRRO")
+    console.log("ID recebido:", fkBairro);
+
+    if (fkBairro == undefined) {
+        return res.sendStatus(400).send("fkBairro está undefined");
+    }
+
+    dataModel.getHospitalsByRegion(fkBairro)
+        .then(function (resultado) {
+            console.log("Qtd de hospitais encontradas: " + resultado.length);
+            return res.sendStatus(200).send(resultado.length);
+        })
+        .catch(function (erro) {
+            console.log("Houve um erro ao pegar os hospitais");
+            res.sendStatus(500).json(erro.sqlMessage);
+        });
+}
+
+function getParksByRegion(req, res) {
+    const fkBairro = req.params.id;
+    // const fkBairro = localStorage.getItem("FK_BAIRRO")
+    console.log("ID recebido:", fkBairro);
+
+    if (fkBairro == undefined) {
+        return res.sendStatus(400).send("fkBairro está undefined");
+    }
+
+    dataModel.getParksByRegion(fkBairro)
+        .then(function (resultado) {
+            console.log("Qtd de parques encontradas: " + resultado.length);
+            return res.sendStatus(200).send(resultado.length);
+        })
+        .catch(function (erro) {
+            console.log("Houve um erro ao pegar os parques");
+            res.sendStatus(500).json(erro.sqlMessage);
+        });
+}
 
 module.exports = {
     //KPIS
     getRegionType,
-    getUrbanMeshDensity,
     getPriceSquareMeter,
+    getUrbanMeshDensity,
+    getViolenceIndex,
 
     //GRAFICOS
     getMediaByFifth,
@@ -202,5 +202,6 @@ module.exports = {
 
     //AUXILIARES
     getSchoolsRegion,
-    getHospitalsByRegion
+    getHospitalsByRegion,
+    getParksByRegion
 };
