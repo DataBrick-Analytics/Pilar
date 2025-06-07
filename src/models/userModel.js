@@ -52,7 +52,6 @@ async function authenticateUser(email, senha) {
     }
 }
 
-
 async function createUser(user) {
     const query = `
     INSERT INTO usuario (nome, email, senha, fk_empresa, funcao_empresa, data_cadastro)
@@ -94,20 +93,19 @@ async function editUser(user, idUser) {
         user.nome,
         user.email,
         user.senha,
-        user.funcao_empresa,
-        user.fk_empresa,
+        user.cpf,
+        user.data_nasc,
         idUser
     ];
 
     try {
         const result = await database.execute(query, values);
-        return result[0];
+        return result;
     } catch (error) {
         console.error('Database error:', error);
         throw error;
     }
 }
-
 
 async function deleteUser(idUser) {
     const query = `
@@ -123,32 +121,43 @@ async function deleteUser(idUser) {
         console.error('Erro ao deletar usuário:', error.message);
         throw error;
     }
-
 }
 
 
-async function searchUserById(idUser) {
+async function searchUsersByEnterpriseId(idEnterprise) {
     const query = `
-    SELECT * FROM usuario WHERE id_usuario = ?
+    SELECT * FROM usuario WHERE fk_empresa = ?
     `;
 
     try {
-        const [resultado] = await database.execute(query, [idUser]);
+        const [resultado] = await database.execute(query, [idEnterprise]);
         console.log('Usuários encontrados com sucesso:', resultado);
         return resultado[0];
     } catch (error) {
         console.error('Erro ao procurar usuario:', error.message);
         throw error;
     }
-
 }
 
+async function searchUserById(idUser) {
+    const query = `
+    SELECT * FROM usuario WHERE id_usuario = ?`;
 
+    try {
+        const resultado = await database.execute(query, [idUser]);
+        console.log('Usuários encontrados com sucesso:', resultado);
+        return resultado;
+    } catch (error) {
+        console.error('Erro ao procurar usuario:', error.message);
+        throw error;
+    }
+}
 
 module.exports = {
     createUser,
     editUser,
     deleteUser,
     authenticateUser,
-    searchUserById
+    searchUserById,
+    searchUsersByEnterpriseId
 }

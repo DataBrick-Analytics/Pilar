@@ -40,7 +40,6 @@ function authenticateUser(req, res) {
         });
 }
 
-
 function createUser(req, res) {
     const user = req.body;
     console.log("Dados recebidos:", user);
@@ -87,7 +86,7 @@ function editUser(req, res) {
         return res.status(400).json({ error: "ID não fornecido" });
     }
 
-    if (!user || !user.nome || !user.email || !user.senha || !user.funcao_empresa || !user.fk_empresa) {
+    if (!user || !user.nome || !user.email || !user.senha || !user.cpf || !user.data_nasc) {
         return res.status(400).json({ 
             error: "Dados incompletos",
             message: "Todos os campos são obrigatórios" 
@@ -98,16 +97,16 @@ function editUser(req, res) {
         .then(function (resultado) {
             console.log("Resultado do banco:", resultado);
             
-            // Simplified check without destructuring
             if (resultado) {
                 return res.status(200).json({
                     message: "Usuário atualizado com sucesso",
                     usuario: {
-                        id: id,
+                        id: user.id_usuario,
                         nome: user.nome,
                         email: user.email,
-                        funcao_empresa: user.funcao_empresa,
-                        fk_empresa: user.fk_empresa
+                        senha: user.senha,
+                        cpf: user.cpf,
+                        data_nasc: user.data_nasc
                     }
                 });
             } else {
@@ -116,11 +115,12 @@ function editUser(req, res) {
                     message: "Usuário atualizado com sucesso",
                     warning: "Resposta do banco incompleta",
                     usuario: {
-                        id: id,
+                        id: user.id_usuario,
                         nome: user.nome,
                         email: user.email,
-                        funcao_empresa: user.funcao_empresa,
-                        fk_empresa: user.fk_empresa
+                        senha: user.senha,
+                        cpf: user.cpf,
+                        data_nasc: user.data_nasc
                     }
                 });
             }
@@ -133,7 +133,6 @@ function editUser(req, res) {
             });
         });
 }
-
 
 function deleteUser(req, res) {
     const id = req.params.id;
@@ -160,9 +159,6 @@ function deleteUser(req, res) {
         });
 }
 
-
-
-
 function searchUserById(req, res) {
     const id = req.params.id;
     console.log("ID usúario:", id);
@@ -174,23 +170,25 @@ function searchUserById(req, res) {
     }
 
     userModel.searchUserById(id)
-        .then(function (resultado) {
-            res.status(200).json({
-                message: "Usuário encontrados com sucesso",
-                resultado: resultado
-            });
+        .then(infosUsuario => {
+            if (infosUsuario) {
+                return res.status(201).json({
+                    nome: infosUsuario[0].nome,
+                    email: infosUsuario[0].email,
+                    cpf: infosUsuario[0].cpf,
+                    data_nasc: infosUsuario[0].data_nasc,
+                    senha: infosUsuario[0].senha,
+                    funcao_empresa: infosUsuario[0].funcao_empresa
+                })
+            }
         })
         .catch(function (erro) {
-            console.error("Erro ao deletar usuário:", erro);
+            console.error("Erro ao buscar o usuário:", erro);
             res.status(500).json({
                 error: erro.sqlMessage || erro.message
             });
         });
 }
-
-
-
-
 
 module.exports = {
     authenticateUser,

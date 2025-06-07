@@ -28,6 +28,4 @@ router.get("/user/:id", function (req, res) {
   usuarioController.searchUserById(req, res);
 });
 
-
-
 module.exports = router;
