@@ -203,6 +203,8 @@
     background-color: white;
     border-radius: 20px;
     border: 1px solid black;
+    overflow-y: scroll;
+    gap: 50px;
 }
 .manual-logo{
     display: flex;
