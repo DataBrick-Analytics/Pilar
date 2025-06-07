@@ -1,0 +1,169 @@
+var database = require("../database/config");
+
+
+// KPIS
+    async function getRegionType(idBairro) {
+        const query = `
+          SELECT
+            SUM(CASE WHEN uso_iptu IN (10, 12, 13, 14, 20, 21, 22, 24, 25) THEN 1 ELSE 0 END) AS total_residencial,
+            SUM(CASE WHEN uso_iptu IN (23, 30, 31, 32, 40, 41, 42, 85) THEN 1 ELSE 0 END) AS total_comercial,
+            SUM(CASE WHEN uso_iptu IN (50, 51, 60, 61) THEN 1 ELSE 0 END) AS total_industrial,
+            SUM(CASE WHEN uso_iptu IN (23, 24, 26, 62, 63) THEN 1 ELSE 0 END) AS total_garagens_depositos,
+            SUM(CASE WHEN uso_iptu IN (22, 32, 42) THEN 1 ELSE 0 END) AS total_misto
+          FROM propriedades WHERE ?; `
+
+        const values = [idBairro]
+
+        try {
+            return resultado = await database.execute(query, values)
+        } catch (error) {
+            console.error("Erro ao localizar a informação", error.message)
+            throw error
+        }
+    }
+
+
+    async function getUrbanMeshDensity(fkBairro) {
+        // calculo para Densidade = populacaoUrbada / area (em hectares)
+        try {
+            const areaRow = await database.execute(`SELECT SUM(area_terreno_m2) AS total_area FROM propriedades WHERE fk_bairros = ?`, [fkBairro])
+            const populacaoRow = await database.execute(`SELECT populacao_total FROM info_regiao where fk_bairros = ?`, [fkBairro])
+
+            const areaM2 = parseFloat((areaRow[0]?.total_area || 0))
+            const populacaototal = populacaoRow[0].populacao_total || 0
+
+            if (areaM2 == 0 || isNaN(areaM2)) return 0
+            const densidade = populacaototal / (areaM2 / 10_000) // area em hectares
+
+            const objDensidade = { valorDensidade: parseInt(densidade) }
+
+            return objDensidade
+
+        } catch (error) {
+            console.error("Houve um erro ao localizar os dados", error.message)
+            throw error
+        }
+    }
+
+    async function getPriceFluctuation(req, res) {
+        const query = `SELECT preco,data_precificao FROM precificao WHERE fk_bairro = ?;`
+        const values = [req.params.id]
+
+        try {
+            return resultado = await database.execute(query, values)
+        } catch (error) {
+            console.error("Erro ao localizar a informação", error.message)
+            throw error
+        }
+    }
+
+
+    async function getPriceSquareMeter(fkBairro) {
+
+        const query = `
+			SELECT preco 
+				FROM precificacao 
+			WHERE fk_bairro = ${fkBairro} 
+			ORDER BY data_precificacao DESC 
+			LIMIT 1;`;
+
+        try {
+            return resultado = await database.execute(query, values)
+
+        } catch (error) {
+            console.error("Houve um erro ao localizar os dados", error.message)
+            throw error
+        }
+    }
+
+    //RESOLVENDO PROBLEMA DO DER PARA FAZER VIOLENCE INDEX NO 
+    // async function getViolenceIndex(fkBairro) {
+    // 	const query = `SELECT preco FROM precificacao WHERE fk_bairro = ${fkBairro}`
+
+    // 	try{
+    // 		return resultado = await database.execute(query, populacaoUrbana)
+    // 	} catch(error){
+    // 		console.error("Houve um erro ao localizar os dados", error.message)
+    // 		throw error
+    // 	}
+    // }
+
+
+    //AUXILIARES
+    async function getSchoolsRegion(fkBairro) {
+        const query = `SELECT * FROM educacao WHERE fk_bairro = ${fkBairro} `
+        const values = [idBairro]
+
+        try {
+            return resultado = await database.execute(query, values)
+        } catch (error) {
+            console.error("Erro ao localizar a informação", error.message)
+            throw error
+        }
+    }
+
+
+    async function getHospitalsByRegion(fkBairro) {
+        const query = `SELECT fk_bairro, COUNT(*) AS total_pontos_saude
+						FROM saude
+					   GROUP BY fk_bairro;`
+        const values = [fkBairro]
+
+        try {
+            return resultado = await database.execute(query, values)
+        } catch (error) {
+            console.error("Erro ao localizar a informação", error.message)
+            throw error
+        }
+    }
+
+
+    //GRAFICOS
+    async function getMediaByFifth(idBairro) {
+        const query = `SElECT renda_domiciliar_quinto_mais_pobre,
+			renda_domiciliar_segundo_quinto_mais_pobre,
+			renda_domiciliar_terceiro_quinto_mais_pobre,
+			renda_domiciliar_quarto_quinto_mais_pobre,
+			renda_domiciliar_quinto_mais_rico
+			FROM info_regiao WHERE fk_bairro = ?;`
+        const values = [idBairro]
+
+        try {
+            return resultado = await database.execute(query, values)
+        } catch (error) {
+            console.error("Erro ao localizar a informação", error.message)
+            throw error
+        }
+    }
+
+
+    async function getPriceFluctuation(req, res) {
+        const query = `SELECT preco,data_precificao FROM precificao WHERE fk_bairro = ?;`
+        const values = [req.params.id]
+
+        try {
+            return resultado = await database.execute(query, values)
+        } catch (error) {
+            console.error("Erro ao localizar a informação", error.message)
+            throw error
+        }
+    }
+
+
+
+    module.exports = {
+        //KPI
+        getRegionType,
+        getUrbanMeshDensity,
+        getPriceSquareMeter,
+        //	getViolenceIndex,
+
+        //GRAFICOS
+        getMediaByFifth,
+        getPriceFluctuation,
+
+        //AUXILIARES
+        getSchoolsRegion,
+        getHospitalsByRegion
+    }
+

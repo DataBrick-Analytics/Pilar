@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboardg</title>
     <link rel="stylesheet" href="css/dashNova.css">
     <link rel="stylesheet" href="./css/Style.css">
-    <script src="js/graficosDash.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="divGeral">
@@ -17,7 +15,7 @@
                 <nav class="sidebarAzul">
                     <div class="logo">
                         <span class="logo-icon">
-                            <img src="./assets/icons-dash/logo.png" alt="">
+                            <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" alt="">
                         </span>
                         <span class="logo-text">DataBrick</span>
                     </div>
@@ -26,9 +24,9 @@
     
                     <div class="user-profile">
                         <div class="avatar">
-                            <img src="./assets/icons-dash/do-utilizador (1).png" alt="">
+                            <img src="./assets/icons-dash/USER-ICON-SM.svg" alt="">
                         </div>
-                        <span class="username">Nome usuario</span>
+                        <span class="username" id="user">Nome usuario</span>
                     </div>
     
                     <div class="separator"></div>
@@ -36,7 +34,7 @@
                     <div class="nav-menu">
                         <a href="#" class="nav-item">
                             <span class="nav-icon">
-                                <img src="./assets/icons-dash/dashboard.svg" alt="">
+                                <img src="./assets/icons-dash/HOME-ICON-SM.svg" alt="">
                             </span>
                             <span>Home</span>
                         </a>
@@ -45,7 +43,7 @@
                             <span class="nav-section-title">PAGES</span>
                             <div class="dropdown">
                                 <button class="dropdown-btn active">
-                                    <span class="nav-icon"> <img src="./assets/icons-dash/dashboard.svg" alt=""></span>
+                                    <span class="nav-icon"> <img src="./assets/icons-dash/CHART-ICON-SM.svg" alt=""></span>
                                     <span>Propriedades</span>
                                     <span class="dropdown-arrow">▼</span>
                                 </button>
@@ -61,9 +59,9 @@
                                 </div>
                             </div>
                             <div class="nav-menu">
-                                <a href="#" class="nav-item">
+                                <a href="./listaUsuario.html" class="nav-item">
                                     <span class="nav-icon">
-                                        <img src="./assets/icons-dash/dashboard.svg" alt="">
+                                        <img src="./assets/icons-dash/ALERT-ICON-SM.svg" alt="">
                                     </span>
                                     <span>Alertas</span>
                                 </a>
@@ -71,7 +69,12 @@
                         </div>
                 </nav>
 
-
+                <div class="div-button-log-out">
+                    <button onclick="logout()" class="button_logout">
+                        Log Out
+                    </button>
+                </div>
+                
 
             </div>
         </div>
@@ -79,38 +82,38 @@
 
             <div class="divPagina">
                 <div class="divPaginaHome">
-                    <a href="index.html">
+                    <!-- <a href="index.html">
                        <img src="assets/icons-dash/Vector.png" alt=""> <a href="index.html">Home</a>
-                    </a>
+                    </a> -->
                 </div>
-                <div class="divPaginaAtual">Dashboard</div>
+                <div class="divPaginaAtual">Analise Urbana da região do Ipiranga</div>
             </div>
 
             <div class="divKPIs">
                 <div class="divKPI">
                     <div class="divKpiIcone Primary icon1"></div>
                     <div class="divKpiNomes">Índice de violência na área</div>
-                    <div class="divKpiValor">2,7%</div>
+                    <div id="kpiseguranca" class="divKpiValor">2,7%</div>
                     <div class="divKpiDescricao1"> <span>15° </span>  no ranking</div>
                 </div>
 
                 <div class="divKPI">
                     <div class="divKpiIcone Secondary icon2"></div>
                     <div class="divKpiNomes">Densidade da malha urbana</div>
-                    <div class="divKpiValor">3/100m²</div>
+                    <div id="kpimalhaurbana" class="divKpiValor"></div>
                     <div class="divKpiDescricao2"> <span>10°</span> no ranking </div>
                 </div>
                 <div class="divKPI">
                     <div class="divKpiIcone Primary icon3"></div>
                     <div class="divKpiNomes">Valor m²</div>
-                    <div class="divKpiValor">R$12.000,00</div>
+                    <div id="kpivalor" class="divKpiValor">R$12.000,00</div>
                     <div class="divKpiDescricao3"> <span>5°</span> no ranking</div>
                 </div>
                 <div class="divKPI">
                     <div class="divKpiIcone Secondary icon4"></div>
                     <div class="divKpiNomes">Predominância tipo de imóvel</div>
-                    <div class="divKpiValor">Residencial</div>
-                    <div class="divKpiDescricao4"> <span>87%</span>dos imóveis</div>
+                    <div id="kpitipo" class="divKpiValor">Residencial</div>
+                    <div class="divKpiDescricao4"> <span id="kpitipovalor"></span>dos imóveis</div>
                 </div>
             </div>
 
@@ -123,9 +126,8 @@
                         <span class="spanNome">Renda Média</span>
                         <span>Renda média por quinto da população</span>
                     </div>
-                    <div class="divAtualizacaoGrafico">
+                    <div id="ultimaAtualizacao" class="divAtualizacaoGrafico">
                         <img src="assets/icons-dash/clock-outline.png" alt="">
-                        Atualizado a 20s atrâs
                     </div>
                 </div>
                 <div class="divGrafico">
@@ -136,9 +138,8 @@
                         <span class="spanNome">Flutuação do preço do m²</span>
                         <span>Evolução do preço m² de Janeiro a Dezembro</span>
                     </div>
-                    <div class="divAtualizacaoGrafico">
+                    <div id="ultimaAtualizacao2" class="divAtualizacaoGrafico">
                         <img src="assets/icons-dash/clock-outline.png" alt="">
-                        Atualizado a 20s atrâs
                     </div>
                 </div>
             </div>
@@ -152,14 +153,14 @@
                 <div class="divKPI2">
                     <div class="divKpiIcone2 Primary icon5"></div>
                     <div class="divKpiNomes">Escolas na região</div>
-                    <div class="divKpiValor">20</div>
+                    <div class="divKpiValor" id="kpiEscolas"></div>
                     <div class="divKpiDescricao1"> <span></span></div>
                 </div>
 
                 <div class="divKPI2">
                     <div class="divKpiIcone2 Secondary icon6"></div>
                     <div class="divKpiNomes">Hospitais na região</div>
-                    <div class="divKpiValor">15</div>
+                    <div class="divKpiValor"id="kpiHospitais"></div>
                     <div class="divKpiDescricao1"> <span></span></div>
                 </div>
 
@@ -178,3 +179,14 @@
     </div>
 </body>
 </html>
+
+<script src="js/dashboard.js">
+    user.innerHTML = sessionStorage.NOME_EMPRESA
+</script>
+    <script src="js/graficosDash.js" defer></script>
+    <script src="js/kpis.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script onload="catchKPI()" src="js/kpis.js"></script>
+    <script onload="getDensidadeMalhaUrbana()" src="js/kpis.js"></script> -->
+
+    <script onload="getUrbanMeshDensity()" src="js/kpis.js"></script>

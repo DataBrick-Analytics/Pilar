@@ -523,12 +523,12 @@ header a {
 }
 
 .projects .works .details p {
-   font-weight: var(--Regular);
-    line-height: 24px;
-    align-items: end;
+    font-weight: var(--Regular);
     font-size: 20px;
-    letter-spacing: var(--letter-p);
-    color:#FFFFF0;
+    text-align: justify;
+    width: 100%;
+    font-weight: var(--Regular);
+    color: var(--text);
 }
 
 .projects .works div img {

@@ -23,4 +23,17 @@ router.delete("/enterprise/:id", function (req, res) {
     enterpriseController.deleteEnterprise(req, res);
 });
 
+// SELECT 
+router.get("/enterprise/employees", function(req,res){
+    enterpriseController.getEnterpriseEmployees(req,res);
+})
+
+router.get("/enterprise/:id", function(req,res){
+    enterpriseController.getEnterpriseById(req,res);
+})
+
+router.get("/enterprise/address/:id", function(req,res) {
+    enterpriseController.getEnterpriseAddress(req,res);
+})
+
 module.exports = router;
