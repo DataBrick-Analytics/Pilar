@@ -101,7 +101,7 @@ function getMediaByFifth(req, res) {
 
     dataModel.getMediaByFifth(fkBairro)
         .then(function (resultado) {
-            res.json(resultado);
+            return res.status(200).json(resultado);
         })
         .catch(function (erro) {
             console.log(erro);
