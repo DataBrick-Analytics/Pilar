@@ -47,28 +47,48 @@ async function autenticateEnterprise(enterprise) {
 
 async function editEnterprise(enterprise, idEnterprise) {
 
-  const query = `
+  console.log("Dados recebidos para edição:", enterprise);
+
+  const queryEnterpriseData = `
   UPDATE empresas
-  SET nome = ?,
-      endereco = ?,
-      telefone = ?,
-      email = ?,
-      senha = ?
+  SET nome_fantasia = ?,
+      razao_social = ?,
+      data_edicao = NOW()
   WHERE id_empresa = ?
   `;
 
-  const values = [
-    enterprise.nome,
-    enterprise.endereco,
-    enterprise.telefone,
-    enterprise.email,
-    enterprise.senha,
+  const valuesEnterpriseData = [
+    enterprise.fantasyName,
+    enterprise.socialReason,
     idEnterprise
   ];
 
+  const queryEnterpriseAddress = `
+  UPDATE enderecos SET
+      rua = ?,
+      bairro = ?,
+      cep = ?,
+      cidade = ?,
+      estado = ?,
+      uf = ?,
+      data_edicao = NOW()
+  WHERE fk_empresa = ?
+  `;
+
+  const valuesEnterpriseAddress = [
+    enterprise.street,
+    enterprise.neighborhood,
+    enterprise.cepCode,
+    enterprise.city,
+    enterprise.state,
+    enterprise.stateCode,
+    idEnterprise
+  ];
 
   try {
-    const [resultado] = await database.execute(query, values);
+    const resultadoData = await database.execute(queryEnterpriseData, valuesEnterpriseData);
+    const resultadoAddress = await database.execute(queryEnterpriseAddress, valuesEnterpriseAddress);
+    const resultado = [resultadoData, resultadoAddress];
     console.log('Usuário inserido com sucesso:', resultado);
   } catch (error) {
     console.error('Erro ao inserir usuário:', error.message);
@@ -102,17 +122,40 @@ async function deleteEnterprise(idEnterprise) {
 async function getEnterpriseEmployees(fkEmpresa) {
   console.log("Entrei no getEnterpriseEmployees()")
 
-  try{
+  try {
     const query = `SELECT * FROM usuarios WHERE fk_empresa = ${fkEmpresa};`
     const resultado = await database.execute(query);
-    
+
     if (resultado.length > 0) {
       console.log("SELECT no banco feito")
       return resultado;
     }
-  } catch (error){
+  } catch (error) {
     console.error("Erro ao selecionar funcionarios", error.message)
     throw error
+  }
+}
+
+async function getEnterpriseById(idEnterprise) {
+  const query = `SELECT * FROM empresas WHERE id_empresa = ${idEnterprise};`
+  const resultado = await database.execute(query);
+
+  if (resultado.length > 0) {
+    return resultado;
+  } else {
+    throw "Não foi possível buscar pela empresa";
+  }
+}
+
+async function getEnterpriseAddress(idEnterprise) {
+  const query = `SELECT * FROM enderecos WHERE fk_empresa = ${idEnterprise};`
+  const resultado = await database.execute(query);
+
+  if (resultado.length > 0) {
+    console.log(resultado);
+    return resultado;
+  } else {
+    throw "Não foi possivel buscar o endereço da empresa";
   }
 }
 
@@ -122,5 +165,7 @@ module.exports = {
   autenticateEnterprise,
   editEnterprise,
   deleteEnterprise,
-  getEnterpriseEmployees
+  getEnterpriseEmployees,
+  getEnterpriseById,
+  getEnterpriseAddress
 }

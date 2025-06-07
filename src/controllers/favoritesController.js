@@ -1,44 +1,5 @@
-var userModel = require("../models/userModel");
+var favoritesModel = require("../models/favoritesModel");
 
-function authenticateUser(req, res) {
-    var user = req.body;
-
-    if (!user.email || !user.senha) {
-        return res.status(400).json({ 
-            error: "Dados inválidos",
-            message: "Email e senha são obrigatórios"
-        });
-    }
-
-    userModel.authenticateUser(user.email, user.senha)
-        .then(function (resultado) {
-            if (resultado && resultado.auth) {
-                return res.status(200).json({
-                    message: "Usuário autenticado com sucesso",
-                    usuario: {
-                        id: resultado.usuario.id_usuario,
-                        nome: resultado.usuario.nome,
-                        email: resultado.usuario.email,
-                        funcao_empresa: resultado.usuario.funcao_empresa,
-                        fk_empresa: resultado.usuario.fk_empresa,
-                        data_cadastro: resultado.usuario.data_cadastro
-                    }
-                });
-            } else {
-                return res.status(401).json({
-                    error: "Autenticação falhou",
-                    message: "Email ou senha inválidos"
-                });
-            }
-        })
-        .catch(function (erro) {
-            console.error("Erro na autenticação:", erro);
-            return res.status(500).json({
-                error: "Erro interno",
-                message: "Erro ao realizar autenticação"
-            });
-        });
-}
 
 function createUser(req, res) {
     const user = req.body;
@@ -86,7 +47,7 @@ function editUser(req, res) {
         return res.status(400).json({ error: "ID não fornecido" });
     }
 
-    if (!user || !user.nome || !user.email || !user.senha || !user.cpf || !user.data_nasc) {
+    if (!user || !user.nome || !user.email || !user.senha || !user.funcao_empresa || !user.fk_empresa) {
         return res.status(400).json({ 
             error: "Dados incompletos",
             message: "Todos os campos são obrigatórios" 
@@ -97,16 +58,16 @@ function editUser(req, res) {
         .then(function (resultado) {
             console.log("Resultado do banco:", resultado);
             
+            // Simplified check without destructuring
             if (resultado) {
                 return res.status(200).json({
                     message: "Usuário atualizado com sucesso",
                     usuario: {
-                        id: user.id_usuario,
+                        id: id,
                         nome: user.nome,
                         email: user.email,
-                        senha: user.senha,
-                        cpf: user.cpf,
-                        data_nasc: user.data_nasc
+                        funcao_empresa: user.funcao_empresa,
+                        fk_empresa: user.fk_empresa
                     }
                 });
             } else {
@@ -115,12 +76,11 @@ function editUser(req, res) {
                     message: "Usuário atualizado com sucesso",
                     warning: "Resposta do banco incompleta",
                     usuario: {
-                        id: user.id_usuario,
+                        id: id,
                         nome: user.nome,
                         email: user.email,
-                        senha: user.senha,
-                        cpf: user.cpf,
-                        data_nasc: user.data_nasc
+                        funcao_empresa: user.funcao_empresa,
+                        fk_empresa: user.fk_empresa
                     }
                 });
             }
@@ -133,6 +93,7 @@ function editUser(req, res) {
             });
         });
 }
+
 
 function deleteUser(req, res) {
     var id = req.params.id;
@@ -159,7 +120,10 @@ function deleteUser(req, res) {
         });
 }
 
-function searchUserById(req, res) {
+
+
+
+function searchFavoriteByUserId (req, res) {
     var id = req.params.id;
     console.log("ID usúario:", id);
 
@@ -169,41 +133,10 @@ function searchUserById(req, res) {
         });
     }
 
-    userModel.searchUserById(id)
-        .then(infosUsuario => {
-            if (infosUsuario) {
-                return res.status(201).json({
-                    nome: infosUsuario[0].nome,
-                    email: infosUsuario[0].email,
-                    cpf: infosUsuario[0].cpf,
-                    data_nasc: infosUsuario[0].data_nasc,
-                    senha: infosUsuario[0].senha,
-                    funcao_empresa: infosUsuario[0].funcao_empresa
-                })
-            }
-        })
-        .catch(function (erro) {
-            console.error("Erro ao buscar o usuário:", erro);
-            res.status(500).json({
-                error: erro.sqlMessage || erro.message
-            });
-        });
-}
-
-function searchUsersByEnterpriseId(req, res) {
-    var id = req.params.id;
-    console.log("ID empresa:", id);
-
-    if (id == undefined || id == null) {
-        return res.status(400).json({
-            error: "O id está undefined ou nulo!"
-        });
-    }
-
-    userModel.searchUsersByEnterpriseId(id)
+    favoritesModel.searchFavoriteByUserId(id)
         .then(function (resultado) {
             res.status(200).json({
-                message: "Usuários encontrados com sucesso",
+                message: "Usuário encontrados com sucesso",
                 resultado: resultado
             });
         })
@@ -215,11 +148,11 @@ function searchUsersByEnterpriseId(req, res) {
         });
 }
 
+
+
 module.exports = {
     createUser,
     editUser,
     deleteUser,
-    authenticateUser,
-    searchUserById,
-    searchUsersByEnterpriseId
+    searchFavoriteByUserId,
 };

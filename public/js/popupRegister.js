@@ -1,54 +1,72 @@
-addEventListener("DOMContentLoaded", function () {
-    async function generateUserCards() {
+
+async function generateUserCards() {
+    try {
         const resposta = await fetch("/enterprise/employees")
         const employees = await resposta.json()
-        const employeesList = [employees];
-
-        console.log("Tamo no retorno", employeesList)
 
         const container = document.querySelector('.users-container');
-        const users = Array(employeesList.length).fill({ name: 'Usuario x - email' });
+        container.innerHTML = ''
 
-        users.forEach(user => {
+        employees.forEach(user => {
             const card = document.createElement('div');
             card.className = 'user-card';
             card.innerHTML = `
-            <span>${user.name}</span>
-            <button onclick="removeUser(this)" aria-label="Remove user">✕</button>
-        `;
+                <span id="${user.id_usuario}">${user.nome} - ${user.email}</span>
+                <div class="crud">
+                    <img src="assets/icons-dash/edit.svg" alt="">
+                    <img class="size" src="assets/icons-dash/x.png" alt="" onclick="removeUser(this)" aria-label="Remove user">
+                </div>
+                `;
             container.appendChild(card);
-
         })
+    } catch (err) {
+        console.log("Erro ao gerar os cards", err)
     }
+}
 
-    function closeModal() {
-        document.getElementById('userModal').style.display = 'none';
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Dom carregado")
+    generateUserCards()
+})
 
 
 
+addEventListener("DOMContentLoaded", () => {
     document.getElementById('userForm').addEventListener('submit', function (e) {
         e.preventDefault();
         closeModal();
     });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        generateUserCards();
-    });
-
-    window.addEventListener('click', function (e) {
-        const modal = document.getElementById('userModal');
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
 })
+
+window.addEventListener('click', function (e) {
+    const modal = document.getElementById('userModal');
+    if (e.target === modal) {
+        closeModal();
+    }
+});
 
 function openModal() {
     document.getElementById('userModal').style.display = 'flex';
 }
-function removeUser(button) {
-    button.closest('.user-card').remove();
+
+
+async function removeUser(button) {
+    const card = button.closest('.user-card');
+    const id = Number(card.querySelector('span').id)
+    console.log("ID selecionado: " + id)
+
+    const deletion = await fetch(`/user/${id}`, {
+        method: "DELETE"
+    })
+    
+    if(deletion.ok){
+        alert("Usuário deletado com sucesso")
+        await generateUserCards()
+    } else {
+        alert("Erro ao remover o usuário")
+    }
+
+    card.remove()
 }
 
 function closeModal() {
@@ -76,7 +94,7 @@ function cadastrarUsuario() {
         senha: senha,
         cpf: cpf,
         funcao_empresa: funcao,
-        fk_empresa: localStorage.getItem('EMPRESA_ID') 
+        fk_empresa: localStorage.getItem('EMPRESA_ID')
     };
 
     // Enviar para o backend
@@ -87,43 +105,35 @@ function cadastrarUsuario() {
         },
         body: JSON.stringify(novoUsuario)
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.id) {
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Erro ao cadastrar usuário. Código: " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
             alert('Usuário cadastrado com sucesso!');
             closeModal();
-            window.location.reload(); // Recarrega a página para mostrar o novo usuário
-        } else {
-            alert('Erro ao cadastrar usuário: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        alert('Erro ao cadastrar usuário!');
-    });
+            window.location.reload();
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao cadastrar usuário: ' + error.message);
+        });
 }
 
-function removeUser(button) {
-    button.closest('.user-card').remove();
-}
 
-document.addEventListener('DOMContentLoaded', function() {
-    generateUserCards();
-
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('userForm');
     if (form) {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
             closeModal();
         });
     }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    generateUserCards();
-});
-
-window.addEventListener('click', function(e) {
+window.addEventListener('click', function (e) {
     const modal = document.getElementById('userModal');
     if (e.target === modal) {
         closeModal();

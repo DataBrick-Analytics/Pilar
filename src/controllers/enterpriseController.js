@@ -57,28 +57,6 @@ function editEnterprise(req, res) {
     console.log("ID:", id);
     console.log("Dados recebidos:", enterprise);
 
-    if (id == undefined || id == null) {
-        return res.status(400).json({ error: "O id está undefined ou nulo!" });
-    }
-    if (enterprise == undefined || enterprise == null) {
-        return res.status(400).json({ error: "A empresa está undefined ou nula!" });
-    }
-    if (enterprise.nome == undefined || enterprise.nome == null) {
-        return res.status(400).json({ error: "Nome está undefined ou nulo!" });
-    }
-    if (enterprise.endereco == undefined || enterprise.endereco == null) {
-        return res.status(400).json({ error: "Endereço está undefined ou nulo!" });
-    }
-    if (enterprise.telefone == undefined || enterprise.telefone == null) {
-        return res.status(400).json({ error: "Telefone está undefined ou nulo!" });
-    }
-    if (enterprise.email == undefined || enterprise.email == null) {
-        return res.status(400).json({ error: "Email está undefined ou nulo!" });
-    }
-    if (enterprise.senha == undefined || enterprise.senha == null) {
-        return res.status(400).json({ error: "Senha está undefined ou nula!" });
-    }
-
     enterpriseModel.editEnterprise(enterprise, id)
         .then(function (resultado) {
             res.status(200).json({
@@ -121,10 +99,10 @@ function deleteEnterprise(req, res) {
 
 async function getEnterpriseEmployees(req, res) {
     console.log("Acessando controller")
-    const fkEmpresa = 3
+    const fkEmpresa = localStorage.getItem('EMPRESA_ID')
+    
     try {
         const allEmployees = await enterpriseModel.getEnterpriseEmployees(fkEmpresa)
-        console.log('voltei pro controller')
         return res.status(200).json(allEmployees)
     } catch (erro) {
             console.log(erro)
@@ -133,9 +111,37 @@ async function getEnterpriseEmployees(req, res) {
     }
 }
 
+async function getEnterpriseById(req, res) {
+    const idEnterprise = req.params.id;
+
+    try {
+        const enterpriseData = await enterpriseModel.getEnterpriseById(idEnterprise);
+        return res.status(200).json(enterpriseData[0]);
+    } catch (error) {
+        console.error(error);
+        console.error(`Houve um erro ao buscar pela empresa do ID ${idEnterprise}`);
+        return res.status(500).json(error.sqlMessage);
+    }
+}
+
+async function getEnterpriseAddress(req, res) {
+    const idEnterprise = req.params.id;
+
+    try {
+        const enterpriseAddress = await enterpriseModel.getEnterpriseAddress(idEnterprise);
+        return res.status(200).json(enterpriseAddress[0]);
+    } catch (error) {
+        console.error(error);
+        console.error(`Houve um erro ao buscar pela empresa do ID ${idEnterprise}`);
+        return res.status(500).json(error.sqlMessage);
+    }
+}
+
 module.exports = {
     createEnterprise,
     editEnterprise,
     deleteEnterprise,
-    getEnterpriseEmployees
+    getEnterpriseEmployees,
+    getEnterpriseById,
+    getEnterpriseAddress
 };
