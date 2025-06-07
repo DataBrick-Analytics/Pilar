@@ -30,43 +30,24 @@
   </div>
 
   <div class="container">
-    <img src="assets/logo/BrickData.svg" alt="">
-    <h4>Cadastre uma conta!</h4>
+    <img src="assets/logo/BrickData.svg" alt="" style="scale: 1.8;">
+    <h4 style="margin: 0;">Cadastre uma conta!</h4>
 
     <form action="" class="formulario">
 
       <div class="leftSection">
         <div class="field">
-          <label for="nome">Nome da Empresa:</label>
-          <input type="text" placeholder="Digite o nome da empresa" id="nomeEmpresa_input">
+          <label for="nome">Nome Fantasia:</label>
+          <input type="text" placeholder="Digite o nome fantasia da empresa" id="nomeFantasia_input">
         </div>
-
-        <div class="field">
-          <label for="email">E-mail:</label>
-          <input type="email" placeholder="empresa@gmail.com" id="email_input">
-        </div>
-
-        <div class="field">
-          <label for="telefone">Telefone:</label>
-          <input type="tel" placeholder="(xx) xxxxx-xxxx" id="telefone_input">
-        </div>
-
-        <div class="field">
-          <label for="estado">Estado:</label>
-          <input type="text" placeholder="São Paulo" id="estado_input">
-        </div>
-
-        <div class="field">
-          <label for="bairro">Bairro:</label>
-          <input type="text" placeholder="Campestre" id="bairro_input">
-        </div>
-      </div>
-
-
-      <div class="rightSection">
         <div class="field">
           <label for="cnpj">CNPJ:</label>
           <input type="number" placeholder="Digite o CNPJ da empresa" id="cnpj_input">
+        </div>
+
+        <div class="field">
+          <label for="cidade">Razão Social  :</label>
+          <input type="text" placeholder="Razão social da empresa" id="razao_social_input">
         </div>
 
         <div class="field">
@@ -76,21 +57,32 @@
           </div>
           <input type="password" placeholder="Digite sua senha" id="senha_input">
         </div>
+        
 
+      </div>
+
+
+      <div class="rightSection">
         <div class="field">
-          <label for="cep">CEP:</label>
-          <input type="number" placeholder="98765-432" id="cep_input">
+          <label for="telefone">Nome Usuário:</label>
+          <input type="text" placeholder="Digite seu nome" id="nome_usuario_input">
         </div>
 
         <div class="field">
-          <label for="cidade">Cidade:</label>
-          <input type="text" placeholder="Santo André" id="cidade_input">
+          <label for="cep">CPF:</label>
+          <input type="number" placeholder="Digite seu CPF" id="cpf_input">
         </div>
 
         <div class="field">
-          <label for="numero">Número:</label>
-          <input type="number" placeholder="1234" id="numero_input">
+          <label for="email">E-mail:</label>
+          <input type="email" placeholder="empresa@gmail.com" id="email_input">
         </div>
+
+        <div class="field">
+          <label for="estado">Data de Nascimento:</label>
+          <input type="date" id="dtNasc_input" style="color: rgb(109, 109, 109);">
+        </div>
+
       </div>
 
     </form>

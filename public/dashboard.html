@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboardg</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="css/dashNova.css">
     <link rel="stylesheet" href="./css/Style.css">
+
+    <link rel="shortcut icon" href="assets/logo/BrickData.svg" type="image/x-icon">
 </head>
+
 <body>
     <div class="divGeral">
         <div class="divPainel">
@@ -19,18 +23,18 @@
                         </span>
                         <span class="logo-text">DataBrick</span>
                     </div>
-    
+
                     <div class="separator"></div>
-    
+
                     <div class="user-profile">
                         <div class="avatar">
                             <img src="./assets/icons-dash/USER-ICON-SM.svg" alt="">
                         </div>
                         <span class="username" id="user">Nome usuario</span>
                     </div>
-    
+
                     <div class="separator"></div>
-    
+
                     <div class="nav-menu">
                         <a href="#" class="nav-item">
                             <span class="nav-icon">
@@ -38,12 +42,13 @@
                             </span>
                             <span>Home</span>
                         </a>
-    
+
                         <div class="nav-section">
                             <span class="nav-section-title">PAGES</span>
                             <div class="dropdown">
                                 <button class="dropdown-btn active">
-                                    <span class="nav-icon"> <img src="./assets/icons-dash/CHART-ICON-SM.svg" alt=""></span>
+                                    <span class="nav-icon"> <img src="./assets/icons-dash/CHART-ICON-SM.svg"
+                                            alt=""></span>
                                     <span>Propriedades</span>
                                     <span class="dropdown-arrow">▼</span>
                                 </button>
@@ -59,11 +64,17 @@
                                 </div>
                             </div>
                             <div class="nav-menu">
-                                <a href="./listaUsuario.html" class="nav-item">
+                                <a href="./TelaAlertas.html" class="nav-item">
                                     <span class="nav-icon">
                                         <img src="./assets/icons-dash/ALERT-ICON-SM.svg" alt="">
                                     </span>
                                     <span>Alertas</span>
+                                    <a href="listaUsuario.html" class="nav-item">
+                                        <span class="nav-icon">
+                                            <img src="./assets/icons-dash/dashboard.svg" alt="">
+                                        </span>
+                                        <span>Usuários</span>
+                                    </a>
                                 </a>
                             </div>
                         </div>
@@ -74,7 +85,7 @@
                         Log Out
                     </button>
                 </div>
-                
+
 
             </div>
         </div>
@@ -94,7 +105,7 @@
                     <div class="divKpiIcone Primary icon1"></div>
                     <div class="divKpiNomes">Índice de violência na área</div>
                     <div id="kpiseguranca" class="divKpiValor">2,7%</div>
-                    <div class="divKpiDescricao1"> <span>15° </span>  no ranking</div>
+                    <div class="divKpiDescricao1"> <span>15° </span> no ranking</div>
                 </div>
 
                 <div class="divKPI">
@@ -145,11 +156,11 @@
             </div>
 
             <div class="divInformacoes">
-                 
+
                 <div class="divInformacoes2">
                     <img src="assets/icons-dash/logo_databrick.svg" alt="">
                 </div>
-                
+
                 <div class="divKPI2">
                     <div class="divKpiIcone2 Primary icon5"></div>
                     <div class="divKpiNomes">Escolas na região</div>
@@ -160,7 +171,7 @@
                 <div class="divKPI2">
                     <div class="divKpiIcone2 Secondary icon6"></div>
                     <div class="divKpiNomes">Hospitais na região</div>
-                    <div class="divKpiValor"id="kpiHospitais"></div>
+                    <div class="divKpiValor" id="kpiHospitais"></div>
                     <div class="divKpiDescricao1"> <span></span></div>
                 </div>
 
@@ -171,22 +182,21 @@
                     <div class="divKpiDescricao1"> <span></span></div>
                 </div>
 
-                
-                
+
+
             </div>
 
         </div>
     </div>
 </body>
+
 </html>
 
 <script src="js/dashboard.js">
     user.innerHTML = sessionStorage.NOME_EMPRESA
 </script>
-    <script src="js/graficosDash.js" defer></script>
-    <script src="js/kpis.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- <script onload="catchKPI()" src="js/kpis.js"></script>
-    <script onload="getDensidadeMalhaUrbana()" src="js/kpis.js"></script> -->
 
-    <script onload="getUrbanMeshDensity()" src="js/kpis.js"></script>
+<script src="js/kpis.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script >
+<script src="js/graficos.js"></script>
+<script onload="validarSessao()" src="js/sessao.js"></script>

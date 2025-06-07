@@ -1,7 +1,7 @@
 var favoritesModel = require("../models/favoritesModel");
 
 
-function createUser(req, res) {
+function createFavorite(req, res) {
     const user = req.body;
     console.log("Dados recebidos:", user);
 

@@ -16,8 +16,8 @@ async function authenticateUser(email, senha) {
         email,
         funcao_empresa,
         fk_empresa
-    FROM usuarios 
-    WHERE email = ? AND senha = ?
+    FROM usuario
+    WHERE email = ? AND senha = sha2(?, 256)
     `;
 
     try {
@@ -54,15 +54,17 @@ async function authenticateUser(email, senha) {
 
 async function createUser(user) {
     const query = `
-    INSERT INTO usuarios (nome, email, senha, fk_empresa, funcao_empresa, data_cadastro)
+    INSERT INTO usuario (nome, email, senha, fk_empresa, funcao_empresa, data_cadastro)
     VALUES (?, ?, ?, ?, ?, NOW())
-    `;
+    `;  
 
     const values = [
-        user.nome,
+        user.nomeUsuario,
         user.email,
         user.senha,
-        user.fk_empresa, 
+        user.fk_empresa,
+        user.cpf,
+        user.dtNasc,
         user.funcao_empresa
     ];
 
@@ -78,13 +80,12 @@ async function createUser(user) {
 
 async function editUser(user, idUser) {
     const query = `
-    UPDATE usuarios 
-    SET nome = ?,
-        email = ?,
-        senha = ?,
-        cpf = ?,
-        data_nasc = ?,
-        data_edicao = now()
+    UPDATE usuario
+    SET nome = ?, 
+        email = ?, 
+        senha = ?, 
+        funcao_empresa = ?,
+        fk_empresa = ?
     WHERE id_usuario = ?
     `;
 
@@ -108,7 +109,7 @@ async function editUser(user, idUser) {
 
 async function deleteUser(idUser) {
     const query = `
-    DELETE FROM usuarios WHERE id_usuario = ?
+    DELETE FROM usuario WHERE id_usuario = ?
     `;
 
     try {
@@ -122,9 +123,10 @@ async function deleteUser(idUser) {
     }
 }
 
+
 async function searchUsersByEnterpriseId(idEnterprise) {
     const query = `
-    SELECT * FROM usuarios WHERE fk_empresa = ?
+    SELECT * FROM usuario WHERE fk_empresa = ?
     `;
 
     try {
@@ -139,20 +141,7 @@ async function searchUsersByEnterpriseId(idEnterprise) {
 
 async function searchUserById(idUser) {
     const query = `
-    SELECT 
-        id_usuario,
-        nome,
-        email,
-        senha,
-        fk_empresa,
-        cpf,
-        DATE_FORMAT(data_nasc, '%Y-%m-%d') AS data_nasc,
-        funcao_empresa,
-        data_criacao,
-        data_edicao
-    FROM usuarios
-    WHERE id_usuario = ?
-    `;
+    SELECT * FROM usuario WHERE id_usuario = ?`;
 
     try {
         const resultado = await database.execute(query, [idUser]);
@@ -169,6 +158,6 @@ module.exports = {
     editUser,
     deleteUser,
     authenticateUser,
-    searchUsersByEnterpriseId,
-    searchUserById
+    searchUserById,
+    searchUsersByEnterpriseId
 }

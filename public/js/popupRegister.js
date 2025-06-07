@@ -1,7 +1,7 @@
 
 async function generateUserCards() {
     try {
-        const resposta = await fetch("/enterprise/employees")
+        const resposta = await fetch(`/enterprise/employees/${localStorage.getItem('EMPRESA_ID')}`)
         const employees = await resposta.json()
 
         const container = document.querySelector('.users-container');
