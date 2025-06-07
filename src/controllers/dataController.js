@@ -124,7 +124,7 @@ function getPriceFluctuation(req, res) {
     dataModel.getPriceFluctuation(fkBairro)
         .then(function (resultado) {
             return res.status(200).json({
-                preco: resultado[0].preco
+                preco: resultado.preco
             });
         })
         .catch(function (erro) {

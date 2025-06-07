@@ -55,11 +55,10 @@ async function getUrbanMeshDensity(fkBairro) {
 
 async function getPriceSquareMeter(fkBairro) {
     const query = `
-        SELECT preco 
+        SELECT avg(preco) as preco
         FROM precificacao 
-        WHERE fk_distrito = ? 
-        ORDER BY data_precificacao DESC 
-        LIMIT 1;`;
+        WHERE fk_distrito = ?;`
+
     const values = [fkBairro];
 
     try {
@@ -140,6 +139,7 @@ async function getMediaByFifth(idBairro) {
     }
 }
 
+
 async function getPriceFluctuation(fkBairro) {
     const query = `
         SELECT preco, data_precificacao 
@@ -154,6 +154,8 @@ async function getPriceFluctuation(fkBairro) {
         throw error;
     }
 }
+
+
 
 // AUXILIARES
 async function getSchoolsRegion(fkBairro) {

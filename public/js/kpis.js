@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     getSchoolsByRegion();
     getUrbanMeshDensity();
     getPriceSquareMeter()
+    getViolenceIndex()
     catchKPI()
 })
 
@@ -175,6 +176,8 @@ async function getHospitalsByRegion() {
     }
 }
 
+
+
 async function getSchoolsByRegion() {
     const kpiEscolas = document.getElementById("kpiEscolas")
     const fkBairro = 10
@@ -203,6 +206,8 @@ async function getSchoolsByRegion() {
     }
 }
 
+
+
 async function getPriceSquareMeter(){
     const kpiValorMetro = document.getElementById("kpivalor")
     const fkBairro = 10
@@ -218,9 +223,8 @@ async function getPriceSquareMeter(){
         if(resposta.ok){
             const dados = await resposta.json()
             console.log("Dados recebidos: " + dados)
-
             if(dados[0] && dados[0].preco !== undefined){
-                kpiValorMetro.innerText = "R$" + dados[0].preco
+                kpiValorMetro.innerText = "R$" + Number(dados[0].preco);
             } else {
                 kpiValorMetro.innerText = "0";
             }
@@ -230,6 +234,36 @@ async function getPriceSquareMeter(){
     } catch (erro) {
         console.error("Erro:", erro);
         kpiValorMetro.innerText = "Erro ao carregar dados";
+    }
+}
+
+async function getViolenceIndex(){
+    const kpiViolencia = document.getElementById("kpiseguranca")
+    const fkBairro = 10
+    kpiViolencia.innerText=''
+
+    try {
+        const resposta = await fetch(`/data/getViolenceIndex/${fkBairro}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        if(resposta.ok){
+            const dados = await resposta.json()
+            console.log("Dados recebidos: " + dados)
+
+            if(dados[0] && dados[0].indice_violencia_percentual !== undefined){
+                kpiViolencia.innerText = dados[0].indice_violencia_percentual + '%'
+            } else {
+                kpiViolencia.innerText = "0";
+            }
+        } else {
+            throw new Error("Erro ao buscar dados de violência");
+        }
+    } catch (erro) {
+        console.error("Erro:", erro);
+        kpiViolencia.innerText = "Erro ao carregar dados";
     }
 }
 

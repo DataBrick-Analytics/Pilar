@@ -7,28 +7,28 @@ function createEnterpriseAndUser(req, res) {
 
     console.log("Dados recebidos:", cadastro);
 
-    if (cadastro.nomeFantasia == undefined || cadastro.nomeFantasia == null) {
+    if (cadastro.nomeFantasia === undefined || cadastro.nomeFantasia == null) {
         return res.status(400).json({ error: "O nome da Empresa está undefined ou nula!" });
     }
-    if (cadastro.cnpj == undefined || cadastro.cnpj == null) {
+    if (cadastro.cnpj === undefined || cadastro.cnpj == null) {
         return res.status(400).json({ error: "CNPJ está undefined ou nulo!" });
     }
-    if (cadastro.nomeUsuario == undefined || cadastro.nomeUsuario == null) {
+    if (cadastro.nomeUsuario === undefined || cadastro.nomeUsuario == null) {
         return res.status(400).json({ error: "O nome do usuario está undefined ou nulo!" });
     }
-    if (cadastro.cpf == undefined || cadastro.cpf == null) {
+    if (cadastro.cpf === undefined) {
         return res.status(400).json({ error: "CPF está undefined ou nulo!" });
     }
-    if (cadastro.email == undefined || cadastro.email == null) {
+    if (cadastro.email === undefined || cadastro.email == null) {
         return res.status(400).json({ error: "Email está undefined ou nulo!" });
     }
-    if (cadastro.senha == undefined || cadastro.senha == null) {
+    if (cadastro.senha === undefined || cadastro.senha == null) {
         return res.status(400).json({ error: "Senha está undefined ou nula!" });
     }
-    if (cadastro.dtNasc == undefined || cadastro.dtNasc == null) {
+    if (cadastro.dtNasc === undefined || cadastro.dtNasc == null) {
         return res.status(400).json({ error: "dtNasc está undefined ou nula!" });
     }
-    if (cadastro.razaoSocial == undefined || cadastro.razaoSocial == null) {
+    if (cadastro.razaoSocial === undefined || cadastro.razaoSocial == null) {
         return res.status(400).json({ error: "Função está undefined ou nula!" });
     }
     
