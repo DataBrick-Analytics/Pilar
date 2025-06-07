@@ -15,8 +15,7 @@ async function authenticateUser(email, senha) {
         nome,
         email,
         funcao_empresa,
-        fk_empresa,
-        data_cadastro
+        fk_empresa
     FROM usuarios 
     WHERE email = ? AND senha = ?
     `;
