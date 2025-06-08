@@ -1,5 +1,8 @@
 
 const ctx2 = document.getElementById('meuGraficoBarras').getContext('2d');
+
+
+
 const meuGraficoBarras = new Chart(ctx2, {
     type: 'bar',
     data: {

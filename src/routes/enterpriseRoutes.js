@@ -5,13 +5,8 @@ var enterpriseController = require("../controllers/enterpriseController");
 
 // INSERT
 router.post("/enterprise/cadastrar", function (req, res) {
-    enterpriseController.createEnterprise(req, res);
+    enterpriseController.createEnterpriseAndUser(req, res);
 });
-
-// SELECT
-router.post("/enterprise/autenticar", function (req, res) {
-    enterpriseController.autenticateEnterprise(req, res);
-})
 
 // UPDATE
 router.put("/enterprise/:id", function (req, res) {
@@ -24,8 +19,16 @@ router.delete("/enterprise/:id", function (req, res) {
 });
 
 // SELECT 
-router.get("/enterprise/employees", function(req,res){
+router.get("/enterprise/employees/:id", function(req,res){
     enterpriseController.getEnterpriseEmployees(req,res);
+})
+
+router.get("/enterprise/:id", function(req,res){
+    enterpriseController.getEnterpriseById(req,res);
+})
+
+router.get("/enterprise/address/:id", function(req,res) {
+    enterpriseController.getEnterpriseAddress(req,res);
 })
 
 module.exports = router;

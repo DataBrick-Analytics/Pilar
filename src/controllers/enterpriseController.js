@@ -1,44 +1,50 @@
 
 var enterpriseModel = require("../models/enterpriseModel");
-const { saveUserActivity } = require('../externServices/userActivityService');
 
 
-function createEnterprise(req, res) {
-    var enterprise = req.body
+function createEnterpriseAndUser(req, res) {
+    const cadastro = req.body
 
-    console.log("Dados recebidos:", enterprise);
+    console.log("Dados recebidos:", cadastro);
 
-    if (enterprise == undefined || enterprise == null) {
-        return res.status(400).json({ error: "A empresa está undefined ou nula!" });
+    if (cadastro.nomeFantasia === undefined || cadastro.nomeFantasia == null) {
+        return res.status(400).json({ error: "O nome da Empresa está undefined ou nula!" });
     }
-    if (enterprise.nome == undefined || enterprise.nome == null) {
-        return res.status(400).json({ error: "Nome está undefined ou nulo!" });
+    if (cadastro.cnpj === undefined || cadastro.cnpj == null) {
+        return res.status(400).json({ error: "CNPJ está undefined ou nulo!" });
     }
-    if (enterprise.endereco == undefined || enterprise.endereco == null) {
-        return res.status(400).json({ error: "Endereço está undefined ou nulo!" });
+    if (cadastro.nomeUsuario === undefined || cadastro.nomeUsuario == null) {
+        return res.status(400).json({ error: "O nome do usuario está undefined ou nulo!" });
     }
-    if (enterprise.telefone == undefined || enterprise.telefone == null) {
-        return res.status(400).json({ error: "Telefone está undefined ou nulo!" });
+    if (cadastro.cpf === undefined) {
+        return res.status(400).json({ error: "CPF está undefined ou nulo!" });
     }
-    if (enterprise.email == undefined || enterprise.email == null) {
+    if (cadastro.email === undefined || cadastro.email == null) {
         return res.status(400).json({ error: "Email está undefined ou nulo!" });
     }
-    if (enterprise.senha == undefined || enterprise.senha == null) {
+    if (cadastro.senha === undefined || cadastro.senha == null) {
         return res.status(400).json({ error: "Senha está undefined ou nula!" });
     }
-
-    enterpriseModel.createEnterprise(enterprise)
+    if (cadastro.dtNasc === undefined || cadastro.dtNasc == null) {
+        return res.status(400).json({ error: "dtNasc está undefined ou nula!" });
+    }
+    if (cadastro.razaoSocial === undefined || cadastro.razaoSocial == null) {
+        return res.status(400).json({ error: "Função está undefined ou nula!" });
+    }
+    
+    enterpriseModel.createEnterpriseAndUser(cadastro)
         .then(function (resultado) {
             console.log('voltou pro then do controller')
 
             if (resultado) {
                 return res.status(201).json({
-                    message: "Empresa criada com sucesso",
-                    id: resultado.insertId
+                    message: "Model executado com sucesso",
+                    resultado: resultado
                 });
             } else {
                 res.status(400).json({
-                    error: "Erro ao criar empresa"
+                    error: "Erro ao criar empresa",
+                    message: "Empresa já cadastrada, não será necessário cadastrar novamente."
                 });
             }
         })
@@ -52,32 +58,10 @@ function createEnterprise(req, res) {
 
 
 function editEnterprise(req, res) {
-    var enterprise = req.body;
-    var id = req.params.id;
+    const enterprise = req.body;
+    const id = req.params.id;
     console.log("ID:", id);
     console.log("Dados recebidos:", enterprise);
-
-    if (id == undefined || id == null) {
-        return res.status(400).json({ error: "O id está undefined ou nulo!" });
-    }
-    if (enterprise == undefined || enterprise == null) {
-        return res.status(400).json({ error: "A empresa está undefined ou nula!" });
-    }
-    if (enterprise.nome == undefined || enterprise.nome == null) {
-        return res.status(400).json({ error: "Nome está undefined ou nulo!" });
-    }
-    if (enterprise.endereco == undefined || enterprise.endereco == null) {
-        return res.status(400).json({ error: "Endereço está undefined ou nulo!" });
-    }
-    if (enterprise.telefone == undefined || enterprise.telefone == null) {
-        return res.status(400).json({ error: "Telefone está undefined ou nulo!" });
-    }
-    if (enterprise.email == undefined || enterprise.email == null) {
-        return res.status(400).json({ error: "Email está undefined ou nulo!" });
-    }
-    if (enterprise.senha == undefined || enterprise.senha == null) {
-        return res.status(400).json({ error: "Senha está undefined ou nula!" });
-    }
 
     enterpriseModel.editEnterprise(enterprise, id)
         .then(function (resultado) {
@@ -95,7 +79,7 @@ function editEnterprise(req, res) {
 }
 
 function deleteEnterprise(req, res) {
-    var id = req.params.id;
+    const id = req.params.id;
     console.log("ID para exclusão:", id);
 
     if (id == undefined || id == null) {
@@ -121,10 +105,10 @@ function deleteEnterprise(req, res) {
 
 async function getEnterpriseEmployees(req, res) {
     console.log("Acessando controller")
-    const fkEmpresa = 3
+    const fkEmpresa = req.params.id
+    
     try {
         const allEmployees = await enterpriseModel.getEnterpriseEmployees(fkEmpresa)
-        console.log('voltei pro controller')
         return res.status(200).json(allEmployees)
     } catch (erro) {
             console.log(erro)
@@ -133,9 +117,37 @@ async function getEnterpriseEmployees(req, res) {
     }
 }
 
+async function getEnterpriseById(req, res) {
+    const idEnterprise = req.params.id;
+
+    try {
+        const enterpriseData = await enterpriseModel.getEnterpriseById(idEnterprise);
+        return res.status(200).json(enterpriseData[0]);
+    } catch (error) {
+        console.error(error);
+        console.error(`Houve um erro ao buscar pela empresa do ID ${idEnterprise}`);
+        return res.status(500).json(error.sqlMessage);
+    }
+}
+
+async function getEnterpriseAddress(req, res) {
+    const idEnterprise = req.params.id;
+
+    try {
+        const enterpriseAddress = await enterpriseModel.getEnterpriseAddress(idEnterprise);
+        return res.status(200).json(enterpriseAddress[0]);
+    } catch (error) {
+        console.error(error);
+        console.error(`Houve um erro ao buscar pela empresa do ID ${idEnterprise}`);
+        return res.status(500).json(error.sqlMessage);
+    }
+}
+
 module.exports = {
-    createEnterprise,
+    createEnterpriseAndUser,
     editEnterprise,
     deleteEnterprise,
-    getEnterpriseEmployees
+    getEnterpriseEmployees,
+    getEnterpriseById,
+    getEnterpriseAddress
 };

@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --text: #D4D4D8;
+    --background: #fffff0;
+    --primary: #2C3E50;
+    --secondary: #e66c2f;
+    --accent: #768087;  
+    --gray: lightslategray;
+}
+
+* {
+    font-family: "Inter";
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    background-color: var(--background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+}
+
+.divPainel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background);
+    width: 15%;
+    height: 100%;
+}
+
+.divPainelAzul{
+    width: 85%;
+    height: 85%;
+    background-color: var(--primary) ;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px var(--primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.div-button-log-out{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+}
+
+.button_logout{
+    display: flex;
+    align-items: center;
+    color: var(--background);
+    border-radius: 5px;
+    background-color: #c45824;
+    justify-content: center;
+    width: 70%;
+    height: 50%;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.button_logout:hover {
+    background-color: #a8421b;
+    transform: scale(1.05);
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background-color: var(--background);
+    width: 85%;
+    height: 100vh;
+}
+
+.center-box {
+    display: flex;
+    flex-direction: column;
+    background: #FFF;
+    width: 90%;
+    height: 80%;
+    border-radius: 16px;
+    box-shadow: 0 5px 10px var(--primary);
+}
+
+.blue-box {
+    width: 100%;
+    height: 15%;
+    background-color: var(--primary);
+    border-radius: 16px 16px 0 0;
+}
+
+.configs {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    gap: 16px;
+}
+
+.configs h1 {
+    font-size: 3rem;
+}
+
+.configs .box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.division {
+    width: 100%;
+    display: flex;
+}
+
+.division div {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.division div h3 {
+    font-size: 1.5rem;
+}
+
+.division div input {
+    font-size: 1rem;
+    background-color: var(--background);
+    outline: none;
+    width: 70%;
+    height: 5.5vh;
+    border-radius: 8px;
+    border: none;
+    padding: 0 0 0 8px ;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.division div input::-webkit-outer-spin-button,
+.division div input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+.update-button {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 32px 16px 0;
+}
+
+.update-button button {
+    display: flex;
+    align-self: flex-end;
+    background-color: var(--primary);
+    width: fit-content;
+    padding: 2vh 2vw;
+    border-radius: 8px;
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.lock {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+}
+
+.lock .blue-box {
+    width: 100%;
+    height: fit-content;
+    background-color: var(--primary);
+    border-radius: 16px 16px 0 0;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.lock .blue-box img {
+    height: 16px;
+    cursor: pointer;
+}
+
+.modal-senha {
+    background-color: #fff;
+    border-radius: 16px;
+    width: 90%;
+    height: 60%;
+    max-width: 400px;
+    max-height: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.confirmationInput {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.confirmationInput input {
+    width: 75%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.confirmationButton {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px;
+}
+
+.confirmationButton button {
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.confirmationButton button:hover {
+    background-color: #0056b3;
+}
+
+.hide {
+    display: none;
+}

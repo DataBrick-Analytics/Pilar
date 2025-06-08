@@ -15,10 +15,9 @@ async function authenticateUser(email, senha) {
         nome,
         email,
         funcao_empresa,
-        fk_empresa,
-        data_cadastro
-    FROM usuarios 
-    WHERE email = ? AND senha = ?
+        fk_empresa
+    FROM usuario
+    WHERE email = ? AND senha = sha2(?, 256)
     `;
 
     try {
@@ -53,25 +52,26 @@ async function authenticateUser(email, senha) {
     }
 }
 
-
 async function createUser(user) {
     const query = `
-    INSERT INTO usuarios (nome, email, senha, fk_empresa, funcao_empresa, data_cadastro)
+    INSERT INTO usuario (nome, email, senha, fk_empresa, funcao_empresa, data_cadastro)
     VALUES (?, ?, ?, ?, ?, NOW())
-    `;
+    `;  
 
     const values = [
-        user.nome,
+        user.nomeUsuario,
         user.email,
         user.senha,
-        user.fk_empresa, 
+        user.fk_empresa,
+        user.cpf,
+        user.dtNasc,
         user.funcao_empresa
     ];
 
     try {
         const resultado = await database.execute(query, values);
         console.log('Database result:', resultado);
-        return resultado[0];
+        return resultado;
     } catch (error) {
         console.error('Database error:', error);
         throw error;
@@ -80,7 +80,7 @@ async function createUser(user) {
 
 async function editUser(user, idUser) {
     const query = `
-    UPDATE usuarios 
+    UPDATE usuario
     SET nome = ?, 
         email = ?, 
         senha = ?, 
@@ -93,41 +93,40 @@ async function editUser(user, idUser) {
         user.nome,
         user.email,
         user.senha,
-        user.funcao_empresa,
-        user.fk_empresa,
+        user.cpf,
+        user.data_nasc,
         idUser
     ];
 
     try {
         const result = await database.execute(query, values);
-        return result[0];
+        return result;
     } catch (error) {
         console.error('Database error:', error);
         throw error;
     }
 }
 
-
 async function deleteUser(idUser) {
     const query = `
-    DELETE FROM usuarios WHERE id_usuario = ?
+    DELETE FROM usuario WHERE id_usuario = ?
     `;
 
     try {
-        const [resultado] = await database.execute(query, [idUser]);
+        console.log(query)
+        const resultado = await database.execute(query, [idUser]);
         console.log('Usuário deletado com sucesso:', resultado);
-        return resultado[0];
+        return resultado;
     } catch (error) {
         console.error('Erro ao deletar usuário:', error.message);
         throw error;
     }
-
 }
 
 
-async function serchUserByEnterpriseId(idEnterprise) {
+async function searchUsersByEnterpriseId(idEnterprise) {
     const query = `
-    SELECT * FROM usuarios WHERE fk_empresa = ?
+    SELECT * FROM usuario WHERE fk_empresa = ?
     `;
 
     try {
@@ -138,14 +137,27 @@ async function serchUserByEnterpriseId(idEnterprise) {
         console.error('Erro ao procurar usuario:', error.message);
         throw error;
     }
-
 }
 
+async function searchUserById(idUser) {
+    const query = `
+    SELECT * FROM usuario WHERE id_usuario = ?`;
+
+    try {
+        const resultado = await database.execute(query, [idUser]);
+        console.log('Usuários encontrados com sucesso:', resultado);
+        return resultado;
+    } catch (error) {
+        console.error('Erro ao procurar usuario:', error.message);
+        throw error;
+    }
+}
 
 module.exports = {
     createUser,
     editUser,
     deleteUser,
     authenticateUser,
-    serchUserByEnterpriseId
+    searchUserById,
+    searchUsersByEnterpriseId
 }
