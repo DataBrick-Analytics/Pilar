@@ -1,25 +1,25 @@
 function cadastrar() {
   //Recupere o valor da nova input pelo nome do id
   // Agora vá para o método fetch logo abaixo
-  var nomeEmpresaVar = nomeEmpresa_input.value;
+  var nomeFantasiaVar = nomeFantasia_input.value;
   var cnpjVar = Number(cnpj_input.value);
   var nomeUsuarioVar = nome_usuario_input.value;
   var cpfVar = cpf_input.value;
   var emailVar = email_input.value;
   var senhaVar = senha_input.value;
   var dtNascVar = dtNasc_input.value;
-  var funcaoVar = funcao_input.value;
+  var razaoSocialVar = razao_social_input.value;
 
   // Verificando se há algum campo em branco
   if (
-    nomeEmpresaVar == "" ||
+    nomeFantasiaVar == "" ||
     cnpjVar == "" ||
     nomeUsuarioVar == "" ||
     cpfVar == "" ||
     emailVar == "" ||
     senhaVar == "" ||
     dtNascVar == "" ||
-    funcaoVar == "" 
+    razaoSocialVar == "" 
   ) {
     console.log("Erro na hora do Cadastro")
 
@@ -34,7 +34,7 @@ function cadastrar() {
   }
 
   // Validação nomeEmpresa
-  if (nomeEmpresaVar.length < 2) {
+  if (nomeFantasiaVar.length < 2) {
     Swal.fire({
       icon: "error",
       title: 'Nome de Empresa Incorreto',
@@ -69,7 +69,7 @@ function cadastrar() {
   }
 
   // Validação do bairro
-  if (funcaoVar.length < 2) {
+  if (razaoSocialVar.length < 2) {
     Swal.fire({
       icon: "error",
       title: 'Bairro Incorreto',
@@ -115,14 +115,14 @@ function cadastrar() {
     body: JSON.stringify({
       // crie um atributo que recebe o valor recuperado aqui
       // Agora vá para o arquivo routes/usuario.js
-      nomeEmpresa: nomeEmpresaVar,
+      nomeFantasia: nomeFantasiaVar,
       cnpj: cnpjVar,
       nomeUsuario: nomeUsuarioVar,
       cpf: cpfVar,
       email: emailVar,
       senha: senhaVar,
       dtNasc: dtNascVar,
-      funcao: funcaoVar
+      razaoSocial: razaoSocialVar
     }),
   })
     .then(function (resposta) {
