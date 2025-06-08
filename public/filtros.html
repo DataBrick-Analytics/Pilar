@@ -75,12 +75,15 @@
                         Log Out
                     </button>
                 </div>
-                
 
             </div>
         </div>
         <div class="divTelaFiltros">
-            <div class="filtos">
+            <div class="box-nome-tela">
+                <h2>Regiões</h2>
+            </div>
+
+            <div class="filtros">
                 <div class="box-filtros">
                     <div class="box-filtro">
                         <select class="filtro">
@@ -126,13 +129,6 @@
                                 </div>
                             </div>
                     </div>
-
-                    <!-- <div class="box-escolhas-filtros">
-                        <p>Itens selecionados:</p>
-                        <div></div>
-                    </div> -->
-
-    
                     <div class="box-botao-filtrar">Filtrar Região</div>
 
             </div>
@@ -153,7 +149,6 @@
                         <div class="box-botao">Acessar Região</div>
                     </div>
                 </div>
-                
 
                 <div class="box-regiao">
                     <div class="box-regiao-cima">
@@ -182,24 +177,58 @@
                         <div class="box-botao">Acessar Região</div>
                     </div>
                 </div>
-
+                <div class="box-regiao">
+                    <div class="box-regiao-cima">
+                        <div class="box-titulo-botoes">
+                            <div class="titulo-regiao"><h1>Região X1</h1></div>
+                            <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                        </div>
+                        <p>Um belo apartamento moderno no centro da cidade</p>
+                    </div>
+                    <div class="box-regiao-baixo">
+                        <div class="box-botao">Acessar Região</div>
+                    </div>
+                </div>
+                <div class="box-regiao">
+                    <div class="box-regiao-cima">
+                        <div class="box-titulo-botoes">
+                            <div class="titulo-regiao"><h1>Região X1</h1></div>
+                            <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                        </div>
+                        <p>Um belo apartamento moderno no centro da cidade</p>
+                    </div>
+                    <div class="box-regiao-baixo">
+                        <div class="box-botao">Acessar Região</div>
+                    </div>
+                </div>
+                <div class="box-regiao">
+                    <div class="box-regiao-cima">
+                        <div class="box-titulo-botoes">
+                            <div class="titulo-regiao"><h1>Região X1</h1></div>
+                            <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                        </div>
+                        <p>Um belo apartamento moderno no centro da cidade</p>
+                    </div>
+                    <div class="box-regiao-baixo">
+                        <div class="box-botao">Acessar Região</div>
+                    </div>
+                </div>
 
             </div>
         <div>
-            
-        <div>
+    <div>
 
     
 </body>
 </html>
 
 <script>
-    
-  document.querySelectorAll('.botao-favoritos').forEach(function(botao) {
-  botao.addEventListener('click', function () {
+  document.querySelector('.botao-favoritos').addEventListener('click', function () {
     this.classList.toggle('ativa');
   });
-});
 
 document.querySelectorAll('.botao-fechar').forEach(function(botao) {
   botao.addEventListener('click', function () {
