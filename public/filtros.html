@@ -82,12 +82,14 @@
         <div class="divTelaFiltros">
             <div class="filtos">
                 <div class="box-filtros">
-                            <select class="filtro">
-                                <option value="">Selecione a cidade</option>
-                                <option value="sp">São Paulo</option>
-                                <option value="rj">Rio de Janeiro</option>
-                                <option value="mg">Minas Gerais</option>
-                                <option value="ba">Bahia</option>
+                    <div class="box-filtro">
+                        <select class="filtro">
+                                <option value="">Selecione a zona</option>
+                                <option value="c">Centro</option>
+                                <option value="n">Norte</option>
+                                <option value="s">Sul</option>
+                                <option value="l">Leste</option>
+                                <option value="o">Oeste</option>
                             </select>
 
                             <select class="filtro">
@@ -105,7 +107,7 @@
                                 <option value="3">Até R$ 500 mil</option>
                                 <option value="4">Acima de R$ 500 mil</option>
                             </select>
-
+                            
                             <select class="filtro">
                                 <option value="">Selecione o tamanho</option>
                                 <option value="p">Pequeno</option>
@@ -114,8 +116,23 @@
                                 <option value="xg">Muito Grande</option>
                             </select>
                     </div>
+                            <div class="itens-selecionados">
+                                <p>Itens selecionados:</p>
+                                <div class="selecao-filtros">
+                                        <div class="filtro-escolhido-1 filtro-escolhido"></div>
+                                        <div class="filtro-escolhido-2 filtro-escolhido"></div>
+                                        <div class="filtro-escolhido-3 filtro-escolhido"></div>
+                                        <div class="filtro-escolhido-4 filtro-escolhido"></div>
+                                </div>
+                            </div>
+                    </div>
 
-                    <div class="box-escolhas-filtros"></div>
+                    <!-- <div class="box-escolhas-filtros">
+                        <p>Itens selecionados:</p>
+                        <div></div>
+                    </div> -->
+
+    
                     <div class="box-botao-filtrar">Filtrar Região</div>
 
             </div>
@@ -229,4 +246,33 @@ document.querySelectorAll('.botao-fechar').forEach(function(botao) {
     if (card) card.style.display = 'none';
   });
 });
+
+
+ document.addEventListener("DOMContentLoaded", function () {
+        const botaoFiltrar = document.querySelector('.box-botao-filtrar');
+
+        botaoFiltrar.addEventListener('click', function () {
+            
+            const selects = document.querySelectorAll('.filtro');
+
+        
+            const divsEscolhidas = [
+                document.querySelector('.filtro-escolhido-1'),
+                document.querySelector('.filtro-escolhido-2'),
+                document.querySelector('.filtro-escolhido-3'),
+                document.querySelector('.filtro-escolhido-4')
+            ];
+
+        
+            divsEscolhidas.forEach(div => div.textContent = '');
+
+
+            selects.forEach((select, index) => {
+                const opcaoSelecionada = select.options[select.selectedIndex];
+                if (opcaoSelecionada && opcaoSelecionada.value !== '') {
+                    divsEscolhidas[index].textContent = opcaoSelecionada.text;
+                }
+            });
+        });
+    });
 </script>

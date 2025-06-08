@@ -25,19 +25,29 @@
     height: 20%;
 }
 .box-filtros{
-    padding-left: 20px;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    width: 60%;
+    flex-direction: row;
+    width: 80%;
     height: 100%;
     box-shadow: 0 5px 10px gray;
     border-top: 8px solid #e66c2f;
     border-radius: 20px;
     background-color: white;
 }
+.box-filtro{
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 70%;
+    height: 100%;
+}
 .box-escolhas-filtros{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     width: 20%;
     height: 100%;
     box-shadow: 0 5px 10px gray;
@@ -45,7 +55,38 @@
     border-radius: 20px;
     background-color: white;
 }
+.itens-selecionados{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.selecao-filtros{
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content: space-around;
+    width: 100%;
+    height: 70%;
+}
+.filtro-escolhido{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 40%;
+    height: 30%;
+}
+
+
+
+
+
 .box-botao-filtrar{
+    cursor: pointer;
     color: white;
     font-weight: bold;
     display: flex;
@@ -56,6 +97,10 @@
     box-shadow: 0 5px 10px gray;
     border-radius: 10px;
     background-color: var(--secondary);
+    transition: all 0.3s ease;
+}
+.box-botao-filtrar:hover{
+    background-color: #a8421b;
 }
 .filtro {
     padding: 8px;
