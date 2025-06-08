@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/dashNova.css">
+    <link rel="stylesheet" href="css/Style.css">
+    <link rel="stylesheet" href="css/filtros.css">
+</head>
+<body>
+    <div class="divGeral">
+        <div class="divPainel">
+            <div class="divPainelAzul">
+
+                <nav class="sidebarAzul">
+                    <div class="logo">
+                        <span class="logo-icon">
+                            <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" alt="">
+                        </span>
+                        <span class="logo-text">DataBrick</span>
+                    </div>
+    
+                    <div class="separator"></div>
+    
+                    <div class="user-profile">
+                        <div class="avatar">
+                            <img src="./assets/icons-dash/USER-ICON-SM.svg" alt="">
+                        </div>
+                        <span class="username" id="user">Nome usuario</span>
+                    </div>
+    
+                    <div class="separator"></div>
+    
+                    <div class="nav-menu">
+                        <a href="#" class="nav-item">
+                            <span class="nav-icon">
+                                <img src="./assets/icons-dash/HOME-ICON-SM.svg" alt="">
+                            </span>
+                            <span>Home</span>
+                        </a>
+    
+                        <div class="nav-section">
+                            <span class="nav-section-title">PAGES</span>
+                            <div class="dropdown">
+                                <button class="dropdown-btn active">
+                                    <span class="nav-icon"> <img src="./assets/icons-dash/CHART-ICON-SM.svg" alt=""></span>
+                                    <span>Propriedades</span>
+                                    <span class="dropdown-arrow">▼</span>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#" class="dropdown-item">
+                                        <span class="prefix">B</span>
+                                        <span>Filtrar propriedade</span>
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        <span class="prefix">C</span>
+                                        <span>Propriedades favoritas</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="nav-menu">
+                                <a href="./listaUsuario.html" class="nav-item">
+                                    <span class="nav-icon">
+                                        <img src="./assets/icons-dash/ALERT-ICON-SM.svg" alt="">
+                                    </span>
+                                    <span>Alertas</span>
+                                </a>
+                            </div>
+                        </div>
+                </nav>
+
+                <div class="div-button-log-out">
+                    <button onclick="logout()" class="button_logout">
+                        Log Out
+                    </button>
+                </div>
+                
+
+            </div>
+        </div>
+        <div class="divTelaFiltros">
+            <div class="filtos">
+                <div class="box-filtros">
+                            <select class="filtro">
+                                <option value="">Selecione a cidade</option>
+                                <option value="sp">São Paulo</option>
+                                <option value="rj">Rio de Janeiro</option>
+                                <option value="mg">Minas Gerais</option>
+                                <option value="ba">Bahia</option>
+                            </select>
+
+                            <select class="filtro">
+                                <option value="">Selecione o tipo</option>
+                                <option value="casa">Casa</option>
+                                <option value="apto">Apartamento</option>
+                                <option value="chacara">Chácara</option>
+                                <option value="sala">Sala Comercial</option>
+                            </select>
+
+                            <select class="filtro">
+                                <option value="">Selecione o preço</option>
+                                <option value="1">Até R$ 100 mil</option>
+                                <option value="2">Até R$ 300 mil</option>
+                                <option value="3">Até R$ 500 mil</option>
+                                <option value="4">Acima de R$ 500 mil</option>
+                            </select>
+
+                            <select class="filtro">
+                                <option value="">Selecione o tamanho</option>
+                                <option value="p">Pequeno</option>
+                                <option value="m">Médio</option>
+                                <option value="g">Grande</option>
+                                <option value="xg">Muito Grande</option>
+                            </select>
+                    </div>
+
+                    <div class="box-escolhas-filtros"></div>
+                    <div class="box-botao-filtrar">Filtrar Região</div>
+
+            </div>
+
+
+            <div class="container-regioes">
+
+                <div class="box-regiao">
+                    <div class="box-regiao-cima">
+                        <div class="box-titulo-botoes">
+                            <div class="titulo-regiao"><h1>Região X1</h1></div>
+                            <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                        </div>
+                        <p>Um belo apartamento moderno no centro da cidade</p>
+                    </div>
+                    <div class="box-regiao-baixo">
+                        <div class="box-botao">Acessar Região</div>
+                    </div>
+                </div>
+
+                <div class="box-regiao">
+                    <div class="box-regiao-cima">
+                        <div class="box-titulo-botoes">
+                            <div class="titulo-regiao"><h1>Região X1</h1></div>
+                            <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                        </div>
+                        <p>Um belo apartamento moderno no centro da cidade</p>
+                    </div>
+                    <div class="box-regiao-baixo">
+                        <div class="box-botao">Acessar Região</div>
+                    </div>
+                </div>
+
+                <div class="box-regiao">
+                    <div class="box-regiao-cima">
+                        <div class="box-titulo-botoes">
+                            <div class="titulo-regiao"><h1>Região X1</h1></div>
+                            <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                        </div>
+                        <p>Um belo apartamento moderno no centro da cidade</p>
+                    </div>
+                    <div class="box-regiao-baixo">
+                        <div class="box-botao">Acessar Região</div>
+                    </div>
+                </div>
+
+                <div class="box-regiao">
+                    <div class="box-regiao-cima">
+                        <div class="box-titulo-botoes">
+                            <div class="titulo-regiao"><h1>Região X1</h1></div>
+                            <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                        </div>
+                        <p>Um belo apartamento moderno no centro da cidade</p>
+                    </div>
+                    <div class="box-regiao-baixo">
+                        <div class="box-botao">Acessar Região</div>
+                    </div>
+                </div>
+
+                <div class="box-regiao">
+                    <div class="box-regiao-cima">
+                        <div class="box-titulo-botoes">
+                            <div class="titulo-regiao"><h1>Região X1</h1></div>
+                            <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                        </div>
+                        <p>Um belo apartamento moderno no centro da cidade</p>
+                    </div>
+                    <div class="box-regiao-baixo">
+                        <div class="box-botao">Acessar Região</div>
+                    </div>
+                </div>
+
+                <div class="box-regiao">
+                    <div class="box-regiao-cima">
+                        <div class="box-titulo-botoes">
+                            <div class="titulo-regiao"><h1>Região X1</h1></div>
+                            <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                        </div>
+                        <p>Um belo apartamento moderno no centro da cidade</p>
+                    </div>
+                    <div class="box-regiao-baixo">
+                        <div class="box-botao">Acessar Região</div>
+                    </div>
+                </div>
+                
+
+
+            </div>
+        <div>
+            
+        <div>
+
+    
+</body>
+</html>
+
+<script>
+  document.querySelector('.botao-favoritos').addEventListener('click', function () {
+    this.classList.toggle('ativa');
+  });
+
+document.querySelectorAll('.botao-fechar').forEach(function(botao) {
+  botao.addEventListener('click', function () {
+    const card = this.closest('.box-regiao');
+    if (card) card.style.display = 'none';
+  });
+});
+</script>
