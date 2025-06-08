@@ -226,9 +226,12 @@
 </html>
 
 <script>
-  document.querySelector('.botao-favoritos').addEventListener('click', function () {
+    
+ document.querySelectorAll('.botao-favoritos').forEach(function(botao) {
+  botao.addEventListener('click', function () {
     this.classList.toggle('ativa');
   });
+});
 
 document.querySelectorAll('.botao-fechar').forEach(function(botao) {
   botao.addEventListener('click', function () {
