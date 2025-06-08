@@ -28,6 +28,7 @@ var enterpriseRouter = require("./src/routes/enterpriseRoutes");
 var modeloRouter = require("./src/routes/modeloRoutes");
 var dataRouter = require("./src/routes/dataRoutes");
 var favoritesRouter = require("./src/routes/favoritesRoutes");
+var districtRouter = require("./src/routes/districtRoutes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -39,8 +40,9 @@ app.use("/", indexRouter);
 app.use("/", userRouter);
 app.use("/", enterpriseRouter); 
 app.use("/", dataRouter); 
-app.use("/modeloRoutes", modeloRouter);
 app.use("/", favoritesRouter);
+app.use("/", districtRouter);
+app.use("/modeloRoutes", modeloRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
