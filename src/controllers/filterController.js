@@ -1,38 +1,50 @@
-var filterModel = require('../models/filterModel');
+const filterModel = require('../models/filterModel');
+
 
 async function getRegionByFilter(req, res) {
-    const filtros = req.body;
-
-    if (filtros.size === undefined) return res.status(400).send("Tamanho está undefined ou nulo!")
-    if (filtros.priceM2 === undefined) return res.status(400).send("Preço está undefined ou nulo!")
-    if (filtros.zone === undefined) return res.status(400).send("Zona está undefined ou nula!")
-    if (filtros.predominance === undefined) return res.status(400).send("Predominancia está undefined ou nula!")
-
     try {
-        const filteredRegions = await filterModel.getRegionByFilter(filtros) || null
-        if (filteredRegions !== null) {
-            return res.status(200).json(filteredRegions)
-        } else {
-            return res.status(404).json({
-                message: "filteredRegions retornou nulo."
-            })
+        const {
+            precoMin,
+            violenciaMax,
+            densidadeMax,
+            zona
+        } = req.body;
+
+        const filtros = {
+            precoMin: precoMin !== undefined ? Number(precoMin) : undefined,
+            violenciaMax: violenciaMax !== undefined ? Number(violenciaMax) : undefined,
+            densidadeMax: densidadeMax !== undefined ? Number(densidadeMax) : undefined,
+            zona: zona || undefined
+        };
+
+        // Validação básica
+        if (
+            (filtros.precoMin !== undefined && isNaN(filtros.precoMin)) ||
+            (filtros.violenciaMax !== undefined && isNaN(filtros.violenciaMax)) ||
+            (filtros.densidadeMax !== undefined && isNaN(filtros.densidadeMax))
+        ) {
+            return res.status(400).json({erro: "Parâmetros numéricos inválidos"});
         }
+
+        // Chamada do model
+        const distritos = await filterModel.getRegionByFilter(filtros);
+
+        res.status(200).json(distritos);
     } catch (erro) {
-        console.log(erro)
-        console.log("Houve um erro ao filtrar as regiões.", erro.sqlMessage)
-        res.status(500).json(erro.sqlMessage)
+        console.error("Erro ao filtrar distritos:", erro);
+        res.status(500).json({erro: "Erro interno ao buscar distritos"});
     }
 }
 
 
 async function getRandomRegion(req, res) {
-    filterModel.getRandomRegion().then(function (resultado) {
-        if (resultado.ok) {
-            return res.status(200).json(resultado)
-        } else {
-            return res.status(400).json(resultado)
-        }
-    })
+    try {
+        const distritos = await filterModel.getRandomRegion();
+        res.status(200).json(distritos);
+    } catch (erro) {
+        console.error("Erro ao filtrar distritos:", erro);
+        res.status(500).json({erro: "Erro interno ao buscar distritos"});
+    }
 }
 
 module.exports = {
