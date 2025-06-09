@@ -1,6 +1,21 @@
+// ...existing code...
+
+function nextStep(step) {
+  document.querySelector(`.step-content.active`).classList.remove('active');
+  document.querySelector(`.step[data-step="${step-1}"]`).classList.remove('active');
+  document.querySelector(`#step${step}`).classList.add('active');
+  document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+}
+
+function prevStep(step) {
+  document.querySelector(`.step-content.active`).classList.remove('active');
+  document.querySelector(`.step[data-step="${step+1}"]`).classList.remove('active');
+  document.querySelector(`#step${step}`).classList.add('active');
+  document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+}
+
 function cadastrar() {
-  //Recupere o valor da nova input pelo nome do id
-  // Agora vá para o método fetch logo abaixo
+  // Existing fields
   var nomeFantasiaVar = nomeFantasia_input.value;
   var cnpjVar = Number(cnpj_input.value);
   var nomeUsuarioVar = nome_usuario_input.value;
@@ -10,7 +25,15 @@ function cadastrar() {
   var dtNascVar = dtNasc_input.value;
   var razaoSocialVar = razao_social_input.value;
 
-  // Verificando se há algum campo em branco
+  // New address fields
+  var cepVar = cep_input.value;
+  var ruaVar = rua_input.value;
+  var numeroVar = numero_input.value;
+  var complementoVar = complemento_input.value;
+  var bairroVar = bairro_input.value;
+  var cidadeVar = cidade_input.value;
+  var estadoVar = estado_input.value;
+
   if (
     nomeFantasiaVar == "" ||
     cnpjVar == "" ||
@@ -19,7 +42,13 @@ function cadastrar() {
     emailVar == "" ||
     senhaVar == "" ||
     dtNascVar == "" ||
-    razaoSocialVar == "" 
+    razaoSocialVar == "" ||
+    cepVar == "" ||
+    ruaVar == "" ||
+    numeroVar == "" ||
+    bairroVar == "" ||
+    cidadeVar == "" ||
+    estadoVar == ""
   ) {
     console.log("Erro na hora do Cadastro")
 
@@ -104,17 +133,100 @@ function cadastrar() {
     return
   }
 
+  
+  // Validação do CEP
+  if (cepVar.length !== 8) {
+    Swal.fire({
+      icon: "error",
+      title: 'CEP Incorreto',
+      text: 'Insira um CEP válido com 8 dígitos',
+      color: "#FFFFFF",
+      background: "#2C3E50"
+    })
+    return
+  }
+
+  // Validação da Rua
+  if (ruaVar.length < 3) {
+    Swal.fire({
+      icon: "error",
+      title: 'Rua Incorreta',
+      text: 'Insira um nome de rua válido',
+      color: "#FFFFFF",
+      background: "#2C3E50"
+    })
+    return
+  }
+
+  // Validação do Número
+  if (numeroVar.length < 1) {
+    Swal.fire({
+      icon: "error",
+      title: 'Número Incorreto',
+      text: 'Insira um número válido',
+      color: "#FFFFFF",
+      background: "#2C3E50"
+    })
+    return
+  }
+
+  // Validação do Bairro
+  if (bairroVar.length < 3) {
+    Swal.fire({
+      icon: "error",
+      title: 'Bairro Incorreto',
+      text: 'Insira um nome de bairro válido',
+      color: "#FFFFFF",
+      background: "#2C3E50"
+    })
+    return
+  }
+
+  // Validação da Cidade
+  if (cidadeVar.length < 3) {
+    Swal.fire({
+      icon: "error",
+      title: 'Cidade Incorreta',
+      text: 'Insira um nome de cidade válido',
+      color: "#FFFFFF",
+      background: "#2C3E50"
+    })
+    return
+  }
+
+  // Validação do Estado
+  if (estadoVar.length !== 2) {
+    Swal.fire({
+      icon: "error",
+      title: 'Estado Incorreto',
+      text: 'Insira a sigla do estado com 2 letras',
+      color: "#FFFFFF",
+      background: "#2C3E50"
+    })
+    return
+  }
+
+  // Validação do Complemento (opcional)
+  if (complementoVar && complementoVar.length < 2) {
+    Swal.fire({
+      icon: "error",
+      title: 'Complemento Incorreto',
+      text: 'Insira um complemento válido ou deixe em branco',
+      color: "#FFFFFF",
+      background: "#2C3E50"
+    })
+    return
+  }
+
   console.log("Informações corretas")
 
-  // Enviando o valor da nova input
   fetch("/enterprise/cadastrar", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      // crie um atributo que recebe o valor recuperado aqui
-      // Agora vá para o arquivo routes/usuario.js
+   
       nomeFantasia: nomeFantasiaVar,
       cnpj: cnpjVar,
       nomeUsuario: nomeUsuarioVar,
@@ -148,6 +260,9 @@ function cadastrar() {
 
   return false;
 }
+
+
+
 
 // Listando empresas cadastradas 
 function listar() {

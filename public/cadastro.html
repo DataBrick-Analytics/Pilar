@@ -2,100 +2,107 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>DataBrick | Cadastro</title>
-  <!--LIBS-->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
+	<title>DataBrick | Cadastro</title>
+	<!--LIBS-->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <link rel="stylesheet" href="css/cadastro.css" />
-  <link rel="icon" href="./assets/icon/favicon2.ico" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  
-  
-  <script src="./js/cadastro.js"></script>
+
+	<link rel="stylesheet" href="css/cadastro.css" />
+	<link rel="icon" href="./assets/icon/favicon2.ico" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+
+
+	<script src="./js/cadastro.js"></script>
 </head>
 
 <body>
 
-  <div class="leftContainer">
-    <div class="signUpDescription">
-      <h1>FAÇA SEU CADASTRO</h1>
-      <p>Cadastre-se agora e aproveite todas as vantagens que oferecemos!</p>
-    </div>
-    <img src="assets/register/register-background-image.svg" alt="" id="imageSignUp">
-  </div>
+	<div class="leftContainer">
+		<div class="signUpDescription">
+			<h1>FAÇA SEU CADASTRO</h1>
+			<p>Cadastre-se agora e aproveite todas as vantagens que oferecemos!</p>
+		</div>
+		<img src="assets/register/register-background-image.svg" alt="" id="imageSignUp">
+	</div>
 
-  <div class="container">
-    <img src="assets/logo/BrickData.svg" alt="" style="scale: 1.8;">
-    <h4 style="margin: 0;">Cadastre uma conta!</h4>
+	<div class="container">
+		<img src="assets/logo/BrickData.svg" alt="" style="scale: 1.8;">
+		<h4>Cadastre uma conta!</h4>
 
-    <form action="" class="formulario">
+		<div class="step-indicators">
+			<div class="step active" data-step="1">Dados da Empresa</div>
+			<div class="step" data-step="2">Endereço</div>
+		</div>
 
-      <div class="leftSection">
-        <div class="field">
-          <label for="nome">Nome Fantasia:</label>
-          <input type="text" placeholder="Digite o nome fantasia da empresa" id="nomeFantasia_input">
-        </div>
-        <div class="field">
-          <label for="cnpj">CNPJ:</label>
-          <input type="number" placeholder="Digite o CNPJ da empresa" id="cnpj_input">
-        </div>
+		<form id="cadastroForm">
 
-        <div class="field">
-          <label for="cidade">Razão Social  :</label>
-          <input type="text" placeholder="Razão social da empresa" id="razao_social_input">
-        </div>
+			<!-- Step 1 -->
+			<div class="step-content active" id="step1">
+				<div class="field">
+					<input type="text" id="nomeFantasia_input" placeholder="Nome Fantasia">
+				</div>
+				<div class="field">
+					<input type="text" id="cnpj_input" placeholder="CNPJ">
+				</div>
+				<div class="field">
+					<input type="text" id="nome_usuario_input" placeholder="Nome do Usuário">
+				</div>
+				<div class="field">
+					<input type="text" id="cpf_input" placeholder="CPF">
+				</div>
+				<div class="field">
+					<input type="email" id="email_input" placeholder="Email">
+				</div>
+				<div class="field password-field">
+					<input type="password" id="senha_input" placeholder="Senha">
+					<i class="fas fa-eye" id="senhaIcon"></i>
+				</div>
+				<div class="field">
+					<input type="text" id="dtNasc_input" placeholder="Data de Nascimento">
+				</div>
+				<div class="field">
+					<input type="text" id="razao_social_input" placeholder="Razão Social">
+				</div>
+				<button type="button" onclick="nextStep(2)" class="next-btn">Próximo</button>
+			</div>
 
-        <div class="field">
-          <div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between;">
-            <label for="senha">Senha: </label>
-            <img src="assets/services/icon - showPasswd.svg" id="senhaIcon">
-          </div>
-          <input type="password" placeholder="Digite sua senha" id="senha_input">
-        </div>
-        
-
-      </div>
-
-
-      <div class="rightSection">
-        <div class="field">
-          <label for="telefone">Nome Usuário:</label>
-          <input type="text" placeholder="Digite seu nome" id="nome_usuario_input">
-        </div>
-
-        <div class="field">
-          <label for="cep">CPF:</label>
-          <input type="number" placeholder="Digite seu CPF" id="cpf_input">
-        </div>
-
-        <div class="field">
-          <label for="email">E-mail:</label>
-          <input type="email" placeholder="empresa@gmail.com" id="email_input">
-        </div>
-
-        <div class="field">
-          <label for="estado">Data de Nascimento:</label>
-          <input type="date" id="dtNasc_input" style="color: rgb(109, 109, 109);">
-        </div>
-
-      </div>
-
-    </form>
-
-    <div class="buttons">
-      <button onclick="cadastrar()" id="signUpButton">Sign Up now</button>
-
-
-      <img src="assets/login/or-crossbar.svg" alt="" id="orLoginImage">
-      <a href="login.html" id="logInButton">Login</a>
-
-    </div>
-  </div>
+			<!-- Step 2 -->
+			<div class="step-content" id="step2">
+				<div class="field">
+				  <input type="text" id="telefone_input" placeholder="Telefone">
+				</div>
+				<div class="field">
+					<input type="text" id="cep_input" placeholder="CEP">
+				</div>
+				<div class="field">
+					<input type="text" id="rua_input" placeholder="Rua">
+				</div>
+				<div class="field">
+					<input type="text" id="numero_input" placeholder="Número">
+				</div>
+				<div class="field">
+					<input type="text" id="complemento_input" placeholder="Complemento">
+				</div>
+				<div class="field">
+					<input type="text" id="bairro_input" placeholder="Bairro">
+				</div>
+				<div class="field">
+					<input type="text" id="cidade_input" placeholder="Cidade">
+				</div>
+				<div class="field">
+					<input type="text" id="estado_input" placeholder="Estado">
+				</div>
+				<div class="button-group">
+					<button type="button" onclick="prevStep(1)" class="prev-btn">Anterior</button>
+					<button type="button" onclick="cadastrar()" class="submit-btn">Cadastrar</button>
+				</div>
+			</div>
+		</form>
+		</div>
 
 </body>
 

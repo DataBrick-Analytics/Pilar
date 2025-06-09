@@ -20,18 +20,18 @@
                         </span>
                         <span class="logo-text">DataBrick</span>
                     </div>
-    
+
                     <div class="separator"></div>
-    
+
                     <div class="user-profile">
                         <div class="avatar">
                             <img src="./assets/icons-dash/USER-ICON-SM.svg" alt="">
                         </div>
                         <span class="username" id="user">Nome usuario</span>
                     </div>
-    
+
                     <div class="separator"></div>
-    
+
                     <div class="nav-menu">
                         <a href="#" class="nav-item">
                             <span class="nav-icon">
@@ -39,7 +39,7 @@
                             </span>
                             <span>Home</span>
                         </a>
-    
+
                         <div class="nav-section">
                             <span class="nav-section-title">PAGES</span>
                             <div class="dropdown">
@@ -110,7 +110,7 @@
                                 <option value="3">Até R$ 12 mil</option>
                                 <option value="4">Acima de R$ 12 mil</option>
                             </select>
-                            
+
                             <select class="filtro">
                                 <option value="">Selecione a densidade de Malha Urbana</option>
                                 <option value="p">Até 25%</option>
@@ -221,12 +221,12 @@
         <div>
     <div>
 
-    
+
 </body>
 </html>
 
 <script>
-    
+
  document.querySelectorAll('.botao-favoritos').forEach(function(botao) {
   botao.addEventListener('click', function () {
     this.classList.toggle('ativa');
@@ -245,10 +245,10 @@ document.querySelectorAll('.botao-fechar').forEach(function(botao) {
         const botaoFiltrar = document.querySelector('.box-botao-filtrar');
 
         botaoFiltrar.addEventListener('click', function () {
-            
+
             const selects = document.querySelectorAll('.filtro');
 
-        
+
             const divsEscolhidas = [
                 document.querySelector('.filtro-escolhido-1'),
                 document.querySelector('.filtro-escolhido-2'),
@@ -256,7 +256,7 @@ document.querySelectorAll('.botao-fechar').forEach(function(botao) {
                 document.querySelector('.filtro-escolhido-4')
             ];
 
-        
+
             divsEscolhidas.forEach(div => div.textContent = '');
 
 
