@@ -11,7 +11,7 @@ function entrar() {
         return false;
     }
 
-    fetch("/user/autenticar", {
+    fetch("/user/autenticar",   {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

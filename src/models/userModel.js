@@ -153,11 +153,29 @@ async function searchUserById(idUser) {
     }
 }
 
+async function salvarEscolhas(escolhas) {
+    const query = `
+        INSERT INTO escolha_usuario (etapa1, etapa2, etapa3)
+        VALUES (?, ?, ?)
+    `;
+
+    const values = [escolhas[0], escolhas[1], escolhas[2]];
+
+    try {
+        const resultado = await database.execute(query, values);
+        return resultado;
+    } catch (error) {
+        console.error("Erro ao salvar escolhas:", error);
+        throw error;
+    }
+}
+
 module.exports = {
     createUser,
     editUser,
     deleteUser,
     authenticateUser,
     searchUserById,
-    searchUsersByEnterpriseId
+    searchUsersByEnterpriseId,
+    salvarEscolhas
 }

@@ -190,10 +190,27 @@ function searchUserById(req, res) {
         });
 }
 
+async function salvarEscolhas(req, res) {
+    const escolhas = req.body.escolhas;
+
+    if (!escolhas || escolhas.length !== 3) {
+        return res.status(400).json({ message: "Escolhas inválidas ou incompletas" });
+    }
+
+    try {
+        const resultado = await escolhaModel.salvarEscolhas(escolhas);
+        return res.status(201).json({ message: "Escolhas salvas com sucesso!", resultado });
+    } catch (erro) {
+        console.error("Erro no Controller:", erro);
+        return res.status(500).json({ message: "Erro ao salvar escolhas", erro });
+    }
+}
+
 module.exports = {
     authenticateUser,
     createUser,
     editUser,
     deleteUser,
-    searchUserById
+    searchUserById,
+    salvarEscolhas
 };
