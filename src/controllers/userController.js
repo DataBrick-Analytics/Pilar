@@ -190,6 +190,7 @@ function searchUserById(req, res) {
         });
 }
 
+
 module.exports = {
     authenticateUser,
     createUser,

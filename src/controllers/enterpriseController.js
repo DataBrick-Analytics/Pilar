@@ -1,8 +1,8 @@
 var enterpriseModel = require("../models/enterpriseModel");
-
+var userModel = require("../models/userModel");
 
 function createEnterpriseAndUser(req, res) {
-    const cadastro = req.body
+    const cadastro = req.body;
 
     console.log("Dados recebidos:", cadastro);
 
@@ -25,6 +25,39 @@ function createEnterpriseAndUser(req, res) {
         return res.status(400).json({error: "Senha está undefined ou nula!"});
     }
     if (cadastro.dtNasc === undefined || cadastro.dtNasc == null) {
+        return res.status(400).json({error: "Data de nascimento está undefined ou nula!"});
+    }
+    if (cadastro.razaoSocial === undefined || cadastro.razaoSocial == null) {
+        return res.status(400).json({error: "Razão Social está undefined ou nula!"});
+    }
+    if (cadastro.uf === undefined || cadastro.uf == null) {
+        return res.status(400).json({error: "UF está undefined ou nula!"});
+    }
+    if (cadastro.cep === undefined || cadastro.cep == null) {
+        return res.status(400).json({error: "CEP está undefined ou nulo!"});
+    }
+    if (cadastro.rua === undefined || cadastro.rua == null) {
+        return res.status(400).json({error: "Rua está undefined ou nula!"});
+    }
+    if (cadastro.numero === undefined || cadastro.numero == null) {
+        return res.status(400).json({error: "Número está undefined ou nulo!"});
+    }
+    if (cadastro.complemento === undefined || cadastro.complemento == null) {
+        return res.status(400).json({error: "Complemento está undefined ou nulo!"});
+    }
+    if (cadastro.bairro === undefined || cadastro.bairro == null) {
+        return res.status(400).json({error: "Bairro está undefined ou nulo!"});
+    }
+    if (cadastro.cidade === undefined || cadastro.cidade == null) {
+        return res.status(400).json({error: "Cidade está undefined ou nula!"});
+    }
+    if (cadastro.estado === undefined || cadastro.estado == null) {
+        return res.status(400).json({error: "Estado está undefined ou nulo!"});
+    }
+    if (cadastro.telefone === undefined || cadastro.telefone == null) {
+        return res.status(400).json({error: "Telefone está undefined ou nulo!"});
+    }
+    if (cadastro.dtNasc === undefined || cadastro.dtNasc == null) {
         return res.status(400).json({error: "dtNasc está undefined ou nula!"});
     }
     if (cadastro.razaoSocial === undefined || cadastro.razaoSocial == null) {
@@ -35,26 +68,67 @@ function createEnterpriseAndUser(req, res) {
         .then(function (resultado) {
             console.log('voltou pro then do controller')
 
-            if (resultado) {
-                return res.status(201).json({
-                    message: "Model executado com sucesso",
-                    resultado: resultado
-                });
-            } else {
-                res.status(400).json({
-                    error: "Erro ao criar empresa",
-                    message: "Empresa já cadastrada, não será necessário cadastrar novamente."
-                });
-            }
-        })
-        .catch(function (erro) {
-            console.error("Erro ao criar empresa:", erro);
-            res.status(500).json({
-                error: erro.sqlMessage || erro.message
-            });
-        });
-}
+            enterpriseModel.checkCnpj(cadastro.cnpj)
+                .then((cnpjExistente) => {
+                    if (cnpjExistente.length > 0) {
+                        res.status(409).json({error: "CNPJ já cadastrado."});
+                        return Promise.reject('CNPJ duplicado');
+                    }
+                    return enterpriseModel.checkRazaoSocialcnpj(cadastro.razaoSocial);
+                })
+                .then((razaoExistente) => {
+                    if (razaoExistente.length > 0) {
+                        res.status(409).json({error: "Razão Social já cadastrada."});
+                        return Promise.reject('Razão Social duplicada');
+                    }
+                    return userModel.checkEmail(cadastro.email);
+                })
+                .then((emailExistente) => {
+                    if (emailExistente.length > 0) {
+                        res.status(409).json({error: "Email já cadastrado."});
+                        return Promise.reject('Email duplicado');
+                    }
+                    return userModel.checkCpf(cadastro.cpf);
+                })
+                .then((cpfExistente) => {
+                    if (cpfExistente.length > 0) {
+                        res.status(409).json({error: "CPF já cadastrado."});
+                        return Promise.reject('CPF duplicado');
+                    }
+                    return enterpriseModel.createEnterpriseAndUser(cadastro);
+                })
+                .then((resultado) => {
+                    if (resultado) {
+                        return res.status(201).json({
+                            message: "Empresa e usuário criados com sucesso",
+                            resultado: resultado
+                        });
+                    } else {
+                        return res.status(400).json({
+                            error: "Erro ao criar empresa",
+                            message: "Empresa já cadastrada, não será necessário cadastrar novamente."
+                        });
+                    }
+                })
+                .catch((erro) => {
+                    if (
+                        erro === 'CNPJ duplicado' ||
+                        erro === 'Razão Social duplicada' ||
+                        erro === 'Email duplicado' ||
+                        erro === 'CPF duplicado'
+                    ) {
+                        return;
+                    }
 
+                    console.error("Erro inesperado:", erro);
+                    if (!res.headersSent) {
+                        res.status(500).json({
+                            error: erro.sqlMessage || erro.message || 'Erro interno'
+                        });
+                    }
+                });
+        })
+}
 
 function editEnterprise(req, res) {
     const enterprise = req.body;
