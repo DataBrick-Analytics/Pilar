@@ -177,6 +177,23 @@ async function checkCpf(cpf) {
 
 
 
+async function salvarEscolhas(idUsuario,escolhas) {
+    const query = `
+        INSERT INTO escolhas_formulario (etapa1, etapa2, etapa3, fk_id_usuario)
+        VALUES (?, ?, ?, ?)
+    `;
+
+    const values = [escolhas[0], escolhas[1], escolhas[2], idUsuario];
+
+    try {
+        const resultado = await database.execute(query, values);
+        return resultado;
+    } catch (error) {
+        console.error("Erro ao salvar escolhas:", error);
+        throw error;
+    }
+}
+
 module.exports = {
     createUser,
     editUser,
@@ -185,5 +202,6 @@ module.exports = {
     searchUserById,
     searchUsersByEnterpriseId,
     checkEmail,
-    checkCpf
+    checkCpf,
+    salvarEscolhas
 }
