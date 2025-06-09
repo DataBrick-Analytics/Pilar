@@ -62,6 +62,11 @@ async function getRegionByFilter(filter) {
     }
 }
 
+async function getRandomRegion(){
+    // SELECT PARA PEGAR REGIOES ALEATÓRIAS E INSERIR NA TELA DE FILTROS
+}
+
 module.exports = {
-    getRegionByFilter
+    getRegionByFilter,
+    getRandomRegion
 }

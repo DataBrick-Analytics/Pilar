@@ -10,8 +10,12 @@ async function getRegionByFilter(req, res) {
 
     try {
         const filteredRegions = await filterModel.getRegionByFilter(filtros) || null
-        if(filteredRegions !== null){
+        if (filteredRegions !== null) {
             return res.status(200).json(filteredRegions)
+        } else {
+            return res.status(404).json({
+                message: "filteredRegions retornou nulo."
+            })
         }
     } catch (erro) {
         console.log(erro)
@@ -20,6 +24,18 @@ async function getRegionByFilter(req, res) {
     }
 }
 
+
+async function getRandomRegion(req, res) {
+    filterModel.getRandomRegion().then(function (resultado) {
+        if (resultado.ok) {
+            return res.status(200).json(resultado)
+        } else {
+            return res.status(400).json(resultado)
+        }
+    })
+}
+
 module.exports = {
-    getRegionByFilter
+    getRegionByFilter,
+    getRandomRegion
 }
