@@ -136,7 +136,7 @@
                                 <p>Refazer questionario de região</p>
                                  Questionário que identifica as regiões preferidas com base no seu perfil.
                             </div>
-                            <div class="alertas-button">Iniciar Teste</div>
+                            <div id="button-forms" class="alertas-button">Iniciar Teste</div>
                         </div>
                         <div class="alertas">
                             <div class="alertas-icon"></div>
@@ -144,7 +144,7 @@
                                 <p>Alertas</p>
                                 Receba notificações do Slack diretamente e fique por dentro das novidades. Acesse e aproveite todas as oportunidades!
                             </div>
-                            <div class="alertas-button">Ver Alertas</div>
+                            <div id="button-allerts" class="alertas-button">Ver Alertas</div>
                         </div>
                     </div>
             </div>
@@ -175,22 +175,6 @@
 </body>
 </html>
 
-<script>
-fetch("/data/getRegiaoRecomendada")
-    .then(res => res.json())
-    .then(data => {
-        data.forEach((regiao, index) => {
-            const regiaoId = document.getElementById(`regiao${index + 1}`);
-            const zonaId = document.getElementById(`zona${index + 1}`);
-            if (regiaoId && zonaId) {
-                regiaoId.textContent = regiao.nome_distrito; 
-                zonaId.textContent = regiao.zona; 
-            }
-        });
-    })
-    .catch(error => {
-        console.error("Erro ao carregar regiões recomendadas:", error);
-    });
-</script>
+<script src="js/home.js"></script>
 
 
