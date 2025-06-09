@@ -91,12 +91,33 @@
                     </div>
 
                     <div class="regioes-favoritas">
-                        <div class="titulo-regioes">Regiões Favoritas:</div>
+                        <div class="titulo-regioes">Regiões Recomendadas:</div>
                         <div class="banners-favoritos">
-                            <div class="banner-favorito-white"></div>
-                            <div class="banner-favorito-orange"></div>
-                            <div class="banner-favorito-white"></div>
-                            <div class="banner-favorito-orange"></div>
+
+                            <div class="banner-favorito">
+                                <div class="banner-regiao"><p id="regiao1"></p></div>
+                                <div class="banner-regiao banner-icon"></div>
+                                <div class="banner-regiao">Zona &nbsp<p id="zona1"></p></div>
+                            </div>
+
+                            <div class="banner-favorito orange">
+                                <div class="banner-regiao-orange"><p id="regiao2"></p></div>
+                                <div class="banner-regiao-orange banner-icon-orange"></div>
+                                <div class="banner-regiao-orange">Zona &nbsp;<p id="zona2"></p></div>
+                            </div>
+
+                            <div class="banner-favorito">
+                                <div class="banner-regiao"><p id="regiao3"></p></div>
+                                <div class="banner-regiao banner-icon"></div>
+                                <div class="banner-regiao">Zona &nbsp<p id="zona3"></p></div>
+                            </div>
+
+                            <div class="banner-favorito orange">
+                                <div class="banner-regiao-orange"><p id="regiao4"></p></div>
+                                <div class="banner-regiao-orange banner-icon-orange"></div>
+                                <div class="banner-regiao-orange">Zona &nbsp<p id="zona4"></p></div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -154,7 +175,20 @@
 </body>
 </html>
 
-
 <script>
-    console.log(sessionStorage);
+fetch("/data/getRegiaoRecomendada")
+    .then(res => res.json())
+    .then(data => {
+        data.forEach((regiao, index) => {
+            const regiaoId = document.getElementById(`regiao${index + 1}`);
+            const zonaId = document.getElementById(`zona${index + 1}`);
+            if (regiaoId && zonaId) {
+                regiaoId.textContent = regiao.nome_distrito; 
+                zonaId.textContent = regiao.zona; 
+            }
+        });
+    })
+    .catch(error => {
+        console.error("Erro ao carregar regiões recomendadas:", error);
+    });
 </script>
