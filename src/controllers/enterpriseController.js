@@ -14,13 +14,8 @@ function createEnterpriseAndUser(req, res) {
     if (cadastro.nomeUsuario === undefined || cadastro.nomeUsuario == null) {
         return res.status(400).json({error: "O nome do usuario está undefined ou nulo!"});
     }
-<<<<<<< HEAD
-    if (cadastro.cpf === undefined || cadastro.cpf == null) {
-        return res.status(400).json({ error: "CPF está undefined ou nulo!" });
-=======
     if (cadastro.cpf === undefined) {
         return res.status(400).json({error: "CPF está undefined ou nulo!"});
->>>>>>> feat/backend-filtros
     }
     if (cadastro.email === undefined || cadastro.email == null) {
         return res.status(400).json({error: "Email está undefined ou nulo!"});
@@ -29,7 +24,6 @@ function createEnterpriseAndUser(req, res) {
         return res.status(400).json({error: "Senha está undefined ou nula!"});
     }
     if (cadastro.dtNasc === undefined || cadastro.dtNasc == null) {
-<<<<<<< HEAD
         return res.status(400).json({ error: "Data de nascimento está undefined ou nula!" });
     }
     if (cadastro.razaoSocial === undefined || cadastro.razaoSocial == null) {
@@ -62,7 +56,6 @@ function createEnterpriseAndUser(req, res) {
     if (cadastro.telefone === undefined || cadastro.telefone == null) {
         return res.status(400).json({ error: "Telefone está undefined ou nulo!" });
     }
-=======
         return res.status(400).json({error: "dtNasc está undefined ou nula!"});
     }
     if (cadastro.razaoSocial === undefined || cadastro.razaoSocial == null) {
@@ -72,7 +65,6 @@ function createEnterpriseAndUser(req, res) {
     enterpriseModel.createEnterpriseAndUser(cadastro)
         .then(function (resultado) {
             console.log('voltou pro then do controller')
->>>>>>> feat/backend-filtros
 
     enterpriseModel.checkCnpj(cadastro.cnpj)
         .then((cnpjExistente) => {
@@ -133,7 +125,7 @@ function createEnterpriseAndUser(req, res) {
                 });
             }
         });
-}
+})
 
 
 
