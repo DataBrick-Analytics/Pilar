@@ -153,13 +153,13 @@ async function searchUserById(idUser) {
     }
 }
 
-async function salvarEscolhas(escolhas) {
+async function salvarEscolhas(idUsuario,escolhas) {
     const query = `
-        INSERT INTO escolha_usuario (etapa1, etapa2, etapa3)
-        VALUES (?, ?, ?)
+        INSERT INTO escolhas_formulario (etapa1, etapa2, etapa3, fk_id_usuario)
+        VALUES (?, ?, ?, ?)
     `;
 
-    const values = [escolhas[0], escolhas[1], escolhas[2]];
+    const values = [escolhas[0], escolhas[1], escolhas[2], idUsuario];
 
     try {
         const resultado = await database.execute(query, values);

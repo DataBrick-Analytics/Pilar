@@ -168,21 +168,24 @@
 
         document.body.appendChild(resumo);
 
+        const userID = localStorage.getItem("USER_ID");
+
         document.getElementById('btn-ver-resultados').addEventListener('click', () => {
         fetch('/escolhas', {  
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ escolhas })
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log("Resposta da API:", data);
-        window.location.href = "home.html";
-    })
-    .catch(error => {
-        console.error("Erro ao salvar escolhas:", error);
-    });
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ escolhas, idUsuario: userID })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Resposta da API:", data);
+                    window.location.href = "home.html";
+                    })
+                        .catch(error => {
+                            console.error("Erro ao salvar escolhas:", error);
+                        });
             window.location.href = "home.html";
+            
         });
     }
 

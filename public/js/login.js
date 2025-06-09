@@ -41,7 +41,7 @@ function entrar() {
                         background: "#2C3E50",
                         confirmButtonColor: "#C45824"
                     }).then(() => {
-                        window.location.href = "./dashboard.html";
+                        window.location.href = "./formulario.html";
                     });
                 } else {
                     Swal.fire({

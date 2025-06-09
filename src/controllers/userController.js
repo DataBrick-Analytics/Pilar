@@ -191,6 +191,7 @@ function searchUserById(req, res) {
 }
 
 async function salvarEscolhas(req, res) {
+    const idUsuario = req.body.idUsuario;
     const escolhas = req.body.escolhas;
 
     if (!escolhas || escolhas.length !== 3) {
@@ -198,7 +199,7 @@ async function salvarEscolhas(req, res) {
     }
 
     try {
-        const resultado = await escolhaModel.salvarEscolhas(escolhas);
+        const resultado = await userModel.salvarEscolhas(idUsuario, escolhas);
         return res.status(201).json({ message: "Escolhas salvas com sucesso!", resultado });
     } catch (erro) {
         console.error("Erro no Controller:", erro);
