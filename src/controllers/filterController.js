@@ -2,6 +2,7 @@ const filterModel = require('../models/filterModel');
 
 
 async function getRegionByFilter(req, res) {
+    console.log("Body recebido:", req.body)
     try {
         const {
             precoMin,
@@ -9,6 +10,8 @@ async function getRegionByFilter(req, res) {
             densidadeMax,
             zona
         } = req.body;
+
+
 
         const filtros = {
             precoMin: precoMin !== undefined ? Number(precoMin) : undefined,

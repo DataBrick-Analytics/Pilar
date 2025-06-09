@@ -17,7 +17,7 @@ async function authenticateUser(email, senha) {
         funcao_empresa,
         fk_empresa
     FROM usuario
-    WHERE email = ? AND senha = sha2(?, 256)
+    WHERE email = ? AND senha = ?
     `;
 
     try {
