@@ -1,6 +1,8 @@
 var favoritesModel = require("../models/favoritesModel");
 
-async function createFavorite(req, res) {
+
+function createFavorite(req, res) {
+
     const dataFavorite = req.body;
 
     if (dataFavorite.userID === undefined || dataFavorite.userID == null) return res.status(400).send("ID do Usuario está undefined ou nulo!")
@@ -30,7 +32,8 @@ async function createFavorite(req, res) {
                 error: "Erro ao favoritar terreno",
                 message: erro.sqlMessage || erro.message
             });
-        });
+
+        })
 }
 
 
@@ -124,7 +127,7 @@ function deleteFavorite(req, res) {
         });
 }
 
-function searchFavoritesByUserId (req, res) {
+function searchFavoritesByUserId(req, res) {
     const userId = req.params.id;
     console.log("ID usúario:", userId);
 
@@ -149,11 +152,33 @@ function searchFavoritesByUserId (req, res) {
         });
 }
 
+function getFavoritesByUser(req, res) {
+    const userID = req.params.userID;
+    const enterpriseID = req.params.enterpriseID;
 
+    if(userID === undefined) return res.status(400).send("IdUser está undefined ou nulo!")
+    if(enterpriseID === undefined) return res.status(400).send("enterpriseID está undefined ou nulo!")
+
+    favoritesModel.getFavoritesByUser(userID, enterpriseID)
+        .then(function (resultado) {
+            console.log("Favoritos retornados:", resultado);
+            return res.status(200).json(resultado); 
+        })
+        .catch(function (erro) {
+            console.error("Erro ao buscar favoritos:", erro);
+            return res.status(500).json({
+                error: "Erro ao buscar favoritos",
+                message: erro.message
+            });
+        });
+
+}
 
 module.exports = {
     createFavorite,
-    editFavorite,
     searchFavoritesByUserId,
-    deleteFavorite
+    editFavorite,
+    deleteFavorite,
+    getFavoritesByUser
+
 };

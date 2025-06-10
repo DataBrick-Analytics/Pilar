@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/dashNova.css">
     <link rel="stylesheet" href="css/Style.css">
     <link rel="stylesheet" href="css/filtros.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div class="divGeral">
@@ -45,17 +46,17 @@
                         <div class="dropdown">
                             <button class="dropdown-btn active">
                                 <span class="nav-icon"> <img src="./assets/icons-dash/CHART-ICON-SM.svg" alt=""></span>
-                                <span>Propriedades</span>
+                                <span>Regiões</span>
                                 <span class="dropdown-arrow">▼</span>
                             </button>
                             <div class="dropdown-content">
                                 <a href="#" class="dropdown-item">
                                     <span class="prefix">B</span>
-                                    <span>Filtrar propriedade</span>
+                                    <span>Filtrar regiões</span>
                                 </a>
                                 <a href="#" class="dropdown-item">
                                     <span class="prefix">C</span>
-                                    <span>Propriedades favoritas</span>
+                                    <span>Regiões favoritas</span>
                                 </a>
                             </div>
                         </div>
@@ -98,28 +99,30 @@
 
                     <select class="filtro" id="filtroViolencia">
                         <option value="">Selecione índice de violência máximo</option>
-                        <option value="10">Até 10%</option>
-                        <option value="20">Até 20%</option>
-                        <option value="30">Até 30%</option>
-                        <option value="50">Até 50%</option>
+                        <option value="0.01">Até 0.01%</option>
+                        <option value="0.02">Até 0.02%</option>
+                        <option value="0.03">Até 0.05%</option>
+                        <option value="0.1">Até 0.1%</option>
                     </select>
 
 
                     <select class="filtro" id="filtroValorM2">
                         <option value="">Selecione o preço do m²</option>
-                        <option value="1000000">Acima de 1 Milhão</option>
-                        <option value="2000000">Acima de 2 Milhões</option>
-                        <option value="3000000">Acima de 3 Milhões</option>
-                        <option value="4000000">Acima de 4 Milhões</option>
-                        <option value="5000001">Acima de 5 Milhões</option>
+                        <option value="5000">Até 5 Mil</option>
+                        <option value="7000">Até 7 Mil</option>
+                        <option value="9000">Até 9 Mil</option>
+                        <option value="12000">Até 12 Mil</option>
+                        <option value="15000">Até 15 Mil</option>
+                        <option value="15001">Acima de 15 Mil</option>
                     </select>
 
                     <select class="filtro" id="filtroDensidade">
-                        <option value="">Selecione densidade máxima</option>
-                        <option value="1000">Até 1000 hab/km²</option>
-                        <option value="5000">Até 5000 hab/km²</option>
-                        <option value="10000">Até 10000 hab/km²</option>
-                        <option value="20000">Até 20000 hab/km²</option>
+                        <option value="">Densidade de mobilidade urbana</option>
+                        <option value="10">Até 10</option>
+                        <option value="18">Até 18</option>
+                        <option value="23">Até 23</option>
+                        <option value="28">Até 28</option>
+                        <option value="29">Acima de 28</option>
                     </select>
 
                 </div>
@@ -139,120 +142,15 @@
 
 
         <div class="container-regioes">
-
-            <div class="box-regiao">
-                <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                    </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
-                </div>
-                <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
-                </div>
-            </div>
-
-            <div class="box-regiao">
-                <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                    </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
-                </div>
-                <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
-                </div>
-            </div>
-
-            <div class="box-regiao">
-                <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                    </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
-                </div>
-                <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
-                </div>
-            </div>
-            <div class="box-regiao">
-                <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                    </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
-                </div>
-                <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
-                </div>
-            </div>
-            <div class="box-regiao">
-                <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                    </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
-                </div>
-                <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
-                </div>
-            </div>
-            <div class="box-regiao">
-                <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                    </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
-                </div>
-                <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
-                </div>
-            </div>
+            <!-- Cards serão inseridos dinamicamente aqui -->
         </div>
     </div>
 </div>
 </body>
 </html>
 <script src="js/filtros.js"></script>
-<script onload="generateRandomRegionCards()" src="js/filtros.js"></script>
-<script onload="validarSessao()" src="js/sessao.js"></script>
-<script type="module" src="js/favoritar.js"></script>
+<script src="js/favoritar.js"></script>
 <script>
-
-
-    import {favoritar} from "./js/favoritar";
-
-    const container = document.querySelector('.container-regioes');
-
-    container.addEventListener('click', function (event) {
-        if (event.target.classList.contains('botao-favoritos')) {
-            event.target.classList.toggle('ativa');
-
-            const userID = localStorage.getItem('USER_ID');
-            const enterpriseID = localStorage.getItem('ID_EMPRESA');
-            const propertyID = isNaN(Number(event.target.id)) ? null : Number(event.target.id)
-
-            console.log(userID, enterpriseID, propertyID)
-
-            favoritar(userID, enterpriseID, propertyID)
-        }
-        if (event.target.classList.contains('botao-fechar')) {
-            const card = event.target.closest('.box-regiao');
-            if (card) card.style.display = 'none';
-        }
-    });
 
     document.addEventListener("DOMContentLoaded", function () {
         const botaoFiltrar = document.querySelector('.box-botao-filtrar');
