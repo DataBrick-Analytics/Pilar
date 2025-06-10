@@ -1,23 +1,19 @@
 var database = require("../database/config");
 
 async function createFavorites(favorite) {
+    const querySelect = `SELECT * FROM favorito WHERE fk_usuario = ? AND fk_empresa = ? AND fk_distrito = ?`;
 
-    const isAlreadyFavorited = await database.execute(`
-                SELECT *
-                FROM favorito
-                WHERE fk_usuario = ?
-                  AND fk_empresa = ?
-                  AND fk_distrito = ?`
-        , [favorite.userID, favorite.enterpriseID, favorite.favoriteLand])
+    const isAlreadyFavorited = await database.execute(
+        querySelect, [favorite.userID, favorite.enterpriseID, favorite.favoriteLand]
+    );
 
-    if (isAlreadyFavorited.length > 0) {
+    if(isAlreadyFavorited.length > 0){
         throw new Error("Este terreno já está favoritado por este usuário.")
     }
 
     const query = `
-        INSERT INTO favorito (fk_usuario, fk_empresa, fk_distrito, data_favorito, data_edicao)
-        VALUES (?, ?, ?, NOW(), NOW())`
-    ;
+        INSERT INTO favorito (fk_usuario, fk_empresa, fk_distrito, data_favorito, data_edicao) VALUES (?, ?, ?, NOW(), NOW())
+    `;
 
     const values = [
         favorite.userID,

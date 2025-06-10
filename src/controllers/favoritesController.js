@@ -1,6 +1,8 @@
 var favoritesModel = require("../models/favoritesModel");
 
+
 function createFavorite(req, res) {
+
     const dataFavorite = req.body;
 
     if (dataFavorite.userID === undefined || dataFavorite.userID == null) return res.status(400).send("ID do Usuario está undefined ou nulo!")
@@ -30,52 +32,9 @@ function createFavorite(req, res) {
                 error: "Erro ao favoritar terreno",
                 message: erro.sqlMessage || erro.message
             });
+
         })
 }
-
-// const alreadyFavorited = await favoritesModel.hasAlreadyFavorited(
-//     fk_usuario,
-//     fk_empresa,
-//     fk_distrito
-// );
-// console.log("Já favoritado:", alreadyFavorited);
-
-// if (alreadyFavorited) {
-//     return res.status(409).json({
-//         error: "Este item já foi favoritado por este usuário."
-//     });
-// }
-
-//const countResult = await favoritesModel.countFavoritesByUser(fk_usuario);
-//const total = countResult.total; // Access the total from the first row
-//console.log("Total de favoritos do usuário:", total, "tipo:", typeof total);
-
-//if (total >= 6) { // Changed to >= to properly enforce limit of 6
-//    console.log("Limite de favoritos atingido. Total atual:", total);
-//    return res.status(403).json({
-//        error: "Limite de 6 favoritos atingido."
-//    });
-//}
-
-//const result = await favoritesModel.createFavorite(favorite);
-//
-//if (result.affectedRows > 0) {
-//    return res.status(201).json({
-//        message: "Favorito criado com sucesso",
-//        favorito: {
-//            nome: favorite.nome,
-//            fk_usuario: favorite.fk_usuario,
-//            fk_empresa: favorite.fk_empresa,
-//            fk_distrito: favorite.fk_distrito
-//        }
-//    });
-//} else {
-//    console.error("Resposta inesperada do banco.");
-//    return res.status(500).json({
-//        error: "Erro ao criar favorito",
-//        message: "Resposta do banco incompleta"
-//    });
-//}
 
 
 async function editFavorite(req, res) {
@@ -203,7 +162,7 @@ function getFavoritesByUser(req, res) {
     favoritesModel.getFavoritesByUser(userID, enterpriseID)
         .then(function (resultado) {
             console.log("Favoritos retornados:", resultado);
-            return res.status(200).json(resultado); // ✅ Retorna direto o array
+            return res.status(200).json(resultado); 
         })
         .catch(function (erro) {
             console.error("Erro ao buscar favoritos:", erro);
@@ -221,4 +180,5 @@ module.exports = {
     editFavorite,
     deleteFavorite,
     getFavoritesByUser
+
 };

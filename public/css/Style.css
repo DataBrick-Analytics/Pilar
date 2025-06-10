@@ -66,6 +66,7 @@
 
  .main-content {
      display: flex;
+     flex-direction: row;
  }
 
  .sidebar {
@@ -206,6 +207,7 @@
  .content {
      flex: 1;
      padding: 1rem;
+
  }
 
  .card {
