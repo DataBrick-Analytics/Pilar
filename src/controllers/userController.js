@@ -227,29 +227,12 @@ function searchUserById(req, res) {
         });
 }
 
-async function salvarEscolhas(req, res) {
-    const idUsuario = req.body.idUsuario;
-    const escolhas = req.body.escolhas;
-
-    if (!escolhas || escolhas.length !== 3) {
-        return res.status(400).json({ message: "Escolhas inválidas ou incompletas" });
-    }
-
-    try {
-        const resultado = await userModel.salvarEscolhas(idUsuario, escolhas);
-        return res.status(201).json({ message: "Escolhas salvas com sucesso!", resultado });
-    } catch (erro) {
-        console.error("Erro no Controller:", erro);
-        return res.status(500).json({ message: "Erro ao salvar escolhas", erro });
-    }
-}
-
-async function salvarvaloresFormulario(req, res) {
+async function salvarValoresFormulario(req, res) {
     const valoresFormulario = req.body.valoresFormulario;
     const idUsuario = req.body.idUsuario;
     
     try {
-        const resultado = await userModel.salvarvaloresFormulario(valoresFormulario, idUsuario);
+        const resultado = await userModel.salvarValoresFormulario(valoresFormulario, idUsuario);
         return res.status(201).json({ message: "Escolhas salvas com sucesso!", resultado });
     } catch (erro) {
         console.error("Erro no Controller:", erro);
@@ -258,11 +241,10 @@ async function salvarvaloresFormulario(req, res) {
 }
 
 async function pegarValoresDistritosEscolhas(req, res) {
-    const valoresFormulario = req.body.valoresFormulario;
-    const idUsuario = req.body.idUsuario;
+    const idUsuario = req.params.id;
     
     try {
-        const resultado = await userModel.pegarValoresDistritosEscolhas(valoresFormulario, idUsuario);
+        const resultado = await userModel.pegarValoresDistritosEscolhas(idUsuario);
         return res.status(201).json({ message: "Escolhas coletadas", resultado });
     } catch (erro) {
         console.error("Erro no Controller:", erro);
@@ -276,7 +258,6 @@ module.exports = {
     editUser,
     deleteUser,
     searchUserById,
-    salvarEscolhas,
-    salvarvaloresFormulario,
+    salvarValoresFormulario,
     pegarValoresDistritosEscolhas
 };
