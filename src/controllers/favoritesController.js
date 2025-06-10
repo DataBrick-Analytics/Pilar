@@ -1,29 +1,24 @@
 var favoritesModel = require("../models/favoritesModel");
 
 async function createFavorite(req, res) {
-    try {
-        const favorite = req.body;
-        console.log("Dados recebidos:", favorite);
-
-function createFavorite(req, res) {
     const dataFavorite = req.body;
 
-    if(dataFavorite.userID === undefined || dataFavorite.userID == null) return res.status(400).send("ID do Usuario está undefined ou nulo!")
-    if(dataFavorite.enterpriseID === undefined || dataFavorite.enterpriseID == null) return res.status(400).send("ID da Enterprise está undefined ou nulo")
-    if(dataFavorite.favoriteLand === undefined || dataFavorite.favoriteLand == null) return res.status(400).send("Propriedade favorita está undefined ou nula")
+    if (dataFavorite.userID === undefined || dataFavorite.userID == null) return res.status(400).send("ID do Usuario está undefined ou nulo!")
+    if (dataFavorite.enterpriseID === undefined || dataFavorite.enterpriseID == null) return res.status(400).send("ID da Enterprise está undefined ou nulo")
+    if (dataFavorite.favoriteLand === undefined || dataFavorite.favoriteLand == null) return res.status(400).send("Propriedade favorita está undefined ou nula")
 
     console.log("Dados recebidos:", dataFavorite);
 
     favoritesModel.createFavorites(dataFavorite)
         .then(function (resultado) {
             console.log("Resultado do banco:", resultado);
-        
+
             if (resultado.affectedRows > 0) {
                 return res.status(201).json({
                     message: "Terreno favoritado com sucesso"
                 });
             } else {
-                return res.status(500).json({ 
+                return res.status(500).json({
                     message: "Erro ao Favoritar Terreno",
                     warning: "Resposta do inesperada do banco",
                 });
@@ -31,70 +26,11 @@ function createFavorite(req, res) {
         })
         .catch(function (erro) {
             console.error("Erro no banco:", erro);
-            return res.status(400).json({ 
+            return res.status(400).json({
                 error: "Erro ao favoritar terreno",
-                message: erro.sqlMessage || erro.message 
+                message: erro.sqlMessage || erro.message
             });
-        }
-
-        const alreadyFavorited = await favoritesModel.hasAlreadyFavorited(
-            fk_usuario, 
-            fk_empresa, 
-            fk_distrito
-        );
-        console.log("Já favoritado:", alreadyFavorited);
-
-        if (alreadyFavorited) {
-            return res.status(409).json({ 
-                error: "Este item já foi favoritado por este usuário." 
-            });
-        }
-
-        const countResult = await favoritesModel.countFavoritesByUser(fk_usuario);
-        const total = countResult.total; // Access the total from the first row
-        console.log("Total de favoritos do usuário:", total, "tipo:", typeof total);
-
-        if (total >= 6) { // Changed to >= to properly enforce limit of 6
-            console.log("Limite de favoritos atingido. Total atual:", total);
-            return res.status(403).json({ 
-            error: "Limite de 6 favoritos atingido." 
         });
-}
-
-        const result = await favoritesModel.createFavorite(favorite);
-        
-        if (result.affectedRows > 0) {
-            return res.status(201).json({
-                message: "Favorito criado com sucesso",
-                favorito: {
-                    nome: favorite.nome,
-                    fk_usuario: favorite.fk_usuario,
-                    fk_empresa: favorite.fk_empresa,
-                    fk_distrito: favorite.fk_distrito
-                }
-            });
-        } else {
-            console.error("Resposta inesperada do banco.");
-            return res.status(500).json({ 
-                error: "Erro ao criar favorito",
-                message: "Resposta do banco incompleta"
-            });
-        }
-
-    } catch (error) {
-        console.error("Erro ao criar favorito:", error);
-        
-        if (error.code === 'ER_DUP_ENTRY') {
-            return res.status(409).json({
-                error: "Este item já foi favoritado por este usuário."
-            });
-        }
-
-        res.status(500).json({
-            error: "Erro interno ao criar favorito",
-            message: error.message
-        });
-    }
 }
 
 
@@ -103,15 +39,15 @@ async function editFavorite(req, res) {
         const userId = req.params.userId;
         const oldDistrito = req.params.oldDistrito;
         const newDistrito = req.body.fk_distrito;
-        
+
         console.log("User ID:", userId);
         console.log("Distrito Antigo:", oldDistrito);
         console.log("Novo Distrito:", newDistrito);
 
         if (!userId || !oldDistrito || !newDistrito) {
-            return res.status(400).json({ 
-                error: "Dados incompletos", 
-                message: "ID do usuário, distrito atual e novo distrito são obrigatórios" 
+            return res.status(400).json({
+                error: "Dados incompletos",
+                message: "ID do usuário, distrito atual e novo distrito são obrigatórios"
             });
         }
 
@@ -119,20 +55,20 @@ async function editFavorite(req, res) {
         const empresaId = currentFavorite.fk_empresa;
 
         const alreadyFavorited = await favoritesModel.hasAlreadyFavorited(
-            userId, 
-            empresaId, 
+            userId,
+            empresaId,
             newDistrito
         );
 
         if (alreadyFavorited) {
-            return res.status(409).json({ 
+            return res.status(409).json({
                 error: "Este distrito já está favoritado por este usuário",
                 message: "Não é possível atualizar para um distrito já favoritado"
             });
         }
 
         const resultado = await favoritesModel.editFavorites(userId, oldDistrito, newDistrito);
-        
+
         if (resultado.success) {
             return res.status(200).json({
                 message: "Favorito atualizado com sucesso",
@@ -144,16 +80,16 @@ async function editFavorite(req, res) {
                 }
             });
         } else {
-            return res.status(404).json({ 
+            return res.status(404).json({
                 error: "Favorito não encontrado"
             });
         }
 
     } catch (erro) {
         console.error("Erro ao atualizar favorito:", erro);
-        return res.status(500).json({ 
+        return res.status(500).json({
             error: "Erro ao atualizar favorito",
-            message: erro.sqlMessage || erro.message 
+            message: erro.sqlMessage || erro.message
         });
     }
 }
@@ -217,7 +153,7 @@ function searchFavoritesByUserId (req, res) {
 
 module.exports = {
     createFavorite,
-    searchFavoriteByUserId,
     editFavorite,
+    searchFavoritesByUserId,
     deleteFavorite
 };

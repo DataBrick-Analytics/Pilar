@@ -230,23 +230,6 @@ async function searchUserById(idUser) {
     }
 }
 
-async function salvarEscolhas(idUsuario,escolhas) {
-    const query = `
-        INSERT INTO escolhas_formulario (etapa1, etapa2, etapa3, fk_id_usuario)
-        VALUES (?, ?, ?, ?)
-    `;
-
-    const values = [escolhas[0], escolhas[1], escolhas[2], idUsuario];
-
-    try {
-        const resultado = await database.execute(query, values);
-        return resultado;
-    } catch (error) {
-        console.error("Erro ao salvar escolhas:", error);
-        throw error;
-    }
-}
-
 async function checkEmail(email) {
     const query = `SELECT email
                    FROM usuario
@@ -273,24 +256,7 @@ async function checkCpf(cpf) {
     }
 }
 
-async function salvarEscolhas(idUsuario,escolhas) {
-    const query = `
-        INSERT INTO escolhas_formulario (etapa1, etapa2, etapa3, fk_id_usuario)
-        VALUES (?, ?, ?, ?)
-    `;
-
-    const values = [escolhas[0], escolhas[1], escolhas[2], idUsuario];
-
-    try {
-        const resultado = await database.execute(query, values);
-        return resultado;
-    } catch (error) {
-        console.error("Erro ao salvar escolhas:", error);
-        throw error;
-    }
-}
-
-async function salvarvaloresFormulario(valoresFormulario, idUsuario) {
+async function salvarValoresFormulario(valoresFormulario, idUsuario) {
     const query = `
         INSERT INTO valores_formularios (baixaViolencia,
             malhaUrbana,
@@ -300,7 +266,7 @@ async function salvarvaloresFormulario(valoresFormulario, idUsuario) {
             parques,
             hospitais,
             escolas,
-            id_usuario)
+            fk_usuario)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
@@ -318,9 +284,9 @@ async function salvarvaloresFormulario(valoresFormulario, idUsuario) {
 
 
 
-async function pegarValoresDistritosEscolhas(valoresFormulario, idUsuario) {
+async function pegarValoresDistritosEscolhas(idUsuario) {
     const query = `
-        select * from valores_formularios where id_usuario = 0;
+        select * from valores_formularios where fk_usuario = ?;
         `;
 
 
@@ -380,6 +346,8 @@ flutuacao_ranking AS (
 educacao_ranking AS (
     SELECT
         e.fk_distrito,
+        d.nome_distrito,
+        d.zona,
         COUNT(*) / d.area AS escolas_por_area,
         ROW_NUMBER() OVER (ORDER BY COUNT(*) / d.area DESC) AS row_num
     FROM educacao e
@@ -473,7 +441,8 @@ seguranca_ranking AS (
 -- no SELECT final que junta tudo:
 SELECT
     p.fk_distrito,
-    r.nome_distrito,
+    e.nome_distrito,
+    e.zona,
     -- outros campos...
 
     (
@@ -501,6 +470,8 @@ SELECT
 
     const resultado = await database.execute(query, [idUsuario]);
 
+    console.log(resultado)
+
     const values = [resultado[0].baixaViolencia,
                     resultado[0].malhaUrbana,
                     resultado[0].valorM2,
@@ -527,10 +498,8 @@ module.exports = {
     deleteUser,
     authenticateUser,
     searchUserById,
-    salvarEscolhas,
     checkEmail,
     checkCpf,
-    salvarEscolhas,
-    salvarvaloresFormulario,
+    salvarValoresFormulario,
     pegarValoresDistritosEscolhas
 }

@@ -28,10 +28,13 @@ router.get("/user/:id", function (req, res) {
   usuarioController.searchUserById(req, res);
 });
 
-//ENVIANDO FORMULARIO 
-router.post("/escolhas", usuarioController.salvarEscolhas);
-router.post("/salvarEscolhas", usuarioController.salvarEscolhas);
-router.post("/salvarvaloresFormulario", usuarioController.salvarvaloresFormulario);
-router.get("/pegarValoresDistritosEscolhas", usuarioController.pegarValoresDistritosEscolhas);
+//ENVIANDO FORMULARIO
+router.post("/salvarValoresFormulario", function (req, res) {
+    usuarioController.salvarValoresFormulario(req, res);
+});
+
+router.get("/pegarValoresDistritosEscolhas/:id", function (req, res) {
+    usuarioController.pegarValoresDistritosEscolhas(req, res);
+});
 
 module.exports = router;

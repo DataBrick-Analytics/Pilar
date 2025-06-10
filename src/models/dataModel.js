@@ -291,7 +291,7 @@ SELECT
 		SUM(
 			COALESCE(s.furtos_regiao, 0) + COALESCE(s.roubos_cargas, 0) + COALESCE(s.roubos, 0) +
 			COALESCE(s.roubos_veiculos, 0) + COALESCE(s.furtos_veiculos, 0) + COALESCE(s.latrocinios, 0) +
-			COALESCE(s.homicio_doloso_acidente_transito, 0) + COALESCE(s.homicidio_culposo_acidente_transito, 0) +
+			COALESCE(s.homicidio_doloso_acidente_transito, 0) + COALESCE(s.homicidio_culposo_acidente_transito, 0) +
 			COALESCE(s.homicidio_culposo, 0)
             )
         ) / NULLIF(ir.populacao_total, 0)
@@ -304,7 +304,7 @@ SELECT
                 SUM(COALESCE(s2.roubos_veiculos, 0)) +
                 SUM(COALESCE(s2.furtos_veiculos, 0)) +
                 SUM(COALESCE(s2.latrocinios, 0)) +
-                SUM(COALESCE(s2.homicio_doloso_acidente_transito, 0)) +
+                SUM(COALESCE(s2.homicidio_doloso_acidente_transito, 0)) +
                 SUM(COALESCE(s2.homicidio_culposo_acidente_transito, 0)) +
                 SUM(COALESCE(s2.homicidio_culposo, 0))
             ) / NULLIF(SUM(ir2.populacao_total), 0)
