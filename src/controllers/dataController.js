@@ -55,7 +55,7 @@ function getUrbanMeshDensity(req, res) {
 
     dataModel.getUrbanMeshDensity(fkBairro)
         .then(function (densidade) {
-            console.log("Valor Densidade: " + densidade.valorDensidade);
+            console.log(densidade);
             return res.status(201).json(densidade);
         })
         .catch(function (erro) {
@@ -112,7 +112,6 @@ function getMediaByFifth(req, res) {
 
 function getPriceFluctuation(req, res) {
     const fkBairro = req.params.id;
-    // const fkBairro = localStorage.getItem("FK_BAIRRO")
     console.log("ID recebido:", fkBairro);
 
     if (fkBairro === undefined || fkBairro == null) {
@@ -123,9 +122,7 @@ function getPriceFluctuation(req, res) {
 
     dataModel.getPriceFluctuation(fkBairro)
         .then(function (resultado) {
-            return res.status(200).json({
-                preco: resultado.preco
-            });
+            return res.status(200).json(resultado);
         })
         .catch(function (erro) {
             console.log(erro);
@@ -179,7 +176,6 @@ async function getHospitalsByRegion(req, res) {
 
 function getParksByRegion(req, res) {
     const fkBairro = req.params.id;
-    // const fkBairro = localStorage.getItem("FK_BAIRRO")
     console.log("ID recebido:", fkBairro);
 
     if (fkBairro == undefined) {
@@ -188,12 +184,11 @@ function getParksByRegion(req, res) {
 
     dataModel.getParksByRegion(fkBairro)
         .then(function (resultado) {
-            console.log("Qtd de parques encontradas: " + resultado.length);
-            return res.sendStatus(200).send(resultado.length);
+            return res.status(200).send(resultado);
         })
         .catch(function (erro) {
             console.log("Houve um erro ao pegar os parques");
-            res.sendStatus(500).json(erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
         });
 }
 

@@ -54,12 +54,12 @@ async function authenticateUser(email, senha) {
 
 async function createUser(user) {
     const query = `
-    INSERT INTO usuario (nome, email, senha, fk_empresa, funcao_empresa, data_cadastro)
-    VALUES (?, ?, ?, ?, ?, NOW())
+        INSERT INTO usuario (nome, email, senha, fk_empresa, cpf, data_nasc, funcao_empresa, data_criacao, data_edicao)
+        VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
     `;  
 
     const values = [
-        user.nomeUsuario,
+        user.nome,
         user.email,
         user.senha,
         user.fk_empresa,

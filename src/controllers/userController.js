@@ -55,7 +55,8 @@ function createUser(req, res) {
                         nome: user.nome,
                         email: user.email,
                         fk_empresa: user.fk_empresa,
-                        funcao_empresa: user.funcao_empresa
+                        funcao_empresa: user.funcao_empresa,
+                        dtNasc: user.dtNasc
                     }
                 });
             } else {

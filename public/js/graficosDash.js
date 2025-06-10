@@ -1,95 +1,141 @@
+async function loadAverageIncome() {
+    let graphicData = [{
+        "renda_domiciliar_quinto_mais_pobre": 0,
+        "renda_domiciliar_segundo_quinto_mais_pobre": 0,
+        "renda_domiciliar_terceiro_quinto_mais_pobre": 0,
+        "renda_domiciliar_quarto_quinto_mais_pobre": 0,
+        "renda_domiciliar_quinto_mais_rico": 0
+    }];
 
-const ctx2 = document.getElementById('meuGraficoBarras').getContext('2d');
-
-
-
-const meuGraficoBarras = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-        labels: ['1/5', '2/5', '3/5', '4/5', '5/5'],
-        datasets: [{
-            label: '', // sem legenda
-            data: [329.29, 649.43,1085.64, 1721.35, 4024.75],
-            backgroundColor: 'white', // cor das barras
-            borderRadius: 5 // borda arredondada das barras (opcional)
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: false // oculta legenda
-            },
-            title: {
-                display: false // oculta título
+    try {
+        const resposta = await fetch(`/data/getMediaByFifth/${fkDistrito}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
             }
+        });
+
+        if (resposta.ok) {
+            graphicData = await resposta.json();
+        } else {
+            console.log(resposta);
+        }
+    } catch (erro) {
+        console.error(erro);
+    }
+
+    const ctx2 = document.getElementById('meuGraficoBarras').getContext('2d');
+    const meuGraficoBarras = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['1/5', '2/5', '3/5', '4/5', '5/5'],
+            datasets: [{
+                label: '',
+                data: Object.values(graphicData[0]),
+                backgroundColor: 'white',
+                borderRadius: 5
+            }]
         },
-        scales: {
-            x: {
-                grid: {
-                    display: false // remove linhas verticais
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
                 },
-                ticks: {
-                    color: 'white'
+                title: {
+                    display: false
                 }
             },
-            y: {
-                grid: {
-                    color: 'white' // linhas horizontais brancas
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: 'white'
+                    }
                 },
-                ticks: {
-                    color: 'white'
+                y: {
+                    grid: {
+                        color: 'white'
+                    },
+                    ticks: {
+                        color: 'white'
+                    }
                 }
             }
         }
-    }
-});
+    });
+}
 
-const ctx = document.getElementById('meuGrafico').getContext('2d');
-const meuGrafico = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Outubro', 'Novembro', 'Dezembro', 'Janeiro', 'Fevereiro'],
-        datasets: [{
-            label: '', // sem legenda
-            data: [9520, 9920, 10062, 11036, 11460],
-            borderColor: 'white', // linha branca
-            backgroundColor: 'rgba(255, 255, 255, 0.1)', // preenchimento suave (opcional)
-            tension: 0.3
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: false // oculta legenda
-            },
-            title: {
-                display: false // oculta título
+async function loadPriceFluctuation() {
+    let graphicData;
+
+    try {
+        const resposta = await fetch(`/data/getPriceFluctuation/${fkDistrito}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
             }
+        });
+
+        if (resposta.ok) {
+            graphicData = await resposta.json();
+        } else {
+            console.log(resposta);
+        }
+    } catch (erro) {
+        console.error(erro);
+    }
+
+    const ctx = document.getElementById('meuGrafico').getContext('2d');
+    const meuGrafico = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Object.values(graphicData).map(item => item.ano).reverse(),
+            datasets: [{
+                label: '',
+                data: Object.values(graphicData).map(item => item.media_preco_metro_quadrado).reverse(),
+                borderColor: 'white',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                tension: 0.3
+            }]
         },
-        scales: {
-            x: {
-                grid: {
-                    display: false // remove linhas verticais
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
                 },
-                ticks: {
-                    color: 'white' // texto do eixo X branco
+                title: {
+                    display: false
                 }
             },
-            y: {
-                grid: {
-                    color: 'white' // apenas linhas horizontais brancas
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: 'white'
+                    }
                 },
-                ticks: {
-                    color: 'white' // texto do eixo Y branco
+                y: {
+                    grid: {
+                        color: 'white'
+                    },
+                    ticks: {
+                        color: 'white'
+                    }
                 }
             }
         }
-    }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadAverageIncome();
+    loadPriceFluctuation();
 });
-
-
-
