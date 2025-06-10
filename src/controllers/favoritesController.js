@@ -2,35 +2,33 @@ var favoritesModel = require("../models/favoritesModel");
 
 
 function createFavorite(req, res) {
-    const user = req.body;
-    console.log("Dados recebidos:", user);
+    const dataFavorite = req.body;
 
-    userModel.createUser(user)
+    if(dataFavorite.userID === undefined || dataFavorite.userID == null) return res.status(400).send("ID do Usuario está undefined ou nulo!")
+    if(dataFavorite.enterpriseID === undefined || dataFavorite.enterpriseID == null) return res.status(400).send("ID da Enterprise está undefined ou nulo")
+    if(dataFavorite.favoriteLand === undefined || dataFavorite.favoriteLand == null) return res.status(400).send("Propriedade favorita está undefined ou nula")
+
+    console.log("Dados recebidos:", dataFavorite);
+
+    favoritesModel.createFavorites(dataFavorite)
         .then(function (resultado) {
             console.log("Resultado do banco:", resultado);
         
             if (resultado.affectedRows > 0) {
                 return res.status(201).json({
-                    message: "Usuário criado com sucesso",
-                    usuario: {
-                        nome: user.nome,
-                        email: user.email,
-                        fk_empresa: user.fk_empresa,
-                        funcao_empresa: user.funcao_empresa
-                    }
+                    message: "Terreno favoritado com sucesso"
                 });
             } else {
-                console.error("Resposta inesperada do banco.");
                 return res.status(500).json({ 
-                    message: "Erro ao criar usuário",
-                    warning: "Resposta do banco incompleta",
+                    message: "Erro ao Favoritar Terreno",
+                    warning: "Resposta do inesperada do banco",
                 });
             }
         })
         .catch(function (erro) {
             console.error("Erro no banco:", erro);
             return res.status(400).json({ 
-                error: "Erro ao criar usuário",
+                error: "Erro ao favoritar terreno",
                 message: erro.sqlMessage || erro.message 
             });
         });
@@ -151,7 +149,7 @@ function searchFavoriteByUserId (req, res) {
 
 
 module.exports = {
-    createUser,
+    createFavorite,
     editUser,
     deleteUser,
     searchFavoriteByUserId,

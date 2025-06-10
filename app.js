@@ -28,6 +28,7 @@ var enterpriseRouter = require("./src/routes/enterpriseRoutes");
 var modeloRouter = require("./src/routes/modeloRoutes");
 var dataRouter = require("./src/routes/dataRoutes");
 var filterRouter = require("./src/routes/filterRoutes");
+var favoritesRouter = require("./src/routes/favoritesRoutes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,6 +41,7 @@ app.use("/", userRouter);
 app.use("/", enterpriseRouter); 
 app.use("/", dataRouter);
 app.use("/", filterRouter);
+app.use("/", favoritesRouter);
 app.use("/modeloRoutes", modeloRouter);
 
 app.listen(PORTA_APP, function () {

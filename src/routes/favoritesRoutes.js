@@ -6,7 +6,7 @@ var favoritosController = require("../controllers/favoritesController");
 
 // POST
 router.post("/favorite/create", function (req, res) {
-    favoritosController.authenticateUser(req, res);
+    favoritosController.createFavorite(req, res);
 })
 
 // GET
