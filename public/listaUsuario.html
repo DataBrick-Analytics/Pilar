@@ -7,6 +7,7 @@
     <title>Lista de Usuário</title>
     <link rel="stylesheet" href="css/listaUsuario.css">
     <link rel="stylesheet" href="./css/dashNova.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dashboard" />
     <link rel="shortcut icon" href="assets/logo/BrickData.svg" type="image/x-icon">
@@ -15,80 +16,110 @@
 <body>
     <div class="divGeral">
         <div class="divPainel">
-            <div class="divPainelAzul">
-
-                <nav class="sidebarAzul">
+            <aside class="sidebar">
+                <header class="sidebar-header">
                     <div class="logo">
-                        <span class="logo-icon">
-                            <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" alt="">
-                        </span>
-                        <span class="logo-text">DataBrick</span>
+                        <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" class="logo-icon">
+                        <h1 class="logo-text">DataBrick</h1>
                     </div>
+                </header>
 
-                    <div class="separator"></div>
+                <hr class="separator" aria-hidden="true">
 
-                    <div class="user-profile">
-                        <div class="avatar">
-                            <img src="./assets/icons-dash/USER-ICON-SM.svg" alt="">
-                        </div>
-                        <span class="username" id="user">Nome usuario</span>
-                    </div>
+                <section class="user-profile" aria-label="Perfil do usuário">
+                    <img src="./assets/icons-dash/USER-ICON-SM.svg" class="avatar">
+                    <span class="username" id="user">Nome usuário</span>
+                </section>
 
-                    <div class="separator"></div>
+                <hr class="separator" aria-hidden="true">
 
-                    <div class="nav-menu">
-                        <a href="#" class="nav-item">
-                            <span class="nav-icon">
-                                <img src="./assets/icons-dash/HOME-ICON-SM.svg" alt="">
-                            </span>
-                            <span>Home</span>
-                        </a>
+                <nav class="main-navigation" aria-label="Menu principal">
+                    <ul class="nav-menu">
+                        <li>
+                            <a href="home.html  " class="nav-item">
+                                <img src="./assets/icons-dash/HOME-ICON-SM.svg"
+                                     alt=""
+                                     aria-hidden="true"
+                                     class="nav-icon">
+                                <span>Home</span>
+                            </a>
+                        </li>
+                    </ul>
 
-                        <div class="nav-section">
-                            <span class="nav-section-title">PAGES</span>
-                            <div class="dropdown">
-                                <button class="dropdown-btn active">
-                                    <span class="nav-icon"> <img src="./assets/icons-dash/CHART-ICON-SM.svg"
-                                            alt=""></span>
-                                    <span>Propriedades</span>
-                                    <span class="dropdown-arrow">▼</span>
-                                </button>
-                                <div class="dropdown-content">
-                                    <a href="#" class="dropdown-item">
-                                        <span class="prefix">B</span>
+                    <section class="nav-section">
+                        <h2 class="nav-section-title">PAGES</h2>
+
+                        <div class="dropdown">
+                            <button class="dropdown-btn active"
+                                    aria-expanded="false"
+                                    aria-controls="propriedades-menu">
+                                <img src="./assets/icons-dash/CHART-ICON-SM.svg"
+                                     aria-hidden="true"
+                                     class="nav-icon">
+                                <span>Propriedades</span>
+                                <span class="dropdown-arrow" aria-hidden="true">▼</span>
+                            </button>
+
+                            <ul id="propriedades-menu" class="dropdown-content" >
+                                <li>
+                                    <a href="filtros.html" class="dropdown-item">
                                         <span>Filtrar propriedade</span>
                                     </a>
-                                    <a href="#" class="dropdown-item">
-                                        <span class="prefix">C</span>
+                                </li>
+                                <li>
+                                    <a href="" class="dropdown-item">
                                         <span>Propriedades favoritas</span>
                                     </a>
-                                </div>
-                            </div>
-                            <div class="nav-menu">
-                                <a href="./TelaAlertas.html" class="nav-item">
-                                    <span class="nav-icon">
-                                        <img src="./assets/icons-dash/ALERT-ICON-SM.svg" alt="">
-                                    </span>
-                                    <span>Alertas</span>
-                                    <a href="listaUsuario.html" class="nav-item">
-                                        <span class="nav-icon">
-                                            <img src="./assets/icons-dash/dashboard.svg" alt="">
-                                        </span>
-                                        <span>Usuários</span>
-                                    </a>
-                                </a>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
+
+                        <ul class="nav-menu">
+                            <li>
+                                <a href="./TelaAlertas.html" class="nav-item">
+                                    <img src="./assets/icons-dash/ALERT-ICON-SM.svg"
+                                         alt=""
+                                         aria-hidden="true"
+                                         class="nav-icon">
+                                    <span>Alertas</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav-menu">
+                            <li>
+                                <a href="./listaUsuario.html" class="nav-item">
+                                    <img src="./assets/icons-dash/account-plus.png"
+                                         alt=""
+                                         aria-hidden="true"
+                                         class="nav-icon">
+                                    <span>Usuários</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav-menu">
+                            <li>
+                                <a href="./empresa.html" class="nav-item">
+                                    <img src="./assets/icons-dash/store.png"
+                                         alt=""
+                                         aria-hidden="true"
+                                         class="nav-icon">
+                                    <span>Empresa</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
                 </nav>
 
-                <div class="div-button-log-out">
-                    <button onclick="logout()" class="button_logout">
+                <footer class="sidebar-footer">
+                    <button type="button"
+                            onclick="logout()"
+                            class="button_logout">
                         Log Out
                     </button>
-                </div>
-
-
-            </div>
+                </footer>
+            </aside>
         </div>
         <main class="content">
             <div class="content-header">
@@ -144,6 +175,10 @@
                     <div class="form-group">
                         <label for="confirmPassword">Função</label>
                         <input type="text" id="funcao">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">data Nascimento</label>
+                        <input type="date" id="dtNasc">
                     </div>
                 </div>
             </form>

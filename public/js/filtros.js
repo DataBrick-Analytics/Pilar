@@ -40,9 +40,9 @@ async function filterRegion() {
             card.className = "box-regiao"
             card.innerHTML = `
                 <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
+                    <div class="box-titulo-botoes"">
                         <div class="titulo-regiao"><h1>Região #${region.id_distrito}</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-favoritos" id="${region.id_distrito}">&#9733;</div>
                         <div class="botao-fechar">X</div>
                     </div>
                     <p>${region.nome_distrito} / Região ${region.zona} / R$${region.preco_m2} </p>

@@ -23,10 +23,6 @@
                             <p>Com base no que é importante pra você, sugerimos regiões que fazem sentido.</p>
                         </div>
                     </div>
-
-
-                    
-                    
                 </div>
 
                 <div class="card-filtros-pai" id="cards-container">
@@ -92,9 +88,7 @@
         var parques = 0
         var hospitais = 0
         var escolas = 0
-
         
-
         function handleClick(event) {
             const botao = event.currentTarget;
             const valorSelecionado = botao.getAttribute('data-value');
@@ -138,7 +132,6 @@
             hospitais,
             escolas
         ];
-
 
             const cards = document.querySelectorAll('.card-filtro');
             cards.forEach(card => card.classList.add('saindo'));
@@ -191,10 +184,8 @@
                 botao.addEventListener('click', handleClick);
             });
         }
-
         function mostrarResumo(container) {
         localStorage.setItem('escolhasUsuario', JSON.stringify(escolhas));
-
         document.body.innerHTML = '';
 
     
