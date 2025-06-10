@@ -193,10 +193,32 @@ function searchFavoritesByUserId(req, res) {
         });
 }
 
+function getFavoritesByUser(req, res) {
+    const userID = req.params.userID;
+    const enterpriseID = req.params.enterpriseID;
+
+    if(userID === undefined) return res.status(400).send("IdUser está undefined ou nulo!")
+    if(enterpriseID === undefined) return res.status(400).send("enterpriseID está undefined ou nulo!")
+
+    favoritesModel.getFavoritesByUser(userID, enterpriseID)
+        .then(function (resultado) {
+            console.log("Favoritos retornados:", resultado);
+            return res.status(200).json(resultado); // ✅ Retorna direto o array
+        })
+        .catch(function (erro) {
+            console.error("Erro ao buscar favoritos:", erro);
+            return res.status(500).json({
+                error: "Erro ao buscar favoritos",
+                message: erro.message
+            });
+        });
+
+}
 
 module.exports = {
     createFavorite,
     searchFavoritesByUserId,
     editFavorite,
-    deleteFavorite
+    deleteFavorite,
+    getFavoritesByUser
 };

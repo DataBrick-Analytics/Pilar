@@ -53,6 +53,7 @@ async function filterRegion() {
             `
             container.appendChild(card)
         })
+        setTimeout(verificarFavoritosExistentes, 200)
     } catch (error){
         console.log("Erro ao gerar os cards", error)
     }
@@ -89,6 +90,8 @@ async function generateRandomRegionCards(){
             `
             container.appendChild(card)
         })
+
+        setTimeout(verificarFavoritosExistentes, 200)
     } catch (error){
         console.log("Erro ao gerar os cards", error)
     }
