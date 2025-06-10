@@ -244,11 +244,39 @@ async function salvarEscolhas(req, res) {
     }
 }
 
+async function salvarvaloresFormulario(req, res) {
+    const valoresFormulario = req.body.valoresFormulario;
+    const idUsuario = req.body.idUsuario;
+    
+    try {
+        const resultado = await userModel.salvarvaloresFormulario(valoresFormulario, idUsuario);
+        return res.status(201).json({ message: "Escolhas salvas com sucesso!", resultado });
+    } catch (erro) {
+        console.error("Erro no Controller:", erro);
+        return res.status(500).json({ message: "Erro ao salvar escolhas", erro });
+    }
+}
+
+async function pegarValoresDistritosEscolhas(req, res) {
+    const valoresFormulario = req.body.valoresFormulario;
+    const idUsuario = req.body.idUsuario;
+    
+    try {
+        const resultado = await userModel.pegarValoresDistritosEscolhas(valoresFormulario, idUsuario);
+        return res.status(201).json({ message: "Escolhas coletadas", resultado });
+    } catch (erro) {
+        console.error("Erro no Controller:", erro);
+        return res.status(500).json({ message: "Erro ao realizar a coleta", erro });
+    }
+}
+
 module.exports = {
     authenticateUser,
     createUser,
     editUser,
     deleteUser,
     searchUserById,
-    salvarEscolhas
+    salvarEscolhas,
+    salvarvaloresFormulario,
+    pegarValoresDistritosEscolhas
 };

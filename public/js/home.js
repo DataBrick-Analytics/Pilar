@@ -14,11 +14,14 @@ fetch("/data/getRegiaoRecomendada")
         console.error("Erro ao carregar regiões recomendadas:", error);
     });
 
-
     document.getElementById('button-forms').addEventListener('click', function() {
     window.location.href = 'formulario.html'; 
   });
 
   document.getElementById('button-allerts').addEventListener('click', function() {
     window.location.href = 'TelaAlertas.html'; 
+  });
+
+   document.getElementById('propiedades-button').addEventListener('click', function() {
+    window.location.href = 'filtros.html'; 
   });
