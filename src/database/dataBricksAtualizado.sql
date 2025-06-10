@@ -353,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `notificacao`
     `canal`
                      VARCHAR(45) NULL,
     `usuario`        VARCHAR(45) NULL,
-    `status_usuario` TINYINT     NULL,
+    `status_usuario`         BOOLEAN     NULL,
     `fk_usuario`     INT         NOT NULL,
     `fk_empresa`     INT         NOT NULL,
     `fk_log`         INT         NOT NULL,
