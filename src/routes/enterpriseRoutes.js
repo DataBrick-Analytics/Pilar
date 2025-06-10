@@ -14,7 +14,7 @@ router.put("/enterprise/:id", function (req, res) {
 });
 
 // DELETE
-router.delete("/enterprise/:id", function (req, res) {
+router.delete("/enterprise/:idUser", function (req, res) {
     enterpriseController.deleteEnterprise(req, res);
 });
 
