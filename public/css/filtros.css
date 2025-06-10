@@ -175,6 +175,10 @@
     cursor: pointer;
     transition: color 0.2s ease;
 }
+
+.botao-favoritos:hover {
+    color: #c97a00;
+}
 .botao-favoritos.ativa {
     color: #c97a00; 
 }
