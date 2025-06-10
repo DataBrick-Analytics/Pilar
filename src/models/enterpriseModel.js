@@ -195,7 +195,14 @@ async function getEnterpriseEmployees(fkEmpresa) {
 
 
 async function getEnterpriseById(idEnterprise) {
-  const query = `SELECT * FROM empresas WHERE id_empresa = ${idEnterprise};`
+  const query = `SELECT e.nome_fantasia,e.razao_social,en.rua,en.bairro,en.cep,
+                               en.cidade,en.estado,en.numero,t.telefone
+                            FROM empresa e
+                        JOIN endereco en
+                            ON e.id_empresa=en.fk_empresa 
+                        JOIN telefone t
+                            ON e.id_empresa=t.fk_empresa
+                        WHERE e.id_empresa = ${idEnterprise};`
   const resultado = await database.execute(query);
 
   if (resultado.length > 0) {
