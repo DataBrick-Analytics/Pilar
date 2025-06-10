@@ -22,3 +22,7 @@ fetch("/data/getRegiaoRecomendada")
   document.getElementById('button-allerts').addEventListener('click', function() {
     window.location.href = 'TelaAlertas.html'; 
   });
+
+   document.getElementById('propiedades-button').addEventListener('click', function() {
+    window.location.href = 'filtros.html'; 
+  });
