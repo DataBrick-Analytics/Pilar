@@ -78,7 +78,7 @@ async function generateRandomRegionCards(){
                 <div class="box-regiao-cima">
                     <div class="box-titulo-botoes">
                         <div class="titulo-regiao"><h1>Região #${region.id_distrito}</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-favoritos" id="${region.id_distrito}">&#9733;</div>
                         <div class="botao-fechar">X</div>
                     </div>
                     <p>Nome: ${region.nome_distrito} / Zona ${region.zona} </p>
@@ -93,3 +93,7 @@ async function generateRandomRegionCards(){
         console.log("Erro ao gerar os cards", error)
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    generateRandomRegionCards()
+})

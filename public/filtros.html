@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/dashNova.css">
     <link rel="stylesheet" href="css/Style.css">
     <link rel="stylesheet" href="css/filtros.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div class="divGeral">
@@ -139,120 +140,15 @@
 
 
         <div class="container-regioes">
-
-            <div class="box-regiao">
-                <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                    </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
-                </div>
-                <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
-                </div>
-            </div>
-
-            <div class="box-regiao">
-                <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                    </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
-                </div>
-                <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
-                </div>
-            </div>
-
-            <div class="box-regiao">
-                <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                    </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
-                </div>
-                <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
-                </div>
-            </div>
-            <div class="box-regiao">
-                <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                    </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
-                </div>
-                <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
-                </div>
-            </div>
-            <div class="box-regiao">
-                <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                    </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
-                </div>
-                <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
-                </div>
-            </div>
-            <div class="box-regiao">
-                <div class="box-regiao-cima">
-                    <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
-                        <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                    </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
-                </div>
-                <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
-                </div>
-            </div>
+            <!-- Cards serão inseridos dinamicamente aqui -->
         </div>
     </div>
 </div>
 </body>
 </html>
 <script src="js/filtros.js"></script>
-<script onload="generateRandomRegionCards()" src="js/filtros.js"></script>
-<script onload="validarSessao()" src="js/sessao.js"></script>
-<script type="module" src="js/favoritar.js"></script>
+<script src="js/favoritar.js"></script>
 <script>
-
-
-    import {favoritar} from "./js/favoritar";
-
-    const container = document.querySelector('.container-regioes');
-
-    container.addEventListener('click', function (event) {
-        if (event.target.classList.contains('botao-favoritos')) {
-            event.target.classList.toggle('ativa');
-
-            const userID = localStorage.getItem('USER_ID');
-            const enterpriseID = localStorage.getItem('ID_EMPRESA');
-            const propertyID = isNaN(Number(event.target.id)) ? null : Number(event.target.id)
-
-            console.log(userID, enterpriseID, propertyID)
-
-            favoritar(userID, enterpriseID, propertyID)
-        }
-        if (event.target.classList.contains('botao-fechar')) {
-            const card = event.target.closest('.box-regiao');
-            if (card) card.style.display = 'none';
-        }
-    });
 
     document.addEventListener("DOMContentLoaded", function () {
         const botaoFiltrar = document.querySelector('.box-botao-filtrar');
