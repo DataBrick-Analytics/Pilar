@@ -15,6 +15,10 @@ router.put("/slack/update/:id", function (req, res) {
     slackController.updateSlack(req, res);
 })
 
+router.put("/slack/updateStatus/:id", function (req, res) {
+    slackController.updateStatus(req, res);
+})
+
 router.delete("/slack/delete/:id", function (req, res) {
     slackController.deleteSlack(req, res);
 })

@@ -58,7 +58,6 @@ form {
 
 label {
     font-weight: 500;
-    margin-bottom: 0.5rem;
     display: block;
     color: #333;
 }
@@ -92,4 +91,85 @@ button {
 
 button:hover {
     background-color: #1a252f;
+}
+
+.alert {
+    height: 100%;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    color: var(--linearwhite);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+}
+
+.edit-button, .delete-button {
+    width: 7vw;
+    background: none;
+    border: none;
+    color: var(--linearwhite);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.online {
+    background: forestgreen;
+}
+
+.offline {
+    background: var(--linearred-orange);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .2s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .2s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(18px);
 }

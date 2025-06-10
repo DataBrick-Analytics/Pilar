@@ -83,26 +83,7 @@
                     <div class="card">
                         <h2 class="alert-font">Alertas</h2>
                         <div class="alerts-container">
-                            <div class="alert error">
-                                <p>A simple primary alert with <strong>an example link</strong>. Give it a click if you
-                                    like</p>
-                                <button class="close-button">×</button>
-                            </div>
-                            <div class="alert success">
-                                <p>A simple primary alert with <strong>an example link</strong>. Give it a click if you
-                                    like</p>
-                                <button class="close-button">×</button>
-                            </div>
-                            <div class="alert warning">
-                                <p>A simple primary alert with <strong>an example link</strong>. Give it a click if you
-                                    like</p>
-                                <button class="close-button">×</button>
-                            </div>
-                            <div class="alert info">
-                                <p>A simple primary alert with <strong>an example link</strong>. Give it a click if you
-                                    like</p>
-                                <button class="close-button">×</button>
-                            </div>
+                        
                         </div>
                     </div>
                 </section>
@@ -125,14 +106,14 @@
                     <header>
                         <h1 id="modal-title">Parametrizacao</h1>
                     </header>
-                    <form onsubmit="saveSlack(event)">
+                    <form onsubmit="handleSaveSlack(event)">
                         <div>
                             <label for="cargo">Notificar cargo em específico:</label>
                             <input type="text" id="cargo" name="cargo" placeholder="Digite o cargo">
                         </div>
                         <div>
-                            <label for="slack">Canal do SLACK:</label>
-                            <input type="text" id="slack" name="slack" placeholder="Digite o canal do Slack">
+                            <label for="canal">Canal do SLACK:</label>
+                            <input type="text" id="canal" name="slack" placeholder="Digite o canal do Slack">
                         </div>
                         <div class="actions">
                             <button type="submit">
@@ -149,4 +130,4 @@
 
 </html>
 <script src="js/slack.js"></script>
-<!--<script onload="validarSessao()" src="js/sessao.js"></script>-->
+<script onload="validarSessao()" src="js/sessao.js"></script>

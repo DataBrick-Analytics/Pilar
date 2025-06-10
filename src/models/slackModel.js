@@ -1,8 +1,8 @@
 let database = require('../database/config');
 
-async function saveSlack(userId, cargo, canalSlack) {
-    const query = `INSERT INTO tabelaSlack (fk_usuario, cargo, canalSlack, data_criacao, data_edicao) VALUES (?, ?, ?, NOW(), NOW())`;
-    const values = [userId, cargo, canalSlack];
+async function saveSlack(userId, cargoMecionado, canalSlack, enterpriseId) {
+    const query = `INSERT INTO notificacao (canal, cargo, status, fk_usuario, fk_empresa, data_criacao, data_edicao) VALUES (?, ?, ?, ?, ?, NOW(), NOW())`;
+    const values = [canalSlack, cargoMecionado, 1, userId, enterpriseId];
 
     try {
         return await database.execute(query, values);
@@ -25,8 +25,29 @@ async function getAllById(userId) {
 }
 
 async function updateSlack(canalSlack, cargo, notificationID) {
-    const query = `UPDATE notificacao SET data_edicao = NOW(), canal = ?, usuario = ? WHERE id_notificacao = ?`;
+    const query = `UPDATE notificacao SET data_edicao = NOW(), canal = ?, cargo = ? WHERE id_notificacao = ?`;
     const values = [canalSlack, cargo, notificationID];
+
+    try {
+        return await database.execute(query, values);
+    } catch (error) {
+        console.error("Erro ao atualizar dados do Slack:", error);
+        throw error;
+    }
+}
+
+async function updateStatus(notificationID, status) {
+    const query = `UPDATE notificacao SET status = ? WHERE id_notificacao = ?`;
+
+    if (status) {
+        status = 1;
+    } else {
+        status = 0;
+    }
+
+    const values = [status, notificationID];
+
+
 
     try {
         return await database.execute(query, values);
@@ -52,5 +73,6 @@ module.exports = {
     saveSlack,
     getAllById,
     updateSlack,
-    deleteSlack
+    deleteSlack,
+    updateStatus
 }

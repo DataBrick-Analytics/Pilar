@@ -28,6 +28,7 @@ var enterpriseRouter = require("./src/routes/enterpriseRoutes");
 var modeloRouter = require("./src/routes/modeloRoutes");
 var dataRouter = require("./src/routes/dataRoutes");
 var favoritesRouter = require("./src/routes/favoritesRoutes");
+var slackRouter = require("./src/routes/slackRoutes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,6 +42,7 @@ app.use("/", enterpriseRouter);
 app.use("/", dataRouter); 
 app.use("/modeloRoutes", modeloRouter);
 app.use("/", favoritesRouter);
+app.use("/", slackRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
