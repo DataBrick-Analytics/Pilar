@@ -11,7 +11,7 @@ function entrar() {
         return false;
     }
 
-    fetch("/user/autenticar", {
+    fetch("/user/autenticar",   {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -41,7 +41,7 @@ function entrar() {
                         background: "#2C3E50",
                         confirmButtonColor: "#C45824"
                     }).then(() => {
-                        window.location.href = "./dashboard.html";
+                        window.location.href = "./formulario.html";
                     });
                 } else {
                     Swal.fire({

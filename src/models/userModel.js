@@ -153,6 +153,23 @@ async function searchUserById(idUser) {
     }
 }
 
+async function salvarEscolhas(idUsuario,escolhas) {
+    const query = `
+        INSERT INTO escolhas_formulario (etapa1, etapa2, etapa3, fk_id_usuario)
+        VALUES (?, ?, ?, ?)
+    `;
+
+    const values = [escolhas[0], escolhas[1], escolhas[2], idUsuario];
+
+    try {
+        const resultado = await database.execute(query, values);
+        return resultado;
+    } catch (error) {
+        console.error("Erro ao salvar escolhas:", error);
+        throw error;
+    }
+}
+
 async function checkEmail(email) {
     const query = `SELECT email FROM usuario WHERE email = ?;`;
     const resultado = await database.execute(query, [email]);
@@ -174,9 +191,6 @@ async function checkCpf(cpf) {
         return [];
     }
 }
-
-
-
 module.exports = {
     createUser,
     editUser,
@@ -184,6 +198,7 @@ module.exports = {
     authenticateUser,
     searchUserById,
     searchUsersByEnterpriseId,
+    salvarEscolhas,
     checkEmail,
     checkCpf
 }

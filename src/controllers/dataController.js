@@ -195,6 +195,19 @@ function getParksByRegion(req, res) {
         });
 }
 
+function getRegiaoRecomendada(req, res) {
+    dataModel.getRegiaoRecomendada()
+        .then((resultado) => {
+            const resposta = Array.isArray(resultado) ? resultado : [resultado];
+            res.status(200).json(resposta);
+        })
+        .catch((erro) => {
+            console.error("Erro no controller:", erro);
+            res.status(500).json({ erro: erro.message });
+        });
+}
+
+
 module.exports = {
     //KPIS
     getRegionType,
@@ -209,5 +222,8 @@ module.exports = {
     //AUXILIARES
     getSchoolsRegion,
     getHospitalsByRegion,
-    getParksByRegion
+    getParksByRegion,
+
+    //REGIÕES RECOMENDADAS
+    getRegiaoRecomendada
 };

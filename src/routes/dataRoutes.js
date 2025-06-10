@@ -44,6 +44,10 @@ router.get("/data/getParksByRegion/:id", function (req, res) {
     dataController.getParksByRegion(req, res)
 })
 
+//REGIÕES RECOMENDADAS
+router.get("/data/getRegiaoRecomendada", function (req, res) {
+    dataController.getRegiaoRecomendada(req, res);
+});
 
 
 
