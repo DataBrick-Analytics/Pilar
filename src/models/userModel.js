@@ -244,7 +244,7 @@ renda_pobre_ranking AS (
         ROW_NUMBER() OVER (ORDER BY (AVG(renda_domiciliar_quinto_mais_pobre) / 12) ASC) AS row_num
     FROM info_regiao
     WHERE fk_distrito IS NOT NULL
-    GROUP BY fk_distrito
+    GROUP BY fk_distrito, nome_distrito
 ),
 
 -- Flutuação preço metro quadrado (últimos 5 anos por distrito)
