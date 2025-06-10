@@ -35,7 +35,7 @@ async function getRegionByFilter({ precoMin, violenciaMax, densidadeMax, zona })
     }
 
     if (densidadeMax !== undefined) {
-        havingConditions.push("densidade_malha_urbana <= ?");
+        havingConditions.push("densidade_mobilidade <= ?");
         params.push(densidadeMax);
     }
 
@@ -43,12 +43,11 @@ async function getRegionByFilter({ precoMin, violenciaMax, densidadeMax, zona })
     const havingClause = havingConditions.length ? `HAVING ${havingConditions.join(" AND ")}` : "";
 
     const query = `
-        SELECT
-            d.id_distrito,
-            d.nome_distrito,
-            d.zona,
+        SELECT d.id_distrito,
+               d.nome_distrito,
+               d.zona,
 
-            ROUND((
+               ROUND((
                       (
                           SUM(
                                   COALESCE(s.furtos_regiao, 0) +
@@ -60,40 +59,40 @@ async function getRegionByFilter({ precoMin, violenciaMax, densidadeMax, zona })
                                   COALESCE(s.homicio_doloso_acidente_transito, 0) +
                                   COALESCE(s.homicidio_culposo_acidente_transito, 0) +
                                   COALESCE(s.homicidio_culposo, 0)
-                          )
-                          ) / NULLIF(ir.populacao_total, 0)
-                      ) / (
-                      SELECT
-                          SUM(
-                                  (
-                                      COALESCE(s2.furtos_regiao, 0) +
-                                      COALESCE(s2.roubos_cargas, 0) +
-                                      COALESCE(s2.roubos, 0) +
-                                      COALESCE(s2.roubos_veiculos, 0) +
-                                      COALESCE(s2.furtos_veiculos, 0) +
-                                      COALESCE(s2.latrocinios, 0) +
-                                      COALESCE(s2.homicio_doloso_acidente_transito, 0) +
-                                      COALESCE(s2.homicidio_culposo_acidente_transito, 0) +
-                                      COALESCE(s2.homicidio_culposo, 0)
-                                      ) / NULLIF(ir2.populacao_total, 0)
-                          )
-                      FROM seguranca s2
-                               JOIN info_regiao ir2 ON s2.fk_distrito = ir2.fk_distrito
-                  ) * 100, 2) AS indice_violencia_percentual,
+                          ) / NULLIF(d.populacao, 0) * 1000
+                          ) / (SELECT SUM(
+                                      (
+                                          COALESCE(s2.furtos_regiao, 0) +
+                                          COALESCE(s2.roubos_cargas, 0) +
+                                          COALESCE(s2.roubos, 0) +
+                                          COALESCE(s2.roubos_veiculos, 0) +
+                                          COALESCE(s2.furtos_veiculos, 0) +
+                                          COALESCE(s2.latrocinios, 0) +
+                                          COALESCE(s2.homicio_doloso_acidente_transito, 0) +
+                                          COALESCE(s2.homicidio_culposo_acidente_transito, 0) +
+                                          COALESCE(s2.homicidio_culposo, 0)
+                                          ) / NULLIF(d2.populacao, 0) * 1000
+                              )
+                               FROM seguranca s2 JOIN distrito d2 ON s2.fk_distrito = d2.id_distrito) * 100, 2) AS indice_violencia_percentual,
+                         ROUND(AVG(pre.preco / NULLIF(pre.area, 0)), 2) AS preco_m2,
+                         ROUND((COALESCE(m.qtd_pontos_onibus, 0) + COALESCE(m.qtd_estacoes_trem_metro, 0)) / NULLIF(d.area, 0), 6 ) AS densidade_mobilidade
 
-            ROUND(ir.populacao_total / (NULLIF(SUM(p.area_terreno_m2), 0) / 10000), 2) AS densidade_malha_urbana,
-            ROUND(AVG(pre.preco), 2) AS preco_m2
-
-        FROM distrito d
-                 JOIN seguranca s ON d.id_distrito = s.fk_distrito
-                 JOIN info_regiao ir ON d.id_distrito = ir.fk_distrito
-                 JOIN propriedade p ON d.id_distrito = p.fk_distrito
-                 JOIN precificacao pre ON d.id_distrito = pre.fk_distrito
-            ${whereClause}
-        GROUP BY d.id_distrito, d.nome_distrito, d.zona, ir.populacao_total
-            ${havingClause}
-        ORDER BY preco_m2 ASC
-            LIMIT 6;
+    FROM distrito d
+    JOIN seguranca s ON d.id_distrito = s.fk_distrito
+    JOIN info_regiao ir ON d.id_distrito = ir.fk_distrito -- ainda mantive, caso vc use o having
+    JOIN propriedade p ON d.id_distrito = p.fk_distrito
+    JOIN precificacao pre ON d.id_distrito = pre.fk_distrito
+    JOIN mobilidade m ON d.id_distrito = m.fk_distrito ${whereClause}
+                             GROUP BY
+                                     d.id_distrito,
+                                     d.nome_distrito,
+                                     d.zona,
+                                     d.populacao,
+                                     d.area,
+                                     m.qtd_pontos_onibus,
+                                     m.qtd_estacoes_trem_metro ${havingClause}
+    ORDER BY preco_m2 ASC
+    LIMIT 6;
     `;
 
     const rows = await database.execute(query, params);
