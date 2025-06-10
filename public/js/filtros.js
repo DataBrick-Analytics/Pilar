@@ -1,21 +1,37 @@
 async function filterRegion() {
-    const zone = document.getElementById("filtroZona").value
-    const predominance = document.getElementById("filtroPredominancia").value
+    const zona = document.getElementById("filtroZona").value
     const priceM2 = document.getElementById("filtroValorM2").value
-    const size = document.getElementById("filtroTamanho").value
+    const violencia = document.getElementById("filtroViolencia").value
+    const densidade = document.getElementById("filtroDensidade").value
 
-    const objFilter = {zone, predominance, priceM2, size}
+    const objFilter = {
+        zona: zona || undefined,
+        violenciaMax: violencia ? Number(violencia) : undefined,
+        densidadeMax: densidade ? Number(densidade) : undefined,
+        precoMin: priceM2,
+
+    }
 
     console.log(objFilter)
     try {
         const response = await fetch("/filter/getRegionByFilter", {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(objFilter)
         })
-        const regions = await response.json()
+
+        if (!response.ok) {
+            const text = await response.text()
+            console.error("Resposta do servidor não OK", response.status, text)
+            return
+        }
+
+        const respostaJson = await response.json()
+        const regions = Array.isArray(respostaJson) ? respostaJson : [respostaJson];
+
+        console.log(regions)
         const container = document.querySelector(".container-regioes")
         container.innerHTML = ""
 
@@ -25,17 +41,17 @@ async function filterRegion() {
             card.innerHTML = `
                 <div class="box-regiao-cima">
                     <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
+                        <div class="titulo-regiao"><h1>Região #${region.id_distrito}</h1></div>
                         <div class="botao-favoritos">&#9733;</div>
                         <div class="botao-fechar">X</div>
                     </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
+                    <p>${region.nome_distrito} / Região ${region.zona} / R$${region.preco_m2} </p>
                 </div>
                 <div class="box-regiao-baixo">
                     <div class="box-botao">Acessar Região</div>
                 </div>
             `
-            container.appendChild(region)
+            container.appendChild(card)
         })
     } catch (error){
         console.log("Erro ao gerar os cards", error)
@@ -61,17 +77,17 @@ async function generateRandomRegionCards(){
             card.innerHTML = `
                 <div class="box-regiao-cima">
                     <div class="box-titulo-botoes">
-                        <div class="titulo-regiao"><h1>Região X1</h1></div>
+                        <div class="titulo-regiao"><h1>Região #${region.id_distrito}</h1></div>
                         <div class="botao-favoritos">&#9733;</div>
                         <div class="botao-fechar">X</div>
                     </div>
-                    <p>Um belo apartamento moderno no centro da cidade</p>
+                    <p>Nome: ${region.nome_distrito} / Zona ${region.zona} </p>
                 </div>
                 <div class="box-regiao-baixo">
                     <div class="box-botao">Acessar Região</div>
                 </div>
             `
-            container.appendChild(region)
+            container.appendChild(card)
         })
     } catch (error){
         console.log("Erro ao gerar os cards", error)
