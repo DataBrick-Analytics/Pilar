@@ -2,17 +2,17 @@ var database = require("../database/config");
 
 async function createFavorites(favorite) {
 
-    const isAlreadyFavorited = await database.execute(`
+    const isAlreadyFavorited = await database.execute(
         SELECT * FROM favorito WHERE fk_usuario = ? AND fk_empresa = ? AND fk_distrito = ?;
-    `, [favorite.userID, favorite.enterpriseID, favorite.favoriteLand])
+    , [favorite.userID, favorite.enterpriseID, favorite.favoriteLand])
 
     if(isAlreadyFavorited.length > 0){
         throw new Error("Este terreno já está favoritado por este usuário.")
     }
 
-    const query = `
+    const query = 
         INSERT INTO favorito (fk_usuario, fk_empresa, fk_distrito, data_favorito, data_edicao)
-        VALUES (?, ?, ?, NOW(), NOW());`
+        VALUES (?, ?, ?, NOW(), NOW());
 
     const values = [
         favorite.userID,
@@ -30,26 +30,56 @@ async function createFavorites(favorite) {
     }
 }
 
-async function editFavorites(favorite, idFavorite) {
-    const query = `
-   UPDATE favoritos 
-    SET fk_usuario = ?,
-      fk_empresa = ?,
-      fk_propriedade = ?,
-      data_favorito = ? 
-    WHERE id_favorito = ?;
-    `;
+async function countFavoritesByUser(fk_usuario) {
+    try {
+        const query = `SELECT COUNT(*) AS total FROM favorito WHERE fk_usuario = ?`;
+        const [rows] = await database.execute(query, [fk_usuario]);
 
-       const values = [
-        favorite.fk_usuario,
-        favorite.fk_empresa,
-        favorite.fk_propriedade,
-        favorite.id_favorito,
+        if (!rows || rows.length === 0) {
+            return [{ total: 0 }];
+        }
+
+        return rows;
+    } catch (error) {
+        console.error("Erro ao contar favoritos:", error);
+        return [{ total: 0 }];
+    }
+}
+
+
+async function editFavorites(userId, oldDistrito, newDistrito) {
+    
+    const dataEdicao = new Date();
+
+    const query = `
+        UPDATE favorito
+        SET 
+            fk_distrito = ?,
+            data_edicao = ?
+        WHERE fk_usuario = ?
+        AND fk_distrito = ?`;
+
+    const values = [
+        newDistrito,
+        dataEdicao,
+        userId,
+        oldDistrito
     ];
 
     try {
         const result = await database.execute(query, values);
-        return result[0];
+        
+        if (result.affectedRows === 0) {
+            throw new Error("Favorito não encontrado para este usuário");
+        }
+
+        return {
+            success: true,
+            fk_usuario: userId,
+            oldDistrito: oldDistrito,
+            newDistrito: newDistrito,
+            data_edicao: dataEdicao
+        };
     } catch (error) {
         console.error('Database error:', error);
         throw error;
@@ -57,46 +87,52 @@ async function editFavorites(favorite, idFavorite) {
 }
 
 
-async function deleteFavorite(idFavorite) {
+async function deleteFavorite(favoriteId) {
+    console.log("ID para exclusão:", favoriteId);
     const query = `
-    DELETE FROM favorite WHERE id_favorito = ?
-    `;
+        DELETE FROM favorito 
+        WHERE id_favorito = ? `
+
+         const values = [favoriteId];
 
     try {
-        console.log(query)
-        const resultado = await database.execute(query, [idUser]);
-        console.log('Usuário deletado com sucesso:', resultado);
-        return resultado;
+        return await database.execute(query,values );
     } catch (error) {
-        console.error('Erro ao deletar usuário:', error.message);
+        console.error('Database error:', error);
         throw error;
     }
-
 }
 
-
-
-async function searchFavoriteByUserId(idUser) {
+async function searchFavoritesByUserId(userId) {
     const query = `
-    SELECT * FROM favorites WHERE fk_usuario = ?
-    `;
+      SELECT 
+            f.id_favorito,
+            f.fk_usuario,
+            f.fk_empresa,
+            f.fk_distrito,
+            f.data_favorito,
+            d.id_distrito,
+            d.nome_distrito,
+            d.area,
+            d.data_criacao AS distrito_data_criacao,
+            d.data_edicao AS distrito_data_edicao
+        FROM favorito f
+        JOIN distrito d ON f.fk_distrito = d.id_distrito
+        WHERE f.fk_usuario = ?`;
 
     try {
-        const [resultado] = await database.execute(query, [idUser]);
-        console.log('Usuários encontrados com sucesso:', resultado);
-        return resultado[0];
+        const result = await database.execute(query, [userId]);
+        return result;
     } catch (error) {
-        console.error('Erro ao procurar usuario:', error.message);
+        console.error("Erro ao buscar favoritos:", error);
         throw error;
     }
-
 }
-
-
 
 module.exports = {
-    createFavorites,
+    createFavorite,
+    countFavoritesByUser,
     editFavorites,
     deleteFavorite,
-    searchFavoriteByUserId,
-}
+    searchFavoritesByUserId
+};

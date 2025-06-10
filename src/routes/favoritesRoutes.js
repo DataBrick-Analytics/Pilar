@@ -1,27 +1,26 @@
 var express = require("express");
 var router = express.Router();
-
 var favoritosController = require("../controllers/favoritesController");
 
 
 // POST
-router.post("/favorite/create", function (req, res) {
+router.post("/favorites/create", function (req, res) {
     favoritosController.createFavorite(req, res);
 })
 
 // GET
-router.get("favorite/:id", function (req, res) {
-  favoritosController.searchFavoriteByUserId(req, res);
+router.get("/favorites/:id", function (req, res) {
+  favoritosController.searchFavoritesByUserId(req, res);
 });
 
 // UPDATE
-router.put("/favorite/:id", function (req, res) {
-  favoritosController.editUser(req, res);
+router.put("/favorites/edit/:userId/:oldDistrito", function (req, res) {
+  favoritosController.editFavorite(req, res);
 });
 
 // DELETE
-router.delete("/favorite/:id", function (req, res) {
-  favoritosController.deleteUser(req, res);
+router.delete("/favorites/delete/:id", function (req, res) {
+  favoritosController.deleteFavorite(req, res);
 });
 
 

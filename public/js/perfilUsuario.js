@@ -9,7 +9,7 @@ async function setUserInfos() {
 }
 
 async function searchProfile() {
-    const userID = localStorage.USER_ID;
+    const userID = localStorage.getItem('USER_ID');
 
     try {
         const resposta = await fetch(`/user/${userID}`, {

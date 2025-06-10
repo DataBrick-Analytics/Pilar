@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+    mysql:
+        container_name: container-mysql
+        build:
+            context: ./databrick/banco
+            dockerfile: Dockerfile
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: databrick
+            MYSQL_USER: databrick
+            MYSQL_PASSWORD: root
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql-data:/var/lib/mysql
+
+    node:
+        container_name: container-node
+        build:
+            context: ./databrick/web
+            dockerfile: Dockerfile
+        restart: always
+        ports:
+            - "8080:8080"
+        depends_on:
+            - mysql
+
+    java:
+        container_name: container-java
+        build:
+            context: ./databrick/app
+            dockerfile: Dockerfile
+        restart: always
+        depends_on:
+            - mysql
+            - node
+
+    spring:
+        container_name: container-spring
+        build:
+            context: ./databrick/spring
+            dockerfile: Dockerfile
+        restart: always
+        ports:
+            - "4585:4585"
+        depends_on:
+            - mysql
+            - node
+            - java
+
+
+volumes:
+    mysql-data:

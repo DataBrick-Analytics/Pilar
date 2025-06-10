@@ -4,6 +4,7 @@ var populationRegion = 0
 var comercialBuildings = 0;
 var residencialBuildings = 0;
 var totalBuildings = 0;
+const regionId = localStorage.getItem('REGIAO_ID');
 
 document.addEventListener('DOMContentLoaded', function () {
     getHospitalsByRegion();
@@ -14,9 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
     catchKPI()
 })
 
-
 function catchKPI() {
-    fetch("/data/getRegionType", {
+    fetch(`/data/getRegionType/${regionId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -59,11 +59,7 @@ function catchKPI() {
 
 
 async function getUrbanMeshDensity() {
-    const fkBairro = 10;
-    // console.log("ID recebido:", fkBairro);
-    // if (!fkBairro == undefined || !fkBairro == null) {
-
-    fetch(`/data/getUrbanMeshDensity/${fkBairro}`, {
+    fetch(`/data/getUrbanMeshDensity/${regionId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -87,9 +83,8 @@ async function getUrbanMeshDensity() {
 
 async function getHospitalsByRegion() {
     const kpiHospitais = document.getElementById("kpiHospitais")
-    const fkBairro = 10
     try {
-        const resposta = await fetch(`/data/getHospitalsByRegion/${fkBairro}`, {
+        const resposta = await fetch(`/data/getHospitalsByRegion/${regionId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -116,9 +111,8 @@ async function getHospitalsByRegion() {
 
 async function getSchoolsByRegion() {
     const kpiEscolas = document.getElementById("kpiEscolas")
-    const fkBairro = 10
     try {
-        const resposta = await fetch(`/data/getSchoolsRegion/${fkBairro}`, {
+        const resposta = await fetch(`/data/getSchoolsRegion/${regionId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -146,11 +140,10 @@ async function getSchoolsByRegion() {
 
 async function getPriceSquareMeter(){
     const kpiValorMetro = document.getElementById("kpivalor")
-    const fkBairro = 10
     kpiValorMetro.innerText=''
 
     try {
-        const resposta = await fetch(`/data/getPriceSquareMeter/${fkBairro}`, {
+        const resposta = await fetch(`/data/getPriceSquareMeter/${regionId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -175,11 +168,10 @@ async function getPriceSquareMeter(){
 
 async function getViolenceIndex(){
     const kpiViolencia = document.getElementById("kpiseguranca")
-    const fkBairro = 10
     kpiViolencia.innerText=''
 
     try {
-        const resposta = await fetch(`/data/getViolenceIndex/${fkBairro}`, {
+        const resposta = await fetch(`/data/getViolenceIndex/${regionId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
