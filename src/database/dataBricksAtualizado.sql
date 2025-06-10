@@ -353,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `notificacao`
     `canal`
                      VARCHAR(45) NULL,
     `usuario`        VARCHAR(45) NULL,
-    `status_usuario` TINYINT     NULL,
+    `status_usuario`         BOOLEAN     NULL,
     `fk_usuario`     INT         NOT NULL,
     `fk_empresa`     INT         NOT NULL,
     `fk_log`         INT         NOT NULL,
@@ -527,6 +527,15 @@ CREATE TABLE IF NOT EXISTS `parque`
         (
          `id_parques`
             )
+);
+
+CREATE TABLE IF NOT EXISTS `escolhas_formulario` (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    etapa1 VARCHAR(20),
+    etapa2 VARCHAR(20),
+    etapa3 VARCHAR(20),
+    fk_id_usuario INT,
+    FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id_usuario)
 );
 
 

@@ -3,39 +3,72 @@ var database = require("../database/config");
 
 async function createEnterpriseAndUser(cadastro) {
   try {
-    const checkEnterprise = await database.execute(`SELECT id_empresa FROM empresa WHERE cnpj = ${cadastro.cnpj}`)
+    const checkEnterprise = await database.execute(
+        `SELECT id_empresa FROM empresa WHERE cnpj = ?`,
+        [cadastro.cnpj]
+    );
 
-    let cadastroEmpresa
-    let cadastroUsuario
-
-    if (checkEnterprise.length == 0) {
-      console.log("Empresa não cadastrada, será necessário cadastrar.")
-      cadastroEmpresa = await database.execute(
-        `INSERT INTO empresa (razao_social, nome_fantasia, cnpj, data_criacao, date_edicao) VALUES (?, ?, ?, ?,?)`
-        , values = [cadastro.razaoSocial, cadastro.nomeFantasia, cadastro.cnpj, new Date(), new Date()]
-      );
-    } else {
-      console.log("Empresa já cadastrada, não será necessário cadastrar novamente.")
-      return
+    if (checkEnterprise.length > 0) {
+      console.log("Empresa já cadastrada, não será necessário cadastrar novamente.");
+      return "Empresa já cadastrada, não será necessário cadastrar novamente.";
     }
-    const idEmpresa = cadastroEmpresa.insertId
 
-    cadastroUsuario = await database.execute(
-      `INSERT INTO usuario (nome, email, senha, fk_empresa, cpf, data_nasc, funcao_empresa, data_criacao, data_edicao)
-      VALUES (?, ?, SHA2(?, 256), ?, ?, ?, ?, ?, ?)`,
-      values = [
-        cadastro.nomeUsuario,
-        cadastro.email,
-        cadastro.senha,
-        idEmpresa,
-        cadastro.cpf,
-        cadastro.dtNasc,
-        "Admin",
-        new Date(),
-        new Date()
-      ])
+    console.log("Empresa não cadastrada, será necessário cadastrar.");
 
-    return "Usuario Criado com sucesso";
+    // Cadastra a empresa
+    const cadastroEmpresa = await database.execute(
+        `INSERT INTO empresa (razao_social, nome_fantasia, cnpj, data_criacao, date_edicao) VALUES (?, ?, ?, ?, ?)`,
+        [cadastro.razaoSocial, cadastro.nomeFantasia, cadastro.cnpj, new Date(), new Date()]
+    );
+
+    // Validação: empresa cadastrada com sucesso?
+    const idEmpresa = cadastroEmpresa?.insertId;
+    if (!idEmpresa) {
+      console.error("Falha ao cadastrar empresa. Encerrando processo.");
+      return;
+    }
+
+    // Cadastra endereço
+    await database.execute(
+        `INSERT INTO endereco (
+        rua, bairro, cep, cidade, estado, uf, fk_empresa, data_criacao, data_edicao
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())`,
+        [
+          cadastro.rua,
+          cadastro.bairro,
+          cadastro.cep,
+          cadastro.cidade,
+          cadastro.estado,
+          cadastro.uf,
+          idEmpresa
+        ]
+    );
+
+    // Cadastra telefone
+    await database.execute(
+        `INSERT INTO telefone (telefone, fk_empresa, data_criacao, data_edicao)
+       VALUES (?, ?, NOW(), NOW())`,
+        [cadastro.telefone, idEmpresa]
+    );
+
+    // Cadastra usuário
+    await database.execute(
+        `INSERT INTO usuario (nome, email, senha, fk_empresa, cpf, data_nasc, funcao_empresa, data_criacao, data_edicao)
+       VALUES (?, ?, SHA2(?, 256), ?, ?, ?, ?, ?, ?)`,
+        [
+          cadastro.nomeUsuario,
+          cadastro.email,
+          cadastro.senha,
+          idEmpresa,
+          cadastro.cpf,
+          cadastro.dtNasc,
+          "Admin",
+          new Date(),
+          new Date()
+        ]
+    );
+
+    return "Usuário criado com sucesso.";
 
   } catch (error) {
     console.error('Erro ao inserir empresa:', error.message);
@@ -159,6 +192,33 @@ async function getEnterpriseAddress(idEnterprise) {
   }
 }
 
+async function checkCnpj(cnpj) {
+  const query = `SELECT cnpj FROM empresa WHERE cnpj = ?;`
+  const resultado = await database.execute(query,[cnpj]);
+
+  if (resultado.length > 0) {
+    return resultado;
+  } else{
+    return [];
+  }
+}
+
+async function checkRazaoSocialcnpj(razaoSocial) {
+  const query = `SELECT razao_social FROM empresa WHERE razao_social = ?;`;
+  const resultado = await database.execute(query, [razaoSocial]);
+
+  if (resultado.length > 0) {
+    return resultado;
+  } else {
+    return [];
+  }
+}
+
+
+
+
+
+
 
 module.exports = {
   createEnterpriseAndUser,
@@ -166,5 +226,7 @@ module.exports = {
   deleteEnterprise,
   getEnterpriseEmployees,
   getEnterpriseById,
-  getEnterpriseAddress
+  getEnterpriseAddress,
+  checkCnpj,
+  checkRazaoSocialcnpj,
 }
