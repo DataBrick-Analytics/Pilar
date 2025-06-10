@@ -4,19 +4,20 @@ var populationRegion = 0
 var comercialBuildings = 0;
 var residencialBuildings = 0;
 var totalBuildings = 0;
-const regionId = localStorage.getItem('REGIAO_ID');
+const fkDistrito = localStorage.getItem('REGIAO_ID');
 
 document.addEventListener('DOMContentLoaded', function () {
+    getViolenceIndex();
+    getUrbanMeshDensity();
+    getPriceSquareMeter();
+    getRegionType();
+    getParksByRegion();
     getHospitalsByRegion();
     getSchoolsByRegion();
-    getUrbanMeshDensity();
-    getPriceSquareMeter()
-    getViolenceIndex()
-    catchKPI()
 })
 
-function catchKPI() {
-    fetch(`/data/getRegionType/${regionId}`, {
+function getRegionType() {
+    fetch(`/data/getRegionType/${fkDistrito}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -34,12 +35,14 @@ function catchKPI() {
                 totalBuildings = parseInt(json[0].total_comercial) + parseInt(json[0].total_garagens_depositos) + parseInt(json[0].total_industrial) + parseInt(json[0].total_misto) + parseInt(json[0].total_residencial)
 
                 if (residencialBuildings > (0.7 * totalBuildings)) {
-                    kpitipo.innerhtml = "Residencial"
-                    kpitipovalor.innerhtml = `${residencialBuildings}%`
+                    kpitipo.innerHTML = "Residencial"
+                    const residencialPercentage = (residencialBuildings / (totalBuildings) * 100).toFixed(2);
+                    kpitipovalor.innerHTML = `${residencialPercentage}%`
 
                 } else {
-                    kpitipo.innerhtml = "Comercial"
-                    kpitipovalor.innerhtml = `${comercialBuildings}%`
+                    kpitipo.innerHTML = "Comercial"
+                    const comercialPercentage = (comercialBuildings / (totalBuildings) * 100).toFixed(2);
+                    kpitipovalor.innerHTML = `${comercialBuildings}%`
 
                 }
             });
@@ -50,6 +53,7 @@ function catchKPI() {
                 console.error(texto);
                 finalizarAguardar(texto);
             });
+            kpitipo.innerHTML = "0 "
         }
 
     }).catch(function (erro) {
@@ -59,7 +63,7 @@ function catchKPI() {
 
 
 async function getUrbanMeshDensity() {
-    fetch(`/data/getUrbanMeshDensity/${regionId}`, {
+    fetch(`/data/getUrbanMeshDensity/${fkDistrito}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -68,12 +72,20 @@ async function getUrbanMeshDensity() {
         function (resposta) {
             if (resposta.ok) {
                 resposta.json().then(json => {
-                    resposta = json;
-                    console.log("Voltei pra função original" + resposta.valorDensidade);
-                    kpimalhaurbana.innerText = `${resposta.valorDensidade}/ha`
+                    let valorMalhaUrbana = Number(json[0].valor_mobilidade_por_area);
+                    kpimalhaurbana.innerText = `${(valorMalhaUrbana.toFixed(2))} pa*/km²`;
+                    top_malha_urbana.innerText = json[0].row_num + "º";
+
+                    const nome_regiao = json[0].nome_distrito
+                        .split(' ')
+                        .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1).toLowerCase())
+                        .join(' ');
+
+                    regiao_nome.innerHTML = nome_regiao;
                 });
             } else {
                 console.log("Houve um erro durante a requisição")
+                kpimalhaurbana.innerHTML = "0 "
             }
         }
     ).catch(function (erro) {
@@ -81,10 +93,37 @@ async function getUrbanMeshDensity() {
     })
 }
 
+async function getParksByRegion() {
+    const kpiParques = document.getElementById("kpiParques");
+
+    try {
+        const resposta = await fetch(`/data/getParksByRegion/${fkDistrito}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        if (resposta.ok) {
+            const dados = await resposta.json();
+            console.log("Dados recebidos:", dados);
+            if (dados.length > 0) {
+                kpiParques.innerText = dados[0].qtde_parques;
+            } else {
+                kpiParques.innerText = "0";
+            }
+        } else {
+            throw new Error("Erro ao buscar dados dos parques");
+        }
+    } catch (erro) {
+        console.error("Erro:", erro);
+        kpiParques.innerText = "0";
+    }
+}
+
 async function getHospitalsByRegion() {
     const kpiHospitais = document.getElementById("kpiHospitais")
     try {
-        const resposta = await fetch(`/data/getHospitalsByRegion/${regionId}`, {
+        const resposta = await fetch(`/data/getHospitalsByRegion/${fkDistrito}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -103,7 +142,7 @@ async function getHospitalsByRegion() {
         }
     } catch (erro) {
         console.error("Erro:", erro);
-        kpiHospitais.innerText = "Erro ao carregar dados";
+        kpiHospitais.innerText = "0";
     }
 }
 
@@ -112,7 +151,7 @@ async function getHospitalsByRegion() {
 async function getSchoolsByRegion() {
     const kpiEscolas = document.getElementById("kpiEscolas")
     try {
-        const resposta = await fetch(`/data/getSchoolsRegion/${regionId}`, {
+        const resposta = await fetch(`/data/getSchoolsRegion/${fkDistrito}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -132,7 +171,7 @@ async function getSchoolsByRegion() {
         }
     }catch (erro) {
         console.error("Erro:", erro);
-        kpiEscolas.innerText = "Erro ao carregar dados";
+        kpiEscolas.innerText = "0";
     }
 }
 
@@ -143,7 +182,7 @@ async function getPriceSquareMeter(){
     kpiValorMetro.innerText=''
 
     try {
-        const resposta = await fetch(`/data/getPriceSquareMeter/${regionId}`, {
+        const resposta = await fetch(`/data/getPriceSquareMeter/${fkDistrito}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -152,8 +191,9 @@ async function getPriceSquareMeter(){
         if(resposta.ok){
             const dados = await resposta.json()
             console.log("Dados recebidos: " + dados)
-            if(dados[0] && dados[0].preco !== undefined){
-                kpiValorMetro.innerText = "R$" + Number(dados[0].preco);
+            if(dados){
+                kpiValorMetro.innerText = "R$" + Number(dados[0].media_preco_por_area).toFixed(2);
+                top_valor_metro.innerText = dados[0].row_num + "º";
             } else {
                 kpiValorMetro.innerText = "0";
             }
@@ -162,7 +202,7 @@ async function getPriceSquareMeter(){
         }
     } catch (erro) {
         console.error("Erro:", erro);
-        kpiValorMetro.innerText = "Erro ao carregar dados";
+        kpiValorMetro.innerText = "0";
     }
 }
 
@@ -171,7 +211,7 @@ async function getViolenceIndex(){
     kpiViolencia.innerText=''
 
     try {
-        const resposta = await fetch(`/data/getViolenceIndex/${regionId}`, {
+        const resposta = await fetch(`/data/getViolenceIndex/${fkDistrito}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -181,8 +221,9 @@ async function getViolenceIndex(){
             const dados = await resposta.json()
             console.log("Dados recebidos: " + dados)
 
-            if(dados[0] && dados[0].indice_violencia_percentual !== undefined){
-                kpiViolencia.innerText = dados[0].indice_violencia_percentual + '%'
+            if(dados){
+                kpiViolencia.innerText = Number(dados[0].indice_violencia).toFixed(3) + '%'
+                top_violencia.innerText = dados[0].num_linha + "º";
             } else {
                 kpiViolencia.innerText = "0";
             }
@@ -191,7 +232,7 @@ async function getViolenceIndex(){
         }
     } catch (erro) {
         console.error("Erro:", erro);
-        kpiViolencia.innerText = "Erro ao carregar dados";
+        kpiViolencia.innerText = "0";
     }
 }
 
