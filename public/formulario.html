@@ -29,10 +29,6 @@
                     
                 </div>
 
-
-
-
-
                 <div class="card-filtros-pai" id="cards-container">
                     <div class="card-filtro">
                         <div class="card-parte-cima">
@@ -86,11 +82,53 @@
             botao.addEventListener('click', handleClick);
         });
 
+        var baixaViolencia = 0
+        var malhaUrbana = 0
+        var valorM2 = 0
+
+        var tipoImovel = 0
+        var rendaMedia = 0
+        var flutuacaoM2 = 0
+
+        var parques = 0
+        var hospitais = 0
+        var escolas = 0
+
         function handleClick(event) {
             const botao = event.currentTarget;
             const valorSelecionado = botao.getAttribute('data-value');
             console.log(`Etapa ${etapa} - Escolheu:`, valorSelecionado);
             escolhas.push(valorSelecionado);
+
+            switch (valorSelecionado) {
+            case "BaixaViolencia":
+                baixaViolencia = 1;
+                break;
+            case "MalhaUrbana":
+                malhaUrbana = 1;
+                break;
+            case "ValorM2":
+                valorM2 = 1;
+                break;
+            case "Tipo de imóvel":
+                tipoImovel = 1;
+                break;
+            case "Renda média":
+                rendaMedia = 1;
+                break;
+            case "Flutuação m²":
+                flutuacaoM2 = 1;
+                break;
+            case "Parques":
+                parques = 1;
+                break;
+            case "Hospitais":
+                hospitais = 1;
+                break;
+            case "Escolas":
+                escolas = 1;
+                break;
+        }
 
             const cards = document.querySelectorAll('.card-filtro');
             cards.forEach(card => card.classList.add('saindo'));
