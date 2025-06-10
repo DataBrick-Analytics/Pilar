@@ -1,0 +1,213 @@
+:root {
+    --text: #D4D4D8;
+    --background: #fffff0;
+    --primary: #2C3E50;
+    --secondary: #e66c2f;
+    --accent: #768087;  
+    --gray: lightslategray;
+}
+
+.divTelaFiltros{
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: var(--background);
+    width: 85%;
+    height: 100vh;
+}
+.box-nome-tela{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 92%;
+    height: 10%;
+    color: var(--primary);
+    position: relative;
+    right: 3.5%;
+    top: -2%;
+}
+.filtros{
+    display: flex;
+    align-items: center ;
+    justify-content: space-between;
+    width: 92%;
+    height: 20%;
+    position: relative;
+    right: 3.5%;
+    top: -1%;
+}
+.container-regioes{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 95%;
+    height: 65%;
+    position: relative;
+    right: 3.5%;
+}
+.box-filtros{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: 90%;
+    box-shadow: 0 5px 10px gray;
+    border-top: 8px solid #e66c2f;
+    border-radius: 20px;
+    background-color: white;
+}
+.box-filtro{
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 70%;
+    height: 100%;
+}
+.box-escolhas-filtros{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+    box-shadow: 0 5px 10px gray;
+    border-top: 8px solid #e66c2f;
+    border-radius: 20px;
+    background-color: white;
+}
+.itens-selecionados{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.selecao-filtros{
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content: space-around;
+    width: 100%;
+    height: 70%;
+}
+.filtro-escolhido{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 40%;
+    height: 30%;
+}
+
+
+
+
+.box-botao-filtrar{
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+    height: 30%;
+    box-shadow: 0 5px 10px gray;
+    border-radius: 10px;
+    background-color: var(--secondary);
+    transition: all 0.3s ease;
+    position: relative;
+    right: 5%;
+}
+.box-botao-filtrar:hover{
+    background-color: #a8421b;
+}
+.filtro {
+    padding: 8px;
+    width: 35%;
+    height: 25%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.box-regiao{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    width: 30%;
+    height: 250px;
+    background-color: white;
+    box-shadow: 0 5px 10px gray;
+    border-top: 8px solid #e66c2f;
+    border-radius: 20px;
+}
+.box-regiao-cima{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 95%;
+    height: 45%;
+}
+.box-titulo-botoes{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 95%;
+    height: 60%;
+}
+.titulo-regiao{
+    width: 80%;
+}
+.botao-favoritos{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 10%;
+    font-size: 40px;
+    color: var(--text); 
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+.botao-favoritos.ativa {
+    color: #c97a00; 
+}
+.botao-fechar {
+    top: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    color: var(--accent);
+    font-weight: bold;
+    border: none;
+}
+
+.box-regiao-baixo{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 95%;
+    height: 45%;
+}
+.box-botao{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    font-size: 110%;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    width: 45%;
+    height: 40%;
+    background-color: var(--secondary);
+}
+.box-botao:hover {
+    background-color: #a8421b;
+}

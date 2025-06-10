@@ -2,6 +2,7 @@
 async function generateUserCards() {
     try {
         const resposta = await fetch(`/enterprise/employees/${localStorage.getItem('EMPRESA_ID')}`)
+
         const employees = await resposta.json()
 
         const container = document.querySelector('.users-container');
@@ -80,9 +81,10 @@ function cadastrarUsuario() {
     const senha = document.getElementById('password').value;
     const cpf = document.getElementById('cpf').value;
     const funcao = document.getElementById('funcao').value;
+    const dtNasc = document.getElementById('dtNasc').value;
 
     // Validações básicas
-    if (!nome || !email || !senha || !cpf || !funcao) {
+    if (!nome || !email || !senha || !cpf || !funcao || !dtNasc) {
         alert('Por favor, preencha todos os campos!');
         return;
     }
@@ -94,7 +96,8 @@ function cadastrarUsuario() {
         senha: senha,
         cpf: cpf,
         funcao_empresa: funcao,
-        fk_empresa: localStorage.getItem('EMPRESA_ID')
+        fk_empresa: localStorage.getItem('EMPRESA_ID'),
+        dtNasc: dtNasc
     };
 
     // Enviar para o backend

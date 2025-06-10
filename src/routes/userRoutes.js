@@ -28,4 +28,7 @@ router.get("/user/:id", function (req, res) {
   usuarioController.searchUserById(req, res);
 });
 
+//ENVIANDO FORMULARIO 
+router.post("/escolhas", usuarioController.salvarEscolhas);
+
 module.exports = router;

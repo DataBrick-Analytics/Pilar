@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,190 +7,172 @@
     <link rel="stylesheet" href="css/dashNova.css">
     <link rel="stylesheet" href="./css/Style.css">
     <link rel="stylesheet" href="css/home2.css">
-    <link rel="stylesheet" href="./css/sidebar.css">
 </head>
 <body>
-<div class="divGeral">
-    <div class="divPainel">
-        <aside class="sidebar">
-            <header class="sidebar-header">
-                <div class="logo">
-                    <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" class="logo-icon">
-                    <h1 class="logo-text">DataBrick</h1>
-                </div>
-            </header>
+    <div class="divGeral">
+        <div class="divPainel">
+            <div class="divPainelAzul">
 
-            <hr class="separator" aria-hidden="true">
-
-            <section class="user-profile" aria-label="Perfil do usuário">
-                <img src="./assets/icons-dash/USER-ICON-SM.svg" class="avatar">
-                <span class="username" id="user">Nome usuário</span>
-            </section>
-
-            <hr class="separator" aria-hidden="true">
-
-            <nav class="main-navigation" aria-label="Menu principal">
-                <ul class="nav-menu">
-                    <li>
-                        <a href="home.html  " class="nav-item">
-                            <img src="./assets/icons-dash/HOME-ICON-SM.svg"
-                                 alt=""
-                                 aria-hidden="true"
-                                 class="nav-icon">
+                <nav class="sidebarAzul">
+                    <div class="logo">
+                        <span class="logo-icon">
+                            <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" alt="">
+                        </span>
+                        <span class="logo-text">DataBrick</span>
+                    </div>
+    
+                    <div class="separator"></div>
+    
+                    <div class="user-profile">
+                        <div class="avatar">
+                            <img src="./assets/icons-dash/USER-ICON-SM.svg" alt="">
+                        </div>
+                        <span class="username" id="user">Nome usuario</span>
+                    </div>
+    
+                    <div class="separator"></div>
+    
+                    <div class="nav-menu">
+                        <a href="#" class="nav-item">
+                            <span class="nav-icon">
+                                <img src="./assets/icons-dash/HOME-ICON-SM.svg" alt="">
+                            </span>
                             <span>Home</span>
                         </a>
-                    </li>
-                </ul>
-
-                <section class="nav-section">
-                    <h2 class="nav-section-title">PAGES</h2>
-
-                    <div class="dropdown">
-                        <button class="dropdown-btn active"
-                                aria-expanded="false"
-                                aria-controls="propriedades-menu">
-                            <img src="./assets/icons-dash/CHART-ICON-SM.svg"
-                                 aria-hidden="true"
-                                 class="nav-icon">
-                            <span>Propriedades</span>
-                            <span class="dropdown-arrow" aria-hidden="true">▼</span>
-                        </button>
-
-                        <ul id="propriedades-menu" class="dropdown-content">
-                            <li>
-                                <a href="filtros.html" class="dropdown-item">
-                                    <span>Filtrar propriedade</span>
+    
+                        <div class="nav-section">
+                            <span class="nav-section-title">PAGES</span>
+                            <div class="dropdown">
+                                <button class="dropdown-btn active">
+                                    <span class="nav-icon"> <img src="./assets/icons-dash/CHART-ICON-SM.svg" alt=""></span>
+                                    <span>Propriedades</span>
+                                    <span class="dropdown-arrow">▼</span>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#" class="dropdown-item">
+                                        <span class="prefix">B</span>
+                                        <span>Filtrar propriedade</span>
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        <span class="prefix">C</span>
+                                        <span>Propriedades favoritas</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="nav-menu">
+                                <a href="./listaUsuario.html" class="nav-item">
+                                    <span class="nav-icon">
+                                        <img src="./assets/icons-dash/ALERT-ICON-SM.svg" alt="">
+                                    </span>
+                                    <span>Alertas</span>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="" class="dropdown-item">
-                                    <span>Propriedades favoritas</span>
-                                </a>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
+                </nav>
+
+                <div class="div-button-log-out">
+                    <button onclick="logout()" class="button_logout">
+                        Log Out
+                    </button>
+                </div>
+                
+
+            </div>
+        </div>
+        <div class="div-tela-home">
+
+            <div class="tela-home-principal">
+
+                    <div class="home-banner-cliente">
+                        <div class="textos-banner">
+                            <h1>OLÁ RUBENS</h1>
+                            <p>Bem-vindo ao melhor projeto para construtoras! Analise de dados de forma rápida e eficiente</p>
+                        </div>
                     </div>
 
-                    <ul class="nav-menu">
-                        <li>
-                            <a href="./TelaAlertas.html" class="nav-item">
-                                <img src="./assets/icons-dash/ALERT-ICON-SM.svg"
-                                     alt=""
-                                     aria-hidden="true"
-                                     class="nav-icon">
-                                <span>Alertas</span>
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="regioes-favoritas">
+                        <div class="titulo-regioes">Regiões Recomendadas:</div>
+                        <div class="banners-favoritos">
 
-                    <ul class="nav-menu">
-                        <li>
-                            <a href="./listaUsuario.html" class="nav-item">
-                                <img src="./assets/icons-dash/account-plus.png"
-                                     alt=""
-                                     aria-hidden="true"
-                                     class="nav-icon">
-                                <span>Usuários</span>
-                            </a>
-                        </li>
-                    </ul>
+                            <div class="banner-favorito">
+                                <div class="banner-regiao"><p id="regiao1"></p></div>
+                                <div class="banner-regiao banner-icon"></div>
+                                <div class="banner-regiao">Zona &nbsp<p id="zona1"></p></div>
+                            </div>
 
-                    <ul class="nav-menu">
-                        <li>
-                            <a href="./empresa.html" class="nav-item">
-                                <img src="./assets/icons-dash/store.png"
-                                     alt=""
-                                     aria-hidden="true"
-                                     class="nav-icon">
-                                <span>Empresa</span>
-                            </a>
-                        </li>
-                    </ul>
-                </section>
-            </nav>
+                            <div class="banner-favorito orange">
+                                <div class="banner-regiao-orange"><p id="regiao2"></p></div>
+                                <div class="banner-regiao-orange banner-icon-orange"></div>
+                                <div class="banner-regiao-orange">Zona &nbsp;<p id="zona2"></p></div>
+                            </div>
 
-            <footer class="sidebar-footer">
-                <button type="button"
-                        onclick="logout()"
-                        class="button_logout">
-                    Log Out
-                </button>
-            </footer>
-        </aside>
-    </div>
-    <div class="div-tela-home">
+                            <div class="banner-favorito">
+                                <div class="banner-regiao"><p id="regiao3"></p></div>
+                                <div class="banner-regiao banner-icon"></div>
+                                <div class="banner-regiao">Zona &nbsp<p id="zona3"></p></div>
+                            </div>
 
-        <div class="tela-home-principal">
+                            <div class="banner-favorito orange">
+                                <div class="banner-regiao-orange"><p id="regiao4"></p></div>
+                                <div class="banner-regiao-orange banner-icon-orange"></div>
+                                <div class="banner-regiao-orange">Zona &nbsp<p id="zona4"></p></div>
+                            </div>
 
-            <div class="home-banner-cliente">
-                <div class="textos-banner">
-                    <h1>OLÁ RUBENS</h1>
-                    <p>Bem-vindo ao melhor projeto para construtoras! Analise de dados de forma rápida e eficiente</p>
-                </div>
-            </div>
-
-            <div class="regioes-favoritas">
-                <div class="titulo-regioes">Regiões Favoritas:</div>
-                <div class="banners-favoritos">
-                    <div class="banner-favorito-white"></div>
-                    <div class="banner-favorito-orange"></div>
-                    <div class="banner-favorito-white"></div>
-                    <div class="banner-favorito-orange"></div>
-                </div>
-            </div>
-
-            <div class="banner-propriedades">
-                <div class="banner-texts">
-                    <p>Veja propriedades e relacione-as por regiões</p>
-                    Explore todas as propriedades disponíveis, conheça suas características e benefícios exclusivos, e
-                    descubra como conectá-las de forma estratégica por região. Tenha acesso a informações detalhadas
-                    para tomar decisões mais assertivas e encontrar as melhores oportunidades!
-                </div>
-                <div class="propiedades-button">Ver Propiedades</div>
-            </div>
-
-            <div class="banner-questionario-alertas">
-                <div class="questionario">
-                    <div class="questionario-icon"></div>
-                    <div class="questionario-texts">
-                        <p>Refazer questionario de região</p>
-                        Questionário que identifica as regiões preferidas com base no seu perfil.
+                        </div>
                     </div>
-                    <div class="alertas-button">Iniciar Teste</div>
-                </div>
-                <div class="alertas">
-                    <div class="alertas-icon"></div>
-                    <div class="alertas-texts">
-                        <p>Alertas</p>
-                        Receba notificações do Slack diretamente e fique por dentro das novidades. Acesse e aproveite
-                        todas as oportunidades!
+
+                    <div class="banner-propriedades">
+                        <div class="banner-texts">
+                            <p>Veja propriedades e relacione-as por regiões</p>
+                            Explore todas as propriedades disponíveis, conheça suas características e benefícios exclusivos, e descubra como conectá-las de forma estratégica por região. Tenha acesso a informações detalhadas para tomar decisões mais assertivas e encontrar as melhores oportunidades!
+                        </div>
+                        <div id="propiedades-button" class="propiedades-button">Ver Propiedades</div>
                     </div>
-                    <div class="alertas-button">Ver Alertas</div>
+
+                    <div class="banner-questionario-alertas">
+                        <div class="questionario">
+                            <div class="questionario-icon"></div>
+                            <div class="questionario-texts">
+                                <p>Refazer questionario de região</p>
+                                 Questionário que identifica as regiões preferidas com base no seu perfil.
+                            </div>
+                            <div id="button-forms" class="alertas-button">Iniciar Teste</div>
+                        </div>
+                        <div class="alertas">
+                            <div class="alertas-icon"></div>
+                            <div class="alertas-texts">
+                                <p>Alertas</p>
+                                Receba notificações do Slack diretamente e fique por dentro das novidades. Acesse e aproveite todas as oportunidades!
+                            </div>
+                            <div id="button-allerts" class="alertas-button">Ver Alertas</div>
+                        </div>
+                    </div>
+            </div>
+            
+            <div class="manual-databrick">
+                <div class="manual-logo"><img src="assets/icons-forms/Book open.png" alt=""> 
+                    <p>O que é o Pilar?</p>
+                </div>
+                <div class="manual">
+                    <p class="pergunta">1-Processamento de Dados com ETL</p>
+                    <span class="resposta">O sistema Databricks utiliza ETL (Extração, Transformação e Carga) para coletar e organizar dados de diversas fontes. Isso permite que informações sobre propriedades e regiões sejam estruturadas de forma eficiente, facilitando análises detalhadas</span>
+                </div>
+                <div class="manual">
+                    <p class="pergunta">2-Analise de Regiões e Perfis de Usuário</p>
+                    <span class="resposta">O sistema permite que o próprio usuário filtre suas preferências, relacionando regiões com perfis específicos. Isso ajuda construtoras a entender quais áreas são mais atrativas para determinados públicos e tomar decisões mais estratégicas.</span>
+                </div>
+                <div class="manual">
+                    <p class="pergunta">3-Tomada de Decisão para Construtoras</p>
+                    <span class="resposta">Construtoras podem utilizar os insights gerados pelo sistema para analisar terrenos e regiões com maior potencial de lucratividade. Isso permite decisões estratégicas mais assertivas na escolha de locais para novos empreendimentos.</span>
+                </div>
+                <div class="manual">
+                    <p class="pergunta">4-Resultados e Benefícios</p>
+                    <span class="resposta">O conectar dados de propriedades, regiões e segurança, o sistema fornece relatórios detalhados que ajudam construtoras e usuários a tomar decisões informadas. Isso melhora a eficiência na escolha de terrenos e investimentos imobiliários.</span>
                 </div>
             </div>
         </div>
-
-        <div class="manual-databrick">
-            <div class="manual-logo"><img src="assets/icons-forms/Book open.png" alt="">
-                <p>O que é o Pilar?</p>
-            </div>
-            <div class="manual">
-                <p class="pergunta">1-Processamento de Dados com ETL</p>
-                <span class="resposta">O sistema Databricks utiliza ETL (Extração, Transformação e Carga) para coletar e organizar dados de diversas fontes. Isso permite que informações sobre propriedades e regiões sejam estruturadas de forma eficiente, facilitando análises detalhadas</span>
-            </div>
-            <div class="manual">
-                <p class="pergunta">2-Analise de Regiões e Perfis de Usuário</p>
-                <span class="resposta">O sistema permite que o próprio usuário filtre suas preferências, relacionando regiões com perfis específicos. Isso ajuda construtoras a entender quais áreas são mais atrativas para determinados públicos e tomar decisões mais estratégicas.</span>
-            </div>
-            <div class="manual">
-                <p class="pergunta">3-Tomada de Decisão para Construtoras</p>
-                <span class="resposta">Construtoras podem utilizar os insights gerados pelo sistema para analisar terrenos e regiões com maior potencial de lucratividade. Isso permite decisões estratégicas mais assertivas na escolha de locais para novos empreendimentos.</span>
-            </div>
-            <div class="manual">
-                <p class="pergunta">4-Resultados e Benefícios</p>
-                <span class="resposta">O conectar dados de propriedades, regiões e segurança, o sistema fornece relatórios detalhados que ajudam construtoras e usuários a tomar decisões informadas. Isso melhora a eficiência na escolha de terrenos e investimentos imobiliários.</span>
-            </div>
-        </div>
     </div>
-</div>
 </body>
 </html>
+
+<script src="js/home.js"></script>

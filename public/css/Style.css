@@ -247,13 +247,6 @@
      gap: 1.25rem;
  }
 
- .alert {
-     padding: 1.25rem;
-     border-radius: 0.5rem;
-     color: var(--linearwhite);
-     position: relative;
- }
-
  .alert.error {
      background-color: var(--error);
  }
@@ -268,18 +261,6 @@
 
  .alert.info {
      background-color: var(--linearblue);
- }
-
- .close-button {
-     position: absolute;
-     right: 1.25rem;
-     top: 50%;
-     transform: translateY(-50%);
-     background: none;
-     border: none;
-     color: var(--linearwhite);
-     font-size: 1.25rem;
-     cursor: pointer;
  }
 
  .subtitle {

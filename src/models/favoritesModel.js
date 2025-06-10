@@ -1,20 +1,34 @@
 var database = require("../database/config");
 
+async function createFavorites(favorite) {
 
-async function hasAlreadyFavorited(fk_usuario, fk_empresa, fk_distrito) {
+    const isAlreadyFavorited = await database.execute(
+        SELECT * FROM favorito WHERE fk_usuario = ? AND fk_empresa = ? AND fk_distrito = ?;
+    , [favorite.userID, favorite.enterpriseID, favorite.favoriteLand])
+
+    if(isAlreadyFavorited.length > 0){
+        throw new Error("Este terreno já está favoritado por este usuário.")
+    }
+
+    const query = 
+        INSERT INTO favorito (fk_usuario, fk_empresa, fk_distrito, data_favorito, data_edicao)
+        VALUES (?, ?, ?, NOW(), NOW());
+
+    const values = [
+        favorite.userID,
+        favorite.enterpriseID,
+        favorite.favoriteLand
+    ];
+
     try {
-        const query = `
-            SELECT 1 FROM favorito
-            WHERE fk_usuario = ? AND fk_empresa = ? AND fk_distrito = ?
-        `;
-        const [rows] = await database.execute(query, [fk_usuario, fk_empresa, fk_distrito]);
-        return rows;
+        const resultado = await database.execute(query, values);
+        console.log('Database result:', resultado);
+        return resultado;
     } catch (error) {
-        console.error("Erro ao verificar favorito:", error);
+        console.error('Database error:', error);
         throw error;
     }
 }
-
 
 async function countFavoritesByUser(fk_usuario) {
     try {
@@ -30,24 +44,6 @@ async function countFavoritesByUser(fk_usuario) {
         console.error("Erro ao contar favoritos:", error);
         return [{ total: 0 }];
     }
-}
-
-
-async function createFavorite(favorite) {
-    const query = `
-        INSERT INTO favorito (fk_usuario, fk_empresa, fk_distrito, data_favorito)
-        VALUES (?, ?, ?, ?)
-    `;
-
-    const values = [
-        favorite.fk_usuario,
-        favorite.fk_empresa,
-        favorite.fk_distrito,
-        favorite.data_favorito || new Date()
-    ];
-
-    const result = await database.execute(query, values);
-    return result;
 }
 
 
@@ -107,27 +103,6 @@ async function deleteFavorite(favoriteId) {
     }
 }
 
-
-async function searchFavoriteByUserId(userId) {
-    const query = `
-        SELECT 
-            f.*,
-            d.nome_distrito 
-        FROM favorito f
-        JOIN distrito d ON f.fk_distrito = d.id_distrito
-        WHERE f.fk_usuario = ?
-        ORDER BY f.data_favorito DESC`;
-
-    try {
-        const [resultado] = await database.execute(query, [userId]);
-        return resultado;
-    } catch (error) {
-        console.error('Database error:', error);
-        throw error;
-    }
-}
-
-
 async function searchFavoritesByUserId(userId) {
     const query = `
       SELECT 
@@ -156,10 +131,8 @@ async function searchFavoritesByUserId(userId) {
 
 module.exports = {
     createFavorite,
-    hasAlreadyFavorited,
     countFavoritesByUser,
     editFavorites,
     deleteFavorite,
-    searchFavoriteByUserId,
     searchFavoritesByUserId
 };
