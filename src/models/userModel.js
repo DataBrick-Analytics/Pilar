@@ -57,7 +57,7 @@ async function authenticateUser(email, senha) {
 async function createUser(user) {
     const query = `
         INSERT INTO usuario (nome, email, senha, fk_empresa, cpf, data_nasc, funcao_empresa, data_criacao)
-        VALUES (?, ?, ?, ?, ?, ?, ?, NOW())
+        VALUES (?, ?, SHA2(?, 256), ?, ?, ?, ?, NOW())
     `;
 
     const values = [
@@ -84,12 +84,14 @@ async function createUser(user) {
 
 //EDITAR USUARIO
 async function editUser(user, idUser) {
+     console.log("Mode chegou porraa"+user);
+     console.log(idUser);
     const query = `
         UPDATE usuario
         SET cpf            = ?,
             nome           = ?,
             email          = ?,
-            senha          = ?,
+            senha          =  SHA2(?, 256),
             data_nasc      = ?,
             funcao_empresa = ?,
             data_edicao    = NOW()
@@ -118,6 +120,7 @@ async function editUser(user, idUser) {
 
 //DELETAR USUARIO
 async function deleteUser(idUser) {
+
     try {
         // 1. Buscar dados do usuário (função + empresa)
         const usuarioRows = await database.execute(
@@ -212,8 +215,6 @@ async function deleteUser(idUser) {
 }
 
 //Metodos GET
-
-
 async function searchUserById(idUser) {
     const query = `
         SELECT *
@@ -243,10 +244,36 @@ async function checkEmail(email) {
     }
 }
 
-async function checkCpf(cpf) {
+async function checkCpfAndIdUser(cpf,idUser) {
     const query = `SELECT cpf
                    FROM usuario
                    WHERE cpf = ?;`;
+    const resultado = await database.execute(query, [cpf,idUser]);
+
+    if (resultado.length > 0) {
+        return resultado;
+    } else {
+        return [];
+    }
+}
+
+async function checkEmailAndIdUser(email, idUser) {
+    const query = `SELECT email
+                   FROM usuario
+                   WHERE email = ? and id_usuario != ?;`;
+    const resultado = await database.execute(query, [email,idUser]);
+
+    if (resultado.length > 0) {
+        return resultado;
+    } else {
+        return [];
+    }
+}
+
+async function checkCpf(cpf) {
+    const query = `SELECT cpf
+                   FROM usuario
+                   WHERE cpf = ? `;
     const resultado = await database.execute(query, [cpf]);
 
     if (resultado.length > 0) {
@@ -255,6 +282,19 @@ async function checkCpf(cpf) {
         return [];
     }
 }
+
+
+async function checkPassword(idUsuario, senha) {
+    const query = `
+    SELECT id_usuario
+    FROM usuario
+    WHERE id_usuario = ? AND senha = SHA2(?, 256)
+  `;
+    const resultado = await database.execute(query, [idUsuario, senha]);
+    return resultado;
+}
+
+
 
 async function salvarValoresFormulario(valoresFormulario, idUsuario) {
     const query = `
@@ -500,6 +540,9 @@ module.exports = {
     searchUserById,
     checkEmail,
     checkCpf,
+    checkEmailAndIdUser,
+    checkCpfAndIdUser,
+    checkPassword,
     salvarValoresFormulario,
     pegarValoresDistritosEscolhas
 }

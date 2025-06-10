@@ -5,7 +5,10 @@ async function setUserInfos() {
     user_name.value = userInfos.nome;
     user_email.value = userInfos.email;
     user_cpf.value = userInfos.cpf;
-    user_birthday.value = userInfos.data_nasc;
+    const dataNasc = new Date(userInfos.data_nasc);
+    const dataFormatada = dataNasc.toISOString().split('T')[0];
+    user_birthday.value = dataFormatada;
+    user_funcao.value = userInfos.funcao_empresa;
 }
 
 async function searchProfile() {
@@ -39,55 +42,71 @@ async function updateUserProfile() {
     var userEmail = user_email.value;
     var userCPF = user_cpf.value;
     var userBirthday = user_birthday.value;
-    var userNewPassword = user_new_password.value;
-    var confirmNewPassword = confirm_new_password.value;
+    var userNewPassword = confirm_new_password.value;
 
-    if (userNewPassword != confirmNewPassword) {
-        return alert("As senha que você digitou não são iguais!")
+    const userID = localStorage.USER_ID;
+    const passwordModal = password_modal.value;
+
+
+    // Valida senha atual via back-end
+    const validacao = await fetch(`/user/checkPassword`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idUsuario: userID,
+            senha: passwordModal
+        })
+    });
+
+    const senhaValida = await validacao.json();
+
+    if (senhaValida !== 1) {
+        return Swal.fire("Erro", "Senha atual incorreta!", "error");
+    }
+
+    if (passwordModal === userNewPassword) {
+        return Swal.fire("Erro", "A nova senha é idêntica à antiga!", "warning");
     }
 
     const userInfos = await searchProfile();
 
-    var passwordModal = password_modal.value
+    // Se nova senha estiver vazia, mantém a antiga
+    if (!userNewPassword) {
+        userNewPassword = passwordModal;
+    }
 
-    if (passwordModal != userInfos.senha) {
-        return alert("Senha incorreta!");
-    } else if (passwordModal == userNewPassword) {
-        return alert("A nova senha é identica a antiga!")
-    } else {
-        var userID = localStorage.USER_ID;
+    try {
+        const resposta = await fetch(`/user/${userID}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nome: userName,
+                email: userEmail,
+                senha: userNewPassword,
+                cpf: userCPF,
+                data_nasc: userBirthday,
+                funcao_empresa: userInfos.funcao_empresa,
+            }),
+        });
 
-        if (userNewPassword == null || userNewPassword == "") {
-            userNewPassword = userInfos.senha;
+        if (resposta.status === 200) {
+            await resposta.json();
+            changeModal();
+            password_modal.value = "";
+
+            return Swal.fire("Sucesso", "Alterações feitas com sucesso!", "success");
+        } else {
+            const texto = await resposta.text();
+            console.error(texto);
+            return Swal.fire("Erro", "Erro ao atualizar o perfil.", "error");
         }
-
-        try {
-            const resposta = await fetch(`/user/${userID}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    nome: userName,
-                    email: userEmail,
-                    senha: userNewPassword,
-                    cpf: userCPF,
-                    data_nasc: userBirthday
-                }),
-            });
-
-            if (resposta.ok) {
-                const json = await resposta.json();
-                changeModal();
-                password_modal.value = "";
-                alert("Alterações feitas com sucesso");
-            } else {
-                const texto = await resposta.text();
-                console.error(texto);
-            }
-        } catch (erro) {
-            console.error(erro);
-        }
+    } catch (erro) {
+        console.error(erro);
+        return Swal.fire("Erro", "Erro inesperado ao atualizar o perfil.", "error");
     }
 }
 
@@ -96,3 +115,4 @@ function changeModal() {
     modal.classList.toggle('hide');
     password_modal.value = "";
 }
+
