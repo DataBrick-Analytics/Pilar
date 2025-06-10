@@ -529,6 +529,15 @@ CREATE TABLE IF NOT EXISTS `parque`
             )
 );
 
+CREATE TABLE IF NOT EXISTS `escolhas_formulario` (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    etapa1 VARCHAR(20),
+    etapa2 VARCHAR(20),
+    etapa3 VARCHAR(20),
+    fk_id_usuario INT,
+    FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id_usuario)
+);
+
 
 INSERT INTO `empresa` (`id_empresa`, `razao_social`, `nome_fantasia`, `cnpj`, `data_criacao`, `date_edicao`)
 VALUES (1, 'Tech Solutions Ltda', 'TechSol', '12345678000199', NOW(), NOW()),

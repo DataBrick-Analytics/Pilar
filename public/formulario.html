@@ -47,7 +47,7 @@
                 </div>
                 <div class="card-filtro">
                     <div class="card-parte-cima">
-                        <div class="card-icon icon1"></div>
+                        <div class="card-icon icon2"></div>
                         <div class="card-titulo"><p>Malha urbana </p></div>
                     </div>
                     <div class="card-parte-baixo">
@@ -58,7 +58,7 @@
                 </div>
                 <div class="card-filtro">
                     <div class="card-parte-cima">
-                        <div class="card-icon icon1"></div>
+                        <div class="card-icon icon3"></div>
                         <div class="card-titulo"><p>Valor M²</p></div>
                     </div>
                     <div class="card-parte-baixo">
@@ -72,10 +72,7 @@
        
     </div>
 
-    <div class="resumo-final"> 
-        
-        
-    </div>
+    
     
     
 </body>
@@ -106,15 +103,15 @@
 
             if (etapa === 2) {
                 adicionarCards(pai, [
-                    { titulo: "Proximidade ", descricao: "Gosto de áreas com parques e muito verde.", icone: "tree.svg" },
-                    { titulo: "Boas escolas", descricao: "A educação das crianças é minha prioridade.", icone: "school.svg" },
-                    { titulo: "Transporte", descricao: "Prefiro locais com acesso fácil a transporte.", icone: "bus.svg" }
+                    { titulo: "Tipo de imóvel", descricao: "Preferência por regiões com imóveis compatíveis ao projeto", icone: "building-lg.svg" },
+                    { titulo: "Renda média", descricao: "Compatibilidade entre o projeto e o perfil econômico local.", icone: "dollar-lg.svg" },
+                    { titulo: "Flutuação m²", descricao: "Menor variação de preço garante previsibilidade no investimento.", icone: "chart-line-lg.svg" }
                 ]);
             } else if (etapa === 3) {
                 adicionarCards(pai, [
-                    { titulo: "Vida noturna", descricao: "Gosto de sair à noite e ter opções por perto.", icone: "nightlife.svg" },
-                    { titulo: "Comércio local", descricao: "Prefiro lugares com mercado, padaria, farmácia por perto.", icone: "store.svg" },
-                    { titulo: "Ambientes", descricao: "Gosto de silêncio e pouca movimentação.", icone: "quiet.svg" }
+                    { titulo: "Parques", descricao: "Áreas verdes próximas valorizam o imóvel e atraem moradores..", icone: "tree-lg.svg" },
+                    { titulo: "Hospitais", descricao: "Boa cobertura de saúde agrega valor e segurança ao projeto.", icone: "hospital.svg" },
+                    { titulo: "Escolas", descricao: "Boas escolas por perto aumentam o apelo para famílias.", icone: "school.svg" }
                 ]);
             } else if (etapa === 4) {
                 mostrarResumo(pai);
@@ -128,7 +125,7 @@
             novo.className = 'card-filtro entrando';
             novo.innerHTML = `
                 <div class="card-parte-cima">
-                    <div class="card-icon" style="background-image: url(../assets/icons-dash/${card.icone}); background-repeat: no-repeat; background-position: center; background-size: 30px 30px;"></div>
+                    <div class="card-icon" style="background-image: url(./assets/icons-forms/${card.icone}); background-repeat: no-repeat; background-position: center; background-size: 30px 30px;"></div>
                     <div class="card-titulo"><p>${card.titulo}</p></div>
                 </div>
                 <div class="card-parte-baixo">
@@ -161,9 +158,9 @@
         <div class="direita-resumo">
             <div class="descricao"><h2>Escolhas feitas para o seu novo Futuro</h2></div>
             <div class="div-escolhas">
-                <li class="li-escolhas"><strong>Etapa 1:</strong> ${escolhas[0]}</li>
-                <li class="li-escolhas"><strong>Etapa 2:</strong> ${escolhas[1]}</li>
-                <li class="li-escolhas"><strong>Etapa 3:</strong> ${escolhas[2]}</li>
+                <li class="li-escolhas"><strong>Etapa 1:</strong>  ${escolhas[0]}</li>
+                <li class="li-escolhas"><strong>Etapa 2:</strong>  ${escolhas[1]}</li>
+                <li class="li-escolhas"><strong>Etapa 3:</strong>  ${escolhas[2]}</li>
             </div>
             <button class="button" id="btn-ver-resultados">Ver Resultados</button>
         </div>

@@ -17,7 +17,7 @@ async function authenticateUser(email, senha) {
         funcao_empresa,
         fk_empresa
     FROM usuario
-    WHERE email = ? AND senha = sha2(?, 256)
+    WHERE email = ? AND senha = ?
     `;
 
     try {
@@ -153,11 +153,37 @@ async function searchUserById(idUser) {
     }
 }
 
+async function checkEmail(email) {
+    const query = `SELECT email FROM usuario WHERE email = ?;`;
+    const resultado = await database.execute(query, [email]);
+
+    if (resultado.length > 0) {
+        return resultado;
+    } else {
+        return [];
+    }
+}
+
+async function checkCpf(cpf) {
+    const query = `SELECT cpf FROM usuario WHERE cpf = ?;`;
+    const resultado = await database.execute(query, [cpf]);
+
+    if (resultado.length > 0) {
+        return resultado;
+    } else {
+        return [];
+    }
+}
+
+
+
 module.exports = {
     createUser,
     editUser,
     deleteUser,
     authenticateUser,
     searchUserById,
-    searchUsersByEnterpriseId
+    searchUsersByEnterpriseId,
+    checkEmail,
+    checkCpf
 }

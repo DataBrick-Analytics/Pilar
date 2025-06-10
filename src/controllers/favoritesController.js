@@ -5,11 +5,35 @@ async function createFavorite(req, res) {
         const favorite = req.body;
         console.log("Dados recebidos:", favorite);
 
-        const { fk_usuario, fk_empresa, fk_distrito } = favorite;
+function createFavorite(req, res) {
+    const dataFavorite = req.body;
 
-        if (!fk_usuario || !fk_empresa || !fk_distrito) {
+    if(dataFavorite.userID === undefined || dataFavorite.userID == null) return res.status(400).send("ID do Usuario está undefined ou nulo!")
+    if(dataFavorite.enterpriseID === undefined || dataFavorite.enterpriseID == null) return res.status(400).send("ID da Enterprise está undefined ou nulo")
+    if(dataFavorite.favoriteLand === undefined || dataFavorite.favoriteLand == null) return res.status(400).send("Propriedade favorita está undefined ou nula")
+
+    console.log("Dados recebidos:", dataFavorite);
+
+    favoritesModel.createFavorites(dataFavorite)
+        .then(function (resultado) {
+            console.log("Resultado do banco:", resultado);
+        
+            if (resultado.affectedRows > 0) {
+                return res.status(201).json({
+                    message: "Terreno favoritado com sucesso"
+                });
+            } else {
+                return res.status(500).json({ 
+                    message: "Erro ao Favoritar Terreno",
+                    warning: "Resposta do inesperada do banco",
+                });
+            }
+        })
+        .catch(function (erro) {
+            console.error("Erro no banco:", erro);
             return res.status(400).json({ 
-                error: "Campos obrigatórios ausentes." 
+                error: "Erro ao favoritar terreno",
+                message: erro.sqlMessage || erro.message 
             });
         }
 
@@ -193,7 +217,7 @@ function searchFavoritesByUserId (req, res) {
 
 module.exports = {
     createFavorite,
+    searchFavoriteByUserId,
     editFavorite,
-    deleteFavorite,
-    searchFavoritesByUserId,
+    deleteFavorite
 };

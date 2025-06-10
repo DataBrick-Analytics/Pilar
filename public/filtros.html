@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/dashNova.css">
+    <link rel="stylesheet" href="css/Style.css">
+    <link rel="stylesheet" href="css/filtros.css">
+</head>
+<body>
+<div class="divGeral">
+    <div class="divPainel">
+        <div class="divPainelAzul">
+
+            <nav class="sidebarAzul">
+                <div class="logo">
+                        <span class="logo-icon">
+                            <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" alt="">
+                        </span>
+                    <span class="logo-text">DataBrick</span>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="user-profile">
+                    <div class="avatar">
+                        <img src="./assets/icons-dash/USER-ICON-SM.svg" alt="">
+                    </div>
+                    <span class="username" id="user">Nome usuario</span>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="nav-menu">
+                    <a href="#" class="nav-item">
+                            <span class="nav-icon">
+                                <img src="./assets/icons-dash/HOME-ICON-SM.svg" alt="">
+                            </span>
+                        <span>Home</span>
+                    </a>
+
+                    <div class="nav-section">
+                        <span class="nav-section-title">PAGES</span>
+                        <div class="dropdown">
+                            <button class="dropdown-btn active">
+                                <span class="nav-icon"> <img src="./assets/icons-dash/CHART-ICON-SM.svg" alt=""></span>
+                                <span>Propriedades</span>
+                                <span class="dropdown-arrow">▼</span>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="#" class="dropdown-item">
+                                    <span class="prefix">B</span>
+                                    <span>Filtrar propriedade</span>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <span class="prefix">C</span>
+                                    <span>Propriedades favoritas</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="nav-menu">
+                            <a href="./listaUsuario.html" class="nav-item">
+                                    <span class="nav-icon">
+                                        <img src="./assets/icons-dash/ALERT-ICON-SM.svg" alt="">
+                                    </span>
+                                <span>Alertas</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="div-button-log-out">
+                <button onclick="logout()" class="button_logout">
+                    Log Out
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <div class="divTelaFiltros">
+        <div class="box-nome-tela">
+            <h2>Regiões</h2>
+        </div>
+
+        <div class="filtros">
+            <div class="box-filtros">
+                <div class="box-filtro">
+                    <select class="filtro" id="filtroZona">
+                        <option value="">Selecione a zona</option>
+                        <option value="Centro">Centro</option>
+                        <option value="Norte">Norte</option>
+                        <option value="Sul">Sul</option>
+                        <option value="Leste">Leste</option>
+                        <option value="oeste">Oeste</option>
+                    </select>
+
+                    <select class="filtro" id="filtroViolencia">
+                        <option value="">Selecione índice de violência máximo</option>
+                        <option value="10">Até 10%</option>
+                        <option value="20">Até 20%</option>
+                        <option value="30">Até 30%</option>
+                        <option value="50">Até 50%</option>
+                    </select>
+
+
+                    <select class="filtro" id="filtroValorM2">
+                        <option value="">Selecione o preço do m²</option>
+                        <option value="1000000">Acima de 1 Milhão</option>
+                        <option value="2000000">Acima de 2 Milhões</option>
+                        <option value="3000000">Acima de 3 Milhões</option>
+                        <option value="4000000">Acima de 4 Milhões</option>
+                        <option value="5000001">Acima de 5 Milhões</option>
+                    </select>
+
+                    <select class="filtro" id="filtroDensidade">
+                        <option value="">Selecione densidade máxima</option>
+                        <option value="1000">Até 1000 hab/km²</option>
+                        <option value="5000">Até 5000 hab/km²</option>
+                        <option value="10000">Até 10000 hab/km²</option>
+                        <option value="20000">Até 20000 hab/km²</option>
+                    </select>
+
+                </div>
+                <div class="itens-selecionados">
+                    <p>Itens selecionados:</p>
+                    <div class="selecao-filtros">
+                        <div class="filtro-escolhido-1 filtro-escolhido"></div>
+                        <div class="filtro-escolhido-2 filtro-escolhido"></div>
+                        <div class="filtro-escolhido-3 filtro-escolhido"></div>
+                        <div class="filtro-escolhido-4 filtro-escolhido"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-botao-filtrar" onclick="filterRegion()">Filtrar Região</div>
+
+        </div>
+
+
+        <div class="container-regioes">
+
+            <div class="box-regiao">
+                <div class="box-regiao-cima">
+                    <div class="box-titulo-botoes">
+                        <div class="titulo-regiao"><h1>Região X1</h1></div>
+                        <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                    </div>
+                    <p>Um belo apartamento moderno no centro da cidade</p>
+                </div>
+                <div class="box-regiao-baixo">
+                    <div class="box-botao">Acessar Região</div>
+                </div>
+            </div>
+
+            <div class="box-regiao">
+                <div class="box-regiao-cima">
+                    <div class="box-titulo-botoes">
+                        <div class="titulo-regiao"><h1>Região X1</h1></div>
+                        <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                    </div>
+                    <p>Um belo apartamento moderno no centro da cidade</p>
+                </div>
+                <div class="box-regiao-baixo">
+                    <div class="box-botao">Acessar Região</div>
+                </div>
+            </div>
+
+            <div class="box-regiao">
+                <div class="box-regiao-cima">
+                    <div class="box-titulo-botoes">
+                        <div class="titulo-regiao"><h1>Região X1</h1></div>
+                        <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                    </div>
+                    <p>Um belo apartamento moderno no centro da cidade</p>
+                </div>
+                <div class="box-regiao-baixo">
+                    <div class="box-botao">Acessar Região</div>
+                </div>
+            </div>
+            <div class="box-regiao">
+                <div class="box-regiao-cima">
+                    <div class="box-titulo-botoes">
+                        <div class="titulo-regiao"><h1>Região X1</h1></div>
+                        <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                    </div>
+                    <p>Um belo apartamento moderno no centro da cidade</p>
+                </div>
+                <div class="box-regiao-baixo">
+                    <div class="box-botao">Acessar Região</div>
+                </div>
+            </div>
+            <div class="box-regiao">
+                <div class="box-regiao-cima">
+                    <div class="box-titulo-botoes">
+                        <div class="titulo-regiao"><h1>Região X1</h1></div>
+                        <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                    </div>
+                    <p>Um belo apartamento moderno no centro da cidade</p>
+                </div>
+                <div class="box-regiao-baixo">
+                    <div class="box-botao">Acessar Região</div>
+                </div>
+            </div>
+            <div class="box-regiao">
+                <div class="box-regiao-cima">
+                    <div class="box-titulo-botoes">
+                        <div class="titulo-regiao"><h1>Região X1</h1></div>
+                        <div class="botao-favoritos">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                    </div>
+                    <p>Um belo apartamento moderno no centro da cidade</p>
+                </div>
+                <div class="box-regiao-baixo">
+                    <div class="box-botao">Acessar Região</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="js/filtros.js"></script>
+<script onload="generateRandomRegionCards()" src="js/filtros.js"></script>
+<script onload="validarSessao()" src="js/sessao.js"></script>
+<script type="module" src="js/favoritar.js"></script>
+<script>
+
+
+    import {favoritar} from "./js/favoritar";
+
+    const container = document.querySelector('.container-regioes');
+
+    container.addEventListener('click', function (event) {
+        if (event.target.classList.contains('botao-favoritos')) {
+            event.target.classList.toggle('ativa');
+
+            const userID = localStorage.getItem('USER_ID');
+            const enterpriseID = localStorage.getItem('ID_EMPRESA');
+            const propertyID = isNaN(Number(event.target.id)) ? null : Number(event.target.id)
+
+            console.log(userID, enterpriseID, propertyID)
+
+            favoritar(userID, enterpriseID, propertyID)
+        }
+        if (event.target.classList.contains('botao-fechar')) {
+            const card = event.target.closest('.box-regiao');
+            if (card) card.style.display = 'none';
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const botaoFiltrar = document.querySelector('.box-botao-filtrar');
+        botaoFiltrar.addEventListener('click', function () {
+            const selects = document.querySelectorAll('.filtro');
+            const divsEscolhidas = [
+                document.querySelector('.filtro-escolhido-1'),
+                document.querySelector('.filtro-escolhido-2'),
+                document.querySelector('.filtro-escolhido-3'),
+                document.querySelector('.filtro-escolhido-4')
+            ];
+            divsEscolhidas.forEach(div => div.textContent = '');
+            selects.forEach((select, index) => {
+                const opcaoSelecionada = select.options[select.selectedIndex];
+                if (opcaoSelecionada && opcaoSelecionada.value !== '') {
+                    divsEscolhidas[index].textContent = opcaoSelecionada.text;
+                }
+            });
+        });
+    });
+
+</script>
