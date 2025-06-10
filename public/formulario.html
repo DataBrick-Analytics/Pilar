@@ -86,13 +86,14 @@
         var malhaUrbana = 0
         var valorM2 = 0
 
-        var tipoImovel = 0
         var rendaMedia = 0
         var flutuacaoM2 = 0
 
         var parques = 0
         var hospitais = 0
         var escolas = 0
+
+        
 
         function handleClick(event) {
             const botao = event.currentTarget;
@@ -110,9 +111,6 @@
             case "ValorM2":
                 valorM2 = 1;
                 break;
-            case "Tipo de imóvel":
-                tipoImovel = 1;
-                break;
             case "Renda média":
                 rendaMedia = 1;
                 break;
@@ -129,6 +127,18 @@
                 escolas = 1;
                 break;
         }
+
+           var valoresFormulario = [
+            baixaViolencia,
+            malhaUrbana,
+            valorM2,
+            rendaMedia,
+            flutuacaoM2,
+            parques,
+            hospitais,
+            escolas
+        ];
+
 
             const cards = document.querySelectorAll('.card-filtro');
             cards.forEach(card => card.classList.add('saindo'));
@@ -212,7 +222,7 @@
         fetch('/escolhas', {  
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ escolhas, idUsuario: userID })
+            body: JSON.stringify({ escolhas, idUsuario: userID, valoresFormulario })
             })
                 .then(res => res.json())
                 .then(data => {

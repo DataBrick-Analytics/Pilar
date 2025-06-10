@@ -29,6 +29,10 @@ router.get("/user/:id", function (req, res) {
 });
 
 //ENVIANDO FORMULARIO 
-router.post("/escolhas", usuarioController.salvarEscolhas);
+router.post("/salvarEscolhas", usuarioController.salvarEscolhas);
+
+router.post("/salvarvaloresFormulario", usuarioController.salvarvaloresFormulario);
+
+router.get("/pegarValoresDistritosEscolhas", usuarioController.pegarValoresDistritosEscolhas);
 
 module.exports = router;
