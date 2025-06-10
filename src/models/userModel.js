@@ -298,7 +298,7 @@ async function checkPassword(idUsuario, senha) {
 
 async function salvarValoresFormulario(valoresFormulario, idUsuario) {
     const query = `
-        INSERT INTO valores_formularios (baixaViolencia,
+        INSERT INTO valores_formulario (baixaViolencia,
             malhaUrbana,
             valorM2,
             rendaMedia,
@@ -306,8 +306,10 @@ async function salvarValoresFormulario(valoresFormulario, idUsuario) {
             parques,
             hospitais,
             escolas,
-            fk_usuario)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            fk_usuario,
+            data_criacao,
+            data_edicao)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
     `;
 
     const values = [valoresFormulario[0],valoresFormulario[1],valoresFormulario[2],valoresFormulario[3],valoresFormulario[4],valoresFormulario[5],
@@ -326,7 +328,7 @@ async function salvarValoresFormulario(valoresFormulario, idUsuario) {
 
 async function pegarValoresDistritosEscolhas(idUsuario) {
     const query = `
-        select * from valores_formularios where fk_usuario = ?;
+        select * from valores_formulario where fk_usuario = ?;
         `;
 
 
