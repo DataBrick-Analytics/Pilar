@@ -250,6 +250,103 @@ async function getParksByRegion(fkBairro) {
     }
 }
 
+async function getRegiaoRecomendada() {
+    const query = `
+    WITH ultimas_10_por_distrito AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY fk_distrito ORDER BY data_precificacao DESC) AS rn
+    FROM precificacao
+),
+filtradas AS (
+    SELECT *
+    FROM ultimas_10_por_distrito
+    WHERE rn <= 10
+),
+limites AS (
+    SELECT 
+        fk_distrito,
+        MAX(CASE WHEN rn = 1 THEN preco END) AS preco_mais_recente,
+        MAX(CASE WHEN rn = 2 THEN preco END) AS preco_mais_antigo
+    FROM filtradas
+    GROUP BY fk_distrito
+),
+renda_media_aproximada as (
+SELECT 
+fk_distrito,
+    (
+        COALESCE(renda_domiciliar_quinto_mais_pobre, 0) +
+        COALESCE(renda_domiciliar_segundo_quinto_mais_pobre, 0) +
+        COALESCE(renda_domiciliar_terceiro_quinto_mais_pobre, 0) +
+        COALESCE(renda_domiciliar_quarto_quinto_mais_pobre, 0) +
+        COALESCE(renda_domiciliar_quinto_mais_rico, 0)
+    ) / 5 AS renda_media_aproximada
+FROM info_regiao
+),
+cte_final as(
+SELECT 
+    d.id_distrito,
+    d.nome_distrito,
+    d.zona,
+    ROUND(((
+		SUM(
+			COALESCE(s.furtos_regiao, 0) + COALESCE(s.roubos_cargas, 0) + COALESCE(s.roubos, 0) +
+			COALESCE(s.roubos_veiculos, 0) + COALESCE(s.furtos_veiculos, 0) + COALESCE(s.latrocinios, 0) +
+			COALESCE(s.homicio_doloso_acidente_transito, 0) + COALESCE(s.homicidio_culposo_acidente_transito, 0) +
+			COALESCE(s.homicidio_culposo, 0)
+            )
+        ) / NULLIF(ir.populacao_total, 0)
+    ) / (
+        SELECT 
+            (
+                SUM(COALESCE(s2.furtos_regiao, 0)) +
+                SUM(COALESCE(s2.roubos_cargas, 0)) +
+                SUM(COALESCE(s2.roubos, 0)) +
+                SUM(COALESCE(s2.roubos_veiculos, 0)) +
+                SUM(COALESCE(s2.furtos_veiculos, 0)) +
+                SUM(COALESCE(s2.latrocinios, 0)) +
+                SUM(COALESCE(s2.homicio_doloso_acidente_transito, 0)) +
+                SUM(COALESCE(s2.homicidio_culposo_acidente_transito, 0)) +
+                SUM(COALESCE(s2.homicidio_culposo, 0))
+            ) / NULLIF(SUM(ir2.populacao_total), 0)
+        FROM seguranca s2
+        JOIN info_regiao ir2 ON s2.fk_distrito = ir2.fk_distrito
+    ) * 100, 2) AS indice_violencia_percentual,
+
+    ROUND(ir.populacao_total / (NULLIF(SUM(p.area_terreno_m2), 0) / 10000), 2) AS densidade_malha_urbana,
+    ROUND(AVG(pre.preco), 2) AS preco_m2,
+	COUNT(DISTINCT pa.id_parques) as qtd_parques,
+    COUNT(DISTINCT e.id_educacao) as qtd_escolas,
+    COUNT(DISTINCT sa.id_saude) as qtd_saude,
+    rma.renda_media_aproximada,
+	ROUND(((l.preco_mais_recente - l.preco_mais_antigo) / l.preco_mais_antigo) * 100, 2) AS ultima_alteracao_percentual
+FROM distrito d
+JOIN seguranca s ON d.id_distrito = s.fk_distrito
+JOIN info_regiao ir ON d.id_distrito = ir.fk_distrito
+JOIN propriedade p ON d.id_distrito = p.fk_distrito
+JOIN precificacao pre ON d.id_distrito = pre.fk_distrito
+JOIN parque pa ON d.id_distrito = pa.fk_distrito
+JOIN educacao e ON d.id_distrito = e.fk_distrito
+JOIN saude sa ON d.id_distrito = sa.fk_distrito
+JOIN renda_media_aproximada rma ON d.id_distrito = rma.fk_distrito  
+JOIN limites l on d.id_distrito = l.fk_distrito
+GROUP BY d.id_distrito, d.nome_distrito, d.zona, ir.populacao_total, rma.renda_media_aproximada
+ORDER BY 4 ASC, 7 DESC
+LIMIT 4
+)
+SELECT nome_distrito, zona FROM cte_final;
+
+    `;
+
+  try {
+    const rows = await database.execute(query);
+    console.log("Tipo de rows:", Array.isArray(rows), rows);
+    return rows;
+} catch (error) {
+    console.error("Erro ao localizar a informação", error.message);
+    throw error;
+}
+}
+
 module.exports = {
     // KPI
     getRegionType,
@@ -264,5 +361,8 @@ module.exports = {
     // AUXILIARES
     getSchoolsRegion,
     getHospitalsByRegion,
-    getParksByRegion
+    getParksByRegion,
+
+    //REGIÕES RECOMENDADAS
+    getRegiaoRecomendada
 };

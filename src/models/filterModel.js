@@ -93,7 +93,7 @@ async function getRegionByFilter({ precoMin, violenciaMax, densidadeMax, zona })
         GROUP BY d.id_distrito, d.nome_distrito, d.zona, ir.populacao_total
             ${havingClause}
         ORDER BY preco_m2 ASC
-            LIMIT 1000;
+            LIMIT 6;
     `;
 
     const rows = await database.execute(query, params);
@@ -104,7 +104,7 @@ async function getRandomRegion(){
     const query = `
         SELECT id_distrito, nome_distrito, zona, area
             FROM distrito
-        ORDER BY RAND();`
+        ORDER BY RAND() LIMIT 6;`
 
     const result = await database.execute(query);
     return result;

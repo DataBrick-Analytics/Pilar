@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 function getRegionType() {
-
     fetch(`/data/getRegionType/${fkDistrito}`, {
         method: "GET",
         headers: {
@@ -64,7 +63,6 @@ function getRegionType() {
 
 
 async function getUrbanMeshDensity() {
-
     fetch(`/data/getUrbanMeshDensity/${fkDistrito}`, {
         method: "GET",
         headers: {

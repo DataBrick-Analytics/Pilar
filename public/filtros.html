@@ -89,34 +89,39 @@
                 <div class="box-filtro">
                     <select class="filtro" id="filtroZona">
                         <option value="">Selecione a zona</option>
-                        <option value="c">Centro</option>
-                        <option value="n">Norte</option>
-                        <option value="s">Sul</option>
-                        <option value="l">Leste</option>
-                        <option value="o">Oeste</option>
+                        <option value="Centro">Centro</option>
+                        <option value="Norte">Norte</option>
+                        <option value="Sul">Sul</option>
+                        <option value="Leste">Leste</option>
+                        <option value="oeste">Oeste</option>
                     </select>
 
-                    <select class="filtro" id="filtroPredominancia">
-                        <option value="">Selecione a predominância</option>
-                        <option value="casa">Residencial</option>
-                        <option value="apto">Comercial</option>
+                    <select class="filtro" id="filtroViolencia">
+                        <option value="">Selecione índice de violência máximo</option>
+                        <option value="10">Até 10%</option>
+                        <option value="20">Até 20%</option>
+                        <option value="30">Até 30%</option>
+                        <option value="50">Até 50%</option>
                     </select>
+
 
                     <select class="filtro" id="filtroValorM2">
-                        <option value="">Selecione o valor M²</option>
-                        <option value="1">Até R$ 5 mil</option>
-                        <option value="2">Até R$ 8 mil</option>
-                        <option value="3">Até R$ 12 mil</option>
-                        <option value="4">Acima de R$ 12 mil</option>
+                        <option value="">Selecione o preço do m²</option>
+                        <option value="1000000">Acima de 1 Milhão</option>
+                        <option value="2000000">Acima de 2 Milhões</option>
+                        <option value="3000000">Acima de 3 Milhões</option>
+                        <option value="4000000">Acima de 4 Milhões</option>
+                        <option value="5000001">Acima de 5 Milhões</option>
                     </select>
 
-                    <select class="filtro" id="filtroTamanho">
-                        <option value="">Selecione o tamanho</option>
-                        <option value="p">Pequeno</option>
-                        <option value="m">Médio</option>
-                        <option value="g">Grande</option>
-                        <option value="xg">Muito Grande</option>
+                    <select class="filtro" id="filtroDensidade">
+                        <option value="">Selecione densidade máxima</option>
+                        <option value="1000">Até 1000 hab/km²</option>
+                        <option value="5000">Até 5000 hab/km²</option>
+                        <option value="10000">Até 10000 hab/km²</option>
+                        <option value="20000">Até 20000 hab/km²</option>
                     </select>
+
                 </div>
                 <div class="itens-selecionados">
                     <p>Itens selecionados:</p>
@@ -216,196 +221,50 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-        <div class="divTelaFiltros">
-            <div class="box-nome-tela">
-                <h2>Regiões</h2>
-            </div>
-
-            <div class="filtros">
-                <div class="box-filtros">
-                    <div class="box-filtro">
-                        <select class="filtro">
-                                <option value="">Selecione a zona</option>
-                                <option value="c">Centro</option>
-                                <option value="n">Norte</option>
-                                <option value="s">Sul</option>
-                                <option value="l">Leste</option>
-                                <option value="o">Oeste</option>
-                            </select>
-
-                            <select class="filtro">
-                                <option value="">Selecione a violencia</option>
-                                <option value="">Até 5%</option>
-                                <option value="">Até 10%</option>
-                                <option value="">Até 20%</option>
-                                <option value="">Até 30%</option>
-                            </select>
-
-                            <select class="filtro">
-                                <option value="">Selecione o valor M²</option>
-                                <option value="1">Até R$ 5 mil</option>
-                                <option value="2">Até R$ 8 mil</option>
-                                <option value="3">Até R$ 12 mil</option>
-                                <option value="4">Acima de R$ 12 mil</option>
-                            </select>
-
-                            <select class="filtro">
-                                <option value="">Selecione a densidade de Malha Urbana</option>
-                                <option value="p">Até 25%</option>
-                                <option value="m">Até 50%</option>
-                                <option value="g">Até 75%</option>
-                                <option value="xg">Acima de 75%</option>
-                            </select>
-                    </div>
-                            <div class="itens-selecionados">
-                                <p>Itens selecionados:</p>
-                                <div class="selecao-filtros">
-                                        <div class="filtro-escolhido-1 filtro-escolhido"></div>
-                                        <div class="filtro-escolhido-2 filtro-escolhido"></div>
-                                        <div class="filtro-escolhido-3 filtro-escolhido"></div>
-                                        <div class="filtro-escolhido-4 filtro-escolhido"></div>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="box-botao-filtrar">Filtrar Região</div>
-
-            </div>
-
-
-            <div class="container-regioes">
-
-                <div class="box-regiao">
-                    <div class="box-regiao-cima">
-                        <div class="box-titulo-botoes">
-                            <div class="titulo-regiao"><h1>Região X1</h1></div>
-                            <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                        </div>
-                        <p>Um belo apartamento moderno no centro da cidade</p>
-                    </div>
-                    <div class="box-regiao-baixo">
-                        <div class="box-botao">Acessar Região</div>
-                    </div>
-                </div>
-
-                <div class="box-regiao">
-                    <div class="box-regiao-cima">
-                        <div class="box-titulo-botoes">
-                            <div class="titulo-regiao"><h1>Região X1</h1></div>
-                            <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                        </div>
-                        <p>Um belo apartamento moderno no centro da cidade</p>
-                    </div>
-                    <div class="box-regiao-baixo">
-                        <div class="box-botao">Acessar Região</div>
-                    </div>
-                </div>
-
-                <div class="box-regiao">
-                    <div class="box-regiao-cima">
-                        <div class="box-titulo-botoes">
-                            <div class="titulo-regiao"><h1>Região X1</h1></div>
-                            <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                        </div>
-                        <p>Um belo apartamento moderno no centro da cidade</p>
-                    </div>
-                    <div class="box-regiao-baixo">
-                        <div class="box-botao">Acessar Região</div>
-                    </div>
-                </div>
-                <div class="box-regiao">
-                    <div class="box-regiao-cima">
-                        <div class="box-titulo-botoes">
-                            <div class="titulo-regiao"><h1>Região X1</h1></div>
-                            <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                        </div>
-                        <p>Um belo apartamento moderno no centro da cidade</p>
-                    </div>
-                    <div class="box-regiao-baixo">
-                        <div class="box-botao">Acessar Região</div>
-                    </div>
-                </div>
-                <div class="box-regiao">
-                    <div class="box-regiao-cima">
-                        <div class="box-titulo-botoes">
-                            <div class="titulo-regiao"><h1>Região X1</h1></div>
-                            <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                        </div>
-                        <p>Um belo apartamento moderno no centro da cidade</p>
-                    </div>
-                    <div class="box-regiao-baixo">
-                        <div class="box-botao">Acessar Região</div>
-                    </div>
-                </div>
-                <div class="box-regiao">
-                    <div class="box-regiao-cima">
-                        <div class="box-titulo-botoes">
-                            <div class="titulo-regiao"><h1>Região X1</h1></div>
-                            <div class="botao-favoritos">&#9733;</div>
-                        <div class="botao-fechar">X</div>
-                        </div>
-                        <p>Um belo apartamento moderno no centro da cidade</p>
-                    </div>
-                    <div class="box-regiao-baixo">
-                        <div class="box-botao">Acessar Região</div>
-                    </div>
-                </div>
-
-            </div>
-        <div>
-    <div>
-
-
-=======
     </div>
 </div>
-
-
->>>>>>> feat/backend-filtros
 </body>
 </html>
 <script src="js/filtros.js"></script>
 <script onload="generateRandomRegionCards()" src="js/filtros.js"></script>
+<script onload="validarSessao()" src="js/sessao.js"></script>
+<script type="module" src="js/favoritar.js"></script>
 <script>
 
-    document.querySelectorAll('.botao-favoritos').forEach(function (botao) {
-        botao.addEventListener('click', function () {
-            this.classList.toggle('ativa');
-        });
-    });
 
-    document.querySelectorAll('.botao-fechar').forEach(function (botao) {
-        botao.addEventListener('click', function () {
-            const card = this.closest('.box-regiao');
+    import {favoritar} from "./js/favoritar";
+
+    const container = document.querySelector('.container-regioes');
+
+    container.addEventListener('click', function (event) {
+        if (event.target.classList.contains('botao-favoritos')) {
+            event.target.classList.toggle('ativa');
+
+            const userID = localStorage.getItem('USER_ID');
+            const enterpriseID = localStorage.getItem('ID_EMPRESA');
+            const propertyID = isNaN(Number(event.target.id)) ? null : Number(event.target.id)
+
+            console.log(userID, enterpriseID, propertyID)
+
+            favoritar(userID, enterpriseID, propertyID)
+        }
+        if (event.target.classList.contains('botao-fechar')) {
+            const card = event.target.closest('.box-regiao');
             if (card) card.style.display = 'none';
-        });
+        }
     });
-
 
     document.addEventListener("DOMContentLoaded", function () {
         const botaoFiltrar = document.querySelector('.box-botao-filtrar');
-
         botaoFiltrar.addEventListener('click', function () {
-
             const selects = document.querySelectorAll('.filtro');
-
-
             const divsEscolhidas = [
                 document.querySelector('.filtro-escolhido-1'),
                 document.querySelector('.filtro-escolhido-2'),
                 document.querySelector('.filtro-escolhido-3'),
                 document.querySelector('.filtro-escolhido-4')
             ];
-
-
             divsEscolhidas.forEach(div => div.textContent = '');
-
-
             selects.forEach((select, index) => {
                 const opcaoSelecionada = select.options[select.selectedIndex];
                 if (opcaoSelecionada && opcaoSelecionada.value !== '') {
@@ -414,4 +273,5 @@
             });
         });
     });
+
 </script>
