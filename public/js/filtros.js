@@ -58,8 +58,8 @@ async function filterRegion() {
                 const id = botaoAcessar.getAttribute("data-id");
 
                 // Salva o ID no sessionStorage
-                sessionStorage.setItem("fkBairro", id);
-                console.log("ID salvo no sessionStorage como fkBairro:", id);
+                localStorage.setItem("REGIAO_ID", id);
+                console.log("ID salvo no localStorage como fkDistrito:", id);
 
                 // Redireciona para a página dashboard.html
                 window.location.href = "dashboard.html";
@@ -70,9 +70,6 @@ async function filterRegion() {
         console.log("Erro ao gerar os cards", error)
     }
 }
-
-
-
 
 async function generateRandomRegionCards(){
     try {
@@ -97,7 +94,7 @@ async function generateRandomRegionCards(){
                     <p>ID#${region.id_distrito} / Zona ${region.zona} </p>
                 </div>
                 <div class="box-regiao-baixo">
-                    <div class="box-botao">Acessar Região</div>
+                    <div class="box-botao" data-id="${region.id_distrito}">Acessar Região</div>
                 </div>
             `
             container.appendChild(card)
@@ -107,8 +104,8 @@ async function generateRandomRegionCards(){
                 const id = botaoAcessar.getAttribute("data-id");
 
                 // Salva o ID no sessionStorage
-                sessionStorage.setItem("fkBairro", id);
-                console.log("ID salvo no sessionStorage como fkBairro:", id);
+                localStorage.setItem("REGIAO_ID", id);
+                console.log("ID salvo no localStorage como fkBairro:", id);
 
                 // Redireciona para a página dashboard.html
                 window.location.href = "dashboard.html";
