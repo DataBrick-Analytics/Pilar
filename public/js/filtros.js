@@ -58,7 +58,7 @@ async function filterRegion() {
 
                 // Salva o ID no sessionStorage
                 localStorage.setItem("REGIAO_ID", id);
-                console.log("ID salvo no localStorage como fkDistrito:", id);
+                console.log("ID salvo no localStorage como REGIAO_ID:", id);
 
                 // Redireciona para a página dashboard.html
                 window.location.href = "dashboard.html";
@@ -103,7 +103,7 @@ async function generateRandomRegionCards(){
 
                 // Salva o ID no sessionStorage
                 localStorage.setItem("REGIAO_ID", id);
-                console.log("ID salvo no localStorage como fkBairro:", id);
+                console.log("ID salvo no localStorage como REGIAO_ID:", id);
 
                 // Redireciona para a página dashboard.html
                 window.location.href = "dashboard.html";
