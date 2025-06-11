@@ -165,12 +165,6 @@ function deleteEnterprise(req, res) {
 
     console.log("ID para exclusão:", idUser);
 
-    // if (idUser == "undefined" ||  idUser == "null") {
-    //     return res.status(400).json({
-    //         error: "O id está undefined ou nulo!"
-    //     });
-    // }
-
     enterpriseModel.deleteEnterprise(idUser)
         .then(function (resultado) {
             res.status(200).json({

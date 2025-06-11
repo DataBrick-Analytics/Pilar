@@ -161,7 +161,8 @@ async function deleteEnterprise() {
 
         if (resposta.ok) {
             changeModal();
-            return alert("Empresa excluída com sucesso");
+            alert("Empresa excluída com sucesso");
+            limparSessao();
         } else {
             const texto = await resposta.text();
             console.error(texto);

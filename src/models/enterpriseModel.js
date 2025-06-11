@@ -158,13 +158,22 @@ async function deleteEnterprise(idUserLogado,idEnterprise) {
     // 3. Apagar dados relacionados ao usuário
     await database.execute(`DELETE FROM favorito WHERE fk_usuario = ?`, [idUserLogado]);
     await database.execute(`DELETE FROM acao_de_usuario WHERE fk_usuario = ?`, [idUserLogado]);
+    await database.execute(`DELETE FROM notificacao WHERE fk_usuario = ?`, [idUserLogado]);
 
     // 4. Apagar usuário
     await database.execute(`DELETE FROM usuario WHERE id_usuario = ?`, [idUserLogado]);
 
+    // 5. Apagar registros relacionados à empresa
+    await database.execute(`DELETE FROM endereco WHERE fk_empresa = ?`, [fk_empresa]);
+    await database.execute(`DELETE FROM telefone WHERE fk_empresa = ?`, [fk_empresa]);
+    await database.execute(`DELETE FROM notificacao WHERE fk_empresa = ?`, [fk_empresa]);
+    await database.execute(`DELETE FROM acao_de_usuario WHERE fk_empresa = ?`, [fk_empresa]);
+    await database.execute(`DELETE FROM favorito WHERE fk_empresa = ?`, [fk_empresa]);
+
     // 5. Apagar a empresa (já que ele é o último usuário)
     await database.execute(`DELETE FROM empresa WHERE id_empresa = ?`, [fk_empresa]);
 
+    
     console.log(`Usuário ${idUserLogado} e empresa ${fk_empresa} excluídos com sucesso`);
     return { success: true, message: "Conta e empresa excluídas com sucesso." };
 
