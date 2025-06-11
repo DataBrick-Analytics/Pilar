@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/Style.css">
     <link rel="stylesheet" href="./css/sidebar.css">
     <title>Databrick - Empresa</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -34,7 +35,7 @@
             <nav class="main-navigation" aria-label="Menu principal">
                 <ul class="nav-menu">
                     <li>
-                        <a href="home.html  " class="nav-item">
+                        <a href="home.html" class="nav-item">
                             <img src="./assets/icons-dash/HOME-ICON-SM.svg"
                                  alt=""
                                  aria-hidden="true"
@@ -54,19 +55,19 @@
                             <img src="./assets/icons-dash/CHART-ICON-SM.svg"
                                  aria-hidden="true"
                                  class="nav-icon">
-                            <span>Propriedades</span>
+                            <span>Regiões</span>
                             <span class="dropdown-arrow" aria-hidden="true">▼</span>
                         </button>
 
                         <ul id="propriedades-menu" class="dropdown-content">
                             <li>
                                 <a href="filtros.html" class="dropdown-item">
-                                    <span>Filtrar propriedade</span>
+                                    <span>Filtrar regiões</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="dropdown-item">
-                                    <span>Propriedades favoritas</span>
+                                <a href="propFavoritas.html" class="dropdown-item">
+                                    <span>Regiões favoritas</span>
                                 </a>
                             </li>
                         </ul>
@@ -74,7 +75,7 @@
 
                     <ul class="nav-menu">
                         <li>
-                            <a href="./TelaAlertas.html" class="nav-item">
+                            <a href="TelaAlertas.html" class="nav-item">
                                 <img src="./assets/icons-dash/ALERT-ICON-SM.svg"
                                      alt=""
                                      aria-hidden="true"
@@ -86,7 +87,7 @@
 
                     <ul class="nav-menu">
                         <li>
-                            <a href="./listaUsuario.html" class="nav-item">
+                            <a href="listaUsuario.html" class="nav-item">
                                 <img src="./assets/icons-dash/account-plus.png"
                                      alt=""
                                      aria-hidden="true"
@@ -98,7 +99,7 @@
 
                     <ul class="nav-menu">
                         <li>
-                            <a href="./empresa.html" class="nav-item">
+                            <a href="empresa.html" class="nav-item">
                                 <img src="./assets/icons-dash/store.png"
                                      alt=""
                                      aria-hidden="true"
@@ -171,8 +172,14 @@
                         <input id="state" type="text" placeholder="Insira sua senha">
                     </div>
                     <div>
-                        <h3>UF</h3>
-                        <input id="state_code" type="text" placeholder="Insira sua novamente">
+                        <h3>Numero:</h3>
+                        <input id="number" type="text" placeholder="Insira sua novamente">
+                    </div>
+                </section>
+                <section class="division">
+                    <div>
+                        <h3>Telefone:</h3>
+                        <input id="phone" type="text" placeholder="Insira sua senha">
                     </div>
                 </section>
             </article>
@@ -181,6 +188,10 @@
             <button onclick="changeModal()"><img
                     src="assets/icons-dash/CHART-ICON-SM.svg"> Atualizar
             </button>
+            <button onclick="changeModalDelete()"><img
+                    src="assets/icons-dash/CHART-ICON-SM.svg"> Apagar Empresa
+            </button>
+            
         </section>
     </div>
 </main>
@@ -199,8 +210,25 @@
     </section>
 </div>
 
+<div class="lockDelete hideDelete">
+    <section class="modal-senha">
+        <div class="blue-box">
+            <a onclick="changeModalDelete()"><img src="assets/icons-edit/close.png"></a>
+        </div>
+        <article class="confirmationInput">
+            <input id="password_modal_delete" type="password" placeholder="Digite sua senha para confirmar">
+        </article>
+        <section class="confirmationButton">
+            <button onclick="deleteEnterprise()">Confirmar</button>
+        </section>
+    </section>
+</div>
+
+
+
 </body>
 </html>
 
-<script src="js/perfilEmpresa.js" onload="isManagerUser()"></script>
-<script src="js/perfilEmpresa.js" onload="setEnterpriseInfos()"></script>
+
+<script src="js/sessao.js" onload="validarSessao()"></script>
+<script src="js/perfilEmpresa.js" onload="isManagerUser(),setEnterpriseInfos()"></script>

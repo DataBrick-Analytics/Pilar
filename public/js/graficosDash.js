@@ -70,7 +70,28 @@ async function loadAverageIncome() {
 }
 
 async function loadPriceFluctuation() {
-    let graphicData;
+    let graphicData = [
+        {
+            "ano": 2025,
+            "media_preco_metro_quadrado": "0"
+        },
+        {
+            "ano": 2024,
+            "media_preco_metro_quadrado": "0"
+        },
+        {
+            "ano": 2023,
+            "media_preco_metro_quadrado": "0"
+        },
+        {
+            "ano": 2022,
+            "media_preco_metro_quadrado": "0"
+        },
+        {
+            "ano": 2021,
+            "media_preco_metro_quadrado": "0"
+        }
+    ];
 
     try {
         const resposta = await fetch(`/data/getPriceFluctuation/${fkDistrito}`, {
@@ -81,7 +102,10 @@ async function loadPriceFluctuation() {
         });
 
         if (resposta.ok) {
-            graphicData = await resposta.json();
+            let data = await resposta.json();
+            if (data.length > 0) {
+                graphicData = data;
+            }
         } else {
             console.log(resposta);
         }
@@ -128,7 +152,8 @@ async function loadPriceFluctuation() {
                     },
                     ticks: {
                         color: 'white'
-                    }
+                    },
+                    min: 0
                 }
             }
         }

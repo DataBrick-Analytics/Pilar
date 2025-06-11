@@ -17,6 +17,10 @@ async function loadCards() {
         for (let i = 0; i < distritos.length; i++) {
             document.getElementById(`regiao${i + 1}`).innerText = distritos[i].nome_distrito.trim();
             document.getElementById(`zona${i + 1}`).innerText = distritos[i].zona;
+            document.getElementById(`card${i + 1}`).onclick = function() {
+                localStorage.setItem('REGIAO_ID', distritos[i].fk_distrito);
+                window.location.href = 'dashboard.html';
+            };
         }
     } catch (error) {
         console.error("Erro ao pegar valores dos distritos:", error);

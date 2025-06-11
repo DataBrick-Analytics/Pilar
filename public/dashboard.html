@@ -13,131 +13,109 @@
 </head>
 
 <body>
-<div class="divGeral">
-    <div class="divPainel">
-        <aside class="sidebar">
-            <header class="sidebar-header">
-                <div class="logo">
-                    <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" class="logo-icon">
-                    <h1 class="logo-text">DataBrick</h1>
-                </div>
-            </header>
+    <div class="divGeral">
+        <div class="divPainel">
+            <aside class="sidebar">
+                <header class="sidebar-header">
+                    <div class="logo">
+                        <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" class="logo-icon">
+                        <h1 class="logo-text">DataBrick</h1>
+                    </div>
+                </header>
 
-            <hr class="separator" aria-hidden="true">
+                <hr class="separator" aria-hidden="true">
 
-            <section class="user-profile" aria-label="Perfil do usuário">
-                <img src="./assets/icons-dash/USER-ICON-SM.svg" class="avatar">
-                <span class="username" id="user">Nome usuário</span>
-            </section>
+                <section class="user-profile" aria-label="Perfil do usuário">
+                    <img src="./assets/icons-dash/USER-ICON-SM.svg" class="avatar">
+                    <span class="username" id="user">Nome usuário</span>
+                </section>
 
-            <hr class="separator" aria-hidden="true">
+                <hr class="separator" aria-hidden="true">
 
-            <nav class="main-navigation" aria-label="Menu principal">
-                <ul class="nav-menu">
-                    <li>
-                        <a href="home.html  " class="nav-item">
-                            <img src="./assets/icons-dash/HOME-ICON-SM.svg"
-                                 alt=""
-                                 aria-hidden="true"
-                                 class="nav-icon">
-                            <span>Home</span>
-                        </a>
-                    </li>
-                </ul>
+                <nav class="main-navigation" aria-label="Menu principal">
+                    <ul class="nav-menu">
+                        <li>
+                            <a href="home.html" class="nav-item">
+                                <img src="./assets/icons-dash/HOME-ICON-SM.svg" alt="" aria-hidden="true"
+                                    class="nav-icon">
+                                <span>Home</span>
+                            </a>
+                        </li>
+                    </ul>
 
-                <section class="nav-section">
-                    <h2 class="nav-section-title">PAGES</h2>
+                    <section class="nav-section">
+                        <h2 class="nav-section-title">PAGES</h2>
 
-                    <div class="dropdown">
-                        <button class="dropdown-btn active"
-                                aria-expanded="false"
-                                aria-controls="propriedades-menu">
-                            <img src="./assets/icons-dash/CHART-ICON-SM.svg"
-                                 aria-hidden="true"
-                                 class="nav-icon">
-                            <span>Propriedades</span>
-                            <span class="dropdown-arrow" aria-hidden="true">▼</span>
-                        </button>
+                        <div class="dropdown">
+                            <button class="dropdown-btn active" aria-expanded="false" aria-controls="propriedades-menu">
+                                <img src="./assets/icons-dash/CHART-ICON-SM.svg" aria-hidden="true" class="nav-icon">
+                                <span>Regiões</span>
+                                <span class="dropdown-arrow" aria-hidden="true">▼</span>
+                            </button>
 
-                        <ul id="propriedades-menu" class="dropdown-content">
+                            <ul id="propriedades-menu" class="dropdown-content">
+                                <li>
+                                    <a href="filtros.html" class="dropdown-item">
+                                        <span>Filtrar regiões</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="propFavoritas.html" class="dropdown-item">
+                                        <span>Regiões favoritas</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <ul class="nav-menu">
                             <li>
-                                <a href="filtros.html" class="dropdown-item">
-                                    <span>Filtrar propriedade</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="" class="dropdown-item">
-                                    <span>Propriedades favoritas</span>
+                                <a href="TelaAlertas.html" class="nav-item">
+                                    <img src="./assets/icons-dash/ALERT-ICON-SM.svg" alt="" aria-hidden="true"
+                                        class="nav-icon">
+                                    <span>Alertas</span>
                                 </a>
                             </li>
                         </ul>
-                    </div>
 
-                    <ul class="nav-menu">
-                        <li>
-                            <a href="./TelaAlertas.html" class="nav-item">
-                                <img src="./assets/icons-dash/ALERT-ICON-SM.svg"
-                                     alt=""
-                                     aria-hidden="true"
-                                     class="nav-icon">
-                                <span>Alertas</span>
-                            </a>
-                        </li>
-                    </ul>
+                        <ul class="nav-menu">
+                            <li>
+                                <a href="listaUsuario.html" class="nav-item">
+                                    <img src="./assets/icons-dash/account-plus.png" alt="" aria-hidden="true"
+                                        class="nav-icon">
+                                    <span>Usuários</span>
+                                </a>
+                            </li>
+                        </ul>
 
-                    <ul class="nav-menu">
-                        <li>
-                            <a href="./listaUsuario.html" class="nav-item">
-                                <img src="./assets/icons-dash/account-plus.png"
-                                     alt=""
-                                     aria-hidden="true"
-                                     class="nav-icon">
-                                <span>Usuários</span>
-                            </a>
-                        </li>
-                    </ul>
+                        <ul class="nav-menu">
+                            <li>
+                                <a href="empresa.html" class="nav-item">
+                                    <img src="./assets/icons-dash/store.png" alt="" aria-hidden="true" class="nav-icon">
+                                    <span>Empresa</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                </nav>
 
-                    <ul class="nav-menu">
-                        <li>
-                            <a href="./empresa.html" class="nav-item">
-                                <img src="./assets/icons-dash/store.png"
-                                     alt=""
-                                     aria-hidden="true"
-                                     class="nav-icon">
-                                <span>Empresa</span>
-                            </a>
-                        </li>
-                    </ul>
-                </section>
-            </nav>
-
-            <footer class="sidebar-footer">
-                <button type="button"
-                        onclick="logout()"
-                        class="button_logout">
-                    Log Out
-                </button>
-            </footer>
-        </aside>
-    </div>
-    <div class="divDash">
-
-        <div class="divPagina">
-            <div class="divPaginaHome">
-                <!-- <a href="index.html">
-                   <img src="assets/icons-dash/Vector.png" alt=""> <a href="index.html">Home</a>
-                </a> -->
-            </div>
-            <div class="divPaginaAtual">Analise Urbana da região do Ipiranga</div>
+                <footer class="sidebar-footer">
+                    <button type="button" onclick="logout()" class="button_logout">
+                        Log Out
+                    </button>
+                </footer>
+            </aside>
         </div>
+        <div class="divDash">
+
             <div class="divPagina">
                 <div class="divPaginaHome">
-                    <!-- <a href="index.html">
-                       <img src="assets/icons-dash/Vector.png" alt=""> <a href="index.html">Home</a>
-                    </a> -->
+                    <a href="index.html">
+                        <img src="assets/icons-dash/Vector.png" alt=""> <a href="index.html">Home</a>
+                    </a>
                 </div>
                 <div class="divPaginaAtual">Analise Urbana da região <span id="regiao_nome"></span></div>
             </div>
+
 
             <div class="divKPIs">
                 <div class="divKPI">
@@ -176,6 +154,9 @@
                         <span class="spanNome">Renda Média</span>
                         <span>Renda média por quinto da população</span>
                     </div>
+                    <div id="ultimaAtualizacao" class="divAtualizacaoGrafico">
+                        <img src="assets/icons-dash/clock-outline.png" alt="">
+                    </div>
                 </div>
                 <div class="divGrafico">
                     <div class="divGraficoReal">
@@ -185,45 +166,48 @@
                         <span class="spanNome">Flutuação do preço do m²</span>
                         <span>Evolução do preço m² por ano</span>
                     </div>
+                    <div id="ultimaAtualizacao2" class="divAtualizacaoGrafico">
+                        <img src="assets/icons-dash/clock-outline.png" alt="">
+                    </div>
                 </div>
-                <div id="ultimaAtualizacao2" class="divAtualizacaoGrafico">
-                    <img src="assets/icons-dash/clock-outline.png" alt="">
+
+            </div>
+
+            <div class="divInformacoes">
+
+                <div class="divInformacoes2">
+                    <img src="assets/icons-dash/logo_databrick.svg" alt="">
                 </div>
+
+                <div class="divKPI2">
+                    <div class="divKpiIcone2 Primary icon5"></div>
+                    <div class="divKpiNomes">Escolas na região</div>
+                    <div class="divKpiValor" id="kpiEscolas"></div>
+                    <div class="divKpiDescricao1"><span></span></div>
+                </div>
+
+                <div class="divKPI2">
+                    <div class="divKpiIcone2 Secondary icon6"></div>
+                    <div class="divKpiNomes">Hospitais na região</div>
+                    <div class="divKpiValor" id="kpiHospitais"></div>
+                    <div class="divKpiDescricao1"><span></span></div>
+                </div>
+
+                <div class="divKPI2">
+                    <div class="divKpiIcone2 Primary icon7"></div>
+                    <div class="divKpiNomes">Parques na região</div>
+                    <div class="divKpiValor" id="kpiParques"></div>
+                    <div class="divKpiDescricao1"><span></span></div>
+                </div>
+
+
             </div>
         </div>
 
-        <div class="divInformacoes">
 
-            <div class="divInformacoes2">
-                <img src="assets/icons-dash/logo_databrick.svg" alt="">
-            </div>
-
-            <div class="divKPI2">
-                <div class="divKpiIcone2 Primary icon5"></div>
-                <div class="divKpiNomes">Escolas na região</div>
-                <div class="divKpiValor" id="kpiEscolas"></div>
-                <div class="divKpiDescricao1"><span></span></div>
-            </div>
-
-            <div class="divKPI2">
-                <div class="divKpiIcone2 Secondary icon6"></div>
-                <div class="divKpiNomes">Hospitais na região</div>
-                <div class="divKpiValor" id="kpiHospitais"></div>
-                <div class="divKpiDescricao1"><span></span></div>
-            </div>
-
-            <div class="divKPI2">
-                <div class="divKpiIcone2 Primary icon7"></div>
-                <div class="divKpiNomes">Parques na região</div>
-                <div class="divKpiValor">3</div>
-                <div class="divKpiDescricao1"><span></span></div>
-            </div>
-
-
-        </div>
 
     </div>
-</div>
+    </div>
 </body>
 
 </html>
@@ -232,7 +216,7 @@
     user.innerHTML = sessionStorage.NOME_EMPRESA
 </script>
 
-<script onload="validarSessao()" src="js/sessao.js"></script>
+<!-- <script onload="validarSessao()" src="js/sessao.js"></script> -->
 <script src="js/kpis.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/graficosDash.js"></script>

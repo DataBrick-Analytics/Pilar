@@ -29,6 +29,11 @@ router.get("/user/:id", function (req, res) {
 });
 
 //ENVIANDO FORMULARIO
+router.post("/user/checkPassword", function (req, res) {
+    usuarioController.checkPassword(req, res);
+});
+
+//ENVIANDO FORMULARIO
 router.post("/salvarValoresFormulario", function (req, res) {
     usuarioController.salvarValoresFormulario(req, res);
 });

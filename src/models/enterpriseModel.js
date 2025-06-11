@@ -2,98 +2,79 @@ var database = require("../database/config");
 
 
 // CRIAR USUARIO
-async function createEnterpriseAndUser(req, res) {
-  const cadastro = req.body;
 
-  console.log("Dados recebidos:", cadastro);
-
-  // Validações de campos obrigatórios sem usar for
-  if (!cadastro.nomeFantasia) {
-    return res.status(400).json({ error: "O nome da Empresa está undefined ou nulo!" });
-  }
-  if (!cadastro.cnpj) {
-    return res.status(400).json({ error: "CNPJ está undefined ou nulo!" });
-  }
-  if (!cadastro.nomeUsuario) {
-    return res.status(400).json({ error: "O nome do usuário está undefined ou nulo!" });
-  }
-  if (!cadastro.cpf) {
-    return res.status(400).json({ error: "CPF está undefined ou nulo!" });
-  }
-  if (!cadastro.email) {
-    return res.status(400).json({ error: "Email está undefined ou nulo!" });
-  }
-  if (!cadastro.senha) {
-    return res.status(400).json({ error: "Senha está undefined ou nula!" });
-  }
-  if (!cadastro.dtNasc) {
-    return res.status(400).json({ error: "Data de nascimento está undefined ou nula!" });
-  }
-  if (!cadastro.razaoSocial) {
-    return res.status(400).json({ error: "Razão Social está undefined ou nula!" });
-  }
-  if (!cadastro.uf) {
-    return res.status(400).json({ error: "UF está undefined ou nula!" });
-  }
-  if (!cadastro.cep) {
-    return res.status(400).json({ error: "CEP está undefined ou nulo!" });
-  }
-  if (!cadastro.rua) {
-    return res.status(400).json({ error: "Rua está undefined ou nula!" });
-  }
-  if (!cadastro.numero) {
-    return res.status(400).json({ error: "Número está undefined ou nulo!" });
-  }
-  if (!cadastro.complemento) {
-    return res.status(400).json({ error: "Complemento está undefined ou nulo!" });
-  }
-  if (!cadastro.bairro) {
-    return res.status(400).json({ error: "Bairro está undefined ou nulo!" });
-  }
-  if (!cadastro.cidade) {
-    return res.status(400).json({ error: "Cidade está undefined ou nula!" });
-  }
-  if (!cadastro.estado) {
-    return res.status(400).json({ error: "Estado está undefined ou nulo!" });
-  }
-  if (!cadastro.telefone) {
-    return res.status(400).json({ error: "Telefone está undefined ou nulo!" });
-  }
-
+async function createEnterpriseAndUser(cadastro) {
   try {
-    const [cnpjExistente, razaoExistente, emailExistente, cpfExistente] = await Promise.all([
-      enterpriseModel.checkCnpj(cadastro.cnpj),
-      enterpriseModel.checkRazaoSocialcnpj(cadastro.razaoSocial),
-      userModel.checkEmail(cadastro.email),
-      userModel.checkCpf(cadastro.cpf)
-    ]);
+    const checkEnterprise = await database.execute(
+       ` SELECT id_empresa FROM empresa WHERE cnpj = ?`,
+        [cadastro.cnpj]
+  );
 
-    if (cnpjExistente.length > 0) {
-      return res.status(409).json({ error: "CNPJ já cadastrado." });
-    }
-    if (razaoExistente.length > 0) {
-      return res.status(409).json({ error: "Razão Social já cadastrada." });
-    }
-    if (emailExistente.length > 0) {
-      return res.status(409).json({ error: "Email já cadastrado." });
-    }
-    if (cpfExistente.length > 0) {
-      return res.status(409).json({ error: "CPF já cadastrado." });
+    if (checkEnterprise.length > 0) {
+      console.log("Empresa já cadastrada, não será necessário cadastrar novamente.");
+      return "Empresa já cadastrada, não será necessário cadastrar novamente.";
     }
 
-    // Cadastro
-    const resultado = await enterpriseModel.createEnterpriseAndUser(cadastro);
+    console.log("Empresa não cadastrada, será necessário cadastrar.");
 
-    return res.status(201).json({
-      message: "Empresa e usuário criados com sucesso",
-      resultado
-    });
+    // Cadastra a empresa
+    const cadastroEmpresa = await database.execute(
+        `INSERT INTO empresa (razao_social, nome_fantasia, cnpj, data_criacao, date_edicao) VALUES (?, ?, ?, ?, ?)`,
+        [cadastro.razaoSocial, cadastro.nomeFantasia, cadastro.cnpj, new Date(), new Date()]
+  );
 
-  } catch (erro) {
-    console.error("Erro inesperado:", erro);
-    return res.status(500).json({
-      error: erro.sqlMessage || erro.message || 'Erro interno ao cadastrar empresa e usuário.'
-    });
+    // Validação: empresa cadastrada com sucesso?
+    const idEmpresa = cadastroEmpresa?.insertId;
+    if (!idEmpresa) {
+      console.error("Falha ao cadastrar empresa. Encerrando processo.");
+      return;
+    }
+
+    // Cadastra endereço
+    await database.execute(
+        ` INSERT INTO endereco (
+        rua, bairro, cep, cidade, estado, uf, fk_empresa, data_criacao, data_edicao
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())`,
+        [
+          cadastro.rua,
+          cadastro.bairro,
+          cadastro.cep,
+          cadastro.cidade,
+          cadastro.estado,
+          cadastro.uf,
+          idEmpresa
+        ]
+    );
+
+    // Cadastra telefone
+    await database.execute(
+        `INSERT INTO telefone (telefone, fk_empresa, data_criacao, data_edicao)
+    VALUES (?, ?, NOW(), NOW())`,
+        [cadastro.telefone, idEmpresa]
+  );
+
+    // Cadastra usuário
+    await database.execute(
+        `INSERT INTO usuario (nome, email, senha, fk_empresa, cpf, data_nasc, funcao_empresa, data_criacao, data_edicao)
+    VALUES (?, ?, SHA2(?, 256), ?, ?, ?, ?, ?, ?)`,
+        [
+          cadastro.nomeUsuario,
+          cadastro.email,
+          cadastro.senha,
+          idEmpresa,
+          cadastro.cpf,
+          cadastro.dtNasc,
+          "Admin",
+          new Date(),
+          new Date()
+        ]
+  );
+
+    return "Usuário criado com sucesso.";
+
+  } catch (error) {
+    console.error('Erro ao inserir empresa:', error.message);
+    throw error;
   }
 }
 
@@ -177,13 +158,22 @@ async function deleteEnterprise(idUserLogado,idEnterprise) {
     // 3. Apagar dados relacionados ao usuário
     await database.execute(`DELETE FROM favorito WHERE fk_usuario = ?`, [idUserLogado]);
     await database.execute(`DELETE FROM acao_de_usuario WHERE fk_usuario = ?`, [idUserLogado]);
+    await database.execute(`DELETE FROM notificacao WHERE fk_usuario = ?`, [idUserLogado]);
 
     // 4. Apagar usuário
     await database.execute(`DELETE FROM usuario WHERE id_usuario = ?`, [idUserLogado]);
 
+    // 5. Apagar registros relacionados à empresa
+    await database.execute(`DELETE FROM endereco WHERE fk_empresa = ?`, [fk_empresa]);
+    await database.execute(`DELETE FROM telefone WHERE fk_empresa = ?`, [fk_empresa]);
+    await database.execute(`DELETE FROM notificacao WHERE fk_empresa = ?`, [fk_empresa]);
+    await database.execute(`DELETE FROM acao_de_usuario WHERE fk_empresa = ?`, [fk_empresa]);
+    await database.execute(`DELETE FROM favorito WHERE fk_empresa = ?`, [fk_empresa]);
+
     // 5. Apagar a empresa (já que ele é o último usuário)
     await database.execute(`DELETE FROM empresa WHERE id_empresa = ?`, [fk_empresa]);
 
+    
     console.log(`Usuário ${idUserLogado} e empresa ${fk_empresa} excluídos com sucesso`);
     return { success: true, message: "Conta e empresa excluídas com sucesso." };
 
@@ -214,7 +204,14 @@ async function getEnterpriseEmployees(fkEmpresa) {
 
 
 async function getEnterpriseById(idEnterprise) {
-  const query = `SELECT * FROM empresas WHERE id_empresa = ${idEnterprise};`
+  const query = `SELECT e.nome_fantasia,e.razao_social,en.rua,en.bairro,en.cep,
+                               en.cidade,en.estado,t.telefone
+                            FROM empresa e
+                        JOIN endereco en
+                            ON e.id_empresa=en.fk_empresa 
+                        JOIN telefone t
+                            ON e.id_empresa=t.fk_empresa
+                        WHERE e.id_empresa = ${idEnterprise};`
   const resultado = await database.execute(query);
 
   if (resultado.length > 0) {
@@ -250,9 +247,33 @@ async function checkCnpj(cnpj) {
   }
 }
 
+
 async function checkRazaoSocialcnpj(razaoSocial) {
   const query = `SELECT razao_social FROM empresa WHERE razao_social = ?;`;
   const resultado = await database.execute(query, [razaoSocial]);
+
+  if (resultado.length > 0) {
+    return resultado;
+  } else {
+    return [];
+  }
+}
+
+async function checkCnpjAndEnterprise(cnpj, idEmpresa) {
+  const query = `SELECT cnpj FROM empresa WHERE cnpj = ? AND id_empresa != ?;`
+  const resultado = await database.execute(query,[cnpj, idEmpresa]);
+
+  if (resultado.length > 0) {
+    return resultado;
+  } else{
+    return [];
+  }
+}
+
+
+async function checkRazaoSocialAndEnterprise(razaoSocial, idEmpresa) {
+  const query = `SELECT razao_social FROM empresa WHERE razao_social = ? AND id_empresa != ? ;`;
+  const resultado = await database.execute(query, [razaoSocial,idEmpresa]);
 
   if (resultado.length > 0) {
     return resultado;
@@ -270,4 +291,6 @@ module.exports = {
   getEnterpriseAddress,
   checkCnpj,
   checkRazaoSocialcnpj,
+  checkCnpjAndEnterprise,
+  checkRazaoSocialAndEnterprise
 }

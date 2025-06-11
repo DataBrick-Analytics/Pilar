@@ -27,6 +27,9 @@ router.delete("/favorites/delete/:id", function (req, res) {
 router.get("/favorites/user/:userID/:enterpriseID", function (req, res) {
     favoritesController.getFavoritesByUser(req,res)
 })
+router.get("/favorites/user/listFavorites/:userID/:enterpriseID", function (req, res) {
+    favoritesController.searchFavoritesByUserId(req,res)
+})
 
 
 
