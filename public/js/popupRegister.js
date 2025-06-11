@@ -14,12 +14,24 @@ async function generateUserCards() {
             card.innerHTML = `
                 <span id="${user.id_usuario}">${user.nome} - ${user.email}</span>
                 <div class="crud">
-                    <img src="assets/icons-dash/edit.svg" alt="">
-                    <img class="size" src="assets/icons-dash/x.png" alt="" onclick="removeUser(this)" aria-label="Remove user">
+                    <img class="edit-btn" src="assets/icons-dash/edit.svg" alt="Editar">
+                    <img class="size" src="assets/icons-dash/x.png" alt="" aria-label="Remove user">
                 </div>
-                `;
+            `;
             container.appendChild(card);
-        })
+
+            const editBtn = card.querySelector('.edit-btn');
+            editBtn.addEventListener('click', () => {
+                localStorage.setItem('ID_FUNCIONARIO', user.id_usuario);
+                window.location.href = `usuario.html?id=${user.id_usuario}`;
+            });
+
+            const removeBtn = card.querySelector('.size');
+            removeBtn.addEventListener('click', function () {
+                removeUser(card);
+            });
+
+        });     
     } catch (err) {
         console.log("Erro ao gerar os cards", err)
     }
@@ -51,23 +63,22 @@ function openModal() {
 }
 
 
-async function removeUser(button) {
-    const card = button.closest('.user-card');
-    const id = Number(card.querySelector('span').id)
-    console.log("ID selecionado: " + id)
+async function removeUser(card) {
+    const id = Number(card.querySelector('span').id);
+    console.log("ID selecionado: " + id);
 
     const deletion = await fetch(`/user/${id}`, {
         method: "DELETE"
-    })
+
     
     if(deletion.ok){
         alert("Usuário deletado com sucesso")
+            registrarAtividade(11);
         await generateUserCards()
     } else {
-        alert("Erro ao remover o usuário")
+        alert("Erro ao remover o usuário");
     }
 
-    card.remove()
 }
 
 function closeModal() {
@@ -97,7 +108,7 @@ function cadastrarUsuario() {
         cpf: cpf,
         funcao_empresa: funcao,
         fk_empresa: localStorage.getItem('EMPRESA_ID'),
-        dtNasc: dtNasc
+        data_nasc: dtNasc
     };
 
     // Enviar para o backend

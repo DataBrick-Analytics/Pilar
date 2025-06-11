@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="css/dashNova.css">
-    <link rel="stylesheet" href="./css/Style.css">
     <link rel="stylesheet" href="css/sidebar.css">
 
     <link rel="shortcut icon" href="assets/logo/BrickData.svg" type="image/x-icon">
@@ -24,8 +23,8 @@
                 </header>
 
                 <hr class="separator" aria-hidden="true">
-
-                <section class="user-profile" aria-label="Perfil do usuário">
+                
+                <section class="user-profile" aria-label="Perfil do usuário" onclick="window.location.href='usuario.html'">
                     <img src="./assets/icons-dash/USER-ICON-SM.svg" class="avatar">
                     <span class="username" id="user">Nome usuário</span>
                 </section>
@@ -108,12 +107,7 @@
         <div class="divDash">
 
             <div class="divPagina">
-                <div class="divPaginaHome">
-                    <a href="index.html">
-                        <img src="assets/icons-dash/Vector.png" alt=""> <a href="index.html">Home</a>
-                    </a>
-                </div>
-                <div class="divPaginaAtual">Analise Urbana da região <span id="regiao_nome"></span></div>
+                <div class="divPaginaAtual">Análise Urbana da região <span id="regiao_nome"></span></div>
             </div>
 
 
@@ -212,11 +206,12 @@
 
 </html>
 
-<script src="js/dashboard.js">
-    user.innerHTML = sessionStorage.NOME_EMPRESA
-</script>
-
-<!-- <script onload="validarSessao()" src="js/sessao.js"></script> -->
+<script src="js/dashboard.js"></script>
+<script src="js/sessao.js" onload="validarSessao()"></script>
 <script src="js/kpis.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/graficosDash.js"></script>
+<script src="js/atividadeUsuario.js"></script>
+<script>
+    registrarAtividade(14);
+</script>

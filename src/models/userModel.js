@@ -23,22 +23,33 @@ async function authenticateUser(email, senha) {
 
     try {
         const result = await database.execute(query, [email, senha]);
-        console.log('Resultado bruto:', result);
-
         const rows = result[0];
-        console.log('Linhas encontradas:', rows);
 
-        // Check if rows exists and has properties
         if (rows && rows.id_usuario) {
-            console.log('Usuário encontrado:', rows);
+            const usuario = rows;
+
+            // Verifica se já realizou a ação 17 usando CASE
+            const checkActionQuery = `
+                SELECT CASE
+                           WHEN EXISTS (
+                               SELECT 1
+                               FROM acao_de_usuario
+                               WHERE fk_usuario = ? AND fk_acao = 17
+                           ) THEN 1
+                           ELSE 0
+                           END AS jaFezAcao
+            `;
+
+            const [actionResult] = await database.execute(checkActionQuery, [usuario.id_usuario]);
+            const jaFezAcao = actionResult.jaFezAcao;
 
             return {
                 auth: true,
-                usuario: rows
+                usuario,
+                jaFezAcao
             };
         }
 
-        console.log('Nenhum usuário encontrado para:', email);
         return {
             auth: false,
             message: "Email ou senha inválidos"
@@ -53,11 +64,13 @@ async function authenticateUser(email, senha) {
     }
 }
 
+
+
 //CRIAR USUARIO
 async function createUser(user) {
     const query = `
-        INSERT INTO usuario (nome, email, senha, fk_empresa, cpf, data_nasc, funcao_empresa, data_criacao)
-        VALUES (?, ?, SHA2(?, 256), ?, ?, ?, ?, NOW())
+        INSERT INTO usuario (nome, email, senha, fk_empresa, cpf, data_nasc, funcao_empresa, data_criacao, data_edicao)
+        VALUES (?, ?, SHA2(?, 256), ?, ?, ?, ?, NOW(), NOW())
     `;
 
     const values = [

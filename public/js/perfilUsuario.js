@@ -11,8 +11,8 @@ async function setUserInfos() {
     user_funcao.value = userInfos.funcao_empresa;
 }
 
+let userID = localStorage.getItem('ID_FUNCIONARIO')  != null ? localStorage.getItem('ID_FUNCIONARIO') : localStorage.getItem('USER_ID');
 async function searchProfile() {
-    const userID = localStorage.getItem('USER_ID');
 
     try {
         const resposta = await fetch(`/user/${userID}`, {
@@ -44,7 +44,6 @@ async function updateUserProfile() {
     var userBirthday = user_birthday.value;
     var userNewPassword = confirm_new_password.value;
 
-    const userID = localStorage.USER_ID;
     const passwordModal = password_modal.value;
 
 
@@ -97,7 +96,7 @@ async function updateUserProfile() {
             await resposta.json();
             changeModal();
             password_modal.value = "";
-
+            registrarAtividade(10);
             return Swal.fire("Sucesso", "Alterações feitas com sucesso!", "success");
         } else {
             const texto = await resposta.text();

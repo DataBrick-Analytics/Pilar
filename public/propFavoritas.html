@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/propFavoritas.css">
     <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="css/propFavoritas.css">
     <link rel="stylesheet" href="./css/filtros.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -22,8 +22,8 @@
     </header>
 
     <hr class="separator" aria-hidden="true">
-
-    <section class="user-profile" aria-label="Perfil do usuário">
+    
+    <section class="user-profile" aria-label="Perfil do usuário" onclick="window.location.href='usuario.html'">
         <img src="./assets/icons-dash/USER-ICON-SM.svg" class="avatar">
         <span class="username" id="user">Nome usuário</span>
     </section>
@@ -130,4 +130,9 @@
 </div>
 </body>
 </html>
+<script src="js/atividadeUsuario.js"></script>
+<script>
+    registrarAtividade(18);
+</script>
+<script src="js/sessao.js" onload="validarSessao()"></script>
 <script onload="listarFavoritos()" src="js/favoritar.js"></script>

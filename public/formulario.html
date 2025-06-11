@@ -66,6 +66,8 @@
 
 </body>
 </html>
+<script src="js/atividadeUsuario.js"></script>
+<script src="js/sessao.js" onload="validarSessao()"></script>
 <script>
     const botoes = document.querySelectorAll('.button-arrow');
     var escolhas = [];
@@ -238,9 +240,10 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ idUsuario: userID, valoresFormulario })
                 });
-                
+                registrarAtividade(17);
                 const data1 = await res1.json();
                 console.log("Resposta da API - salvarValoresFormulario:", data1);
+
             } catch (error) {
                 console.error("Erro ao salvar valores do formulário:", error);
             }

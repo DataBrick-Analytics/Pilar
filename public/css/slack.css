@@ -1,7 +1,54 @@
+:root {
+    --drop-shadow-black: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+    --error: rgba(239, 68, 68, 1);
+    --linearblue: rgba(26, 115, 231, 1);
+    --lineardark-black: rgba(25, 25, 25, 1);
+    --lineardark-blue: rgba(52, 71, 103, 1);
+    --lineargreen: rgba(76, 175, 80, 1);
+    --lineargrey: rgba(123, 128, 154, 1);
+    --linearorange: rgba(251, 140, 0, 1);
+    --linearred-orange: rgba(244, 67, 52, 1);
+    --linearwhite: rgba(255, 255, 255, 1);
+    --primarycobalto: rgba(44, 62, 80, 1);
+}
+
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     background: #f9f9f9;
+}
+
+.content {
+    width: 100%;
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding: 1rem;
+}
+
+.main-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.card {
+    background-color: var(--linearwhite);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: var(--drop-shadow-black);
+    margin-bottom: 1rem;
+}
+
+.alert-font {
+    color: var(--lineardark-blue);
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+}
+
+.notification {
+    color: var(--lineardark-blue);
+    font-size: 1.25rem;
+    margin-bottom: 0.3rem;
 }
 
 .container-notification {
@@ -15,6 +62,69 @@ body {
     color: var(--lineardark-blue);
     font-weight: 700;
     font-size: 24px;
+}
+
+.alerts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.alert.error {
+    background-color: var(--error);
+}
+
+.alert.success {
+    background-color: var(--lineargreen);
+}
+
+.alert.warning {
+    background-color: var(--linearorange);
+}
+
+.alert.info {
+    background-color: var(--linearblue);
+}
+
+.subtitle {
+    color: var(--lineargrey);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.notification-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+}
+
+.btn {
+    padding: 0.800rem 1.25rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: var(--linearwhite);
+    font-weight: bold;
+    font-size: 0.75rem;
+    cursor: pointer;
+    min-width: 250px;
+}
+
+.btn.success {
+    background-color: var(--lineargreen);
+}
+
+.btn.info {
+    background-color: var(--linearblue);
+}
+
+.btn.warning {
+    background-color: var(--linearorange);
+}
+
+.btn.danger {
+    background-color: var(--linearred-orange);
 }
 
 .modal {

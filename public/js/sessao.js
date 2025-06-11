@@ -1,12 +1,21 @@
 // sessão
 function validarSessao() {
-    var email = localStorage.EMAIL_USUARIO;
-    var nome = localStorage.NOME_USUARIO;
+    var email = localStorage.getItem('EMAIL_USUARIO');
+    var nome = localStorage.getItem('NOME_USUARIO');
 
-    var b_usuario = document.getElementById("b_usuario");
+    var user = document.getElementById("user");
+
+    if (!window.location.pathname.endsWith("/usuario.html")) {
+        localStorage.removeItem('ID_FUNCIONARIO');
+    }
+
+    if (!user) {
+        console.error("Elemento com id 'user' não encontrado.");
+        return;
+    }
 
     if (email != null && nome != null) {
-        b_usuario.innerHTML = nome;
+        user.innerHTML = nome;
     } else {
         window.location = "../login.html";
     }
