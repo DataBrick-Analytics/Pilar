@@ -256,3 +256,5 @@ CREATE TABLE valores_formulario (
     data_criacao DATETIME NULL,
     data_edicao DATETIME NULL
 );
+
+SET GLOBAL sql_mode = (SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));
