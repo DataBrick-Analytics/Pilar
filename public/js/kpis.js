@@ -132,7 +132,7 @@ async function getHospitalsByRegion() {
         if (resposta.ok) {
             const dados = await resposta.json();
             console.log("Dados recebidos:", dados);
-            if (dados && dados.total_pontos_saude !== undefined) {
+            if (dados.length > 0) {
                 kpiHospitais.innerText = dados.total_pontos_saude;
             } else {
                 kpiHospitais.innerText = "0";
@@ -161,7 +161,7 @@ async function getSchoolsByRegion() {
             const dados = await resposta.json()
             console.log("Dados recebidos: " + dados)
 
-            if (dados && dados.total_escolas !== undefined) {
+            if (dados.length > 0) {
                 kpiEscolas.innerText = dados.total_escolas;
             } else {
                 kpiEscolas.innerText = "0";
@@ -191,7 +191,7 @@ async function getPriceSquareMeter(){
         if(resposta.ok){
             const dados = await resposta.json()
             console.log("Dados recebidos: " + dados)
-            if(dados){
+            if(dados.length > 0){
                 kpiValorMetro.innerText = "R$" + Number(dados[0].media_preco_por_area).toFixed(2);
                 top_valor_metro.innerText = dados[0].row_num + "º";
             } else {
@@ -221,7 +221,7 @@ async function getViolenceIndex(){
             const dados = await resposta.json()
             console.log("Dados recebidos: " + dados)
 
-            if(dados){
+            if(dados.length > 0){
                 kpiViolencia.innerText = Number(dados[0].indice_violencia).toFixed(3) + '%'
                 top_violencia.innerText = dados[0].num_linha + "º";
             } else {
