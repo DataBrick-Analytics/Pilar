@@ -13,6 +13,7 @@ function authenticateUser(req, res) {
     userModel.authenticateUser(user.email, user.senha)
         .then(function (resultado) {
             if (resultado && resultado.auth) {
+                console.log(resultado.jaFezAcao)
                 return res.status(200).json({
                     message: "Usuário autenticado com sucesso",
                     usuario: {
@@ -21,7 +22,8 @@ function authenticateUser(req, res) {
                         email: resultado.usuario.email,
                         funcao_empresa: resultado.usuario.funcao_empresa,
                         fk_empresa: resultado.usuario.fk_empresa,
-                        data_cadastro: resultado.usuario.data_cadastro
+                        data_cadastro: resultado.usuario.data_cadastro,
+                        jaFezAcao: resultado.jaFezAcao
                     }
                 });
             } else {

@@ -62,6 +62,7 @@ async function removeUser(button) {
     
     if(deletion.ok){
         alert("Usuário deletado com sucesso")
+            registrarAtividade(11);
         await generateUserCards()
     } else {
         alert("Erro ao remover o usuário")

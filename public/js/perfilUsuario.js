@@ -97,7 +97,7 @@ async function updateUserProfile() {
             await resposta.json();
             changeModal();
             password_modal.value = "";
-
+            registrarAtividade(10);
             return Swal.fire("Sucesso", "Alterações feitas com sucesso!", "success");
         } else {
             const texto = await resposta.text();

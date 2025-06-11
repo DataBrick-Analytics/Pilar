@@ -50,6 +50,7 @@ function favoritar(user, enterprise, property, event) {
                 background: "#2C3E50"
             })
             event.target.classList.add('ativa');
+            registrarAtividade(15)
         } else {
             event.classList.remove('ativa');
             console.error("Erro ao favoritar:", resposta.status);

@@ -11,7 +11,7 @@ function entrar() {
         return false;
     }
 
-    fetch("/user/autenticar",   {
+    fetch("/user/autenticar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -25,14 +25,14 @@ function entrar() {
             resposta.json().then(json => {
                 console.log("Dados recebidos:", json);
 
-                // Alterado para verificar o objeto usuario
                 if (json.usuario && json.usuario.id) {
                     localStorage.setItem('USER_ID', json.usuario.id);
                     localStorage.setItem('EMPRESA_ID', json.usuario.fk_empresa);
                     localStorage.setItem('EMAIL_USUARIO', json.usuario.email);
                     localStorage.setItem('NOME_USUARIO', json.usuario.nome);
-                    
+                    localStorage.setItem('JA_FEZ', json.usuario.jaFezAcao);
 
+                    registrarAtividade(6);
                     Swal.fire({
                         icon: 'success',
                         title: 'Bem vindo!',
@@ -41,7 +41,12 @@ function entrar() {
                         background: "#2C3E50",
                         confirmButtonColor: "#C45824"
                     }).then(() => {
-                        window.location.href = "./formulario.html";
+                        console.log("Recebido ja fez acao", json.jaFezAcao);
+                        if (json.usuario.jaFezAcao === 1) {
+                            window.location.href = "./home.html";
+                        } else {
+                            window.location.href = "./formulario.html";
+                        }
                     });
                 } else {
                     Swal.fire({
@@ -51,8 +56,21 @@ function entrar() {
                     });
                 }
             });
+        } else {
+            console.error('Erro na resposta:', resposta);
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: 'Não foi possível autenticar. Tente novamente mais tarde.'
+            });
         }
-        // ...existing code...
+    }).catch(function (erro) {
+        console.error('Erro na requisição:', erro);
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: 'Erro ao enviar a requisição. Tente novamente mais tarde.'
+        });
     });
 
     return false;
