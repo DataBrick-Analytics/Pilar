@@ -9,14 +9,20 @@ function registrarAtividade(idActivity) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             userActivityId: {
-                dtActivity: new Date().toISOString(),
                 fkEnterprise: Number(fkEnterprise),
                 userId: Number(idUsuario),
                 idActivity: Number(idActivity)
             },
         })
     })
-        .then(r => r.json())
+        .then(async r => {
+            const text = await r.text();
+            try {
+                return JSON.parse(text);
+            } catch {
+                return { error: text };
+            }
+        })
         .then(console.log)
         .catch(console.error);
 }
