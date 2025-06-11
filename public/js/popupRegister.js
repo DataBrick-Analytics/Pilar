@@ -22,10 +22,10 @@ async function generateUserCards() {
 
             const editBtn = card.querySelector('.edit-btn');
             editBtn.addEventListener('click', () => {
-                localStorage.setItem('USER_ID', user.id_usuario);
-                window.location.href = 'usuario.html';
+                window.location.href = `usuario.html?id=${user.id_usuario}`;    
             });
-    })
+
+        });     
     } catch (err) {
         console.log("Erro ao gerar os cards", err)
     }
