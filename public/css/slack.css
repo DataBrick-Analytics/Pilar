@@ -1,7 +1,45 @@
+:root {
+    --drop-shadow-black: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+    --linearwhite: rgba(255, 255, 255, 1);
+}
+
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     background: #f9f9f9;
+}
+
+.content {
+    width: 100%;
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding: 1rem;
+}
+
+.main-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.card {
+    background-color: var(--linearwhite);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: var(--drop-shadow-black);
+    margin-bottom: 1rem;
+}
+
+.alert-font {
+    color: var(--lineardark-blue);
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+}
+
+.notification {
+    color: var(--lineardark-blue);
+    font-size: 1.25rem;
+    margin-bottom: 0.3rem;
 }
 
 .container-notification {
@@ -15,6 +53,53 @@ body {
     color: var(--lineardark-blue);
     font-weight: 700;
     font-size: 24px;
+}
+
+.alerts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.subtitle {
+    color: var(--lineargrey);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.notification-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+}
+
+.btn {
+    padding: 0.800rem 1.25rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: var(--linearwhite);
+    font-weight: bold;
+    font-size: 0.75rem;
+    cursor: pointer;
+    min-width: 250px;
+}
+
+.btn.success {
+    background-color: var(--lineargreen);
+}
+
+.btn.info {
+    background-color: var(--linearblue);
+}
+
+.btn.warning {
+    background-color: var(--linearorange);
+}
+
+.btn.danger {
+    background-color: var(--linearred-orange);
 }
 
 .modal {

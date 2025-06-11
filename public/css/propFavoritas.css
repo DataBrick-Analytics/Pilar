@@ -23,12 +23,9 @@ body {
 }
 
 .content{
+    margin-left: var(--sidebar-width);
     height: 90vh;
-    width: 75%;
-    position: absolute;
-    top: 50%;
-    left: 55%;
-    transform: translate(-50%, -50%);
+    width: calc(100% - var(--sidebar-width));
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

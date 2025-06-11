@@ -8,13 +8,13 @@
 }
 
 .divTelaFiltros{
-    
+    margin-left: var(--sidebar-width);
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
     background-color: var(--background);
-    width: 85%;
+    width: calc(100% - var(--sidebar-width));
     height: 100vh;
 }
 .box-nome-tela{

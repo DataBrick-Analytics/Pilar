@@ -4,82 +4,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/dashNova.css">
-    <link rel="stylesheet" href="css/Style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/filtros.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div class="divGeral">
-    <div class="divPainel">
-        <div class="divPainelAzul">
-
-            <nav class="sidebarAzul">
-                <div class="logo">
-                        <span class="logo-icon">
-                            <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" alt="">
-                        </span>
-                    <span class="logo-text">DataBrick</span>
-                </div>
-
-                <div class="separator"></div>
-
-                <div class="user-profile">
-                    <div class="avatar">
-                        <img src="./assets/icons-dash/USER-ICON-SM.svg" alt="">
-                    </div>
-                    <span class="username" id="user">Nome usuario</span>
-                </div>
-
-                <div class="separator"></div>
-
-                <div class="nav-menu">
-                    <a href="home.html" class="nav-item">
-                            <span class="nav-icon">
-                                <img src="./assets/icons-dash/HOME-ICON-SM.svg" alt="">
-                            </span>
+    <aside class="sidebar">
+        <header class="sidebar-header">
+            <div class="logo">
+                <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" class="logo-icon">
+                <h1 class="logo-text">DataBrick</h1>
+            </div>
+        </header>
+        
+        <hr class="separator" aria-hidden="true">
+        
+        <section class="user-profile" aria-label="Perfil do usuário" onclick="window.location.href='usuario.html'">
+            <img src="./assets/icons-dash/USER-ICON-SM.svg" class="avatar">
+            <span class="username" id="user">Nome usuário</span>
+        </section>
+        
+        <hr class="separator" aria-hidden="true">
+        
+        <nav class="main-navigation" aria-label="Menu principal">
+            <ul class="nav-menu">
+                <li>
+                    <a href="home.html  " class="nav-item">
+                        <img src="./assets/icons-dash/HOME-ICON-SM.svg"
+                             alt=""
+                             aria-hidden="true"
+                             class="nav-icon">
                         <span>Home</span>
                     </a>
-
-                    <div class="nav-section">
-                        <span class="nav-section-title">PAGES</span>
-                        <div class="dropdown">
-                            <button class="dropdown-btn active">
-                                <span class="nav-icon"> <img src="./assets/icons-dash/CHART-ICON-SM.svg" alt=""></span>
-                                <span>Regiões</span>
-                                <span class="dropdown-arrow">▼</span>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="filtros.html" class="dropdown-item">
-                                    <span class="prefix">B</span>
-                                    <span>Filtrar regiões</span>
-                                </a>
-                                <a href="propFavoritas.html" class="dropdown-item">
-                                    <span class="prefix">C</span>
-                                    <span>Regiões favoritas</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="nav-menu">
-                            <a href="listaUsuario.html" class="nav-item">
-                                    <span class="nav-icon">
-                                        <img src="./assets/icons-dash/ALERT-ICON-SM.svg" alt="">
-                                    </span>
-                                <span>Alertas</span>
+                </li>
+            </ul>
+            
+            <section class="nav-section">
+                <h2 class="nav-section-title">PAGES</h2>
+                
+                <div class="dropdown">
+                    <button class="dropdown-btn active"
+                            aria-expanded="false"
+                            aria-controls="propriedades-menu">
+                        <img src="./assets/icons-dash/CHART-ICON-SM.svg"
+                             aria-hidden="true"
+                             class="nav-icon">
+                        <span>Regiões</span>
+                        <span class="dropdown-arrow" aria-hidden="true">▼</span>
+                    </button>
+                    
+                    <ul id="propriedades-menu" class="dropdown-content" >
+                        <li>
+                            <a href="filtros.html" class="dropdown-item">
+                                <span>Filtrar regiões</span>
                             </a>
-                        </div>
-                    </div>
+                        </li>
+                        <li>
+                            <a href="propFavoritas.html" class="dropdown-item">
+                                <span>Regiões favoritas</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-
-            <div class="div-button-log-out">
-                <button onclick="logout()" class="button_logout">
-                    Log Out
-                </button>
-            </div>
-
-        </div>
-    </div>
+                
+                <ul class="nav-menu">
+                    <li>
+                        <a href="TelaAlertas.html" class="nav-item">
+                            <img src="./assets/icons-dash/ALERT-ICON-SM.svg"
+                                 alt=""
+                                 aria-hidden="true"
+                                 class="nav-icon">
+                            <span>Alertas</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <ul class="nav-menu">
+                    <li>
+                        <a href="listaUsuario.html" class="nav-item">
+                            <img src="./assets/icons-dash/account-plus.png"
+                                 alt=""
+                                 aria-hidden="true"
+                                 class="nav-icon">
+                            <span>Usuários</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <ul class="nav-menu">
+                    <li>
+                        <a href="empresa.html" class="nav-item">
+                            <img src="./assets/icons-dash/store.png"
+                                 alt=""
+                                 aria-hidden="true"
+                                 class="nav-icon">
+                            <span>Empresa</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+        
+        <footer class="sidebar-footer">
+            <button type="button"
+                    onclick="logout()"
+                    class="button_logout">
+                Log Out
+            </button>
+        </footer>
+    </aside>
+    
     <div class="divTelaFiltros">
         <div class="box-nome-tela">
             <h2>Regiões</h2>
@@ -179,3 +214,6 @@
 <script>
     registrarAtividade(2);
 </script>
+<script src="js/sessao.js" onload="validarSessao()"></script>
+<script src="js/dashboard.js"></script>
+
