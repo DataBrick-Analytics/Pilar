@@ -196,19 +196,3 @@
      flex: 1;
      padding: 1rem;
  }
-
- .alert.error {
-     background-color: var(--error);
- }
-
- .alert.success {
-     background-color: var(--lineargreen);
- }
-
- .alert.warning {
-     background-color: var(--linearorange);
- }
-
- .alert.info {
-     background-color: var(--linearblue);
- }
