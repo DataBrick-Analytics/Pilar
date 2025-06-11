@@ -132,7 +132,7 @@ async function getHospitalsByRegion() {
         if (resposta.ok) {
             const dados = await resposta.json();
             console.log("Dados recebidos:", dados);
-            if (dados.length > 0) {
+            if (dados) {
                 kpiHospitais.innerText = dados.total_pontos_saude;
             } else {
                 kpiHospitais.innerText = "0";
@@ -161,7 +161,7 @@ async function getSchoolsByRegion() {
             const dados = await resposta.json()
             console.log("Dados recebidos: " + dados)
 
-            if (dados.length > 0) {
+            if (dados) {
                 kpiEscolas.innerText = dados.total_escolas;
             } else {
                 kpiEscolas.innerText = "0";
@@ -221,8 +221,8 @@ async function getViolenceIndex(){
             const dados = await resposta.json()
             console.log("Dados recebidos: " + dados)
 
-            if(dados.length > 0){
-                kpiViolencia.innerText = Number(dados[0].indice_violencia).toFixed(3) + '%'
+            if(dados){
+                kpiViolencia.innerText = Number(dados[0].indice_violencia).toFixed(2) + '%'
                 top_violencia.innerText = dados[0].num_linha + "º";
             } else {
                 kpiViolencia.innerText = "0";
