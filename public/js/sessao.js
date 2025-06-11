@@ -5,6 +5,10 @@ function validarSessao() {
 
     var user = document.getElementById("user");
 
+    if (!window.location.pathname.endsWith("/usuario.html")) {
+        localStorage.removeItem('ID_FUNCIONARIO');
+    }
+
     if (!user) {
         console.error("Elemento com id 'user' não encontrado.");
         return;

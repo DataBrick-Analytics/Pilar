@@ -69,8 +69,8 @@ async function authenticateUser(email, senha) {
 //CRIAR USUARIO
 async function createUser(user) {
     const query = `
-        INSERT INTO usuario (nome, email, senha, fk_empresa, cpf, data_nasc, funcao_empresa, data_criacao)
-        VALUES (?, ?, SHA2(?, 256), ?, ?, ?, ?, NOW())
+        INSERT INTO usuario (nome, email, senha, fk_empresa, cpf, data_nasc, funcao_empresa, data_criacao, data_edicao)
+        VALUES (?, ?, SHA2(?, 256), ?, ?, ?, ?, NOW(), NOW())
     `;
 
     const values = [

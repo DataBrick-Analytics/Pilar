@@ -33,8 +33,8 @@ async function createEnterpriseAndUser(cadastro) {
     // Cadastra endereço
     await database.execute(
         ` INSERT INTO endereco (
-        rua, bairro, cep, cidade, estado, uf, fk_empresa, data_criacao, data_edicao
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())`,
+        rua, bairro, cep, cidade, estado, uf, numero, fk_empresa, data_criacao, data_edicao
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())`,
         [
           cadastro.rua,
           cadastro.bairro,
@@ -42,6 +42,7 @@ async function createEnterpriseAndUser(cadastro) {
           cadastro.cidade,
           cadastro.estado,
           cadastro.uf,
+          cadastro.numero,
           idEmpresa
         ]
     );
