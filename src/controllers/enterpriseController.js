@@ -135,7 +135,7 @@ function editEnterprise(req, res) {
         telefone: enterprise.phone
     };
 
-    enterpriseModel.checkRazaoSocialcnpj(dadosConvertidos.razao_social, id)
+    enterpriseModel.checkRazaoSocialAndEnterprise(dadosConvertidos.razao_social, id)
         .then((razaoExiste) => {
             if (razaoExiste.length > 0) {
                 throw new Error("Já existe uma empresa com essa razão social.");

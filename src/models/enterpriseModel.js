@@ -238,9 +238,33 @@ async function checkCnpj(cnpj) {
   }
 }
 
+
 async function checkRazaoSocialcnpj(razaoSocial) {
   const query = `SELECT razao_social FROM empresa WHERE razao_social = ?;`;
   const resultado = await database.execute(query, [razaoSocial]);
+
+  if (resultado.length > 0) {
+    return resultado;
+  } else {
+    return [];
+  }
+}
+
+async function checkCnpjAndEnterprise(cnpj, idEmpresa) {
+  const query = `SELECT cnpj FROM empresa WHERE cnpj = ? AND id_empresa != ?;`
+  const resultado = await database.execute(query,[cnpj, idEmpresa]);
+
+  if (resultado.length > 0) {
+    return resultado;
+  } else{
+    return [];
+  }
+}
+
+
+async function checkRazaoSocialAndEnterprise(razaoSocial, idEmpresa) {
+  const query = `SELECT razao_social FROM empresa WHERE razao_social = ? AND id_empresa != ? ;`;
+  const resultado = await database.execute(query, [razaoSocial, idEmpresa]);
 
   if (resultado.length > 0) {
     return resultado;
@@ -258,4 +282,6 @@ module.exports = {
   getEnterpriseAddress,
   checkCnpj,
   checkRazaoSocialcnpj,
+  checkCnpjAndEnterprise,
+  checkRazaoSocialAndEnterprise
 }

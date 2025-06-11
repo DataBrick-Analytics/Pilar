@@ -88,14 +88,24 @@ async function updateEnterprise() {
 
     console.log(enterpriseInformations);
 
-    let passwordModal = password_modal.value;
+     const userID = localStorage.USER_ID;
+     const passwordModal = password_modal.value;
+    const validacao = await fetch(`/user/checkPassword`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idUsuario: userID,
+            senha: passwordModal
+        })
+    });
 
-    // if (Object.values(enterpriseInformations).some(value => value == null || value.trim() == "")) {
-    //     return alert("Todos os campos precisam estar preenchidos")
-    // } 
-    // else if (passwordModal != managerPassword) {
-    //     return alert("Senha incorreta!")
-    // }
+     const senhaValida = await validacao.json();
+
+    if (senhaValida !== 1) {
+        return Swal.fire("Erro", "Senha incorreta!", "error");
+    }
 
     try {
         const resposta = await fetch(`/enterprise/${enterpriseID}`, {
@@ -110,6 +120,34 @@ async function updateEnterprise() {
             const json = resposta.json();
             changeModal();
             return alert("Alterações feitas com sucesso")
+        } else {
+            const texto = await resposta.text();
+            console.error(texto);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function deleteEnterprise() {
+    const enterpriseID = localStorage.getItem('EMPRESA_ID');
+    let passwordModal = password_modal.value;
+
+    // if (passwordModal != managerPassword) {
+    //     return alert("Senha incorreta!")
+    // }
+
+    try {
+        const resposta = await fetch(`/enterprise/${enterpriseID}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (resposta.ok) {
+            changeModal();
+            return alert("Empresa excluída com sucesso");
         } else {
             const texto = await resposta.text();
             console.error(texto);
