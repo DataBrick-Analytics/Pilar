@@ -88,8 +88,8 @@ async function updateEnterprise() {
 
     console.log(enterpriseInformations);
 
-     const userID = localStorage.USER_ID;
-     const passwordModal = password_modal.value;
+    const userID = localStorage.USER_ID;
+    const passwordModal = password_modal.value;
     const validacao = await fetch(`/user/checkPassword`, {
         method: "POST",
         headers: {
@@ -131,11 +131,25 @@ async function updateEnterprise() {
 
 async function deleteEnterprise() {
     const enterpriseID = localStorage.getItem('EMPRESA_ID');
-    let passwordModal = password_modal.value;
+    
+    const userID = localStorage.USER_ID;
+    const passwordModal = password_modal_delete.value;
+    const validacao = await fetch(`/user/checkPassword`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idUsuario: userID,
+            senha: passwordModal
+        })
+    });
 
-    // if (passwordModal != managerPassword) {
-    //     return alert("Senha incorreta!")
-    // }
+     const senhaValida = await validacao.json();
+
+    if (senhaValida !== 1) {
+        return Swal.fire("Erro", "Senha incorreta!", "error");
+    }
 
     try {
         const resposta = await fetch(`/enterprise/${enterpriseID}`, {
@@ -161,4 +175,10 @@ function changeModal() {
     const modal = document.querySelector(".lock");
     modal.classList.toggle('hide');
     password_modal.value = "";
+}
+
+function changeModalDelete() {
+    const modal = document.querySelector(".lockDelete");
+    modal.classList.toggle('hideDelete');
+    password_modal_delete.value = "";
 }

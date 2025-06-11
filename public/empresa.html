@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/Style.css">
     <link rel="stylesheet" href="./css/sidebar.css">
     <title>Databrick - Empresa</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -184,12 +185,13 @@
             </article>
         </section>
         <section class="update-button">
-            <button onclick="deleteEnterprise()"><img
-                    src="assets/icons-dash/CHART-ICON-SM.svg"> Apagar Empresa
-            </button>
             <button onclick="changeModal()"><img
                     src="assets/icons-dash/CHART-ICON-SM.svg"> Atualizar
             </button>
+            <button onclick="changeModalDelete()"><img
+                    src="assets/icons-dash/CHART-ICON-SM.svg"> Apagar Empresa
+            </button>
+            
         </section>
     </div>
 </main>
@@ -207,6 +209,22 @@
         </section>
     </section>
 </div>
+
+<div class="lockDelete hideDelete">
+    <section class="modal-senha">
+        <div class="blue-box">
+            <a onclick="changeModalDelete()"><img src="assets/icons-edit/close.png"></a>
+        </div>
+        <article class="confirmationInput">
+            <input id="password_modal_delete" type="password" placeholder="Digite sua senha para confirmar">
+        </article>
+        <section class="confirmationButton">
+            <button onclick="deleteEnterprise()">Confirmar</button>
+        </section>
+    </section>
+</div>
+
+
 
 </body>
 </html>

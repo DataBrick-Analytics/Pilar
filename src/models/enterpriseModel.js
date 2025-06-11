@@ -264,7 +264,7 @@ async function checkCnpjAndEnterprise(cnpj, idEmpresa) {
 
 async function checkRazaoSocialAndEnterprise(razaoSocial, idEmpresa) {
   const query = `SELECT razao_social FROM empresa WHERE razao_social = ? AND id_empresa != ? ;`;
-  const resultado = await database.execute(query, [razaoSocial, idEmpresa]);
+  const resultado = await database.execute(query, [razaoSocial,idEmpresa]);
 
   if (resultado.length > 0) {
     return resultado;
