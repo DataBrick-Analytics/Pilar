@@ -1,6 +1,15 @@
 :root {
     --drop-shadow-black: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+    --error: rgba(239, 68, 68, 1);
+    --linearblue: rgba(26, 115, 231, 1);
+    --lineardark-black: rgba(25, 25, 25, 1);
+    --lineardark-blue: rgba(52, 71, 103, 1);
+    --lineargreen: rgba(76, 175, 80, 1);
+    --lineargrey: rgba(123, 128, 154, 1);
+    --linearorange: rgba(251, 140, 0, 1);
+    --linearred-orange: rgba(244, 67, 52, 1);
     --linearwhite: rgba(255, 255, 255, 1);
+    --primarycobalto: rgba(44, 62, 80, 1);
 }
 
 body {
@@ -59,6 +68,22 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+}
+
+.alert.error {
+    background-color: var(--error);
+}
+
+.alert.success {
+    background-color: var(--lineargreen);
+}
+
+.alert.warning {
+    background-color: var(--linearorange);
+}
+
+.alert.info {
+    background-color: var(--linearblue);
 }
 
 .subtitle {

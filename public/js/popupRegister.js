@@ -69,11 +69,12 @@ async function removeUser(card) {
 
     const deletion = await fetch(`/user/${id}`, {
         method: "DELETE"
-    });
 
-    if (deletion.ok) {
-        alert("Usuário deletado com sucesso");
-        await generateUserCards();
+    
+    if(deletion.ok){
+        alert("Usuário deletado com sucesso")
+            registrarAtividade(11);
+        await generateUserCards()
     } else {
         alert("Erro ao remover o usuário");
     }
