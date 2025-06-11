@@ -94,6 +94,10 @@
     text-align: center;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--background);
 }
