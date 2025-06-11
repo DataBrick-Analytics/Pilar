@@ -1,7 +1,6 @@
-const container = document.querySelector('.container-regioes');
-if (container) {
-    container.addEventListener('click', function (event) {
-
+document.addEventListener('click', function (event) {
+    const target = event.target;
+    if (target.classList.contains('botao-favoritos')) {
         console.log("CLICADO!")
         const userID = localStorage.getItem('USER_ID');
         const enterpriseID = localStorage.getItem('EMPRESA_ID');
@@ -21,10 +20,8 @@ if (container) {
             const card = event.target.closest('.box-regiao');
             if (card) card.style.display = 'none';
         }
-    });
-} else {
-    console.log("Container não encontrado!")
-}
+    }
+});
 
 
 function favoritar(user, enterprise, property, event) {
@@ -100,7 +97,7 @@ function desfavoritar(property, event) {
                         color: "#FFFFFF",
                         background: "#2C3E50"
                     })
-
+                    listarFavoritos();
                 } else {
                     console.error("Erro ao remover favorito!", resposta.status)
                     Swal.fire({
@@ -144,7 +141,7 @@ async function verificarFavoritosExistentes() {
             return;
         }
 
-        const favoritos = await response.json();
+        let favoritos = await response.json();
         console.log("Favoritos retornados:", favoritos);
 
         favoritos.forEach(favorito => {
@@ -160,4 +157,51 @@ async function verificarFavoritosExistentes() {
     } catch (error) {
         console.log("Erro ao verificar favoritos existentes:", error);
     }
+}
+
+async function listarFavoritos() {
+    const userID = localStorage.getItem('USER_ID');
+    const enterpriseID = localStorage.getItem('EMPRESA_ID');
+
+    const res = await fetch(`/favorites/user/listFavorites/${userID}/${enterpriseID}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    const favoritosListados = await res.json()
+    const container = document.querySelector(".container-regioes")
+    container.innerHTML = '';
+
+    favoritosListados.forEach(item => {
+        const card = document.createElement("div")
+        card.className = "box-regiao"
+        card.innerHTML = `
+                <div class="box-regiao-cima">
+                    <div class="box-titulo-botoes"">
+                        <div class="titulo-regiao"><h1>${item.nome_distrito}</h1></div>
+                        <div class="botao-favoritos" id="${item.id_distrito}">&#9733;</div>
+                    </div>
+                    <p>ID# ${item.id_distrito} - Região ${item.zona} </p>
+                </div>
+                <div class="box-regiao-baixo">
+                    <div class="box-botao" data-id="${item.id_distrito}">Acessar Região</div>
+                </div>
+        `
+        container.appendChild(card)
+        const botaoAcessar = card.querySelector(".box-botao");
+
+        botaoAcessar.addEventListener("click", () => {
+            const id = botaoAcessar.getAttribute("data-id");
+
+            // Salva o ID no sessionStorage
+            localStorage.setItem("REGIAO_ID", id);
+            console.log("ID salvo no localStorage como REGIAO_ID:", id);
+
+            // Redireciona para a página dashboard.html
+            window.location.href = "dashboard.html";
+        });
+    })
+    setTimeout(verificarFavoritosExistentes, 200)
 }

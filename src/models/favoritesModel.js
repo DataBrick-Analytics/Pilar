@@ -106,25 +106,19 @@ async function deleteFavorite(favoriteId) {
     }
 }
 
-async function searchFavoritesByUserId(userId) {
+async function searchFavoritesByUserId(userId, enterpriseId) {
     const query = `
-        SELECT f.id_favorito,
-               f.fk_usuario,
-               f.fk_empresa,
-               f.fk_distrito,
-               f.data_favorito,
-               d.id_distrito,
-               d.nome_distrito,
-               d.area,
-               d.data_criacao AS distrito_data_criacao,
-               d.data_edicao  AS distrito_data_edicao
+        SELECT
+            d.id_distrito,
+            d.nome_distrito,
+            d.zona
         FROM favorito f
                  JOIN distrito d ON f.fk_distrito = d.id_distrito
-        WHERE f.fk_usuario = ?`;
+        WHERE f.fk_usuario = ? AND f.fk_empresa = ? 
+        LIMIT 6`;
 
     try {
-        const result = await database.execute(query, [userId]);
-        return result;
+        return await database.execute(query, [userId, enterpriseId]);
     } catch (error) {
         console.error("Erro ao buscar favoritos:", error);
         throw error;

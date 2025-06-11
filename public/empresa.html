@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/Style.css">
     <link rel="stylesheet" href="./css/sidebar.css">
     <title>Databrick - Empresa</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -187,6 +188,10 @@
             <button onclick="changeModal()"><img
                     src="assets/icons-dash/CHART-ICON-SM.svg"> Atualizar
             </button>
+            <button onclick="changeModalDelete()"><img
+                    src="assets/icons-dash/CHART-ICON-SM.svg"> Apagar Empresa
+            </button>
+            
         </section>
     </div>
 </main>
@@ -205,9 +210,25 @@
     </section>
 </div>
 
+<div class="lockDelete hideDelete">
+    <section class="modal-senha">
+        <div class="blue-box">
+            <a onclick="changeModalDelete()"><img src="assets/icons-edit/close.png"></a>
+        </div>
+        <article class="confirmationInput">
+            <input id="password_modal_delete" type="password" placeholder="Digite sua senha para confirmar">
+        </article>
+        <section class="confirmationButton">
+            <button onclick="deleteEnterprise()">Confirmar</button>
+        </section>
+    </section>
+</div>
+
+
+
 </body>
 </html>
 
-<script src="js/perfilEmpresa.js" onload="isManagerUser()"></script>
-<script src="js/perfilEmpresa.js" onload="setEnterpriseInfos()"></script>
-<script src="js/dashboard.js"></script>
+
+<script src="js/sessao.js" onload="validarSessao()"></script>
+<script src="js/perfilEmpresa.js" onload="isManagerUser(),setEnterpriseInfos()"></script>
