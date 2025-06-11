@@ -22,7 +22,8 @@ async function generateUserCards() {
 
             const editBtn = card.querySelector('.edit-btn');
             editBtn.addEventListener('click', () => {
-                window.location.href = `usuario.html?id=${user.id_usuario}`;    
+                localStorage.setItem('ID_FUNCIONARIO', user.id_usuario);
+                window.location.href = `usuario.html?id=${user.id_usuario}`;
             });
 
             const removeBtn = card.querySelector('.size');
