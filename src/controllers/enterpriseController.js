@@ -108,38 +108,40 @@ function editEnterprise(req, res) {
     // 1. Verificar se todos os campos obrigatórios estão presentes
     if (
         !id ||
-        !enterprise.razao_social ||
-        !enterprise.nome_fantasia ||
-        !enterprise.cnpj ||
-        !enterprise.rua ||
-        !enterprise.numero ||
-        !enterprise.bairro ||
-        !enterprise.cidade ||
-        !enterprise.estado ||
-        !enterprise.telefone
+        !enterprise.fantasyName ||
+        !enterprise.socialReason ||
+        !enterprise.street ||
+        !enterprise.neighborhood ||
+        !enterprise.cepCode ||
+        !enterprise.city ||
+        !enterprise.state ||
+        !enterprise.number ||
+        !enterprise.phone
     ) {
         return res.status(400).json({
             error: "Todos os campos são obrigatórios!"
         });
     }
 
-    // 2. Verificar se o CNPJ já existe para outra empresa
-    enterpriseModel.checkCnpj(enterprise.cnpj, id)
-        .then((cnpjExiste) => {
-            if (cnpjExiste.length > 0) {
-                throw new Error("Já existe uma empresa com esse CNPJ.");
-            }
+    // Converter nomes dos campos
+    const dadosConvertidos = {
+        razao_social: enterprise.socialReason,
+        nome_fantasia: enterprise.fantasyName,
+        rua: enterprise.street,
+        numero: enterprise.number,
+        bairro: enterprise.neighborhood,
+        cidade: enterprise.city,
+        estado: enterprise.state,
+        telefone: enterprise.phone
+    };
 
-            // 3. Verificar se a razão social já existe para outra empresa
-            return enterpriseModel.checkRazaoSocialcnpj(enterprise.razao_social, id);
-        })
+    enterpriseModel.checkRazaoSocialcnpj(dadosConvertidos.razao_social, id)
         .then((razaoExiste) => {
             if (razaoExiste.length > 0) {
                 throw new Error("Já existe uma empresa com essa razão social.");
             }
 
-            // 4. Se estiver tudo certo, atualiza a empresa
-            return enterpriseModel.editEnterprise(enterprise, id);
+            return enterpriseModel.editEnterprise(dadosConvertidos, id);
         })
         .then((resultado) => {
             res.status(200).json({

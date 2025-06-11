@@ -196,7 +196,7 @@ async function getEnterpriseEmployees(fkEmpresa) {
 
 async function getEnterpriseById(idEnterprise) {
   const query = `SELECT e.nome_fantasia,e.razao_social,en.rua,en.bairro,en.cep,
-                               en.cidade,en.estado,en.numero,t.telefone
+                               en.cidade,en.estado,t.telefone
                             FROM empresa e
                         JOIN endereco en
                             ON e.id_empresa=en.fk_empresa 

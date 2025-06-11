@@ -75,25 +75,27 @@ async function updateEnterprise() {
     const enterpriseID = localStorage.getItem('EMPRESA_ID');
 
     const enterpriseInformations = {
-        socialReason: social_reason.value,
         fantasyName: fantasy_name.value,
+        socialReason: social_reason.value,
         street: street.value,
         neighborhood: neighborhood.value,
         cepCode: cep_code.value,
         city: city.value,
         state: state.value,
-        stateCode: state_code.value
+        number: number.value,
+        phone: phone.value
     };
 
     console.log(enterpriseInformations);
 
     let passwordModal = password_modal.value;
 
-    if (Object.values(enterpriseInformations).some(value => value == null || value.trim() == "")) {
-        return alert("Todos os campos precisam estar preenchidos")
-    } else if (passwordModal != managerPassword) {
-        return alert("Senha incorreta!")
-    }
+    // if (Object.values(enterpriseInformations).some(value => value == null || value.trim() == "")) {
+    //     return alert("Todos os campos precisam estar preenchidos")
+    // } 
+    // else if (passwordModal != managerPassword) {
+    //     return alert("Senha incorreta!")
+    // }
 
     try {
         const resposta = await fetch(`/enterprise/${enterpriseID}`, {
