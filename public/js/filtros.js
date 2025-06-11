@@ -8,7 +8,7 @@ async function filterRegion() {
         zona: zona || undefined,
         violenciaMax: violencia ? Number(violencia) : undefined,
         densidadeMax: densidade ? Number(densidade) : undefined,
-        precoMin: priceM2,
+        precoMin: priceM2 ? Number(priceM2) : undefined
 
     }
 
@@ -43,7 +43,6 @@ async function filterRegion() {
                     <div class="box-titulo-botoes"">
                         <div class="titulo-regiao"><h1>${region.nome_distrito}</h1></div>
                         <div class="botao-favoritos" id="${region.id_distrito}">&#9733;</div>
-                        <div class="botao-fechar">X</div>
                     </div>
                     <p>ID#${region.id_distrito} / Região ${region.zona} / R$${region.preco_m2} </p>
                 </div>
@@ -89,7 +88,6 @@ async function generateRandomRegionCards(){
                     <div class="box-titulo-botoes">
                         <div class="titulo-regiao"><h1>${region.nome_distrito}</h1></div>
                         <div class="botao-favoritos" id="${region.id_distrito}">&#9733;</div>
-                        <div class="botao-fechar">X</div>
                     </div>
                     <p>ID#${region.id_distrito} / Zona ${region.zona} </p>
                 </div>
