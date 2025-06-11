@@ -5,7 +5,7 @@ function validarSessao() {
 
     var user = document.getElementById("user");
 
-    if (!window.location.pathname.endsWith("/usuario.html") != ) {
+    if (!window.location.pathname.endsWith("/usuario.html")) {
         localStorage.removeItem('ID_FUNCIONARIO');
     }
 
