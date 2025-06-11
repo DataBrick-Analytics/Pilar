@@ -100,7 +100,6 @@ function desfavoritar(property, event) {
                         color: "#FFFFFF",
                         background: "#2C3E50"
                     })
-
                 } else {
                     console.error("Erro ao remover favorito!", resposta.status)
                     Swal.fire({
@@ -125,6 +124,8 @@ function desfavoritar(property, event) {
     })
 }
 
+let favoritos // VARIAVEL GLOBAL PARA ARMAZENAR OS CARDS JÁ FAVORITADOS PELO USUARIO
+
 async function verificarFavoritosExistentes() {
     const userID = localStorage.getItem('USER_ID');
     const enterpriseID = localStorage.getItem('EMPRESA_ID');
@@ -144,7 +145,7 @@ async function verificarFavoritosExistentes() {
             return;
         }
 
-        const favoritos = await response.json();
+        favoritos = await response.json();
         console.log("Favoritos retornados:", favoritos);
 
         favoritos.forEach(favorito => {
@@ -160,4 +161,39 @@ async function verificarFavoritosExistentes() {
     } catch (error) {
         console.log("Erro ao verificar favoritos existentes:", error);
     }
+}
+
+async function listarFavoritos() {
+    const userID = localStorage.getItem('USER_ID');
+    const enterpriseID = localStorage.getItem('EMPRESA_ID');
+
+    const res = await fetch(`/favorites/user/listFavorites/${userID}/${enterpriseID}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    const favoritosListados = await res.json()
+    const container = document.querySelector(".container-regioes")
+
+    favoritosListados.forEach(item => {
+        const card = document.createElement("div")
+        card.className = "box-regiao"
+        card.innerHTML = `
+                <div class="box-regiao-cima">
+                    <div class="box-titulo-botoes"">
+                        <div class="titulo-regiao"><h1>${item.nome_distrito}</h1></div>
+                        <div class="botao-favoritos" id="${item.id_distrito}">&#9733;</div>
+                        <div class="botao-fechar">X</div>
+                    </div>
+                    <p>ID# ${item.id_distrito} - Região ${item.zona} </p>
+                </div>
+                <div class="box-regiao-baixo">
+                    <div class="box-botao">Acessar Região</div>
+                </div>
+        `
+        container.appendChild(card)
+    })
+    setTimeout(verificarFavoritosExistentes, 200)
 }

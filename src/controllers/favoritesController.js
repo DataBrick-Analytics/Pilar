@@ -127,42 +127,38 @@ function deleteFavorite(req, res) {
         });
 }
 
-function searchFavoritesByUserId(req, res) {
-    const userId = req.params.id;
-    console.log("ID usúario:", userId);
+async function searchFavoritesByUserId(req, res) {
+    const userId = req.params.userID;
+    const enterpriseId = req.params.enterpriseID;
 
-    if (!userId) {
-        return res.status(400).json({
-            error: "O id está undefined ou nulo!"
-        });
-    }
+    console.log("ID usúario:" + userId);
+    console.log("ID empresa:" + enterpriseId);
 
-    favoritesModel.searchFavoritesByUserId(userId)
-        .then(function (resultado) {
-            res.status(200).json({
-                message: "Favoritos encontrados com sucesso",
-                resultado: resultado
-            });
+    if (!userId) return res.status(400).send("userID está NULO ou undefined!")
+    if (!enterpriseId) return res.status(400).send("enterpriseID está NULO ou undefined!")
+
+    try {
+        const favoritados = await favoritesModel.searchFavoritesByUserId(userId, enterpriseId)
+        return res.status(200).json(favoritados)
+    } catch (erro) {
+        console.error("Erro ao deletar usuário:", erro);
+        res.status(500).json({
+            error: erro.sqlMessage || erro.message
         })
-        .catch(function (erro) {
-            console.error("Erro ao deletar usuário:", erro);
-            res.status(500).json({
-                error: erro.sqlMessage || erro.message
-            });
-        });
+    }
 }
 
 function getFavoritesByUser(req, res) {
     const userID = req.params.userID;
     const enterpriseID = req.params.enterpriseID;
 
-    if(userID === undefined) return res.status(400).send("IdUser está undefined ou nulo!")
-    if(enterpriseID === undefined) return res.status(400).send("enterpriseID está undefined ou nulo!")
+    if (userID === undefined) return res.status(400).send("IdUser está undefined ou nulo!")
+    if (enterpriseID === undefined) return res.status(400).send("enterpriseID está undefined ou nulo!")
 
     favoritesModel.getFavoritesByUser(userID, enterpriseID)
         .then(function (resultado) {
             console.log("Favoritos retornados:", resultado);
-            return res.status(200).json(resultado); 
+            return res.status(200).json(resultado);
         })
         .catch(function (erro) {
             console.error("Erro ao buscar favoritos:", erro);

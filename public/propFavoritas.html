@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/propFavoritas.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/filtros.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <title>Databrick - Favoritos</title>
+</head>
+
+<body>
+<aside class="sidebar">
+    <header class="sidebar-header">
+        <div class="logo">
+            <img src="./assets/icons-dash/logo_databrick_branco_v2.svg" class="logo-icon">
+            <h1 class="logo-text">DataBrick</h1>
+        </div>
+    </header>
+
+    <hr class="separator" aria-hidden="true">
+
+    <section class="user-profile" aria-label="Perfil do usuário">
+        <img src="./assets/icons-dash/USER-ICON-SM.svg" class="avatar">
+        <span class="username" id="user">Nome usuário</span>
+    </section>
+
+    <hr class="separator" aria-hidden="true">
+
+    <nav class="main-navigation" aria-label="Menu principal">
+        <ul class="nav-menu">
+            <li>
+                <a href="home.html  " class="nav-item">
+                    <img src="./assets/icons-dash/HOME-ICON-SM.svg"
+                         alt=""
+                         aria-hidden="true"
+                         class="nav-icon">
+                    <span>Home</span>
+                </a>
+            </li>
+        </ul>
+
+        <section class="nav-section">
+            <h2 class="nav-section-title">PAGES</h2>
+
+            <div class="dropdown">
+                <button class="dropdown-btn active"
+                        aria-expanded="false"
+                        aria-controls="propriedades-menu">
+                    <img src="./assets/icons-dash/CHART-ICON-SM.svg"
+                         aria-hidden="true"
+                         class="nav-icon">
+                    <span>Propriedades</span>
+                    <span class="dropdown-arrow" aria-hidden="true">▼</span>
+                </button>
+
+                <ul id="propriedades-menu" class="dropdown-content">
+                    <li>
+                        <a href="filtros.html" class="dropdown-item">
+                            <span>Filtrar propriedade</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="dropdown-item">
+                            <span>Propriedades favoritas</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="nav-menu">
+                <li>
+                    <a href="./TelaAlertas.html" class="nav-item">
+                        <img src="./assets/icons-dash/ALERT-ICON-SM.svg"
+                             alt=""
+                             aria-hidden="true"
+                             class="nav-icon">
+                        <span>Alertas</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav-menu">
+                <li>
+                    <a href="./listaUsuario.html" class="nav-item">
+                        <img src="./assets/icons-dash/account-plus.png"
+                             alt=""
+                             aria-hidden="true"
+                             class="nav-icon">
+                        <span>Usuários</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav-menu">
+                <li>
+                    <a href="./empresa.html" class="nav-item">
+                        <img src="./assets/icons-dash/store.png"
+                             alt=""
+                             aria-hidden="true"
+                             class="nav-icon">
+                        <span>Empresa</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </nav>
+
+    <footer class="sidebar-footer">
+        <button type="button"
+                onclick="logout()"
+                class="button_logout">
+            Log Out
+        </button>
+    </footer>
+</aside>
+
+<div class="content">
+    <div class="barraSuperior">
+        <h2>Distritos Favoritados:</h2>
+
+    </div>
+
+    <div class="container-regioes">
+        <!-- Cards Favoritados serão inseridos dinamicamente aqui -->
+    </div>
+</div>
+</body>
+</html>
+<script src="js/favoritar.js"></script>
+<script onload="listarFavoritos()" src="js/favoritar.js"></script>
