@@ -14,12 +14,18 @@ async function generateUserCards() {
             card.innerHTML = `
                 <span id="${user.id_usuario}">${user.nome} - ${user.email}</span>
                 <div class="crud">
-                    <img src="assets/icons-dash/edit.svg" alt="">
+                    <img class="edit-btn" src="assets/icons-dash/edit.svg" alt="Editar">
                     <img class="size" src="assets/icons-dash/x.png" alt="" onclick="removeUser(this)" aria-label="Remove user">
                 </div>
                 `;
             container.appendChild(card);
-        })
+
+            const editBtn = card.querySelector('.edit-btn');
+            editBtn.addEventListener('click', () => {
+                localStorage.setItem('USER_ID', user.id_usuario);
+                window.location.href = 'usuario.html';
+            });
+    })
     } catch (err) {
         console.log("Erro ao gerar os cards", err)
     }
