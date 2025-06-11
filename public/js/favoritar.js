@@ -1,7 +1,6 @@
-const container = document.querySelector('.container-regioes');
-if (container) {
-    container.addEventListener('click', function (event) {
-
+document.addEventListener('click', function (event) {
+    const target = event.target;
+    if (target.classList.contains('botao-favoritos')) {
         console.log("CLICADO!")
         const userID = localStorage.getItem('USER_ID');
         const enterpriseID = localStorage.getItem('EMPRESA_ID');
@@ -21,10 +20,8 @@ if (container) {
             const card = event.target.closest('.box-regiao');
             if (card) card.style.display = 'none';
         }
-    });
-} else {
-    console.log("Container não encontrado!")
-}
+    }
+});
 
 
 function favoritar(user, enterprise, property, event) {
