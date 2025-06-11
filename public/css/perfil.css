@@ -27,6 +27,17 @@ body {
     height: 100vh;
 }
 
+main {
+    margin-left: var(--sidebar-width);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background-color: var(--background);
+    width: calc(100% - var(--sidebar-width));
+    height: 100vh;
+}
+
 .divPainel{
     display: flex;
     align-items: center;
@@ -75,16 +86,6 @@ body {
 .button_logout:hover {
     background-color: #a8421b;
     transform: scale(1.05);
-}
-
-main {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
-    background-color: var(--background);
-    width: 85%;
-    height: 100vh;
 }
 
 .center-box {
