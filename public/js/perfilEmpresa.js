@@ -119,6 +119,7 @@ async function updateEnterprise() {
         if (resposta.ok) {
             const json = resposta.json();
             changeModal();
+            registrarAtividade(12);
             return alert("Alterações feitas com sucesso")
         } else {
             const texto = await resposta.text();
