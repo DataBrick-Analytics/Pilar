@@ -96,7 +96,7 @@ async function editUser(req, res) {
     const user = req.body;
     const id = req.params.id;
     console.log("ID:", id);
-    console.log("Dados recebidos:", user);
+    console.log("Chego no controller, Dados recebidos:", user);
 
     if (!id) {
         return res.status(400).json({ error: "ID não fornecido" });
@@ -110,7 +110,7 @@ async function editUser(req, res) {
     }
 
     try {
-        const emailResult = await userModel.checkEmail(user.email);
+        const emailResult = await userModel.checkEmailAndIdUser(user.email,id);
         if (
             emailResult.length > 0 &&
             emailResult[0].id_usuario !== Number(id)
@@ -120,7 +120,8 @@ async function editUser(req, res) {
             });
         }
 
-        const cpfResult = await userModel.checkCpf(user.cpf);
+        const cpfResult = await userModel.checkCpfAndIdUser(user.cpf,id);
+
         if (
             cpfResult.length > 0 &&
             cpfResult[0].id_usuario !== Number(id)
@@ -144,6 +145,7 @@ async function editUser(req, res) {
                     senha: user.senha,
                     cpf: user.cpf,
                     data_nasc: user.data_nasc,
+                    funcao_empresa: user.funcao_empresa,
                 },
             });
         } else {
@@ -227,6 +229,25 @@ function searchUserById(req, res) {
         });
 }
 
+
+async function checkPassword(req, res) {
+    const { idUsuario, senha } = req.body;
+
+    try {
+        const resultado = await userModel.checkPassword(idUsuario, senha);
+
+        if (resultado.length > 0) {
+            res.status(200).json(1); // Senha válida
+        } else {
+            res.status(200).json(0); // Senha inválida
+        }
+    } catch (erro) {
+        console.error("Erro ao validar senha:", erro);
+        res.status(500).json({ erro: "Erro interno" });
+    }
+}
+
+
 async function salvarValoresFormulario(req, res) {
     const valoresFormulario = req.body.valoresFormulario;
     const idUsuario = req.body.idUsuario;
@@ -258,6 +279,7 @@ module.exports = {
     editUser,
     deleteUser,
     searchUserById,
+    checkPassword,
     salvarValoresFormulario,
     pegarValoresDistritosEscolhas
 };

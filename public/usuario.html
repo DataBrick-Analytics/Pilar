@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="css/perfil.css">
     <link rel="stylesheet" href="css/Style.css">
     <title>Databrick - Usuário</title>
+    <!--LIBS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
 </head>
 
 <body>
@@ -45,17 +50,17 @@
                         <div class="dropdown">
                             <button class="dropdown-btn active">
                                 <span class="nav-icon"> <img src="./assets/icons-dash/CHART-ICON-SM.svg" alt=""></span>
-                                <span>Propriedades</span>
+                                <span>Regiões</span>
                                 <span class="dropdown-arrow">▼</span>
                             </button>
                             <div class="dropdown-content">
                                 <a href="#" class="dropdown-item">
                                     <span class="prefix">B</span>
-                                    <span>Filtrar propriedade</span>
+                                    <span>Filtrar regiões</span>
                                 </a>
                                 <a href="#" class="dropdown-item">
                                     <span class="prefix">C</span>
-                                    <span>Propriedades favoritas</span>
+                                    <span>Regiões favoritas</span>
                                 </a>
                             </div>
                         </div>
@@ -68,6 +73,7 @@
                             </a>
                         </div>
                     </div>
+                </div>
             </nav>
 
             <div class="div-button-log-out">
@@ -108,13 +114,18 @@
                     </section>
                     <section class="division">
                         <div>
-                            <h3>Senha</h3>
-                            <input id="user_new_password" type="password" placeholder="Insira sua senha">
-                        </div>
-                        <div>
-                            <h3>Confirmar senha</h3>
+                            <h3>Nova Senha:</h3>
                             <input id="confirm_new_password" type="password" placeholder="Insira sua novamente">
+
                         </div>
+
+                        <div>
+                            <h3>Funcão</h3>
+                            <input id="user_funcao" type="text" placeholder="Funcão empresa" disabled>
+                        </div>
+                    </section>
+                    <section class="division">
+
                     </section>
                 </article>
             </section>

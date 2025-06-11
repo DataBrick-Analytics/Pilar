@@ -13,7 +13,7 @@ async function isManagerUser() {
 
         if (resposta.ok) {
             const json = await resposta.json();
-            if (json.funcao_empresa != 'Gerente') {
+            if (json.funcao_empresa != 'Admin') {
                 window.location.href = "./dashboard.html"
             }
             managerPassword = json.senha;
@@ -31,19 +31,18 @@ async function isManagerUser() {
 
 async function setEnterpriseInfos() {
     const enterpriseInfos = await searchEnterprise();
-    const enterpriseAddress = await searchEnterpriseAddress();
 
     console.log(enterpriseInfos);
-    console.log(enterpriseAddress);
-
-    social_reason.value = enterpriseInfos.razao_social;
     fantasy_name.value = enterpriseInfos.nome_fantasia;
-    street.value = enterpriseAddress.rua;
-    neighborhood.value = enterpriseAddress.bairro;
-    cep_code.value = enterpriseAddress.cep;
-    city.value = enterpriseAddress.cidade;
-    state.value = enterpriseAddress.estado;
-    state_code.value = enterpriseAddress.uf;
+    social_reason.value = enterpriseInfos.razao_social;
+    street.value = enterpriseInfos.rua;
+    neighborhood.value = enterpriseInfos.bairro;
+    cep_code.value = enterpriseInfos.cep;
+    city.value = enterpriseInfos.cidade;
+    state.value = enterpriseInfos.estado;
+    number.value = enterpriseInfos.numero;
+    phone.value = enterpriseInfos.telefone;
+
 }
 
 async function searchEnterprise() {
@@ -70,31 +69,6 @@ async function searchEnterprise() {
     }
 
     return null;
-}
-
-async function searchEnterpriseAddress() {
-    const enterpriseID = localStorage.getItem('EMPRESA_ID');
-
-    try {
-        const resposta = await fetch(`/enterprise/address/${enterpriseID}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        if (resposta.ok) {
-            const json = await resposta.json();
-            console.log(json)
-            return json;
-        } else {
-            console.log(resposta);
-            const texto = await resposta.text();
-            console.error(texto);
-        }
-    } catch (erro) {
-        console.error(erro);
-    }
 }
 
 async function updateEnterprise() {
