@@ -206,7 +206,26 @@ async function deleteUser(idUser) {
             console.log("Ações de usuário excluídas.");
         }
 
-        // 5. Excluir o usuário
+
+        // 5. Excluir o formulario de valores, se existir
+        const formulario = await database.execute(
+            `SELECT *
+             FROM valores_formulario
+             WHERE fk_usuario = ?`,
+            [idUser]
+        );
+
+        if (formulario.length > 0) {
+            await database.execute(
+                `DELETE
+                 FROM valores_formulario
+                 WHERE fk_usuario = ?`,
+                [idUser]
+            );
+            console.log("valores fomulaarios de usuário excluídas.");
+        }
+
+        // 6. Excluir o usuário
         const resultado = await database.execute(
             `DELETE
              FROM usuario

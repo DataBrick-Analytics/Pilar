@@ -160,6 +160,7 @@ async function deleteEnterprise(idUserLogado,idEnterprise) {
     await database.execute(`DELETE FROM favorito WHERE fk_usuario = ?`, [idUserLogado]);
     await database.execute(`DELETE FROM acao_de_usuario WHERE fk_usuario = ?`, [idUserLogado]);
     await database.execute(`DELETE FROM notificacao WHERE fk_usuario = ?`, [idUserLogado]);
+    await database.execute(`DELETE FROM valores_formulario WHERE fk_usuario = ?`, [idUserLogado]);
 
     // 4. Apagar usuário
     await database.execute(`DELETE FROM usuario WHERE id_usuario = ?`, [idUserLogado]);
@@ -206,7 +207,7 @@ async function getEnterpriseEmployees(fkEmpresa) {
 
 async function getEnterpriseById(idEnterprise) {
   const query = `SELECT e.nome_fantasia,e.razao_social,en.rua,en.bairro,en.cep,
-                               en.cidade,en.estado,t.telefone
+                               en.cidade,en.estado,en.numero,t.telefone
                             FROM empresa e
                         JOIN endereco en
                             ON e.id_empresa=en.fk_empresa 
@@ -224,7 +225,7 @@ async function getEnterpriseById(idEnterprise) {
 
 
 async function getEnterpriseAddress(idEnterprise) {
-  const query = `SELECT * FROM enderecos WHERE fk_empresa = ${idEnterprise};`
+  const query = `SELECT * FROM endereco WHERE fk_empresa = ${idEnterprise};`
   const resultado = await database.execute(query);
 
   if (resultado.length > 0) {
