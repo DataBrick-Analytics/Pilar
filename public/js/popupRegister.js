@@ -69,7 +69,7 @@ async function removeUser(card) {
 
     const deletion = await fetch(`/user/${id}`, {
         method: "DELETE"
-
+    });
     
     if(deletion.ok){
         alert("Usuário deletado com sucesso")

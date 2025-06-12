@@ -166,7 +166,7 @@ async function deleteUser(idUser) {
             const totalAdmins = admins[0].total;
             console.log("Total de administradores:" + totalAdmins)
             if (totalAdmins === 0) {
-                throw new Error("Este é o único administrador da empresa e não pode ser excluído.");
+                throw "Este é o único administrador da empresa e não pode ser excluído.";
             }
         }
 

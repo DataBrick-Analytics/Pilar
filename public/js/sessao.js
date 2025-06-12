@@ -43,3 +43,9 @@ function finalizarAguardar(texto) {
     }
 }
 
+function logout(){
+    localStorage.clear();
+    sessionStorage.clear();
+
+    window.location.href = "./index.html"
+}
