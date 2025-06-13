@@ -5,9 +5,11 @@ async function setUserInfos() {
     user_name.value = userInfos.nome;
     user_email.value = userInfos.email;
     user_cpf.value = userInfos.cpf;
+
     const dataNasc = new Date(userInfos.data_nasc);
     const dataFormatada = dataNasc.toISOString().split('T')[0];
     user_birthday.value = dataFormatada;
+
     user_funcao.value = userInfos.funcao_empresa;
 }
 
@@ -96,9 +98,11 @@ async function updateUserProfile() {
             await resposta.json();
             changeModal();
             password_modal.value = "";
+            localStorage.setItem('NOME_USUARIO', userName);
             registrarAtividade(10);
-            return Swal.fire("Sucesso", "Alterações feitas com sucesso!", "success");
-        } else {
+            Swal.fire("Sucesso", "Alterações feitas com sucesso!", "success").then(() => {
+                document.getElementById('user').textContent = userName;
+            });        } else {
             const texto = await resposta.text();
             console.error(texto);
             return Swal.fire("Erro", "Erro ao atualizar o perfil.", "error");
