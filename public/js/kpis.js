@@ -16,6 +16,71 @@ document.addEventListener('DOMContentLoaded', function () {
     getSchoolsByRegion();
 })
 
+
+async function getPriceSquareMeter(){
+    const kpiValorMetro = document.getElementById("kpivalor")
+    kpiValorMetro.innerText=''
+
+    try {
+        const resposta = await fetch(`/data/getPriceSquareMeter/${fkDistrito}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        if(resposta.ok){
+            const dados = await resposta.json()
+            console.log("Dados recebidos: " + dados)
+            if(dados.length > 0){
+                kpiValorMetro.innerText = "R$" + Number(dados[0].media_preco_por_area).toFixed(2);
+                top_valor_metro.innerText = dados[0].row_num + "º";
+            } else {
+                kpiValorMetro.innerText = "Sem dados";
+                div_kpi_metro_quadrado.innerHTML = ` `
+
+            }
+        } else {
+            throw new Error("Erro ao buscar dados das escolas");
+        }
+    } catch (erro) {
+        console.error("Erro:", erro);
+        kpiValorMetro.innerText = "Sem dados";
+    }
+}
+
+async function getViolenceIndex(){
+    const kpiViolencia = document.getElementById("kpiseguranca")
+    kpiViolencia.innerText=''
+
+    try {
+        const resposta = await fetch(`/data/getViolenceIndex/${fkDistrito}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        if(resposta.ok){
+            const dados = await resposta.json()
+            console.log("Dados recebidos: " + dados)
+
+            if(dados){
+                kpiViolencia.innerText = Number(dados[0].indice_violencia).toFixed(2) + '%'
+                top_violencia.innerText = dados[0].num_linha + "º";
+            } else {
+                kpiViolencia.innerText = "Sem dados";
+                div_kpi_indice_violencia.innerHTML = ` `
+            }
+        } else {
+            throw new Error("Erro ao buscar dados de violência");
+        }
+    } catch (erro) {
+        console.error("Erro:", erro);
+        kpiViolencia.innerText = "Sem dados";
+        div_kpi_indice_violencia.innerHTML = ` `
+    }
+}
+
+
 function getRegionType() {
     fetch(`/data/getRegionType/${fkDistrito}`, {
         method: "GET",
@@ -25,7 +90,7 @@ function getRegionType() {
     }).then(function (resposta) {
         console.log("Peguei as informações de tipo de região no banco");
 
-        if (resposta.ok) {
+        if (resposta.ok && resposta.length > 0) {
             console.log(resposta);
 
             resposta.json().then(json => {
@@ -53,7 +118,8 @@ function getRegionType() {
                 console.error(texto);
                 finalizarAguardar(texto);
             });
-            kpitipo.innerHTML = "0 "
+            kpitipo.innerHTML = "Sem dados"
+            div_kpi_tipo_valor.innerHTML =` `
         }
 
     }).catch(function (erro) {
@@ -70,7 +136,7 @@ async function getUrbanMeshDensity() {
         }
     }).then(
         function (resposta) {
-            if (resposta.ok) {
+            if (resposta.ok && resposta.length > 0) {
                 resposta.json().then(json => {
                     let valorMalhaUrbana = Number(json[0].valor_mobilidade_por_area);
                     kpimalhaurbana.innerText = `${(valorMalhaUrbana.toFixed(2))} pa*/km²`;
@@ -85,11 +151,14 @@ async function getUrbanMeshDensity() {
                 });
             } else {
                 console.log("Houve um erro durante a requisição")
-                kpimalhaurbana.innerHTML = "0 "
+                kpimalhaurbana.innerHTML = "Sem dados"
+                div_kpi_malha_urbana.innerHTML = ` `
             }
         }
     ).catch(function (erro) {
         console.error(erro)
+        kpimalhaurbana.innerHTML = "Sem dados"
+        div_kpi_malha_urbana.innerHTML = ` `
     })
 }
 
@@ -109,14 +178,15 @@ async function getParksByRegion() {
             if (dados.length > 0) {
                 kpiParques.innerText = dados[0].qtde_parques;
             } else {
-                kpiParques.innerText = "0";
+                kpiParques.innerText = "Sem dados";
+                kpiParques.style.fontSize = "22px";
             }
         } else {
             throw new Error("Erro ao buscar dados dos parques");
         }
     } catch (erro) {
         console.error("Erro:", erro);
-        kpiParques.innerText = "0";
+        kpiParques.innerText = "Sem dados";
     }
 }
 
@@ -135,14 +205,16 @@ async function getHospitalsByRegion() {
             if (dados) {
                 kpiHospitais.innerText = dados.total_pontos_saude;
             } else {
-                kpiHospitais.innerText = "0";
+                kpiHospitais.innerText = "Sem dados";
+                kpiHospitais.style.fontSize = "22px";
             }
         } else {
             throw new Error("Erro ao buscar dados dos hospitais");
         }
     } catch (erro) {
         console.error("Erro:", erro);
-        kpiHospitais.innerText = "0";
+        kpiHospitais.innerText = "Sem dados";
+        kpiHospitais.style.fontSize = "22px";
     }
 }
 
@@ -157,82 +229,27 @@ async function getSchoolsByRegion() {
                 "Content-Type": "application/json"
             }
         })
-        if (resposta.ok) {
+        if (resposta.ok && resposta.length > 0) {
             const dados = await resposta.json()
             console.log("Dados recebidos: " + dados)
 
             if (dados) {
                 kpiEscolas.innerText = dados.total_escolas;
             } else {
-                kpiEscolas.innerText = "0";
+
+                kpiEscolas.innerText = "Sem dados";
+                kpiEscolas.style.fontSize = "22px";
+
             }
         } else {
             throw new Error("Erro ao buscar dados das escolas");
         }
     }catch (erro) {
         console.error("Erro:", erro);
-        kpiEscolas.innerText = "0";
+        kpiEscolas.innerText = "Sem dados";
+        kpiEscolas.style.fontSize = "22px";
+
     }
 }
 
-
-
-async function getPriceSquareMeter(){
-    const kpiValorMetro = document.getElementById("kpivalor")
-    kpiValorMetro.innerText=''
-
-    try {
-        const resposta = await fetch(`/data/getPriceSquareMeter/${fkDistrito}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        if(resposta.ok){
-            const dados = await resposta.json()
-            console.log("Dados recebidos: " + dados)
-            if(dados.length > 0){
-                kpiValorMetro.innerText = "R$" + Number(dados[0].media_preco_por_area).toFixed(2);
-                top_valor_metro.innerText = dados[0].row_num + "º";
-            } else {
-                kpiValorMetro.innerText = "0";
-            }
-        } else {
-            throw new Error("Erro ao buscar dados das escolas");
-        }
-    } catch (erro) {
-        console.error("Erro:", erro);
-        kpiValorMetro.innerText = "0";
-    }
-}
-
-async function getViolenceIndex(){
-    const kpiViolencia = document.getElementById("kpiseguranca")
-    kpiViolencia.innerText=''
-
-    try {
-        const resposta = await fetch(`/data/getViolenceIndex/${fkDistrito}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        if(resposta.ok){
-            const dados = await resposta.json()
-            console.log("Dados recebidos: " + dados)
-
-            if(dados){
-                kpiViolencia.innerText = Number(dados[0].indice_violencia).toFixed(2) + '%'
-                top_violencia.innerText = dados[0].num_linha + "º";
-            } else {
-                kpiViolencia.innerText = "0";
-            }
-        } else {
-            throw new Error("Erro ao buscar dados de violência");
-        }
-    } catch (erro) {
-        console.error("Erro:", erro);
-        kpiViolencia.innerText = "0";
-    }
-}
 

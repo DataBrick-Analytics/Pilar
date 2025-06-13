@@ -8,12 +8,12 @@ async function createFavorites(favorite) {
     );
 
     if(isAlreadyFavorited.length > 0){
-        throw new Error("Este terreno já está favoritado por este usuário.")
+        throw new Error("Essa região já está favoritado por este usuário.")
     }
 
     const limitFavorites = await countFavoritesByUser(favorite.userID);
     if (limitFavorites.total >= 6) {
-        throw new Error("Limite de favoritos atingido. Você só pode favoritar até 6 terrenos.");
+        throw new Error("Limite de favoritos atingido. Você só pode favoritar até 6 regiões.");
     }
 
     const query = `

@@ -123,7 +123,7 @@ async function getViolenceIndex(fkDistrito) {
                      + COALESCE(s.homicidio_doloso_acidente_transito, 0)
                      + COALESCE(s.homicidio_culposo_acidente_transito, 0)
                      + COALESCE(s.homicidio_culposo, 0)
-                     ) / d.populacao DESC
+                     ) / d.populacao ASC
              ) AS num_linha
             FROM distrito d
         JOIN seguranca s ON s.fk_distrito = d.id_distrito
