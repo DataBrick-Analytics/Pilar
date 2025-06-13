@@ -146,14 +146,14 @@ async function deleteEnterprise() {
         })
     });
 
-     const senhaValida = await validacao.json();
+    const senhaValida = await validacao.json();
 
     if (senhaValida !== 1) {
         return Swal.fire("Erro", "Senha incorreta!", "error");
     }
 
     try {
-        const resposta = await fetch(`/enterprise/${enterpriseID}`, {
+        const resposta = await fetch(`/enterprise/${userID}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

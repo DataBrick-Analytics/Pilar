@@ -27,12 +27,10 @@ function createFavorite(req, res) {
             }
         })
         .catch(function (erro) {
-            console.error("Erro no banco:", erro);
             return res.status(400).json({
                 error: "Erro ao favoritar terreno",
                 message: erro.sqlMessage || erro.message
             });
-
         })
 }
 

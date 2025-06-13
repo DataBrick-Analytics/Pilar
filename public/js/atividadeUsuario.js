@@ -8,17 +8,15 @@ function registrarAtividade(idActivity) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            userActivityId: {
-                fkEnterprise: Number(fkEnterprise),
-                userId: Number(idUsuario),
-                idActivity: Number(idActivity)
-            },
+            fkEnterprise: Number(fkEnterprise),
+            userId: Number(idUsuario),
+            idActivity: Number(idActivity)
         })
     })
         .then(async r => {
             const text = await r.text();
             try {
-                return JSON.parse(text);
+                return { success: text };
             } catch {
                 return { error: text };
             }

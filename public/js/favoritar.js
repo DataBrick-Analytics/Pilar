@@ -52,6 +52,15 @@ function favoritar(user, enterprise, property, event) {
             event.target.classList.add('ativa');
             registrarAtividade(15)
         } else {
+            resposta.json().then(data => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Erro!",
+                    text: data.message,
+                    color: "#FFFFFF",
+                    background: "#2C3E50"
+                });
+            });
             event.classList.remove('ativa');
             console.error("Erro ao favoritar:", resposta.status);
         }

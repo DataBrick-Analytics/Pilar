@@ -11,6 +11,11 @@ async function createFavorites(favorite) {
         throw new Error("Este terreno já está favoritado por este usuário.")
     }
 
+    const limitFavorites = await countFavoritesByUser(favorite.userID);
+    if (limitFavorites.total >= 6) {
+        throw new Error("Limite de favoritos atingido. Você só pode favoritar até 6 terrenos.");
+    }
+
     const query = `
         INSERT INTO favorito (fk_usuario, fk_empresa, fk_distrito, data_favorito, data_edicao) VALUES (?, ?, ?, NOW(), NOW())
     `;
