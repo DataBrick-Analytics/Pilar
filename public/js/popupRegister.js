@@ -90,9 +90,11 @@ function cadastrarUsuario() {
     const nome = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const senha = document.getElementById('password').value;
-    const cpf = document.getElementById('cpf').value;
-    const funcao = document.getElementById('funcao').value;
+    let cpf = document.getElementById('cpf').value;
+    let funcao = document.getElementById('funcao').value;
     const dtNasc = document.getElementById('dtNasc').value;
+
+    cpf = cpf.replace(/\D/g, '');
 
     // Validações básicas
     if (!nome || !email || !senha || !cpf || !funcao || !dtNasc) {
@@ -110,6 +112,8 @@ function cadastrarUsuario() {
         fk_empresa: localStorage.getItem('EMPRESA_ID'),
         data_nasc: dtNasc
     };
+
+
 
     // Enviar para o backend
     fetch('/user', {
@@ -151,5 +155,20 @@ window.addEventListener('click', function (e) {
     const modal = document.getElementById('userModal');
     if (e.target === modal) {
         closeModal();
+    }
+});
+
+// Máscara para CPF
+document.addEventListener('DOMContentLoaded', function () {
+    const cpfInput = document.getElementById('cpf');
+    if (cpfInput) {
+        cpfInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            e.target.value = value;
+        });
     }
 });
