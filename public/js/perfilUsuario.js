@@ -1,11 +1,31 @@
+function formatarCPF(cpf) {
+    cpf = cpf.replace(/\D/g, '').slice(0, 11);
+    return cpf.replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const cpfInput = document.getElementById('user_cpf');
+    if (cpfInput) {
+        cpfInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '').slice(0, 11);
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            e.target.value = value;
+        });
+    }
+});
+
+
 async function setUserInfos() {
     const userInfos = await searchProfile();
     console.log(userInfos)
 
     user_name.value = userInfos.nome;
     user_email.value = userInfos.email;
-    user_cpf.value = userInfos.cpf;
-
+    user_cpf.value = formatarCPF(userInfos.cpf);
     const dataNasc = new Date(userInfos.data_nasc);
     const dataFormatada = dataNasc.toISOString().split('T')[0];
     user_birthday.value = dataFormatada;
@@ -48,6 +68,7 @@ async function updateUserProfile() {
 
     const passwordModal = password_modal.value;
 
+    userCPF = userCPF.replace(/\D/g, '');
 
     // Valida senha atual via back-end
     const validacao = await fetch(`/user/checkPassword`, {
@@ -100,16 +121,38 @@ async function updateUserProfile() {
             password_modal.value = "";
             localStorage.setItem('NOME_USUARIO', userName);
             registrarAtividade(10);
-            Swal.fire("Sucesso", "Alterações feitas com sucesso!", "success").then(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso',
+                text: 'Alterações feitas com sucesso!',
+                color: "#FFFFFF",
+                background: "#2C3E50",
+                confirmButtonColor: "#C45824"
+            }).then(() => {
                 document.getElementById('user').textContent = userName;
-            });        } else {
+            });
+        }else {
             const texto = await resposta.text();
             console.error(texto);
-            return Swal.fire("Erro", "Erro ao atualizar o perfil.", "error");
+            return Swal.fire({
+                icon: 'erro',
+                title: 'Erro!',
+                text: 'Erro ao atualizar o perfil..',
+                color: "#FFFFFF",
+                background: "#2C3E50",
+                confirmButtonColor: "#C45824"
+            });
         }
     } catch (erro) {
         console.error(erro);
-        return Swal.fire("Erro", "Erro inesperado ao atualizar o perfil.", "error");
+        return Swal.fire({
+            icon: 'erro',
+            title: 'Erro',
+            text: 'Erro ao atualizar o perfil..',
+            color: "#FFFFFF",
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
+        });
     }
 }
 

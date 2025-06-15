@@ -1,7 +1,7 @@
 const userID = localStorage.getItem('USER_ID');
 
 async function loadCards() {
-    document.getElementById(`intro`).innerText = `OLÁ ` + localStorage.getItem('NOME_USUARIO').toUpperCase();
+    document.getElementById(`intro`).innerText = `OLÁ, ` + localStorage.getItem('NOME_USUARIO').toUpperCase();
 
     try {
         const res = await fetch(`/pegarValoresDistritosEscolhas/${userID}`, {

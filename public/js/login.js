@@ -52,7 +52,10 @@ function entrar() {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: json.message || 'Email e/ou senha inválidos!'
+                        text: json.message || 'Email e/ou senha inválidos!',
+                        color: "#FFFFFF",
+                        background: "#2C3E50",
+                        confirmButtonColor: "#C45824"
                     });
                 }
             });
@@ -61,7 +64,10 @@ function entrar() {
             Swal.fire({
                 icon: 'error',
                 title: 'Erro',
-                text: 'Não foi possível autenticar. Tente novamente mais tarde.'
+                text: 'Não foi possível autenticar. Tente novamente mais tarde.',
+                color: "#FFFFFF",
+                background: "#2C3E50",
+                confirmButtonColor: "#C45824"
             });
         }
     }).catch(function (erro) {

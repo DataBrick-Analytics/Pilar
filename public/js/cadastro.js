@@ -174,7 +174,8 @@ function cadastrar() {
             title: "Opa...",
             text: "Informações Faltando!",
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
         });
         return;
     }
@@ -186,7 +187,9 @@ function cadastrar() {
             title: 'Estado não selecionado',
             text: 'Por favor, selecione um estado',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
+
         });
         return;
     }
@@ -228,7 +231,9 @@ function cadastrar() {
             title: 'Estado e UF não correspondem',
             text: 'A UF selecionada não corresponde ao nome do estado',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
+
         });
         return;
     }
@@ -241,7 +246,9 @@ function cadastrar() {
             title: 'Nome de Empresa Incorreto',
             text: 'Insira um nome válido',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
+
         })
         return
     }
@@ -256,7 +263,9 @@ function cadastrar() {
             title: 'Email Incorreto',
             text: 'Insira um email válido (Gmail, Hotmail ou Outlook)!',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
+
         });
         return;
     }
@@ -268,7 +277,9 @@ function cadastrar() {
             title: 'Estado Incorreto',
             text: 'Insira um estado válido',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
+
         })
         return
     }
@@ -280,7 +291,8 @@ function cadastrar() {
             title: 'Bairro Incorreto',
             text: 'Insira um Bairro válido',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
         })
         return
     }
@@ -292,7 +304,9 @@ function cadastrar() {
             title: 'CNPJ Incorreto',
             text: 'Insira um CPNJ válido',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
+
         })
         return
     }
@@ -300,7 +314,13 @@ function cadastrar() {
     // Validação do CEP
     if (nomeUsuarioVar.length < 1) {
         Swal.fire({
-            icon: "error", title: 'CEP Incorreto', text: 'Insira um Cep válido', color: "#FFFFFF", background: "#2C3E50"
+            icon: "error",
+            title: 'CEP Incorreto',
+            text: 'Insira um Cep válido',
+            color: "#FFFFFF",
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
+
         })
         return
     }
@@ -313,7 +333,8 @@ function cadastrar() {
             title: 'CEP Incorreto',
             text: 'Insira um CEP válido com 8 dígitos',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
         })
         return
     }
@@ -325,7 +346,8 @@ function cadastrar() {
             title: 'Rua Incorreta',
             text: 'Insira um nome de rua válido',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
         })
         return
     }
@@ -337,7 +359,8 @@ function cadastrar() {
             title: 'Número Incorreto',
             text: 'Insira um número válido',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
         })
         return
     }
@@ -349,7 +372,8 @@ function cadastrar() {
             title: 'Bairro Incorreto',
             text: 'Insira um nome de bairro válido',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
         })
         return
     }
@@ -361,7 +385,8 @@ function cadastrar() {
             title: 'Cidade Incorreta',
             text: 'Insira um nome de cidade válido',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
         })
         return
     }
@@ -374,7 +399,9 @@ function cadastrar() {
             title: 'Complemento Incorreto',
             text: 'Insira um complemento válido ou deixe em branco',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
+
         })
         return
     }
@@ -385,7 +412,9 @@ function cadastrar() {
             title: 'UF não selecionada',
             text: 'Por favor, selecione um estado',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
+
         })
         return;
     }
@@ -399,7 +428,9 @@ function cadastrar() {
             title: 'Telefone Incorreto',
             text: 'Insira um número de telefone válido (com DDD)',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
+
         })
         return;
     }
@@ -411,7 +442,9 @@ function cadastrar() {
             title: 'Celular Incorreto',
             text: 'Para números de celular, o primeiro dígito após o DDD deve ser 9',
             color: "#FFFFFF",
-            background: "#2C3E50"
+            background: "#2C3E50",
+            confirmButtonColor: "#C45824"
+
         })
         return;
     }
@@ -450,7 +483,9 @@ function cadastrar() {
                     title: "Perfeito!",
                     text: "Cadastro realizado com sucesso!",
                     color: "#FFFFFF",
-                    background: "#2C3E50"
+                    background: "#2C3E50",
+                    confirmButtonColor: "#C45824"
+
 
                 }).then(() => {
                     window.location = '/login.html'
@@ -462,7 +497,9 @@ function cadastrar() {
                         title: "Erro ao cadastrar",
                         text: erro?.error || "Erro inesperado!",
                         color: "#FFFFFF",
-                        background: "#2C3E50"
+                        background: "#2C3E50",
+                        confirmButtonColor: "#C45824"
+
                     });
                 }).catch(function () {
                     Swal.fire({
@@ -470,7 +507,9 @@ function cadastrar() {
                         title: "Erro ao cadastrar",
                         text: "Erro inesperado ao interpretar a resposta do servidor.",
                         color: "#FFFFFF",
-                        background: "#2C3E50"
+                        background: "#2C3E50",
+                        confirmButtonColor: "#C45824"
+
                     });
                 });
             }
