@@ -90,7 +90,7 @@ function getRegionType() {
     }).then(function (resposta) {
         console.log("Peguei as informações de tipo de região no banco");
 
-        if (resposta.ok && resposta.length > 0) {
+        if (resposta.ok) {
             console.log(resposta);
 
             resposta.json().then(json => {
@@ -136,7 +136,7 @@ async function getUrbanMeshDensity() {
         }
     }).then(
         function (resposta) {
-            if (resposta.ok && resposta.length > 0) {
+            if (resposta.ok) {
                 resposta.json().then(json => {
                     let valorMalhaUrbana = Number(json[0].valor_mobilidade_por_area);
                     kpimalhaurbana.innerText = `${(valorMalhaUrbana.toFixed(2))} pa*/km²`;
@@ -229,7 +229,7 @@ async function getSchoolsByRegion() {
                 "Content-Type": "application/json"
             }
         })
-        if (resposta.ok && resposta.length > 0) {
+        if (resposta.ok) {
             const dados = await resposta.json()
             console.log("Dados recebidos: " + dados)
 
